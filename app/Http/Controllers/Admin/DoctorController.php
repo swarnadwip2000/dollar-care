@@ -11,7 +11,7 @@ use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Storage;
 use File;
 
-class SellerController extends Controller
+class DoctorController extends Controller
 {
     use ImageTrait;
     /**
@@ -21,8 +21,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $sellers = User::Role('SELLER')->get();
-        return view('admin.seller.list')->with(compact('sellers'));
+        $doctors = User::Role('DOCTOR')->get();
+        return view('admin.doctor.list')->with(compact('doctors'));
     }
 
     /**
@@ -32,7 +32,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        return view('admin.seller.create');
+        return view('admin.doctor.create');
     }
 
     /**
@@ -48,35 +48,36 @@ class SellerController extends Controller
             'email' => 'required|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
-            'address' => 'required',
             'phone' => 'required',
             'profile_picture' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'status' => 'required',
-            'pincode' => 'required',
+            'gender' => 'required',
+            'year_of_experience' => 'required',
+            'specialization' => 'required',
         ]);
 
         $data = new User();
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
-        $data->address = $request->address;
         $data->phone = $request->phone;
+        $data->location = $request->location;
+        $data->gender = $request->gender;
+        $data->year_of_experience = $request->year_of_experience;
+        $data->specialization = $request->specialization;
         $data->status = $request->status;
-        $data->city = $request->city;
-        $data->country = $request->country;
-        $data->pincode = $request->pincode;
-        $data->profile_picture = $this->imageUpload($request->file('profile_picture'), 'seller');
+        $data->profile_picture = $this->imageUpload($request->file('profile_picture'), 'doctor');
         $data->save();
-        $data->assignRole('SELLER');
+        $data->assignRole('DOCTOR');
         $maildata = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
-            'type' => 'Seller',
+            'type' => 'Doctor',
         ];
 
         Mail::to($request->email)->send(new RegistrationMail($maildata));
-        return redirect()->route('sellers.index')->with('message', 'Seller created successfully.');
+        return redirect()->route('doctors.index')->with('message', 'Doctor created successfully.');
     }
 
     /**
@@ -98,8 +99,8 @@ class SellerController extends Controller
      */
     public function edit($id)
     {
-       $seller = User::findOrFail($id);
-         return view('admin.seller.edit')->with(compact('seller'));
+       $doctor = User::findOrFail($id);
+         return view('admin.doctor.edit')->with(compact('doctor'));
     }
 
     /**
@@ -114,20 +115,21 @@ class SellerController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-            'address' => 'required',
             'phone' => 'required',
             'status' => 'required',
-            'pincode' => 'required',
+            'gender' => 'required',
+            'year_of_experience' => 'required',
+            'specialization' => 'required',
         ]);
         $data = User::findOrFail($id);
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->address = $request->address;
+        $data->location = $request->location;
         $data->phone = $request->phone;
+        $data->gender = $request->gender;
+        $data->year_of_experience = $request->year_of_experience;
+        $data->specialization = $request->specialization;
         $data->status = $request->status;
-        $data->city = $request->city;
-        $data->country = $request->country;
-        $data->pincode = $request->pincode;
         if ($request->password != null) {
             $request->validate([
                 'password' => 'min:8',
@@ -143,10 +145,10 @@ class SellerController extends Controller
                 $currentImageFilename = $data->profile_picture; // get current image name
                 Storage::delete('app/'.$currentImageFilename);
             }
-            $data->profile_picture = $this->imageUpload($request->file('profile_picture'), 'seller');
+            $data->profile_picture = $this->imageUpload($request->file('profile_picture'), 'doctor');
         }
         $data->save();
-        return redirect()->route('sellers.index')->with('message', 'Seller updated successfully.');
+        return redirect()->route('doctors.index')->with('message', 'Doctor updated successfully.');
     }
 
     /**
@@ -172,6 +174,6 @@ class SellerController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('sellers.index')->with('error', 'Seller has been deleted successfully.');
+        return redirect()->route('doctors.index')->with('error', 'Doctor has been deleted successfully.');
     }
 }

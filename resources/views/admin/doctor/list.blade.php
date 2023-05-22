@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Customer Details - Derick Veliz admin
+    All Doctor Details - {{env('APP_NAME')}} admin
 @endsection
 @push('styles')
 <style>
@@ -24,15 +24,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Customers Information</h3>
+                        <h3 class="page-title">Doctors Information</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Customers</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('doctors.index') }}">Doctors</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('customers.create') }}" class="btn add-btn" ><i
-                                class="fa fa-plus"></i> Add a Customer</a>
+                        <a href="{{ route('doctors.create') }}" class="btn add-btn" ><i
+                                class="fa fa-plus"></i> Add a Doctor</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Customers Details</h4>
+                                <h4 class="mb-0">Doctors Details</h4>
                             </div>
 
                         </div>
@@ -56,36 +56,42 @@
                                     <th> Name</th>
                                     <th> Email</th>
                                     <th> Phone</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Address</th>
+                                    <th>Location</th>
+                                    <th>Gender</th>
+                                    <th>Date of Birth</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($customers as $key => $customer)
+                                @foreach ($doctors as $key => $doctor)
                                     <tr>
-                                        <td>{{ $customer->name }}</td>
-                                        <td>{{ $customer->email }}</td>
-                                        <td>{{ $customer->phone }}</td>
-                                        <td>{{ $customer->city }}</td>
-                                        <td>{{ $customer->country }}</td>
-                                        <td>{{ $customer->address }}</td>
+                                        <td>{{ $doctor->name }}</td>
+                                        <td>{{ $doctor->email }}</td>
+                                        <td>{{ $doctor->phone }}</td>
+                                        <td>
+                                            {{ $doctor->location }}
+                                        </td>
+                                        <td>
+                                            {{ $doctor->gender }}
+                                        </td>
+                                        <td>
+                                            {{ $doctor->dob }}
+                                        </td>
                                         <td>
                                             <div class="button-switch">
                                                 <input type="checkbox" id="switch-orange" class="switch toggle-class"
-                                                    data-id="{{ $customer['id'] }}"
-                                                    {{ $customer['status'] ? 'checked' : '' }} />
+                                                    data-id="{{ $doctor['id'] }}"
+                                                    {{ $doctor['status'] ? 'checked' : '' }} />
                                                 <label for="switch-orange" class="lbl-off"></label>
                                                 <label for="switch-orange" class="lbl-on"></label>
                                             </div>
                                         </td>
                                         <td>
-                                            <a title="Edit Customer" data-route=""
-                                                href="{{ route('customers.edit', $customer->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                                            <a title="Edit Doctor" data-route=""
+                                                href="{{ route('doctors.edit', $doctor->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                            <a title="Delete Customer" data-route="{{ route('customers.delete', $customer->id) }}"
+                                            <a title="Delete Doctor" data-route="{{ route('doctors.delete', $doctor->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -124,7 +130,7 @@
         $(document).on('click', '#delete', function(e) {
             swal({
                     title: "Are you sure?",
-                    text: "To delete this customer.",
+                    text: "To delete this doctor.",
                     type: "warning",
                     confirmButtonText: "Yes",
                     showCancelButton: true
@@ -150,7 +156,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route("customers.change-status")}}',
+                url: '{{route("doctors.change-status")}}',
                 data: {
                     'status': status,
                     'user_id': user_id

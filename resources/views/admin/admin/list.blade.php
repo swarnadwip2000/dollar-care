@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Admin Details - Derick Veliz admin
+    All Admin Details - {{ env('APP_NAME') }} admin
 @endsection
 
 
 @section('content')
-@php
-    use App\Models\User;
-@endphp
+    @php
+        use App\Models\User;
+    @endphp
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -38,7 +38,7 @@
                             <div class="col-md-6">
                                 <h4 class="mb-0">Admin Details</h4>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -56,24 +56,28 @@
                             </thead>
                             <tbody>
                                 @foreach ($admins as $admin)
-                                
-                                <tr>
-                                    <td style="display:none;"><a href="{{Storage::url($admin->profile_picture)}}" target="_blank" >
-                                        <img src="{{Storage::url($admin->profile_picture)}}" class="rounded-circle shadow" width="130px" height="130px" alt="" id="img-{{ $admin->id }}" data-url="{{ Storage::url($admin->profile_picture) }}"></a></td>
-                                    <td>{{ $admin->name}}</td>
-                                    <td>{{ $admin->email}}</td>
-                                    <td>{{ date('d M Y',strtotime($admin->created_at)) }}</td>
-                                    <td align="center">
-                                        <a class="edit-admins" href="#" data-bs-toggle="modal"
+                                    <tr>
+                                        <td style="display:none;"><a href="{{ Storage::url($admin->profile_picture) }}"
+                                                target="_blank">
+                                                <img src="{{ Storage::url($admin->profile_picture) }}"
+                                                    class="rounded-circle shadow" width="130px" height="130px"
+                                                    alt="" id="img-{{ $admin->id }}"
+                                                    data-url="{{ Storage::url($admin->profile_picture) }}"></a></td>
+                                        <td>{{ $admin->name }}</td>
+                                        <td>{{ $admin->email }}</td>
+                                        <td>{{ date('d M Y', strtotime($admin->created_at)) }}</td>
+                                        <td align="center">
+                                            <a class="edit-admins" href="#" data-bs-toggle="modal"
                                                 data-bs-target="#edit_admin" data-id="{{ $admin->id }}"
                                                 data-route="{{ route('admin.edit', $admin->id) }}"><i
                                                     class="fas fa-edit"></i></a> &nbsp;&nbsp;
-                                                    
-                                        <a href="{{route('admin.delete', $admin->id)}}" onclick="return confirm('Are you sure to delete this admin?')"><i class="fas fa-trash"></i></a>
-                                        
-                                    </td>
-                                </tr>
-                               
+
+                                            <a href="{{ route('admin.delete', $admin->id) }}"
+                                                onclick="return confirm('Are you sure to delete this admin?')"><i
+                                                    class="fas fa-trash"></i></a>
+
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
 
@@ -192,7 +196,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="submit-section">
                                     <button class="btn btn-primary submit-btn">Update</button>
                                 </div>
@@ -248,7 +252,7 @@
 
             });
 
-            
+
         });
     </script>
     <script>
@@ -257,7 +261,7 @@
             $('.edit-admins').on('click', function() {
                 var id = $(this).data('id');
                 var route = $(this).data('route');
-                var img_url = $('#img-'+id).data('url');
+                var img_url = $('#img-' + id).data('url');
                 $('#loading').addClass('loading');
                 $('#loading-content').addClass('loading-content');
                 $.ajaxSetup({
@@ -278,7 +282,8 @@
                             await $('#hidden_id').val(data.admin.id);
                             await $('#edit_name').val(data.admin.name);
                             await $('#edit_email').val(data.admin.email);
-                            await $('.show-image').html('<img src="'+img_url+'" class="inline-block" alt="admin">');
+                            await $('.show-image').html('<img src="' + img_url +
+                                '" class="inline-block" alt="admin">');
                             await $('#loading').removeClass('loading');
                             await $('#loading-content').removeClass('loading-content');
                         } catch (error) {
@@ -289,6 +294,4 @@
             });
         });
     </script>
-
-
 @endpush

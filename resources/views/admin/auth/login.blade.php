@@ -10,9 +10,9 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Login - Chat Box Admin Panel</title>
+    <title>Login - {{ env('APP_NAME') }} Panel</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.ico') }}">
 
     <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
 
@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="account-page">
@@ -39,7 +40,7 @@
             <div class="container">
 
                 <div class="account-logo">
-                    <a href="admin-dashboard.html"><img src="{{ asset('admin_assets/img/logo2.png') }}"
+                    <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/logo2.png') }}"
                             alt="Dreamguy's Technologies"></a>
                 </div>
 
@@ -72,7 +73,8 @@
                                 <div class="position-relative" id="show_hide_password">
                                     <input type="password" class="form-control border-end-0" name="password"
                                         id="inputChoosePassword" placeholder="Enter Password">
-                                    <a href="javascript:;" class=""><span class="fa fa-eye-slash" id="toggle-password"></span></a>
+                                    <a href="javascript:;" class=""><span class="fa fa-eye-slash"
+                                            id="toggle-password"></span></a>
                                 </div>
                                 @if ($errors->has('password'))
                                     <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
@@ -106,36 +108,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
-    @if(Session::has('message'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.success("{{ session('message') }}");
+    @if (Session::has('message'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('message') }}");
     @endif
 
-    @if(Session::has('error'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.error("{{ session('error') }}");
+    @if (Session::has('error'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.error("{{ session('error') }}");
     @endif
 
-    @if(Session::has('info'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.info("{{ session('info') }}");
+    @if (Session::has('info'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.info("{{ session('info') }}");
     @endif
 
-    @if(Session::has('warning'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.warning("{{ session('warning') }}");
+    @if (Session::has('warning'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.warning("{{ session('warning') }}");
     @endif
 </script>
 
