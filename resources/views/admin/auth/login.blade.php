@@ -40,7 +40,7 @@
             <div class="container">
 
                 <div class="account-logo">
-                    <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/logo2.png') }}"
+                    <a href="{{ route('home') }}"><img src="{{ asset('admin_assets/img/logo2.png') }}"
                             alt="Dreamguy's Technologies"></a>
                 </div>
 

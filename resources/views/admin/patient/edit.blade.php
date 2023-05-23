@@ -112,7 +112,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label"> Password
                                                         </label>
                                                         <input type="password" name="password" id=""
-                                                            class="form-control" placeholder="Enter pasword">
+                                                            class="form-control" placeholder="Enter pasword" autocomplete="off">
                                                         @if ($errors->has('password'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('password') }}</div>
@@ -122,8 +122,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label"> Confirm
                                                             Password </label>
                                                         <input type="password" name="confirm_password" id=""
-                                                            class="form-control"
-                                                            value="{{ $patient['confirm_password'] }}">
+                                                            class="form-control">
                                                         @if ($errors->has('confirm_password'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('confirm_password') }}</div>
@@ -174,6 +173,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

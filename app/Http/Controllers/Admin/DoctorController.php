@@ -52,7 +52,7 @@ class DoctorController extends Controller
             'profile_picture' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'status' => 'required',
             'gender' => 'required',
-            'year_of_experience' => 'required',
+            'year_of_experience' => 'required|numeric',
             'specialization' => 'required',
         ]);
 

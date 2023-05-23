@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     @stack('styles')
     <style>
@@ -75,6 +75,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
 <script>
     @if (Session::has('message'))
         toastr.options = {
@@ -108,7 +109,26 @@
         toastr.warning("{{ session('warning') }}");
     @endif
 </script>
-
+<script>
+    $(document).ready(function() {
+        toastr.options = {
+            // 'closeButton': true,
+            // 'debug': false,
+            // 'newestOnTop': false,
+            // 'progressBar': false,
+            'positionClass': 'toast-top-center',
+            // 'preventDuplicates': false,
+            'showDuration': '10',
+            'hideDuration': '10',
+            'timeOut': '800',
+            'extendedTimeOut': '800',
+            // 'showEasing': 'swing',
+            // 'hideEasing': 'linear',
+            // 'showMethod': 'fadeIn',
+            // 'hideMethod': 'fadeOut',
+        }
+    });
+</script>
 
 @stack('scripts')
 

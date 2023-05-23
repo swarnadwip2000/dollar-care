@@ -45,7 +45,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="name" id=""
                                                             class="form-control" value="{{ old('name') }}"
-                                                            placeholder="Enter Doctor Name">
+                                                            placeholder="Enter Patient Name">
                                                         @if ($errors->has('name'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('name') }}</div>
@@ -56,7 +56,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="email" id=""
                                                             class="form-control" value="{{ old('email') }}"
-                                                            placeholder="Enter Doctor Email">
+                                                            placeholder="Enter Patient Email">
                                                         @if ($errors->has('email'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('email') }}</div>
@@ -74,33 +74,67 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> City
-                                                        </label>
-                                                        <input type="text" name="city" id=""
-                                                            class="form-control" value="{{ old('city') }}"
-                                                            placeholder="City">
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Country
-                                                        </label>
-                                                        <input type="text" name="country" id=""
-                                                            class="form-control" value="{{ old('country') }}"
-                                                            placeholder="Country">
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Address
-                                                            <span style="color: red;">*</span></label>
-                                                        <input type="text" name="address" id=""
-                                                            class="form-control" value="{{ old('address') }}"
-                                                            placeholder="Address">
-                                                        @if ($errors->has('address'))
+                                                        <label for="inputEnterYourName" class="col-form-label"> Specialization <span
+                                                                style="color: red;">*</span></label>
+                                                        <input type="text" name="specialization" id=""
+                                                            class="form-control" value="{{ old('specialization') }}"
+                                                            placeholder="Enter Specialization">
+                                                        @if ($errors->has('specialization'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('address') }}</div>
+                                                                {{ $errors->first('specialization') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Year of Experience <span
+                                                                style="color: red;">*</span></label>
+                                                        <input type="text" name="year_of_experience" id=""
+                                                            class="form-control" value="{{ old('year_of_experience') }}"
+                                                            placeholder="Enter year of experience">
+                                                        @if ($errors->has('year_of_experience'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('year_of_experience') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="" class="col-form-label">Gender<span
+                                                                class="text-danger">*</span> </label>
+                                                        <div class="display-between">
+                                                            <span for="" class="radio-gender">Male </span> <input
+                                                                type="radio" class="gender" name="gender" id="gender"
+                                                                value="Male" checked>
+                                                            <span class="radio-gender">Female </span> <input type="radio"
+                                                                class="gender" name="gender" id="gender" value="Female">
+                                                        </div>
+                                                        @if ($errors->has('gender'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('gender') }}</div>
                                                         @endif
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Location ( City,State,Country,Pincode )
+                                                            <span style="color: red;">*</span></label>
+                                                        <input type="text" name="location" id="location"
+                                                            class="form-control" value="{{ old('location') }}"
+                                                            placeholder="Location">
+                                                        @if ($errors->has('location'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('location') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Status
+                                                            <span style="color: red;">*</span></label>
+                                                        <select name="status" id="" class="form-control">
+                                                            <option value="">Select a Status</option>
+                                                            <option value="1">Active</option>
+                                                            <option value="0">Inactive</option>
+                                                        </select>
+                                                        @if ($errors->has('status'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('status') }}</div>
+                                                        @endif
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Password
                                                             <span style="color: red;">*</span></label>
@@ -122,30 +156,7 @@
                                                                 {{ $errors->first('confirm_password') }}</div>
                                                         @endif
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Pin Code
-                                                            <span style="color: red;">*</span></label>
-                                                        <input type="text" name="pincode" id=""
-                                                            class="form-control" value="{{ old('pincode') }}"
-                                                            placeholder="Pincode">
-                                                        @if ($errors->has('pincode'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('pincode') }}</div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Status
-                                                            <span style="color: red;">*</span></label>
-                                                        <select name="status" id="" class="form-control">
-                                                            <option value="">Select a Status</option>
-                                                            <option value="1">Active</option>
-                                                            <option value="0">Inactive</option>
-                                                        </select>
-                                                        @if ($errors->has('status'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('status') }}</div>
-                                                        @endif
-                                                    </div>
+                                                    
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Profile
                                                             Picture <span style="color: red;">*</span></label>
@@ -163,6 +174,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

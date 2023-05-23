@@ -46,7 +46,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="name" id=""
                                                             class="form-control" value="{{ $doctor['name'] }}"
-                                                            placeholder="Enter Doctor Name">
+                                                            placeholder="Enter Patient Name">
                                                         @if ($errors->has('name'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('name') }}</div>
@@ -57,7 +57,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="email" id=""
                                                             class="form-control" value="{{ $doctor['email'] }}"
-                                                            placeholder="Enter Doctor Email">
+                                                            placeholder="Enter Patient Email">
                                                         @if ($errors->has('email'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('email') }}</div>
@@ -75,64 +75,49 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> City
+                                                        <label for="inputEnterYourName" class="col-form-label"> Specialization <span
+                                                                style="color: red;">*</span></label>
+                                                        <input type="text" name="specialization" id=""
+                                                            class="form-control" value="{{ $doctor['specialization'] }}"
+                                                            placeholder="Enter Phone Number">
+                                                        @if ($errors->has('specialization'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('specialization') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Year of Experience <span
+                                                                style="color: red;">*</span></label>
+                                                        <input type="text" name="year_of_experience" id=""
+                                                            class="form-control" value="{{ $doctor['year_of_experience'] }}"
+                                                            placeholder="Enter Phone Number">
+                                                        @if ($errors->has('year_of_experience'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('year_of_experience') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="" class="col-form-label">Gender<span
+                                                                class="text-danger">*</span> </label>
+                                                        <div class="display-between">
+                                                            <span for="" class="radio-gender">Male </span> <input
+                                                                type="radio" class="gender" name="gender" id="gender"
+                                                                value="Male" @if($doctor['gender'] == 'Male') checked @endif>
+                                                            <span class="radio-gender">Female </span> <input type="radio"
+                                                                class="gender" name="gender" id="gender" value="Female" @if($doctor['gender'] == 'Female') checked @endif>
+                                                        </div>
+                                                        @if ($errors->has('gender'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('gender') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Location <span class="text-danger">*</span> ( City,State,Country,Pincode )
                                                         </label>
-                                                        <input type="text" name="city" id=""
-                                                            class="form-control" value="{{ $doctor['city'] }}"
-                                                            placeholder="City">
+                                                        <input type="text" name="location" id=""
+                                                            class="form-control" value="{{ $doctor['location'] }}"
+                                                            placeholder="enter location">
 
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Country
-                                                        </label>
-                                                        <input type="text" name="country" id=""
-                                                            class="form-control" value="{{ $doctor['country'] }}"
-                                                            placeholder="Country">
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Address
-                                                            <span style="color: red;">*</span></label>
-                                                        <input type="text" name="address" id=""
-                                                            class="form-control" value="{{ $doctor['address'] }}"
-                                                            placeholder="Address">
-                                                        @if ($errors->has('address'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('address') }}</div>
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Password
-                                                        </label>
-                                                        <input type="password" name="password" id=""
-                                                            class="form-control" placeholder="Enter pasword">
-                                                        @if ($errors->has('password'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('password') }}</div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Confirm
-                                                            Password </label>
-                                                        <input type="password" name="confirm_password" id=""
-                                                            class="form-control"
-                                                            value="{{ $doctor['confirm_password'] }}">
-                                                        @if ($errors->has('confirm_password'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('confirm_password') }}</div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Pin Code
-                                                            <span style="color: red;">*</span></label>
-                                                        <input type="text" name="pincode" id=""
-                                                            class="form-control" value="{{ $doctor['pincode'] }}"
-                                                            placeholder="Pincode">
-                                                        @if ($errors->has('pincode'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('pincode') }}</div>
-                                                        @endif
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Status
@@ -152,6 +137,27 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Password
+                                                        </label>
+                                                        <input type="password" name="password" id=""
+                                                            class="form-control" placeholder="Enter pasword" autocomplete="off">
+                                                        @if ($errors->has('password'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('password') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Confirm
+                                                            Password </label>
+                                                        <input type="password" name="confirm_password" id=""
+                                                            class="form-control">
+                                                        @if ($errors->has('confirm_password'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('confirm_password') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Profile
                                                             Picture </label>
                                                         <input type="file" name="profile_picture" id=""
@@ -162,6 +168,7 @@
                                                                 {{ $errors->first('profile_picture') }}</div>
                                                         @endif
                                                     </div>
+                                                    <div class="col-md-6"></div>
                                                     @if ($doctor['profile_picture'])
                                                         <div class="col-md-6">
                                                             <label for="inputEnterYourName" class="col-form-label">View
@@ -178,6 +185,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

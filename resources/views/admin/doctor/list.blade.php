@@ -56,9 +56,10 @@
                                     <th> Name</th>
                                     <th> Email</th>
                                     <th> Phone</th>
-                                    <th>Location</th>
+                                    <th>Specialization</th>
+                                    <th>Year of Experience</th>
                                     <th>Gender</th>
-                                    <th>Date of Birth</th>
+                                    <th>Location</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -70,13 +71,15 @@
                                         <td>{{ $doctor->email }}</td>
                                         <td>{{ $doctor->phone }}</td>
                                         <td>
-                                            {{ $doctor->location }}
+                                            {{ $doctor->specialization }}
                                         </td>
+                                        <td>
+                                            <i>{{ $doctor->year_of_experience }} Year </i>
                                         <td>
                                             {{ $doctor->gender }}
                                         </td>
                                         <td>
-                                            {{ $doctor->dob }}
+                                            {{ $doctor->location }}
                                         </td>
                                         <td>
                                             <div class="button-switch">

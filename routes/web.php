@@ -5,9 +5,12 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Frontend\CmsController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -27,7 +30,8 @@ Route::get('clear', function () {
     return "Optimize clear has been successfully";
 });
 
-Route::get('/', [AuthController::class, 'login'])->name('admin.login');
+Route::get('/admin', [AuthController::class, 'redirectAdminLogin']);
+Route::get('/admin/login', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/login-check', [AuthController::class, 'loginCheck'])->name('admin.login.check');  //login check
 Route::post('forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('admin.forget.password');
 Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
@@ -49,6 +53,7 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     Route::resources([
         'patients' => PatientController::class,
         'doctors' => DoctorController::class,
+        'contact-us' => ContactUsController::class,
     ]);
     //  Customer Routes
     Route::prefix('patients')->group(function () {
@@ -62,4 +67,23 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         Route::get('/doctor-delete/{id}', [DoctorController::class, 'delete'])->name('doctors.delete');
     });
 
+    Route::prefix('blogs')->name('blogs.')->group(function(){
+        Route::prefix('categories')->name('categories.')->group(function(){
+            Route::get('/', [BlogController::class, 'categoryIndex'])->name('index');
+            Route::get('/create', [BlogController::class, 'create'])->name('create');
+            Route::post('/store', [BlogController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [BlogController::class, 'update'])->name('update');
+            Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('delete');
+        });
+    });
 });
+
+
+/**------------------------------------------------------------- Frontend  ----------------------------------------------------------------------------------------------*/
+
+Route::get('/', [CmsController::class, 'index'])->name('home');
+Route::get('/about-us', [CmsController::class, 'aboutUs'])->name('about-us');
+Route::get('/services', [CmsController::class, 'services'])->name('services');
+Route::get('/contact-us', [CmsController::class, 'contactUs'])->name('contact-us');
+Route::post('/contact-us', [CmsController::class, 'contactUsSubmit'])->name('contact-us.submit');

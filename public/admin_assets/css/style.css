@@ -11551,3 +11551,21 @@ table.dataTable td.dataTables_empty {
 .gender {
     margin: 0px 28px 0px 0px;
 }
+
+.fa-edit {
+    color:#15388b;
+}
+
+.fa-trash {
+    color: #e61c29;
+}
+
+tr.odd {
+    background-color: #b6c1e75e !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #0a0909 !important;
+    border: 1px solid transparent !important;
+    background: #b6c1e7 !important;
+}
