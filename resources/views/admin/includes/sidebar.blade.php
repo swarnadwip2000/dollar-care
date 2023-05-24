@@ -35,14 +35,14 @@
                     <span>Others</span>
                 </li>
                 <li class="submenu">
-                    <a href="#" class="{{ Request::is('admin/blogs*') ? 'active' : ' ' }}"><i class="la la-blog"></i> <span>Blogs </span> <span
+                    <a href="#" class="{{ Request::is('admin/blogs*') ? 'active' : ' ' }}"><i class="la la-blog"></i> <span>Blogs</span> <span
                             class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li class="{{ Request::is('admin/blogs/categories*') ? 'active' : ' ' }}">
                             <a href="{{ route('blogs.categories.index') }}">Category</a>
                         </li>
-                        <li class="{{ Request::is('admin/password*') ? 'active' : ' ' }}">
-                            <a href="{{ route('admin.password') }}">Details</a>
+                        <li class="{{ Request::is('admin/blogs') | Request::is('admin/blogs/create') ? 'active' : ' ' }}">
+                            <a href="{{ route('blogs.index') }}">Details</a>
                         </li>                
                     </ul>
                 </li>

@@ -1008,6 +1008,7 @@ p {
   border: none;
   margin-bottom: 15px;
   color: rgb(255 255 255 / 50%);
+  font-size: 16px;
 }
 .read-btn:hover {
   color: var(--white-color);
@@ -1826,6 +1827,17 @@ p {
 .login_form label {
   color: var(--black-color);
 }
+.doc-s{
+  display: inline-block;
+  padding: 20px;
+}
+.doc-s .form-check-input:checked {
+  background-color: #D92133;
+  border-color: #000;
+}
+.doc-s .form-check-inline {
+  margin-right: 2rem;
+}
 .login_form .form-control {
   background-color: transparent;
   border: 1px solid rgb(0 0 0 / 50%);
@@ -1927,9 +1939,6 @@ input[type="password"] {
 /* .login_form .form-group {
   padding-bottom: 20px;
 } */
-.login_form .form-group.g-h label {
-  display: block;
-}
 .reg-sec .login_form .toggle {
   top: 55%;
 }
@@ -1968,4 +1977,9 @@ input[type="password"] {
 .social-list ul li a:hover{
   background: linear-gradient(90deg, #1851b5 0%, #ed1b24 100%);
   transition: ease all 0.5s;
+}
+
+.search-form i
+{
+  font-size: 1rem;
 }

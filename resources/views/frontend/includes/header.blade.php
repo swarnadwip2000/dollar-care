@@ -17,7 +17,7 @@
                 
               </li>
               <li class="{{ Request::is('services') ? 'active' : '' }}"><a href="{{ route('services') }}">Services</a></li>
-              <li><a href="blog.html">Blog</a></li>
+              <li class="{{ Request::is('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Blog</a></li>
               <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a href="{{ route('contact-us') }}">Contact Us</a></li>
               <li>
                 <a href="login.html"

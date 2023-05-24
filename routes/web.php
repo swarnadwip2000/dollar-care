@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -70,12 +71,19 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     Route::prefix('blogs')->name('blogs.')->group(function(){
         Route::prefix('categories')->name('categories.')->group(function(){
             Route::get('/', [BlogController::class, 'categoryIndex'])->name('index');
-            Route::get('/create', [BlogController::class, 'create'])->name('create');
-            Route::post('/store', [BlogController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('edit');
-            Route::post('/update/{id}', [BlogController::class, 'update'])->name('update');
-            Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('delete');
+            Route::get('/create', [BlogController::class, 'categoryCreate'])->name('create');
+            Route::post('/store', [BlogController::class, 'categoryStore'])->name('store');
+            Route::get('/edit/{id}', [BlogController::class, 'categoryEdit'])->name('edit');
+            Route::post('/update', [BlogController::class, 'categoryUpdate'])->name('update');
+            Route::get('/delete/{id}', [BlogController::class, 'categoryDelete'])->name('delete');
         });
+        Route::get('/', [BlogController::class, 'index'])->name('index');
+        Route::get('/create', [BlogController::class, 'create'])->name('create');
+        Route::post('/store', [BlogController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('edit');
+        Route::post('/update', [BlogController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('delete');
+        Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus'])->name('change-status');
     });
 });
 
@@ -87,3 +95,4 @@ Route::get('/about-us', [CmsController::class, 'aboutUs'])->name('about-us');
 Route::get('/services', [CmsController::class, 'services'])->name('services');
 Route::get('/contact-us', [CmsController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact-us', [CmsController::class, 'contactUsSubmit'])->name('contact-us.submit');
+Route::get('/blogs', [FrontendBlogController::class, 'blogs'])->name('blogs');

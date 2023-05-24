@@ -11,9 +11,6 @@
 @endpush
 
 @section('content')
-    @php
-        use App\Models\User;
-    @endphp
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -67,9 +64,9 @@
                                         </td>
                                         <td>
                                             <a title="Edit Blog Category" data-route=""
-                                                href="{{ route('categories.edit', $category->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                                                href="{{ route('blogs.categories.edit', $category->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                            <a title="Delete Blog Category" data-route="{{ route('categories.delete', $category->id) }}"
+                                            <a title="Delete Blog Category" data-route="{{ route('blogs.categories.delete', $category->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -93,11 +90,11 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [3]
+                        "targets": [2]
                     },
                     {
                         "orderable": true,
-                        "targets": [0, 1 ]
+                        "targets": [0, 1]
                     }
                 ]
             });
