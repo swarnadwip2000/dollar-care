@@ -93,6 +93,8 @@
                                                                 value="Male" @if($patient['gender'] == 'Male') checked @endif>
                                                             <span class="radio-gender">Female </span> <input type="radio"
                                                                 class="gender" name="gender" id="gender" value="Female" @if($patient['gender'] == 'Female') checked @endif>
+                                                                <span class="radio-gender">Other </span> <input type="radio"
+                                                                class="gender" name="gender" id="gender" value="Female" @if($patient['gender'] == 'Other') checked @endif>
                                                         </div>
                                                         @if ($errors->has('gender'))
                                                             <div class="error" style="color:red;">

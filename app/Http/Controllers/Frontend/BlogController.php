@@ -9,11 +9,38 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function blogs()
+    public function blogs($slug = null)
     {
-        $blogsCategories = BlogCategory::orderBy('id', 'desc')->select('name')->get();
-        $blogs = Blog::orderBy('id', 'desc')->paginate(10);  
-        $lastBlogs = Blog::orderBy('id', 'desc')->take(10)->get();                                                                                                                               
-        return view('frontend.blogs')->with(compact('blogs','blogsCategories','lastBlogs'));
+        if ($slug != null) {
+            $blogsCategories = BlogCategory::orderBy('id', 'desc')->select('name','slug')->get();
+            $blogs = Blog::with('category')->whereHas('category', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })->orderBy('id', 'desc')->paginate(10);
+            $lastBlogs = Blog::orderBy('id', 'desc')->take(10)->get();
+            return view('frontend.blogs')->with(compact('blogs', 'blogsCategories', 'lastBlogs'));
+        } else {
+            $blogsCategories = BlogCategory::orderBy('id', 'desc')->select('name','slug')->get();
+            $blogs = Blog::orderBy('id', 'desc')->paginate(10);
+            $lastBlogs = Blog::orderBy('id', 'desc')->take(10)->get();
+            return view('frontend.blogs')->with(compact('blogs', 'blogsCategories', 'lastBlogs'));
+        }
+    }
+
+    public function blogDetails($category_slug , $blog_slug)
+    {
+        $blogsCategories = BlogCategory::orderBy('id', 'desc')->select('name','slug')->get();
+        $blog = Blog::with('category')->whereHas('category', function ($query) use ($category_slug) {
+            $query->where('slug', $category_slug);
+        })->where('slug', $blog_slug)->first();
+        $lastBlogs = Blog::orderBy('id', 'desc')->take(10)->get();
+        return view('frontend.blog-details')->with(compact('blog', 'blogsCategories', 'lastBlogs'));
+    }
+
+    public function searchResult(Request $request)
+    {
+        if ($request->ajax()) {
+                $blogs = Blog::where('title', 'LIKE', '%' . $request->search . '%')->orderBy('id', 'desc')->get();
+                return response()->json(['view' => view('frontend.search-result', compact('blogs'))->render()]);
+        }
     }
 }

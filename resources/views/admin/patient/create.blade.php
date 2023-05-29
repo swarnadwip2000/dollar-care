@@ -92,6 +92,8 @@
                                                                 value="Male" checked>
                                                             <span class="radio-gender">Female </span> <input type="radio"
                                                                 class="gender" name="gender" id="gender" value="Female">
+                                                                <span class="radio-gender">Other </span> <input type="radio"
+                                                                class="gender" name="gender" id="gender" value="Other">
                                                         </div>
                                                         @if ($errors->has('gender'))
                                                             <div class="error" style="color:red;">

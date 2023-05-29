@@ -261,7 +261,7 @@
                             </p>
                         </div>
                         <div class="main-btn pt-4">
-                            <a href="about.html" tabindex="0"><span>read more</span><span
+                            <a href="{{ route('about-us') }}" tabindex="0"><span>read more</span><span
                                     class="btn-arw"><i class="fa-solid fa-arrow-right"></i></span></a>
                         </div>
                     </div>
@@ -302,7 +302,7 @@
                                 </div>
                             </div>
                             <div class="main-btn-2">
-                                <a href="#">READ MORE<span class="btn-dash"><i
+                                <a href="{{ route('services') }}#first_service">READ MORE<span class="btn-dash"><i
                                             class="fa-solid fa-minus"></i></span><span class="btn-dot"><i
                                             class="fa-solid fa-ellipsis"></i></span></a>
                             </div>
@@ -327,7 +327,7 @@
                                 </div>
                             </div>
                             <div class="main-btn-2">
-                                <a href="#">READ MORE<span class="btn-dash"><i
+                                <a href="{{ route('services') }}#second_service">READ MORE<span class="btn-dash"><i
                                             class="fa-solid fa-minus"></i></span><span class="btn-dot"><i
                                             class="fa-solid fa-ellipsis"></i></span></a>
                             </div>
@@ -357,7 +357,7 @@
                                 </div>
                             </div>
                             <div class="main-btn-2">
-                                <a href="#">READ MORE<span class="btn-dash"><i
+                                <a href="{{ route('services') }}#third_service">READ MORE<span class="btn-dash"><i
                                             class="fa-solid fa-minus"></i></span><span class="btn-dot"><i
                                             class="fa-solid fa-ellipsis"></i></span></a>
                             </div>

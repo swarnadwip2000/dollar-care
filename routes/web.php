@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
 use Illuminate\Support\Facades\Artisan;
@@ -95,4 +96,13 @@ Route::get('/about-us', [CmsController::class, 'aboutUs'])->name('about-us');
 Route::get('/services', [CmsController::class, 'services'])->name('services');
 Route::get('/contact-us', [CmsController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact-us', [CmsController::class, 'contactUsSubmit'])->name('contact-us.submit');
-Route::get('/blogs', [FrontendBlogController::class, 'blogs'])->name('blogs');
+Route::get('/blogs/{slug?}', [FrontendBlogController::class, 'blogs'])->name('blogs');
+Route::get('/blog-details/{category_slug}/{blog_slug}', [FrontendBlogController::class, 'blogDetails'])->name('blogs.details');
+// search result
+Route::post('/search-result', [FrontendBlogController::class, 'searchResult'])->name('blogs.search');
+
+Route::get('/login', [FrontendAuthController::class, 'login'])->name('login');
+Route::get('/register', [FrontendAuthController::class, 'register'])->name('register');
+Route::post('/register-store', [FrontendAuthController::class, 'registerStore'])->name('register.store');
+Route::post('/user-login-check', [FrontendAuthController::class, 'loginCheck'])->name('login.check');
+Route::get('/logout', [FrontendAuthController::class, 'logout'])->name('logout');

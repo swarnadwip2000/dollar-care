@@ -20,8 +20,31 @@
         <div class="container">
             <div class="blog-inr-wrap">
                 <div class="row justify-content-between">
-                    <div class="col-xl-9 col-12" id="search-result">
-                        @include('frontend.search-result')
+                    <div class="col-xl-9 col-12">
+                        <div class="blog-box-1">
+                            <div class="blog-inr-img">
+                                <img src="{{ Storage::url($blog['image']) }}" alt="" />
+                            </div>
+                            <div class="blog-text">
+                                <div class="date-box d-flex align-items-center justify-content-end">
+                                    <div class="bl-date-img">
+                                        <img src="assets/images/date.png" alt="" />
+                                    </div>
+                                    <div class="bl-date">
+                                        <h4>{{ date("d M' Y", strtotime($blog['created_at'])) }}</h4>
+                                    </div>
+                                </div>
+                                <div class="blg-d">
+                                    <div class="head-1 h-b pb-3">
+                                        <h2>{{ $blog['title'] }}</h2>
+                                    </div>
+                                    <div class="para p-b">
+                                        {!! $blog['content'] !!}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="col-xl-3 col-12">
                         @if (count($blogsCategories) > 0)
@@ -39,17 +62,17 @@
                             </div>
                         @endif
                         <div class="cat-div">
-                            <div class="cat-box">
+                            {{-- <div class="cat-box">
                                 <h4>SEARCH</h4>
                                 <div class="search-form">
-                                    <form action="javascript:void(0);">
-                                        <input type="text" placeholder="search here" name="search" id="search-blog" data-route="{{ route('blogs.search') }}" />
+                                    <form action="/">
+                                        <input type="text" placeholder="search here" name="search" />
                                         <button type="submit">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         @if (count($lastBlogs) > 0)
                             <div class="cat-div">
@@ -63,7 +86,6 @@
                                                 </a></li>
                                         @endforeach
                                     </ul>
-
                                 </div>
                             </div>
                         @endif
@@ -82,37 +104,10 @@
                         </div> --}}
                     </div>
                 </div>
-
-
-                <div class="pagi_1">
-                    <nav aria-label="Page navigation example">
-                        {{ $blogs->links() }}                                                                                                         
-                    </nav>
-                </div>
             </div>
         </div>
     </section>
 @endsection
 
 @push('scripts')
-<script>
-    $(document).ready(function() {
-       $('#search-blog').keyup(function() {
-           var search = $(this).val();
-              var route = $(this).data('route');
-               $.ajax({
-                   url: route,
-                   method: "POST",
-                   data: {
-                       "_token": "{{ csrf_token() }}",
-                       "search": search
-                   },
-                   success: function(response) {
-                       $('#search-result').html(response.view);
-                   }
-               });
-           
-       });
-    });
-</script>
 @endpush

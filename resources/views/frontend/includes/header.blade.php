@@ -20,7 +20,7 @@
               <li class="{{ Request::is('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Blog</a></li>
               <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a href="{{ route('contact-us') }}">Contact Us</a></li>
               <li>
-                <a href="login.html"
+                <a href="{{ route('login') }}"
                   ><span class="u-i"
                     ><i class="fa-regular fa-user"></i></span
                   >LOGIN</a

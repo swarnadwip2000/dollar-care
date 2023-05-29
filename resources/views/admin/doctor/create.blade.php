@@ -74,8 +74,8 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Specialization <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label">
+                                                            Specialization <span style="color: red;">*</span></label>
                                                         <input type="text" name="specialization" id=""
                                                             class="form-control" value="{{ old('specialization') }}"
                                                             placeholder="Enter Specialization">
@@ -85,8 +85,8 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Year of Experience <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label"> Year of
+                                                            Experience <span style="color: red;">*</span></label>
                                                         <input type="text" name="year_of_experience" id=""
                                                             class="form-control" value="{{ old('year_of_experience') }}"
                                                             placeholder="Enter year of experience">
@@ -103,7 +103,11 @@
                                                                 type="radio" class="gender" name="gender" id="gender"
                                                                 value="Male" checked>
                                                             <span class="radio-gender">Female </span> <input type="radio"
-                                                                class="gender" name="gender" id="gender" value="Female">
+                                                                class="gender" name="gender" id="gender"
+                                                                value="Female">
+                                                            <span class="radio-gender">Other </span> <input type="radio"
+                                                                class="gender" name="gender" id="gender"
+                                                                value="Other">
                                                         </div>
                                                         @if ($errors->has('gender'))
                                                             <div class="error" style="color:red;">
@@ -112,7 +116,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Location ( City,State,Country,Pincode )
+                                                        <label for="inputEnterYourName" class="col-form-label"> Location (
+                                                            City,State,Country,Pincode )
                                                             <span style="color: red;">*</span></label>
                                                         <input type="text" name="location" id="location"
                                                             class="form-control" value="{{ old('location') }}"
@@ -156,7 +161,7 @@
                                                                 {{ $errors->first('confirm_password') }}</div>
                                                         @endif
                                                     </div>
-                                                    
+
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Profile
                                                             Picture <span style="color: red;">*</span></label>

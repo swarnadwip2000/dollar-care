@@ -25,7 +25,7 @@
               <img src="{{asset('frontend_assets/images/sev-1.jpg')}}" alt="" />
             </div>
           </div>
-          <div class="col-xl-6 col-md-12 col-12">
+          <div class="col-xl-6 col-md-12 col-12" id="first_service">
             <div class="serv-inr-text">
               <div class="head-1 h-b">
                 <h2>Individual Online Enrollment (IOE) Link</h2>
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="serv-inr-wrap">
+      <div class="serv-inr-wrap" id="second_service">
         <div class="row justify-content-between align-items-center">
           <div class="col-xl-6 col-md-12 col-12">
             <div class="serv-inr-text">
@@ -200,7 +200,7 @@
               <img src="{{asset('frontend_assets/images/sev-3.jpg')}}" alt="" />
             </div>
           </div>
-          <div class="col-xl-6 col-md-12 col-12">
+          <div class="col-xl-6 col-md-12 col-12" id="third_service">
             <div class="serv-inr-text">
               <div class="head-1 h-b">
                 <h2>
