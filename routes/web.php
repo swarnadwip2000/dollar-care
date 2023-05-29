@@ -10,9 +10,11 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
+use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -56,6 +58,7 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         'patients' => PatientController::class,
         'doctors' => DoctorController::class,
         'contact-us' => ContactUsController::class,
+        'newsletters' => NewsletterController::class,
     ]);
     //  Customer Routes
     Route::prefix('patients')->group(function () {
@@ -106,3 +109,6 @@ Route::get('/register', [FrontendAuthController::class, 'register'])->name('regi
 Route::post('/register-store', [FrontendAuthController::class, 'registerStore'])->name('register.store');
 Route::post('/user-login-check', [FrontendAuthController::class, 'loginCheck'])->name('login.check');
 Route::get('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
+
+// newsletter
+Route::post('/newsletter', [FrontendNewsletterController::class, 'newsletter'])->name('newsletter');
