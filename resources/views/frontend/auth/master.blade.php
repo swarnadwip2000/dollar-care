@@ -5,10 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="author" content="Swarnadwip Nath" />
     <meta name="generator" content="Hugo 0.84.0" />
     @yield('meta_title')
     <title>{{ env('APP_NAME') }} | @yield('title') </title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
