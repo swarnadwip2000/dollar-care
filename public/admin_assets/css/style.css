@@ -1668,8 +1668,8 @@ button.bg-danger:hover {
 .btn-primary:active,
 .btn-primary.active {
     color: #fff;
-    background-color: #1075ab;
-    border-color: #1075ab;
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
 }
 
 .btn-primary:focus .open > .dropdown-toggle.btn-primary,
@@ -11553,7 +11553,7 @@ table.dataTable td.dataTables_empty {
 }
 
 .fa-edit {
-    color:#15388b;
+    color: #15388b;
 }
 
 .fa-trash {
@@ -11564,7 +11564,8 @@ tr.odd {
     background-color: #b6c1e75e !important;
 }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: #0a0909 !important;
     border: 1px solid transparent !important;
     background: #b6c1e7 !important;
