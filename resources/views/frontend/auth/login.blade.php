@@ -54,7 +54,7 @@
                                             @endif
                                             <div class="login-text text-right">
                                                 <p>
-                                                    <a href="#">Forgot Password?</a>
+                                                    <a href="{{ route('forget.password') }}">Forgot Password?</a>
                                                 </p>
                                             </div>
                                         </div>

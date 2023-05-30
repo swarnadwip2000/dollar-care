@@ -45,8 +45,8 @@
     padding-bottom: 10px;
 }
 .login_form .toggle {
-  top: 65%;
-  transform: translate(0%, -65%);
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 }
 @media (max-width: 1440px) {
@@ -262,9 +262,6 @@
 }
 .width_545 {
   height: auto;
-}
-.login_sec_left_bg{
-  height: 150vh;
 }
 }
 @media (max-width: 991px) {
@@ -529,7 +526,10 @@
   }
   .main-btn a {
     padding: 10px 10px;
-    font-size: 11px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .inr-bnr-text h1 {
     font-size: 30px;
@@ -578,8 +578,14 @@
     padding: 20px 0px 20px 0px;
   }
   .bl-text h3 {
-    font-size: 11px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .bl-lft img{
+    width: 100%;
+  }
+  .date-box{
+    padding-top: 0!important;
   }
   .blog-sec {
     padding: 20px 0px;
@@ -628,14 +634,19 @@
     padding: 0;
   }
   .blog-rit {
-    display: block !important;
     padding-bottom: 10px;
   }
+  .bl-lft {
+    padding-right: 20px;
+    width: 30%;
+}
   .blog-box-img {
     padding-bottom: 10px;
   }
+  .bl-text{
+    width: 70%;
+  }
   .date-box {
-    display: block !important;
   }
   .main-btn {
     padding-top: 0px !important;
@@ -657,12 +668,21 @@
     font-size: 14px;
     line-height: 18px;
 }
+.abt-sec {
+  clip-path: initial;
+  padding: 20px 0px;
+}
+.wht-slide-icon-div {
+  margin: 0 auto;
+}
+.wht-slide-wrap {
+  text-align: center;
+}
+.sub-btn{
+  width: 100%;
+}
 }
 @media (max-width: 375.98px) {
-  .main-btn a {
-    padding: 10px 10px;
-    font-size: 8px;
-  }
   .d-mem-num {
     right: 24%;
   }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
+use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPasswordController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -109,6 +110,13 @@ Route::get('/register', [FrontendAuthController::class, 'register'])->name('regi
 Route::post('/register-store', [FrontendAuthController::class, 'registerStore'])->name('register.store');
 Route::post('/user-login-check', [FrontendAuthController::class, 'loginCheck'])->name('login.check');
 Route::get('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
+// forget password
+Route::get('/forget-password', [FrontendForgetPasswordController::class, 'forgetPassword'])->name('forget.password');
+Route::post('/forget-password', [FrontendForgetPasswordController::class, 'forgetPasswordSubmit'])->name('forget.password.submit');
+Route::get('/otp-verification/{id}', [FrontendForgetPasswordController::class, 'otpVerification'])->name('otp.verification');
+Route::post('/otp-verification', [FrontendForgetPasswordController::class, 'otpVerificationSubmit'])->name('otp.verification.submit');
+Route::get('/reset-password/{id}', [FrontendForgetPasswordController::class, 'resetPassword'])->name('reset.password');
+Route::post('/reset-password', [FrontendForgetPasswordController::class, 'resetPasswordSubmit'])->name('reset.password.submit');
 
 // newsletter
 Route::post('/newsletter', [FrontendNewsletterController::class, 'newsletter'])->name('newsletter');
