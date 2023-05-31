@@ -19,7 +19,7 @@
                             <div class="main_hh">
                                 <div class="login_sec_right_text">
                                     <div class="login-logo">
-                                        <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo-t.png') }}" /></a>   
+                                        <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}" /></a>   
                                     </div>
                                     <div class="login-logo-head">
                                         <h1>Login to explore more</h1>

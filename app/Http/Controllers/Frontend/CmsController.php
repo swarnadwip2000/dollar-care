@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,9 @@ class CmsController extends Controller
 {
     public function index()
     {
-        return view('frontend.home');
+        $blogs = Blog::orderBy('id', 'desc')->limit(4)->offset(1)->get();
+        $blog = Blog::orderBy('id', 'desc')->first();
+        return view('frontend.home')->with(compact('blogs','blog'));
     }
 
     public function aboutUs()
@@ -20,7 +23,9 @@ class CmsController extends Controller
 
     public function services()
     {
-        return view('frontend.services');
+        $blogs = Blog::orderBy('id', 'desc')->limit(4)->offset(1)->get();
+        $blog = Blog::orderBy('id', 'desc')->first();
+        return view('frontend.services')->with(compact('blogs','blog'));
     }
 
     public function contactUs()
@@ -47,5 +52,25 @@ class CmsController extends Controller
         $contactUs->save();
         
         return redirect()->back()->with('message', 'Thank you for contacting us. We will get back to you soon.');
+    }
+
+    public function qna()
+    {
+        return view('frontend.qna');
+    }
+
+    public function membershipPlans()
+    {
+        return view('frontend.membership-plans');
+    }
+
+    public function telehealth()
+    {
+        return view('frontend.telehealth');
+    }
+
+    public function mobileHealthCoverage()
+    {
+        return view('frontend.mobile-health-coverage');
     }
 }

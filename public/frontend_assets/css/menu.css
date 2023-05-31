@@ -22,7 +22,7 @@
   list-style: none;
   line-height: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   position: relative;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -62,13 +62,13 @@
   position: relative;
 }
 #cssmenu > ul > li > a {
-  padding: 18px 24px;
+  padding: 15px 18px;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;   
   text-decoration: none;
   color: var(--black-color);
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-family: var(--main-font);
   letter-spacing: 1px;
 }
@@ -429,4 +429,23 @@ padding-right: 10px;
 .logo img{
   width: 100%;
 }
-
+/*  */
+.t-btn{
+  box-shadow: none;
+  outline: none;
+}
+.t-btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+.offcanvas-body.t-body p i, .offcanvas-body.t-body i{
+ color: var(--main-color)!important;
+}
+.offcanvas-body.t-body p a{
+  color: var(--black-color)!important;
+  font-size: 14px;
+ }
+ .offcanvas-body.t-body h4{
+  color: var(--black-color)!important;
+  font-size: 14px;
+ }

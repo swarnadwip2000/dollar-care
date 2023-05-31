@@ -256,85 +256,50 @@
       </div>
       <div class="blog-box-wrap">
         <div class="row justify-content-between">
-          <div class="col-xl-6 col-md-6 col-12">
+          <div class="col-xl-6 col-md-12 col-12">
             <div class="blog-box-img">
-              <img src="{{asset('frontend_assets/images/blog-img.jpg')}}" alt="" />
+               <a href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}"> <img src="{{ Storage::url($blog['image']) }}" alt="" /></a>
             </div>
-            <div class="blog-rit d-flex">
-              <div class="bl-text bl-text-1">
-                <h3>Five Benefits Of Individual Health Insurance</h3>
-                <p>
-                  Individual health insurance is a health policy that an
-                  individual purchases to shield themselves against
-                  unpredictable health issues...
-                </p>
-                <div class="date-box d-flex align-items-center">
-                  <div class="bl-date-img">
-                    <img src="{{asset('frontend_assets/images/date.png')}}" alt="" />
-                  </div>
-                  <div class="bl-date">
-                    <h4>17 May’ 2022</h4>
-                  </div>
+            <div class="blog-rit d-flex" data-aos="fade-up" data-aos-easing="linear"
+                data-aos-duration="600">
+                <div class="bl-text bl-text-1">
+                    <a href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}"><h3>{{ $blog['title'] }}</h3></a>
+                    <p>
+                        {!! substr($blog['content'], 0,200) !!}...
+                    </p>
+                    <div class="date-box d-flex align-items-center">
+                        <div class="bl-date-img">
+                            <img src="{{ asset('frontend_assets/images/date.png') }}" alt="" />
+                        </div>
+                        <div class="bl-date">
+                            <h4>{{ date("d M' Y", strtotime($blog['created_at'])) }}</h4>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="col-xl-6 col-md-6 col-12">
-            <div class="blog-rit d-flex">
-              <div class="bl-lft">
-                <img src="{{asset('frontend_assets/images/blog-1.jpg')}}" alt="" />
-              </div>
-              <div class="bl-text">
-                <h3>What Are the Advantages of Group Health Insurance?</h3>
-                <div class="date-box d-flex align-items-center pt-3">
-                  <div class="bl-date-img">
-                    <img src="{{asset('frontend_assets/images/date.png')}}" alt="" />
-                  </div>
-                  <div class="bl-date">
-                    <h4>17 May’ 2022</h4>
-                  </div>
+        </div>
+        <div class="col-xl-6 col-md-12 col-12">
+            @foreach ($blogs as $item)
+                <div class="blog-rit d-flex" data-aos="fade-up" data-aos-easing="linear"
+                    data-aos-duration="600">
+                    <div class="bl-lft">
+                        <a href="{{ route('blogs.details', ['category_slug' => $item['category']['slug'], 'blog_slug' => $item['slug']]) }}"><img src="{{ Storage::url($item['image']) }}" alt="" /></a>
+                    </div>
+                    <div class="bl-text">
+                        <a href="{{ route('blogs.details', ['category_slug' => $item['category']['slug'], 'blog_slug' => $item['slug']]) }}"><h3>{{ $item['title'] }}</h3></a>
+                        <div class="date-box d-flex align-items-center pt-3">
+                            <div class="bl-date-img">
+                                <img src="{{ asset('frontend_assets/images/date.png') }}" alt="" />
+                            </div>
+                            <div class="bl-date">
+                                <h4>{{ date("d M' Y", strtotime($item['created_at'])) }}</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="blog-rit d-flex">
-              <div class="bl-lft">
-                <img src="{{asset('frontend_assets/images/blog-2.jpg')}}" alt="" />
-              </div>
-              <div class="bl-text">
-                <h3>
-                  The Big Ideas: Foremost Organization Mission Health
-                  Insurance
-                </h3>
-                <div class="date-box d-flex align-items-center pt-3">
-                  <div class="bl-date-img">
-                    <img src="{{asset('frontend_assets/images/date.png')}}" alt="" />
-                  </div>
-                  <div class="bl-date">
-                    <h4>17 May’ 2022</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="blog-rit d-flex">
-              <div class="bl-lft">
-                <img src="{{asset('frontend_assets/images/blog-3.jpg')}}" alt="" />
-              </div>
-              <div class="bl-text">
-                <h3>
-                  Individual Health Insurance, Health Policy, Health
-                  Insurance, Insurance, Health
-                </h3>
-                <div class="date-box d-flex align-items-center pt-3">
-                  <div class="bl-date-img">
-                    <img src="{{asset('frontend_assets/images/date.png')}}" alt="" />
-                  </div>
-                  <div class="bl-date">
-                    <h4>17 May’ 2022</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            @endforeach
+
+        </div>
         </div>
       </div>
     </div>

@@ -18,8 +18,8 @@
     font-size: 16px;
   }
   .slide .slide__content--headings .title {
-    font-size: 35px;
-    line-height: 45px;
+    font-size: 30px;
+    line-height: 38px;
   }
   .slide .slide__content--headings .top-title {
     font-size: 20px;
@@ -51,12 +51,12 @@
 }
 @media (max-width: 1440px) {
   .slide .slide__content--headings .top-title {
-    font-size: 18px;
-    line-height: 28px;
-  }
+    font-size: 16px;
+    line-height: 22px;
+}
   #cssmenu > ul > li > a {
-    padding: 18px 12px;
-    font-size: 15px;
+    padding: 15px 12px;
+    font-size: 14px;
   }
   .mn-btn a {
     color: var(--white-color);
@@ -74,6 +74,26 @@
   .serv-text {
     min-height: 490px;
   }
+  .slide .slide__content--headings .title {
+    font-size: 28px;
+    line-height: 32px;
+}
+.wht-slide-wrap {
+  min-height: 404px;
+}
+.head-1 h2 {
+  font-weight: 700;
+  font-size: 40px;
+}
+.wht-serv .slick-nav.prev-arrow {
+  left: -6%;
+}
+.wht-serv .slick-nav.next-arrow {
+  left: -6%;
+}
+.login_sec_left_bg{
+    height:100vh;
+}
 }
 @media (max-width: 1366px) {
   .wht-slide-wrap {
@@ -117,36 +137,63 @@
 
 @media (max-width: 1280px) {
   .slide .slide__content--headings .title {
-    font-size: 30px;
-    line-height: 40px;
-  }
-  .slide .slide__content--headings .top-title {
-    font-size: 16px;
-    line-height: 22px;
-  }
+    font-size: 24px;
+    line-height: 28px;
+}
+.slide .slide__content--headings .top-title {
+  font-size: 14px;
+  line-height: 20px;
+}
   .blog-inr {
     padding: 60px 0px;
   }
   .width_545{
-   padding: 0px 30px;
+   padding: 30px;
   }
+  #cssmenu > ul > li > a {
+    padding: 15px 12px;
+    font-size: 12px;
+}
+}
+@media (max-width: 1199.98px){
+  .wht-serv {
+    margin-top: 0;
+    margin-left: 0%;
+}
+.wht-we-do-wrap{
+  text-align: center;
+}
+.wht-we-do {
+  padding: 50px 0px;
+}
+.serv-text {
+  min-height: 300px;
+}
+.service::before {
+  height: 100%;
+}
+.serv-box{
+  margin-bottom: 20px
+}
+.service {
+  padding: 50px 0px;
+}
+.abt-foremost {
+  padding: 20px 0px 20px;
+}
 }
 @media (max-width: 1024px) {
-  .slide .slide__content--headings .top-title {
-    font-size: 16px;
+  .slide .slide__content--headings .title {
+    font-size: 18px;
     line-height: 22px;
-  }
+}
+.slide .slide__content--headings .top-title {
+  font-size: 12px;
+  line-height: 16px;
+}
   .slide .slide__content {
     position: absolute;
     top: 50%;
-  }
-  .slide .slide__content--headings .title {
-    font-size: 22px;
-    line-height: 32px;
-  }
-  .slide .slide__content--headings .title {
-    font-size: 22px;
-    line-height: 32px;
   }
   .scroll_text_1 h3:before {
     display: none;
@@ -232,7 +279,7 @@
     padding-top: 80px;
   }
   .main-btn a {
-    padding: 20px 16px;
+    padding: 12px 16px;
   }
   .inr-bnr-text h1 {
     font-size: 65px;
@@ -247,21 +294,36 @@
     margin-bottom: 20px;
   }
   .wht-slide-wrap {
-    min-height: 350px;
+    min-height: 438px;
   }
   .head-1 h2 {
     font-size: 28px;
     line-height: 34px;
   }
-  .login_sec_left {
-    padding: 22px;
-  }
+ 
   .login_form .toggle {
     top: 50%;
     transform: translate(0%, -50%);
 }
-.width_545 {
-  height: auto;
+
+.mn-btn {
+  width: 100%;
+}
+#cssmenu > ul > li.active a::before{
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  bottom: 0px;
+  left: 0;
+}
+.slide .slide__content{
+  padding: 20px;
+}
+.t-btn{
+  display: none;
+}
+#cssmenu, #cssmenu ul, #cssmenu ul li, #cssmenu ul li a, #cssmenu #menu-button{
+  justify-content: center;
 }
 }
 @media (max-width: 991px) {
@@ -276,6 +338,12 @@
     bottom: 17%;
     width: 85%;
   }
+  .wht-slide-wrap {
+    min-height: 362px;
+}
+.abt-sec {
+  padding: 50px 0px;
+}
 }
 @media (max-width: 768px) {
   .slide .slide__content--headings .title {
@@ -343,7 +411,7 @@
     padding-bottom: 10px;
   }
   .abt-foremost {
-    padding: 0px 0px 20px;
+    padding: 20px 0px 20px;
   }
   .dev-con-box {
     margin-bottom: 108px;
@@ -368,7 +436,7 @@
     padding-bottom: 20px;
   }
   .logo a {
-    width: 175px;
+    width: 100px;
   }
   .dev-con-wrap {
     padding-bottom: 18px;
@@ -393,9 +461,6 @@
   }
   .dev-con {
     padding: 45px 0px 0px;
-  }
-  .login_sec_left {
-    padding: 22px;
   }
   .login-logo-head h1 {
     font-weight: 700;
@@ -483,7 +548,6 @@
   .slick-nav i {
     display: none;
   }
-
   .wht-we-do {
     padding: 20px 0px;
     background: rgb(0 0 0 / 10%);
@@ -680,6 +744,13 @@
 }
 .sub-btn{
   width: 100%;
+}
+.slide .slide__content--headings .title {
+  font-size: 22px;
+  line-height: 30px;
+}
+.wht-we-do {
+  padding: 50px 0px 50px;
 }
 }
 @media (max-width: 375.98px) {

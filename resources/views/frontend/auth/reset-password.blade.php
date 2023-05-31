@@ -23,7 +23,7 @@
                   </div>
                   <div class="res-head pb-5">
                     <h1>
-                      Change your password 
+                      Change your password
                     </h1>
                   </div>
                 </div>

@@ -5,7 +5,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-xl-3 col-md-12 col-12">
                         <div class="ftr-logo">
-                            <img src="{{ asset('frontend_assets/images/ftr-logo.png') }}" alt="" />
+                            <img src="{{ asset('frontend_assets/images/logo.png') }}" alt="" />
                         </div>
                         <div class="indus-head">
                             <p>
@@ -120,11 +120,13 @@
             <div class="ftr-link">
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('about-us') }}html">About Us</a></li>
-                    <li><a href="{{ route('services') }}">Services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="{{ route('telehealth') }}">Telehealth</a></li>
+                    <li><a href="{{ route('membership-plans') }}">Membership Plans</a></li>
+                    <li><a href="{{ route('mobile-health-coverage') }}">Mobile Health Coverage</a></li>
+                    <li><a href="{{ route('qna') }}">Q&A</a></li>
+                    <li><a href="{{ route('blogs') }}">Blogs</a></li>
                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
-                </ul>
+                  </ul>
             </div>
             <div class="ftr-btm">
                 <ul>
@@ -134,7 +136,7 @@
                     <li><a href="terms.html">Terms & Conditions</a></li>
                 </ul>
                 <p>
-                    Copyright © 2023 DollarCARE. All Rights Reserved DESIGNED &
+                    Copyright © {{ date('Y') }} DollarCARE. All Rights Reserved DESIGNED &
                     DEVELOPED BY <a href="#">EXCELLIS IT</a>·
                 </p>
             </div>

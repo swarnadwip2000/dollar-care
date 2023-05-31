@@ -126,6 +126,20 @@ $('.wht-serv').slick({
   nextArrow: '<div class="slick-nav next-arrow"><i class="fa fa-arrow-right"></i></div>',
   responsive: [
     {
+      breakpoint: 1200,
+      settings: {
+        arrows: false,
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        arrows: false,
+        slidesToShow: 2
+      }
+    },
+    {
       breakpoint: 799,
       settings: {
         arrows: false,

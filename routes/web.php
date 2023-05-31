@@ -100,6 +100,15 @@ Route::get('/about-us', [CmsController::class, 'aboutUs'])->name('about-us');
 Route::get('/services', [CmsController::class, 'services'])->name('services');
 Route::get('/contact-us', [CmsController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact-us', [CmsController::class, 'contactUsSubmit'])->name('contact-us.submit');
+// qna
+Route::get('/qna', [CmsController::class, 'qna'])->name('qna');
+// membership plans
+Route::get('/membership-plans', [CmsController::class, 'membershipPlans'])->name('membership-plans');
+// telehealth
+Route::get('/telehealth', [CmsController::class, 'telehealth'])->name('telehealth');
+// Mobile health coverage
+Route::get('/mobile-health-coverage', [CmsController::class, 'mobileHealthCoverage'])->name('mobile-health-coverage');
+
 Route::get('/blogs/{slug?}', [FrontendBlogController::class, 'blogs'])->name('blogs');
 Route::get('/blog-details/{category_slug}/{blog_slug}', [FrontendBlogController::class, 'blogDetails'])->name('blogs.details');
 // search result
