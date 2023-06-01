@@ -162,7 +162,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('admin.update') }}" method="POST" id="editForm"
+                            <form action="{{ route('cms.qna.update') }}" method="POST" id="editForm"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

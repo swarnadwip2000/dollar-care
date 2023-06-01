@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CmsController as AdminCmsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
@@ -89,6 +90,17 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         Route::post('/update', [BlogController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('delete');
         Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus'])->name('change-status');
+    });
+
+    Route::prefix('cms')->name('cms.')->group(function(){
+        Route::prefix('qna')->name('qna.')->group(function(){
+            Route::get('/', [AdminCmsController::class, 'qnaIndex'])->name('index');
+            Route::post('/store', [AdminCmsController::class, 'qnaStore'])->name('store');
+            Route::post('/edit/{id}', [AdminCmsController::class, 'qnaEdit'])->name('edit');
+            Route::post('/update', [AdminCmsController::class, 'qnaUpdate'])->name('update');
+            Route::get('/delete/{id}', [AdminCmsController::class, 'qnaDelete'])->name('delete');
+            Route::get('/qnaChangeStatus',[AdminCmsController::class, 'qnaChangeStatus'])->name('change-status');
+        });
     });
 });
 

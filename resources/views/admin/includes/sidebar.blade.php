@@ -52,6 +52,15 @@
                 <li class="{{ Request::is('admin/newsletters*') ? 'active' : ' ' }}">
                     <a href="{{ route('newsletters.index') }}" ><i class="la la-paper-plane"></i> <span>Newsletter</span></a>                 
                 </li>
+                <li class="submenu">
+                    <a href="#" class="{{ Request::is('admin/cms*') ? 'active' : ' ' }}"><i class="la la-cog"></i> <span>Settings</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li class="{{ Request::is('admin/cms/qna*') ? 'active' : ' ' }}">
+                            <a href="{{ route('cms.qna.index') }}">QNA Page</a>
+                        </li>         
+                    </ul>
+                </li>
             </ul> 
         </div>
     </div>
