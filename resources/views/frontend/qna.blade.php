@@ -25,118 +25,28 @@ Q & A
         <div class="q-acc" data-aos="fade-up" data-aos-duration="1000">
             <div class="accordion" id="accordionExample">
                 <div class="row justify-content-between">
+                    @foreach ($qnas->chunk(5) as $items)
                     <div class="col-xl-6">
+                        @foreach ($items as $key=>$item)
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                    1. What is an HSA?
+                                <button class="accordion-button @if($key==0) @else collapsed @endif" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ $key }}" aria-expanded="true"
+                                    aria-controls="collapse{{ $key }}">
+                                    {{ $key+1 }}. {{ $item->question }}
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show"
+                            <div id="collapse{{ $key }}" class="accordion-collapse collapse @if($key==0) show @endif"
                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    A Health Savings Account (HSA) is a purpose saving account that enables
-                                    individuals to pay for qualifying health care expenses with pre-tax funds
-                                    while participating in a High Deductible Health Plan. You can use this HSA
-                                    to pay for current health expenses, save for future qualified medical and
-                                    retiree health expenses, or invest in IRAs.
+                                    {!! $item->answer !!}
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                    aria-expanded="false" aria-controls="collapseTwo">
-                                    2. How does an HSA work?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse"
-                                aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p><b>Funding - </b>you may contribute to your HSA on a pre-determined
-                                        schedule throughout the year.</p>
-                                    <p><b>Accessing funds - </b>you can pay for your payment cards, payout of
-                                        pocket, request reimbursement online, or use the mobile app. Always keep
-                                        your receipts as you may need them for an IRS audit.</p>
-                                    <p><b>Requesting reimbursement - </b> it is quick and easy to submit
-                                        requests for reimbursement and upload receipts online or using the
-                                        mobile app.</p>
-                                    <p><b>Reimbursement processing - </b>promptly process your requests and
-                                        reimburse by checking or direct depositing. You receive money sooner in
-                                        direct deposits.</p>
-                                    <p><b>Account management - </b>you can check your balance, review claims
-                                        activity, and access valuable tools just by logging in to your mobile
-                                        account.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                    aria-expanded="false" aria-controls="collapseThree">
-                                    3. What are the benefits of establishing an HSA?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse"
-                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    Tax savings - HSA provides tax deductions when you contribute to your
-                                    account and a tax-free income when your employer contributes to your
-                                    account. It also provides tax-free earnings through investments and tax-free
-                                    withdrawals for qualified medical expenses. Affordability - HSA carries
-                                    higher deductible but lower monthly premiums. The savings from lower
-                                    premiums can be put in the funding of the HSA. Flexibility - allows you to
-                                    pay your current medical expenses or save money for future needs. The money
-                                    saved can be invested, and your account can grow through tax-free investment
-                                    earnings. Ownership and portability- accounts are entirely portable, which
-                                    means that you can keep your HSA even if you change jobs, change your
-                                    medical coverage or become unemployed.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                    aria-expanded="false" aria-controls="collapseFour">
-                                    4. Can I withdraw money from my HSA account for other purposes?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse"
-                                aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    Yes, you can withdraw money from your HSA account at any time and for any
-                                    purpose. However, suppose the money is used for an ineligible expense. In
-                                    that case, the expenditure will be taxed, and the individuals who are not
-                                    disabled or over age 65 are subject to a 20% tax penalty.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                    aria-expanded="false" aria-controls="collapseFive">
-                                    5. Can I change the amount I contribute to my HSA during the plan year?
-                                </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse"
-                                aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    Yes, you can change the amount you contribute to your HSA at any time during
-                                    the year. If you change the amount contributed via payroll on a pre-tax
-                                    basis, check with your employer. You can also make non-payroll contributions
-                                    changes using the contribution center in your online account. This allows
-                                    you to make or change contributions regularly or on a one-time basis.
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="col-xl-6">
+                    @endforeach
+                    {{-- <div class="col-xl-6">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingSix">
                                 <button class="accordion-button collapsed" type="button"
@@ -237,7 +147,7 @@ Q & A
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

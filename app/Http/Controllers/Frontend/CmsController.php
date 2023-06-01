@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\ContactUs;
+use App\Models\Qna;
 use Illuminate\Http\Request;
 
 class CmsController extends Controller
@@ -56,7 +57,8 @@ class CmsController extends Controller
 
     public function qna()
     {
-        return view('frontend.qna');
+        $qnas = Qna::where('status', true)->get();
+        return view('frontend.qna')->with(compact('qnas'));
     }
 
     public function membershipPlans()
