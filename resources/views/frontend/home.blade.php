@@ -523,6 +523,7 @@
             </div>
             <div class="blog-box-wrap">
                 <div class="row justify-content-between">
+                    @if($blogs->count() > 0)
                     <div class="col-xl-6 col-md-12 col-12">
                         <div class="blog-box-img">
                            <a href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}"> <img src="{{ Storage::url($blog['image']) }}" alt="" /></a>
@@ -567,6 +568,7 @@
                         @endforeach
 
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

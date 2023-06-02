@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // assignRoleSeeder::class,
             // assignAdminSeeder::class,
-            AddQnaSeeder::class,
+            // AddQnaSeeder::class,
+            // ContactPageCmsSeeder::class,
+            AddPlanSeeder::class,
         ]);
     }
 }

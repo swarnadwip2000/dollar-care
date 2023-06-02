@@ -239,6 +239,7 @@
   </section>
   <section class="blog-sec">
     <div class="container">
+      @if($blogs->count() > 0)
       <div class="blog-sec-wrap">
         <div class="blog-sec-head text-center pb-5">
           <div class="head-1 h-b pb-3">
@@ -302,6 +303,7 @@
         </div>
         </div>
       </div>
+      @endif
     </div>
   </section>
 @endsection

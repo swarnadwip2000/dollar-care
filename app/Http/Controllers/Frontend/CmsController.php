@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\ContactPageCms;
 use App\Models\ContactUs;
 use App\Models\Qna;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class CmsController extends Controller
 
     public function contactUs()
     {
-        return view('frontend.contact-us');
+        $details = ContactPageCms::first();
+        return view('frontend.contact-us')->with(compact('details'));
     }
 
     public function contactUsSubmit(Request $request)
