@@ -2144,3 +2144,79 @@ padding-bottom: 20px;
 }
 
 
+/* mem-sec */
+.mem-sec {
+  padding: 100px 0px;
+}
+
+.mem-box-wrap {
+  background: var(--white-color);
+  box-shadow: 0px 4px 73px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding-bottom: 50px;
+}
+
+.mem-box {
+  background: #DA2032;
+  border-radius: 0px 0px 8px 8px;
+  text-align: center;
+  padding: 20px 0px;
+}
+
+.mem-box h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white-color);
+}
+.price-box {
+ text-align: center;
+ padding: 50px 0px;
+}
+
+.price-box h2 {
+  font-weight: 700;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: var(--semi-black);
+}
+
+.price-box h2 span {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--semi-black);
+  padding: 0px 10px;
+}
+.mem-list{
+  text-align: center;
+}  
+.mem-list ul li{
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--semi-black);
+  padding-bottom: 22px;
+  list-style: none;
+  width: 100%;
+  position: relative;
+}
+.mem-list ul {
+padding: 0;  
+}
+.mem-list ul li::before {
+  content: "\f00c";
+  color: var(--main-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  position: absolute;
+  left: 10%;
+  font-family: 'Font Awesome 6 Free';
+}
+.mem-box-2{
+  background: linear-gradient(79.92deg, #ED1B24 -8.2%, #1851B5 100.72%);
+}
+.mem-box-3{
+  background: #1D50B2;
+}
