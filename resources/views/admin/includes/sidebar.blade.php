@@ -36,7 +36,7 @@
                     <span>Plan Management</span>
                 </li>
                 <li class="{{ Request::is('admin/plans*') ? 'active' : ' ' }}">
-                    <a href="{{ route('plans.index') }}" ><i class="fa fa-wheelchair"></i> <span>Manage Plans</span></a>                 
+                    <a href="{{ route('plans.index') }}" ><i class="fa fa-address-card"></i> <span>Membership Plans</span></a>                 
                 </li>
 
                 <li class="menu-title">
