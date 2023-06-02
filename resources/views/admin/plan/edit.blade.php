@@ -42,8 +42,8 @@
                                             <div class="border p-4 rounded">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <label for="inputEnterYourName" class="col-form-label">Plan Name <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label">Plan Name
+                                                            <span style="color: red;">*</span></label>
                                                         <input type="text" name="plan_name" id=""
                                                             class="form-control" value="{{ $plan['plan_name'] }}"
                                                             placeholder="Enter Plan Name">
@@ -53,8 +53,8 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Plan Price <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label"> Plan Price
+                                                            <span style="color: red;">*</span></label>
                                                         <input type="text" name="plan_price" id=""
                                                             class="form-control" value="{{ $plan['plan_price'] }}"
                                                             placeholder="Enter Plan Price">
@@ -64,8 +64,8 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Plan Type <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label"> Plan Type
+                                                            <span style="color: red;">*</span></label>
                                                         <input type="text" name="plan_type" id=""
                                                             class="form-control" value="{{ $plan['plan_type'] }}"
                                                             placeholder="Enter Plan Type">
@@ -74,30 +74,44 @@
                                                                 {{ $errors->first('plan_type') }}</div>
                                                         @endif
                                                     </div>
-                                                    <div style="display: flex;">
-                                                        <div class="col-md-6">
-                                                            <label for="inputEnterYourName" class="col-form-label"> Plan Specification <span
-                                                                    style="color: red;">*</span></label>
-
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info add">Add More Plan</button>
-                                                            </div>
-
-                                                            @foreach($plan->specification as $vall)                                                               
-                                                            <div style="display: flex;margin-right: 20px;">
-                                                                <input type="text" name="plan_specification[]"
-                                                                class="form-control" value="{{ $vall->specification_name }}"
-                                                                placeholder="Enter Plan Specification">
-                                                                <button type="button" class="btn btn-danger cross">Remove</button>
-                                                            </div>
-                                                        </br>
-                                                            @endforeach                                                       
-                                                        </div>                                               
+                                                    {{-- <div style="display: flex;"> --}}
+                                                    <div class="col-md-12">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Plan
+                                                            Specification <span style="color: red;">*</span></label>
                                                     </div>
-                                                
-                                                    <span class="add-name">
-                                                    </span>
-                                                                                                   
+                                                    <div class="add-name">
+                                                        @foreach ($plan->specification as $key => $vall)
+                                                            <div class="row">
+                                                                <div class="col-md-8 pb-3">
+                                                                    <div style="display: flex">
+                                                                        <input type="text" name="plan_specification[]"
+                                                                            class="form-control"
+                                                                            value="{{ $vall->specification_name }}"
+                                                                            placeholder="Enter Plan Specification" id="plan-{{ $vall->id }}" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    @if ($key == 0)
+                                                                        <button type="button"
+                                                                            class="btn btn-success add good-button"><i
+                                                                                class="fas fa-plus"></i> Add More
+                                                                            Plan</button>
+                                                                    @endif
+                                                                    @if ($key != 0)
+                                                                        <button type="button"
+                                                                            class="btn btn-danger cross good-button" data-id="{{ $vall->id }}"> <i
+                                                                                class="fas fa-close"></i> Remove</button>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            {{-- </br> --}}
+                                                        @endforeach
+
+                                                    </div>
+
+                                                    {{-- </div> --}}
+
+
                                                     <div class="row" style="margin-top: 20px; float: left;">
                                                         <div class="col-sm-9">
                                                             <button type="submit"
@@ -121,18 +135,19 @@
 @endsection
 
 @push('scripts')
-<script>
-    $(document).ready(function(){
-        $(".add").click(function(){
-           
-            $(".add-name").append('<div class="col-md-6"><div style="display: flex;"><input type="text" name="plan_specification[]" class="form-control"  placeholder="Enter Plan Specification"><button type="button" class="btn btn-danger cross">Remove</button></div></div>');
-        });
-    });
+    <script>
+        $(document).ready(function() {
+            $(".add").click(function() {
 
-    $(document).on('click', '.cross', function(){
-        $(this).parent().remove();
-    });
-    
-    
+                $(".add-name").append(
+                    '<div class="row"><div class="col-md-8 pb-3"><div style="display: flex"><input type="text" name="plan_specification[]" required class="form-control"  placeholder="Enter Plan Specification"></div> </div> <div class="col-md-4 "><button type="button" class="btn btn-danger cross good-button"> <i class="fas fa-close"></i> Remove</button></div>'
+                );
+            });
+        });
+
+        $(document).on('click', '.cross', function() {
+            // remove pareent div
+            $(this).parent().parent().remove();
+        });
     </script>
 @endpush
