@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactPageCms;
+use App\Models\ContactUs;
 use App\Models\Qna;
 use Illuminate\Http\Request;
 
@@ -63,5 +65,33 @@ class CmsController extends Controller
         $qna->answer = $request->edit_answer;
         $qna->save();
         return redirect()->back()->with('message', 'Qna has been updated successfully');
+    }
+
+    public function contactUsIndex()
+    {
+        $contactUs = ContactPageCms::orderBy('id', 'desc')->first();
+       return view('admin.cms.contact-us.update')->with(compact('contactUs'));
+    }
+
+    public function contactUsUpdate(Request $request)
+    {
+        $request->validate([
+            'contact_page_title' => 'required',
+            'visit_us' => 'required',
+            'call_us' => 'required',
+            'mail_us' => 'required',
+        ]);
+
+        try {
+            $contactUs = ContactPageCms::orderBy('id', 'desc')->first();
+            $contactUs->contact_page_title = $request->contact_page_title;
+            $contactUs->visit_us = $request->visit_us;
+            $contactUs->call_us = $request->call_us;
+            $contactUs->mail_us = $request->mail_us;
+            $contactUs->save();
+            return redirect()->back()->with('message', 'Contact us page details has been updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

@@ -95,7 +95,7 @@
                         </div>
                         <div class="main_text">
                             <h5>VISIT US</h5>
-                            <p>17581 Sultana St, Hesperia, CA <br />92345, USA</p>
+                            <p>{{ $detail['visit_us'] }}</p>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="main_text">
                             <h5>CALL US</h5>
-                            <a href="tel:760-881-1141">760-881-1141</a>
+                            <a href="tel:{{ $detail['call_us'] }}">{{ $detail['call_us'] }}</a>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="main_text">
                             <h5>MAIL US</h5>
-                            <a href=" mailto:info@dollarcare.org">info@dollarcare.org</a>
+                            <a href="mailto:{{ $detail['mail_us'] }}">{{ $detail['mail_us'] }}</a>
                         </div>
                     </div>
                 </div>

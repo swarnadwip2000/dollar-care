@@ -59,6 +59,9 @@
                         <li class="{{ Request::is('admin/cms/qna*') ? 'active' : ' ' }}">
                             <a href="{{ route('cms.qna.index') }}">QNA Page</a>
                         </li>         
+                        <li class="{{ Request::is('admin/cms/contact-us*') ? 'active' : ' ' }}">
+                            <a href="{{ route('cms.contact-us.index') }}">Contact Us Page</a>
+                        </li>     
                     </ul>
                 </li>
             </ul> 

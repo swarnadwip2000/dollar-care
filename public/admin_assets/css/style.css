@@ -650,7 +650,7 @@ body {
     font-family: circularstd, sans-serif;
     font-size: 15px;
     color: #1f1f1f;
-    background-color: #f7f7f7;
+    background-color: #60636e47;
     overflow-x: hidden;
 }
 
@@ -3322,7 +3322,7 @@ input[type="file"].form-control {
     transition: all 0.2s ease;
     width: 230px;
     z-index: 1001;
-    background: linear-gradient(to bottom, #eb1b26 0%, #1e57b1 100%);
+    background: linear-gradient(to bottom, #ffff 100%, #ffff 100%);
 }
 
 @media (max-width: 992px) {
@@ -3383,7 +3383,7 @@ input[type="file"].form-control {
 
 .sidebar .sidebar-menu ul li.menu-title,
 .two-col-bar .sidebar-menu ul li.menu-title {
-    color: #ebebeb;
+    color: black;
     font-size: 14px;
     opacity: 1;
     padding: 5px 15px;
@@ -3408,7 +3408,7 @@ input[type="file"].form-control {
     justify-content: flex-start;
     position: relative;
     font-size: 15px;
-    color: #b7c0cd;
+    color: #1e1e1ec9;
     height: auto;
     -webkit-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
@@ -3546,7 +3546,7 @@ input[type="file"].form-control {
 .sidebar .sidebar-menu ul li.active a,
 .two-col-bar .sidebar-menu ul li.active a {
     color: #fff;
-    background-color: rgb(171 187 237 / 36%);
+    background: linear-gradient(to right, #eb1b26 0%, #1e57b1 100%) !important;
 }
 
 .sidebar .sidebar-menu ul ul,
@@ -11523,7 +11523,7 @@ button.close {
 table.dataTable thead th,
 table.dataTable tfoot th {
     /* font-weight: bold; */
-    background: #e51d2a;
+    background: #393e64;
     color: #fff;
 }
 

@@ -32,8 +32,8 @@ class CmsController extends Controller
 
     public function contactUs()
     {
-        $details = ContactPageCms::first();
-        return view('frontend.contact-us')->with(compact('details'));
+        $detail = ContactPageCms::first();
+        return view('frontend.contact-us')->with(compact('detail'));
     }
 
     public function contactUsSubmit(Request $request)

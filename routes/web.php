@@ -101,6 +101,11 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
             Route::get('/delete/{id}', [AdminCmsController::class, 'qnaDelete'])->name('delete');
             Route::get('/qnaChangeStatus',[AdminCmsController::class, 'qnaChangeStatus'])->name('change-status');
         });
+
+        Route::prefix('contact-us')->name('contact-us.')->group(function(){
+            Route::get('/', [AdminCmsController::class, 'contactUsIndex'])->name('index');
+            Route::post('/update', [AdminCmsController::class, 'contactUsUpdate'])->name('update');
+        });
     });
 });
 
