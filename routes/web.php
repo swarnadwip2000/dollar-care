@@ -68,6 +68,9 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     Route::prefix('patients')->group(function () {
         Route::get('/patient-delete/{id}', [PatientController::class, 'delete'])->name('patients.delete');
     });
+    Route::prefix('plans')->group(function () {
+        Route::get('/plans-delete/{id}', [PlanController::class, 'delete'])->name('plans.delete');
+    });
     Route::get('/changePatientStatus', [PatientController::class, 'changePatientsStatus'])->name('patients.change-status');
 
     // Doctor Routes

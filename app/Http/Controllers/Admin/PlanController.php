@@ -110,8 +110,11 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        return $id;
+        $plan_delete = Plan::findOrFail($id);
+        $plan_delete->delete();
+        $plan_specification_delete = PlanSpecfication::where('plan_id',$id)->delete();
+        return redirect()->route('patients.index')->with('error', 'Plan has been deleted successfully.');
     }
 }
