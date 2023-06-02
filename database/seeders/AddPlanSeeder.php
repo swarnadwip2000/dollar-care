@@ -18,7 +18,8 @@ class AddPlanSeeder extends Seeder
         $plans = [
             [
                 'plan_name' => 'Basic',
-                'plan_price' => '10',
+                'plan_price' => '100',
+                'plan_type' => 'Basic',
                 'specification' => [
                     [
                         'specification_name' => 'Domain Name                        ',
@@ -41,8 +42,9 @@ class AddPlanSeeder extends Seeder
                 ],
             ],
             [
-                'plan_name' => 'Gold',
-                'plan_price' => '20',
+                'plan_name' => 'Standard',
+                'plan_price' => '200',
+                'plan_type' => 'Gold',
                 'specification' => [
                     [
                         'specification_name' => 'Domain Name                        ',
@@ -65,8 +67,9 @@ class AddPlanSeeder extends Seeder
                 ],
             ],
             [
-                'plan_name' => 'Platinum',
-                'plan_price' => '30',
+                'plan_name' => 'Quality',
+                'plan_price' => '300',
+                'plan_type' => 'Platinum',
                 'specification' => [
                     [
                         'specification_name' => 'Domain Name                        ',
@@ -94,6 +97,7 @@ class AddPlanSeeder extends Seeder
             $planModel = new Plan();
             $planModel->plan_name = $plan['plan_name'];
             $planModel->plan_price = $plan['plan_price'];
+            $planModel->plan_type = $plan['plan_type'];
             $planModel->save();
 
             foreach ($plan['specification'] as $specification) {
