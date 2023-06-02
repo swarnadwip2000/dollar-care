@@ -31,6 +31,14 @@
                 <li class="{{ Request::is('admin/doctors*') ? 'active' : ' ' }}">
                     <a href="{{ route('doctors.index') }}" ><i class="fas fa-user-md"></i> <span>Manage Doctors</span></a>                 
                 </li>
+
+                <li class="menu-title">
+                    <span>Plan Management</span>
+                </li>
+                <li class="{{ Request::is('admin/plans*') ? 'active' : ' ' }}">
+                    <a href="{{ route('plans.index') }}" ><i class="fa fa-wheelchair"></i> <span>Manage Plans</span></a>                 
+                </li>
+
                 <li class="menu-title">
                     <span>Others</span>
                 </li>

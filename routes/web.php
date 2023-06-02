@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
@@ -61,6 +62,7 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         'doctors' => DoctorController::class,
         'contact-us' => ContactUsController::class,
         'newsletters' => NewsletterController::class,
+        'plans' => PlanController::class,
     ]);
     //  Customer Routes
     Route::prefix('patients')->group(function () {

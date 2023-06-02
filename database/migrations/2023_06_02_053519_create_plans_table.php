@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->id();
             $table -> string('plan_name');
             $table -> string('plan_price');
+            $table -> string('plan_type');
             $table->timestamps();
         });
     }
