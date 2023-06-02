@@ -69,7 +69,7 @@
                                                     class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
                                             <a title="Delete Patient"
-                                                data-route=""
+                                                data-route="{{ route('plans.delete', $plan->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
