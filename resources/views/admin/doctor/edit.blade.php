@@ -46,7 +46,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="name" id=""
                                                             class="form-control" value="{{ $doctor['name'] }}"
-                                                            placeholder="Enter Patient Name">
+                                                            placeholder="Enter Doctor Name">
                                                         @if ($errors->has('name'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('name') }}</div>
@@ -57,7 +57,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="email" id=""
                                                             class="form-control" value="{{ $doctor['email'] }}"
-                                                            placeholder="Enter Patient Email">
+                                                            placeholder="Enter Doctor Email">
                                                         @if ($errors->has('email'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('email') }}</div>
@@ -79,7 +79,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="specialization" id=""
                                                             class="form-control" value="{{ $doctor['specialization'] }}"
-                                                            placeholder="Enter Phone Number">
+                                                            placeholder="Enter Specialization">
                                                         @if ($errors->has('specialization'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('specialization') }}</div>
@@ -90,7 +90,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="year_of_experience" id=""
                                                             class="form-control" value="{{ $doctor['year_of_experience'] }}"
-                                                            placeholder="Enter Phone Number">
+                                                            placeholder="Enter Year Experience">
                                                         @if ($errors->has('year_of_experience'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('year_of_experience') }}</div>

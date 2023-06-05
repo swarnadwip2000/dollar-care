@@ -45,7 +45,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="name" id=""
                                                             class="form-control" value="{{ old('name') }}"
-                                                            placeholder="Enter Patient Name">
+                                                            placeholder="Enter Doctor Name">
                                                         @if ($errors->has('name'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('name') }}</div>
@@ -56,7 +56,7 @@
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="email" id=""
                                                             class="form-control" value="{{ old('email') }}"
-                                                            placeholder="Enter Patient Email">
+                                                            placeholder="Enter Doctor Email">
                                                         @if ($errors->has('email'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('email') }}</div>
