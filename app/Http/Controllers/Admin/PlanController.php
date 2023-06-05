@@ -63,7 +63,7 @@ class PlanController extends Controller
     public function edit($id)
     {
         //
-        $plan = Plan::where('id',$id)->with('Specification')->first();
+        $plan = Plan::where('id',$id)->with('specifications')->first();
         return view('admin.plan.edit')->with(compact('plan'));
     }
 

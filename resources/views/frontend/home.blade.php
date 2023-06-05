@@ -55,7 +55,7 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="about.html"><span>get started</span><span class="btn-arw"><i
+                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
                                     class="fa-solid fa-arrow-right"></i></span></a>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="about.html"><span>get started</span><span class="btn-arw"><i
+                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
                                     class="fa-solid fa-arrow-right"></i></span></a>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="about.html"><span>get started</span><span class="btn-arw"><i
+                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
                                     class="fa-solid fa-arrow-right"></i></span></a>
                     </div>
                 </div>

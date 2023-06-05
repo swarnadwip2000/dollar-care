@@ -22,6 +22,13 @@
                     </ul>
                 </li>
                 <li class="menu-title">
+                    <span>Speciality Management</span>
+                </li>
+                <li class="{{ Request::is('admin/patients*') ? 'active' : ' ' }}">
+                    <a href="{{ route('patients.index') }}" ><i class="	fa fa-stethoscope"></i> <span>Symptoms</span></a>                 
+                </li>
+
+                <li class="menu-title">
                     <span>User Management</span>
                 </li>
                 <li class="{{ Request::is('admin/patients*') ? 'active' : ' ' }}">
@@ -36,7 +43,7 @@
                     <span>Plan Management</span>
                 </li>
                 <li class="{{ Request::is('admin/plans*') ? 'active' : ' ' }}">
-                    <a href="{{ route('plans.index') }}" ><i class="fa fa-address-card"></i> <span>Membership Plans</span></a>                 
+                    <a href="{{ route('plans.index') }}" ><i class="la la-address-card"></i> <span>Membership Plans</span></a>                 
                 </li>
 
                 <li class="menu-title">

@@ -77,10 +77,10 @@
                                                     {{-- <div style="display: flex;"> --}}
                                                     <div class="col-md-12">
                                                         <label for="inputEnterYourName" class="col-form-label"> Plan
-                                                            Specification <span style="color: red;">*</span></label>
+                                                            Specifications <span style="color: red;">*</span></label>
                                                     </div>
                                                     <div class="add-name">
-                                                        @foreach ($plan->specification as $key => $vall)
+                                                        @foreach ($plan->specifications as $key => $vall)
                                                             <div class="row">
                                                                 <div class="col-md-8 pb-3">
                                                                     <div style="display: flex">

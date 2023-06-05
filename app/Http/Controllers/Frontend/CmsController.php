@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\ContactPageCms;
 use App\Models\ContactUs;
+use App\Models\Plan;
 use App\Models\Qna;
 use Illuminate\Http\Request;
 
@@ -65,7 +66,8 @@ class CmsController extends Controller
 
     public function membershipPlans()
     {
-        return view('frontend.membership-plans');
+        $plans = Plan::with('specifications')->orderBy('id', 'asc')->get();
+        return view('frontend.membership-plans')->with(compact('plans'));
     }
 
     public function telehealth()

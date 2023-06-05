@@ -118,7 +118,7 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [6,7]
+                        "targets": [6,7,8]
                     },
                     {
                         "orderable": true,

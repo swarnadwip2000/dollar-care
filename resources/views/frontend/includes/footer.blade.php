@@ -122,9 +122,7 @@
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('telehealth') }}">Telehealth</a></li>
                     <li><a href="{{ route('membership-plans') }}">Membership Plans</a></li>
-                    <li><a href="{{ route('mobile-health-coverage') }}">Mobile Health Coverage</a></li>
-                    <li><a href="{{ route('qna') }}">Q&A</a></li>
-                    <li><a href="{{ route('blogs') }}">Blogs</a></li>
+                    <li><a href="{{ route('blogs') }}">Q&A / Blogs</a></li>
                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                   </ul>
             </div>

@@ -77,7 +77,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label"> Age <span
                                                                 style="color: red;">*</span></label>
                                                         <input type="date" name="age" id="age"
-                                                            class="form-control" value="{{ old('age') }}">
+                                                            class="form-control" value="{{ old('age') }}" max="{{ date('Y-m-d') }}">
                                                         @if ($errors->has('age'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('age') }}</div>

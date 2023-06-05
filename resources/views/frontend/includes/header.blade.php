@@ -28,9 +28,9 @@
               </ul> -->
                         </li>
                         <li class="{{ Request::is('membership-plans') ? 'active' : '' }}"><a href="{{ route('membership-plans') }}">Membership Plans</a></li>
-                        <li class="{{ Request::is('mobile-health-coverage') ? 'active' : '' }}"><a href="{{ route('mobile-health-coverage') }}">Mobile Health Coverage</a></li>
-                        <li class="{{ Request::is('qna') ? 'active' : '' }}"><a href="{{ route('qna') }}">Q&A</a></li>
-                        <li class="{{ Request::is('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Blog</a>
+                        {{-- <li class="{{ Request::is('mobile-health-coverage') ? 'active' : '' }}"><a href="{{ route('mobile-health-coverage') }}">Mobile Health Coverage</a></li> --}}
+                        {{-- <li class="{{ Request::is('qna') ? 'active' : '' }}"><a href="{{ route('qna') }}">Q&A</a></li> --}}
+                        <li class="{{ Request::is('qna-blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Q&A / Blogs</a>
                         </li>
                         <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a
                           href="{{ route('contact-us') }}">Contact Us</a></li>

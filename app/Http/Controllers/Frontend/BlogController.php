@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Qna;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,17 +13,19 @@ class BlogController extends Controller
     public function blogs($slug = null)
     {
         if ($slug != null) {
+            $qnas = Qna::where('status', true)->get();
             $blogsCategories = BlogCategory::orderBy('id', 'desc')->select('name','slug')->get();
             $blogs = Blog::with('category')->whereHas('category', function ($query) use ($slug) {
                 $query->where('slug', $slug);
             })->orderBy('id', 'desc')->paginate(10);
             $lastBlogs = Blog::orderBy('id', 'desc')->take(10)->get();
-            return view('frontend.blogs')->with(compact('blogs', 'blogsCategories', 'lastBlogs'));
+            return view('frontend.blogs')->with(compact('blogs', 'blogsCategories', 'lastBlogs','qnas'));
         } else {
+            $qnas = Qna::where('status', true)->get();
             $blogsCategories = BlogCategory::orderBy('id', 'desc')->select('name','slug')->get();
             $blogs = Blog::orderBy('id', 'desc')->paginate(10);
             $lastBlogs = Blog::orderBy('id', 'desc')->take(10)->get();
-            return view('frontend.blogs')->with(compact('blogs', 'blogsCategories', 'lastBlogs'));
+            return view('frontend.blogs')->with(compact('blogs', 'blogsCategories', 'lastBlogs','qnas'));
         }
     }
 

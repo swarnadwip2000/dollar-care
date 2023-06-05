@@ -14,7 +14,7 @@ class Plan extends Model
         'plan_type',
     ];
 
-    public function Specification()
+    public function specifications()
     {
         return $this->hasMany(PlanSpecfication::class);
     }
