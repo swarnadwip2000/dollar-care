@@ -15,6 +15,7 @@ class CreateSymptomsTable extends Migration
     {
         Schema::create('symptoms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('specialization_id')->references('id')->on('specializations')->onDelete('cascade')->nullable();
             $table->string('symptom_name');
             $table->string('symptom_description');
             $table->string('symptom_image');

@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{ env('APP_NAME') }} | Create Blog
+    {{ env('APP_NAME') }} | Edit Specializations Details
 @endsection
 @push('styles')
 @endpush
@@ -13,15 +13,16 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Create</h3>
+                        <h3 class="page-title">Edit Details</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('blogs.index') }}">Blogs</a></li>
-                            <li class="breadcrumb-item active">Create Blog</li>
+                            <li class="breadcrumb-item"><a href="{{ route('specializations.index') }}">Specializations</a>
+                            </li>
+                            <li class="breadcrumb-item active">Edit Specializations Details</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
                         {{-- <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_group"><i
-                            class="fa fa-plus"></i> Add Blog</a> --}}
+                            class="fa fa-plus"></i> Add Specializations</a> --}}
                     </div>
                 </div>
             </div>
@@ -31,48 +32,34 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-xl-12 mx-auto">
-                                <h6 class="mb-0 text-uppercase">Create A Blog</h6>
+                                <h6 class="mb-0 text-uppercase">Edit A Specializations</h6>
                                 <hr>
                                 <div class="card border-0 border-4">
                                     <div class="card-body">
-                                        <form action="{{ route('blogs.store') }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form action="{{ route('specializations.update', $specialization->id) }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @method('PUT')
                                             @csrf
+                                            <input type="hidden" name="id" value="{{ $specialization->id }}">
                                             <div class="border p-4 rounded">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Category
-                                                            <span style="color: red;">*</span></label>
-                                                        <select name="blog_category_id" id="blog_category_id" class="form-control">
-                                                            <option value="">Select a category</option>
-                                                            @foreach ($categories as $category)
-                                                                <option value="{{ $category['id'] }}">
-                                                                    {{ $category['name'] }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @if ($errors->has('blog_category_id'))
+                                                        <label for="inputEnterYourName" class="col-form-label">
+                                                            Specialization Name <span style="color: red;">*</span></label>
+                                                        <input type="text" name="name" id=""
+                                                            class="form-control" value="{{ $specialization['name'] }}"
+                                                            placeholder="Enter Specialization Name">
+                                                        @if ($errors->has('name'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('blog_category_id') }}</div>
+                                                                {{ $errors->first('name') }}</div>
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Title <span
-                                                                style="color: red;">*</span></label>
-                                                        <input type="text" name="title" id=""
-                                                            class="form-control" value="{{ old('title') }}"
-                                                            placeholder="Enter Blog Title">
-                                                        @if ($errors->has('title'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('title') }}</div>
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Slug <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label">
+                                                            Specialization Slug <span style="color: red;">*</span></label>
                                                         <input type="text" name="slug" id=""
-                                                            class="form-control" value="{{ old('slug') }}"
-                                                            placeholder="Enter Blog Slug">
+                                                            class="form-control" value="{{ $specialization['slug'] }}"
+                                                            placeholder="Enter Specialization Slug">
                                                         @if ($errors->has('slug'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('slug') }}</div>
@@ -84,8 +71,12 @@
                                                             <span style="color: red;">*</span></label>
                                                         <select name="status" id="" class="form-control">
                                                             <option value="">Select a Status</option>
-                                                            <option value="1">Active</option>
-                                                            <option value="0">Inactive</option>
+                                                            <option value="1"
+                                                                @if ($specialization['status'] == 1) selected="" @endif>Active
+                                                            </option>
+                                                            <option value="0"
+                                                                @if ($specialization['status'] == 0) selected="" @endif>
+                                                                Inactive</option>
                                                         </select>
                                                         @if ($errors->has('status'))
                                                             <div class="error" style="color:red;">
@@ -94,30 +85,40 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Image <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label"> Image
+                                                        </label>
                                                         <input type="file" name="image" id=""
-                                                            class="form-control" value="{{ old('image') }}">
+                                                            class="form-control" value="{{ $specialization['image'] }}">
                                                         @if ($errors->has('image'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('image') }}</div>
                                                         @endif
                                                     </div>
-
+                                                    <div class="col-md-6">
+                                                    </div>
+                                                    @if ($specialization['image'])
+                                                        <div class="col-md-6">
+                                                            <label for="inputEnterYourName" class="col-form-label">View
+                                                                Profile Picture </label>
+                                                            <br>
+                                                            <img src="{{ Storage::url($specialization['image']) }}"
+                                                                alt="" class="img-design"
+                                                                style="height:50px; width: 50px;">
+                                                        </div>
+                                                    @endif
                                                     <div class="col-md-12">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Content
+                                                        <label for="inputEnterYourName" class="col-form-label"> Description
                                                             <span style="color: red;">*</span></label>
-                                                        <textarea name="content" class="form-control" id="content" cols="30" rows="10">{{ old('content') }}</textarea>
-                                                        @if ($errors->has('content'))
+                                                        <textarea name="description" id="" cols="30" rows="10" class="form-control">{{ $specialization['description'] }}</textarea>
+                                                        @if ($errors->has('description'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('content') }}</div>
+                                                                {{ $errors->first('description') }}</div>
                                                         @endif
                                                     </div>
-
                                                     <div class="row" style="margin-top: 20px; float: left;">
                                                         <div class="col-sm-9">
                                                             <button type="submit"
-                                                                class="btn px-5 submit-btn">Create</button>
+                                                                class="btn px-5 submit-btn">Update</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,20 +138,9 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('content');
-        CKEDITOR.on('instanceReady', function(evt) {
-            var editor = evt.editor;
-
-            editor.on('change', function(e) {
-                var contentSpace = editor.ui.space('contents');
-                var ckeditorFrameCollection = contentSpace.$.getElementsByTagName('iframe');
-                var ckeditorFrame = ckeditorFrameCollection[0];
-                var innerDoc = ckeditorFrame.contentDocument;
-                var innerDocTextAreaHeight = $(innerDoc.body).height();
-                console.log(innerDocTextAreaHeight);
-            });
+        $(document).ready(function() {
+            $('#specialization_id').select2();
         });
     </script>
 @endpush

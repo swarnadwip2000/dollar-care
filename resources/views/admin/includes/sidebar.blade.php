@@ -24,8 +24,11 @@
                 <li class="menu-title">
                     <span>Speciality Management</span>
                 </li>
-                <li class="{{ Request::is('admin/patients*') ? 'active' : ' ' }}">
-                    <a href="{{ route('patients.index') }}" ><i class="	fa fa-stethoscope"></i> <span>Symptoms</span></a>                 
+                <li class="{{ Request::is('admin/specializations*') ? 'active' : ' ' }}">
+                    <a href="{{ route('specializations.index') }}" ><i class="	la la-heart"></i> <span>Specialization</span></a>                 
+                </li>
+                <li class="{{ Request::is('admin/symptoms*') ? 'active' : ' ' }}">
+                    <a href="{{ route('symptoms.index') }}" ><i class="	fa fa-stethoscope"></i> <span>Symptoms</span></a>                 
                 </li>
 
                 <li class="menu-title">

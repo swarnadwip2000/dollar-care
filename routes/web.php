@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\SpecializationController;
+use App\Http\Controllers\Admin\SymptomsController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
@@ -63,7 +65,21 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         'contact-us' => ContactUsController::class,
         'newsletters' => NewsletterController::class,
         'plans' => PlanController::class,
+        'symptoms' => SymptomsController::class,
+        'specializations' => SpecializationController::class,
     ]);
+
+    // symptom routes
+    Route::prefix('symptoms')->group(function () {
+        Route::get('/symptom-delete/{id}', [SymptomsController::class, 'delete'])->name('symptoms.delete');
+    });
+    Route::get('/symptom-status', [SymptomsController::class, 'changeStatus'])->name('symptoms.change-status');
+    // Specialization routes
+    Route::prefix('specializations')->group(function () {
+        Route::get('/specialization-delete/{id}', [SpecializationController::class, 'delete'])->name('specializations.delete');
+    });
+    Route::get('/specialization-status', [SpecializationController::class, 'changeStatus'])->name('specializations.change-status');
+    
     //  Customer Routes
     Route::prefix('patients')->group(function () {
         Route::get('/patient-delete/{id}', [PatientController::class, 'delete'])->name('patients.delete');

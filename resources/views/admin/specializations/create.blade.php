@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{ env('APP_NAME') }} | Create Blog
+    {{ env('APP_NAME') }} | Create Specialization
 @endsection
 @push('styles')
 @endpush
@@ -15,13 +15,13 @@
                     <div class="col">
                         <h3 class="page-title">Create</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('blogs.index') }}">Blogs</a></li>
-                            <li class="breadcrumb-item active">Create Blog</li>
+                            <li class="breadcrumb-item"><a href="{{ route('specializations.index') }}">Specializations</a></li>
+                            <li class="breadcrumb-item active">Create Specialization</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
                         {{-- <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_group"><i
-                            class="fa fa-plus"></i> Add Blog</a> --}}
+                            class="fa fa-plus"></i> Add Specialization</a> --}}
                     </div>
                 </div>
             </div>
@@ -31,48 +31,32 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-xl-12 mx-auto">
-                                <h6 class="mb-0 text-uppercase">Create A Blog</h6>
+                                <h6 class="mb-0 text-uppercase">Create Specialization</h6>
                                 <hr>
                                 <div class="card border-0 border-4">
                                     <div class="card-body">
-                                        <form action="{{ route('blogs.store') }}" method="post"
+                                        <form action="{{ route('specializations.store') }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="border p-4 rounded">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Category
-                                                            <span style="color: red;">*</span></label>
-                                                        <select name="blog_category_id" id="blog_category_id" class="form-control">
-                                                            <option value="">Select a category</option>
-                                                            @foreach ($categories as $category)
-                                                                <option value="{{ $category['id'] }}">
-                                                                    {{ $category['name'] }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @if ($errors->has('blog_category_id'))
-                                                            <div class="error" style="color:red;">
-                                                                {{ $errors->first('blog_category_id') }}</div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Title <span
+                                                        <label for="inputEnterYourName" class="col-form-label"> Specialization Name <span
                                                                 style="color: red;">*</span></label>
-                                                        <input type="text" name="title" id=""
-                                                            class="form-control" value="{{ old('title') }}"
-                                                            placeholder="Enter Blog Title">
-                                                        @if ($errors->has('title'))
+                                                        <input type="text" name="name" id=""
+                                                            class="form-control" value="{{ old('name') }}"
+                                                            placeholder="Enter Specialization Name">
+                                                        @if ($errors->has('name'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('title') }}</div>
+                                                                {{ $errors->first('name') }}</div>
                                                         @endif
                                                     </div>
-
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Slug <span
                                                                 style="color: red;">*</span></label>
                                                         <input type="text" name="slug" id=""
                                                             class="form-control" value="{{ old('slug') }}"
-                                                            placeholder="Enter Blog Slug">
+                                                            placeholder="Enter Specialization slug">
                                                         @if ($errors->has('slug'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('slug') }}</div>
@@ -105,12 +89,12 @@
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Content
+                                                        <label for="inputEnterYourName" class="col-form-label"> Description
                                                             <span style="color: red;">*</span></label>
-                                                        <textarea name="content" class="form-control" id="content" cols="30" rows="10">{{ old('content') }}</textarea>
-                                                        @if ($errors->has('content'))
+                                                        <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
+                                                        @if ($errors->has('description'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('content') }}</div>
+                                                                {{ $errors->first('description') }}</div>
                                                         @endif
                                                     </div>
 
@@ -137,20 +121,9 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('content');
-        CKEDITOR.on('instanceReady', function(evt) {
-            var editor = evt.editor;
-
-            editor.on('change', function(e) {
-                var contentSpace = editor.ui.space('contents');
-                var ckeditorFrameCollection = contentSpace.$.getElementsByTagName('iframe');
-                var ckeditorFrame = ckeditorFrameCollection[0];
-                var innerDoc = ckeditorFrame.contentDocument;
-                var innerDocTextAreaHeight = $(innerDoc.body).height();
-                console.log(innerDocTextAreaHeight);
-            });
+        $(document).ready(function() {
+            $('#specialization_id').select2();
         });
     </script>
 @endpush

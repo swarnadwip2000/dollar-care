@@ -162,7 +162,7 @@ class DoctorController extends Controller
         //
     }
 
-    public function changeSellersStatus(Request $request)
+    public function changeDoctorsStatus(Request $request)
     {
         $user = User::find($request->user_id);
         $user->status = $request->status;

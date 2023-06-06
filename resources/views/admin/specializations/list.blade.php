@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Blog Details - {{env('APP_NAME')}} admin
+    All Specialization Details - {{env('APP_NAME')}} admin
 @endsection
 @push('styles')
 <style>
@@ -21,15 +21,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Blogs Information</h3>
+                        <h3 class="page-title">Specializations Information</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('blogs.index') }}">Blogs</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('specializations.index') }}">Specializations</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('blogs.create') }}" class="btn add-btn" ><i
-                                class="fa fa-plus"></i> Add a Blog</a>
+                        <a href="{{ route('specializations.create') }}" class="btn add-btn" ><i
+                                class="fa fa-plus"></i> Add a Specialization</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Blogs Details</h4>
+                                <h4 class="mb-0">Specializations Details</h4>
                             </div>
 
                         </div>
@@ -50,46 +50,42 @@
                         <table id="myTable" class="dd table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th> Title </th>
-                                    <th> Category </th>
-                                    <th> Slug</th>
+                                    <th>Specializations Name </th>
+                                    <th> Slug </th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($blogs as $key => $blog)
+                                @foreach ($specializations as $key => $specialization)
                                     <tr>
                                         <td>
-                                            {{ $blog['title'] }}
+                                            {{ $specialization['name'] }}
                                         </td>
                                         <td>
-                                            {{ $blog->category->name }}
+                                            {{ $specialization['slug'] }}
                                         </td>
                                         <td>
-                                            {{ $blog['slug'] }}
-                                        </td>
-                                        <td>
-                                            @if($blog->image)
-                                            <img src="{{ Storage::url($blog->image) }}" alt="Blog Image"
-                                                width="70px" height="70px" style="border-radius: 50%">
+                                            @if ($specialization['image'])
+                                            <img src="{{ Storage::url($specialization->image) }}" alt="Specialization Image"
+                                            width="70px" height="70px" style="border-radius: 50%">
                                             @endif
                                         </td>
                                         <td>
                                             <div class="button-switch">
                                                 <input type="checkbox" id="switch-orange" class="switch toggle-class"
-                                                    data-id="{{ $blog['id'] }}"
-                                                    {{ $blog['status'] ? 'checked' : '' }} />
+                                                    data-id="{{ $specialization['id'] }}"
+                                                    {{ $specialization['status'] ? 'checked' : '' }} />
                                                 <label for="switch-orange" class="lbl-off"></label>
                                                 <label for="switch-orange" class="lbl-on"></label>
                                             </div>
                                         </td>
                                         <td>
-                                            <a title="Edit Blog" data-route=""
-                                                href="{{ route('blogs.edit', $blog->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                                            <a title="Edit Specialization" data-route=""
+                                                href="{{ route('specializations.edit', $specialization->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                            <a title="Delete Blog" data-route="{{ route('blogs.delete', $blog->id) }}"
+                                            <a title="Delete Specialization" data-route="{{ route('specializations.delete', $specialization->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -113,11 +109,11 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [3, 4, 5]
+                        "targets": [2,3,4]
                     },
                     {
                         "orderable": true,
-                        "targets": [0, 1, 2]
+                        "targets": [0, 1]
                     }
                 ]
             });
@@ -128,7 +124,7 @@
         $(document).on('click', '#delete', function(e) {
             swal({
                     title: "Are you sure?",
-                    text: "To delete this blog.",
+                    text: "To delete this specialization.",
                     type: "warning",
                     confirmButtonText: "Yes",
                     showCancelButton: true
@@ -154,7 +150,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route("blogs.change-status")}}',
+                url: '{{route("specializations.change-status")}}',
                 data: {
                     'status': status,
                     'id': id
