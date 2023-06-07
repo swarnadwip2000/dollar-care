@@ -75,21 +75,27 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Specialization <span
-                                                                style="color: red;">*</span></label>
-                                                        <input type="text" name="specialization" id=""
-                                                            class="form-control" value="{{ $doctor['specialization'] }}"
-                                                            placeholder="Enter Specialization">
-                                                        @if ($errors->has('specialization'))
+                                                        <label for="inputEnterYourName" class="col-form-label">
+                                                            Specialization <span style="color: red;">*</span></label>
+                                                        <select name="specialization_id[]" id="specialization_id"
+                                                            class="form-control" multiple>
+                                                            <option value="">Select Specialization</option>
+                                                            @foreach ($specializations as $specialization)
+                                                                <option value="{{ $specialization['id'] }}" @if($doctor->doctorSpecializations->count() > 0) @foreach($doctor->doctorSpecializations as $item) @if($item['specialization_id'] == $specialization['id']) selected @endif @endforeach @endif>
+                                                                    {{ $specialization['name'] }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @if ($errors->has('specialization_id'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('specialization') }}</div>
+                                                                {{ $errors->first('specialization_id') }}</div>
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Year of Experience <span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="inputEnterYourName" class="col-form-label"> Year of
+                                                            Experience <span style="color: red;">*</span></label>
                                                         <input type="text" name="year_of_experience" id=""
-                                                            class="form-control" value="{{ $doctor['year_of_experience'] }}"
+                                                            class="form-control"
+                                                            value="{{ $doctor['year_of_experience'] }}"
                                                             placeholder="Enter Year Experience">
                                                         @if ($errors->has('year_of_experience'))
                                                             <div class="error" style="color:red;">
@@ -102,11 +108,15 @@
                                                         <div class="display-between">
                                                             <span for="" class="radio-gender">Male </span> <input
                                                                 type="radio" class="gender" name="gender" id="gender"
-                                                                value="Male" @if($doctor['gender'] == 'Male') checked @endif>
+                                                                value="Male"
+                                                                @if ($doctor['gender'] == 'Male') checked @endif>
                                                             <span class="radio-gender">Female </span> <input type="radio"
-                                                                class="gender" name="gender" id="gender" value="Female" @if($doctor['gender'] == 'Female') checked @endif>
-                                                                <span class="radio-gender">Other </span> <input type="radio"
-                                                                class="gender" name="gender" id="gender" value="Other" @if($doctor['gender'] == 'Other') checked @endif>
+                                                                class="gender" name="gender" id="gender" value="Female"
+                                                                @if ($doctor['gender'] == 'Female') checked @endif>
+                                                            <span class="radio-gender">Other </span> <input type="radio"
+                                                                class="gender" name="gender" id="gender"
+                                                                value="Other"
+                                                                @if ($doctor['gender'] == 'Other') checked @endif>
                                                         </div>
                                                         @if ($errors->has('gender'))
                                                             <div class="error" style="color:red;">
@@ -114,12 +124,17 @@
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Location <span class="text-danger">*</span> ( City,State,Country,Pincode )
+                                                        <label for="inputEnterYourName" class="col-form-label"> Location
+                                                            <span class="text-danger">*</span> ( City,State,Country,Pincode
+                                                            )
                                                         </label>
                                                         <input type="text" name="location" id=""
                                                             class="form-control" value="{{ $doctor['location'] }}"
-                                                            placeholder="enter location">
-
+                                                            placeholder="Enter location">
+                                                        @if ($errors->has('location'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('location') }}</div>
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Status
@@ -142,7 +157,8 @@
                                                         <label for="inputEnterYourName" class="col-form-label"> Password
                                                         </label>
                                                         <input type="password" name="password" id=""
-                                                            class="form-control" placeholder="Enter pasword" autocomplete="off">
+                                                            class="form-control" placeholder="Enter pasword"
+                                                            autocomplete="off">
                                                         @if ($errors->has('password'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('password') }}</div>
@@ -158,7 +174,7 @@
                                                                 {{ $errors->first('confirm_password') }}</div>
                                                         @endif
                                                     </div>
-                                                    
+
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Profile
                                                             Picture </label>
@@ -170,7 +186,6 @@
                                                                 {{ $errors->first('profile_picture') }}</div>
                                                         @endif
                                                     </div>
-                                                    <div class="col-md-6"></div>
                                                     @if ($doctor['profile_picture'])
                                                         <div class="col-md-6">
                                                             <label for="inputEnterYourName" class="col-form-label">View
@@ -203,4 +218,9 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#specialization_id').select2();
+        });
+    </script>
 @endpush

@@ -20,4 +20,9 @@ class Specialization extends Model
     {
         return $this->hasMany(Symptoms::class);
     }
+
+    public function doctorSpecializations()
+    {
+        return $this->hasMany(DoctorSpecialization::class, 'specialization_id');
+    }
 }

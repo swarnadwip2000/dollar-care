@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Doctor Details - {{env('APP_NAME')}} admin
+    All Doctor Details - {{ env('APP_NAME') }} admin
 @endsection
 @push('styles')
-<style>
-    .dataTables_filter{
-        margin-bottom: 10px !important;
-    }
-</style>
+    <style>
+        .dataTables_filter {
+            margin-bottom: 10px !important;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -31,8 +31,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('doctors.create') }}" class="btn add-btn" ><i
-                                class="fa fa-plus"></i> Add a Doctor</a>
+                        <a href="{{ route('doctors.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            Doctor</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,14 @@
                                         <td>{{ $doctor->email }}</td>
                                         <td>{{ $doctor->phone }}</td>
                                         <td>
-                                            {{ $doctor->specialization }}
+                                            @if ($doctor->doctorSpecializations->count() > 0)
+                                            {{-- @dd($doctor->doctorSpecializations) --}}
+                                                @foreach ($doctor->doctorSpecializations as $item)
+                                                    <span class="badge bg-primary">{{ $item->specialization->name }}</span>
+                                                @endforeach
+                                            @else
+                                                <span class="badge bg-danger">No Specialization</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <i>{{ $doctor->year_of_experience }} Year </i>
@@ -92,9 +99,11 @@
                                         </td>
                                         <td>
                                             <a title="Edit Doctor" data-route=""
-                                                href="{{ route('doctors.edit', $doctor->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                                                href="{{ route('doctors.edit', $doctor->id) }}"><i
+                                                    class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                            <a title="Delete Doctor" data-route="{{ route('doctors.delete', $doctor->id) }}"
+                                            <a title="Delete Doctor"
+                                                data-route="{{ route('doctors.delete', $doctor->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -118,11 +127,11 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [6,7,8]
+                        "targets": [6, 7, 8]
                     },
                     {
                         "orderable": true,
-                        "targets": [0, 1, 2, 3, 4 ,5 ]
+                        "targets": [0, 1, 2, 3, 4, 5]
                     }
                 ]
             });
@@ -155,11 +164,11 @@
         $('.toggle-class').change(function() {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var user_id = $(this).data('id');
-    
+
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route("doctors.change-status")}}',
+                url: '{{ route('doctors.change-status') }}',
                 data: {
                     'status': status,
                     'user_id': user_id

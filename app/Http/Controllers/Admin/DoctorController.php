@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationMail;
+use App\Models\DoctorSpecialization;
+use App\Models\Specialization;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Storage;
 use File;
@@ -32,7 +34,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('admin.doctor.create');
+        $specializations = Specialization::select('id', 'name')->get();
+        return view('admin.doctor.create')->with(compact('specializations'));
     }
 
     /**
@@ -53,7 +56,7 @@ class DoctorController extends Controller
             'status' => 'required',
             'gender' => 'required',
             'year_of_experience' => 'required|numeric',
-            'specialization' => 'required',
+            'specialization_id' => 'required',
         ]);
 
         $data = new User();
@@ -64,10 +67,17 @@ class DoctorController extends Controller
         $data->location = $request->location;
         $data->gender = $request->gender;
         $data->year_of_experience = $request->year_of_experience;
-        $data->specialization = $request->specialization;
         $data->status = $request->status;
         $data->profile_picture = $this->imageUpload($request->file('profile_picture'), 'doctor');
         $data->save();
+
+        foreach ($request->specialization_id as $key => $value) {
+            $doctorSpecialization = DoctorSpecialization::create([
+                'doctor_id' => $data->id,
+                'specialization_id' => $value,
+            ]);
+        }
+
         $data->assignRole('DOCTOR');
         $maildata = [
             'name' => $request->name,
@@ -99,8 +109,9 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-       $doctor = User::findOrFail($id);
-         return view('admin.doctor.edit')->with(compact('doctor'));
+         $doctor = User::with('doctorSpecializations')->findOrFail($id);
+         $specializations = Specialization::select('id', 'name')->get();
+         return view('admin.doctor.edit')->with(compact('doctor','specializations'));
     }
 
     /**
@@ -119,7 +130,7 @@ class DoctorController extends Controller
             'status' => 'required',
             'gender' => 'required',
             'year_of_experience' => 'required',
-            'specialization' => 'required',
+            'specialization_id' => 'required',
         ]);
         $data = User::findOrFail($id);
         $data->name = $request->name;
@@ -128,7 +139,6 @@ class DoctorController extends Controller
         $data->phone = $request->phone;
         $data->gender = $request->gender;
         $data->year_of_experience = $request->year_of_experience;
-        $data->specialization = $request->specialization;
         $data->status = $request->status;
         if ($request->password != null) {
             $request->validate([
@@ -148,6 +158,15 @@ class DoctorController extends Controller
             $data->profile_picture = $this->imageUpload($request->file('profile_picture'), 'doctor');
         }
         $data->save();
+        if ($request->specialization_id) {
+            DoctorSpecialization::where('doctor_id', $id)->delete();
+            foreach ($request->specialization_id as $key => $value) {
+                $doctorSpecialization = DoctorSpecialization::create([
+                    'doctor_id' => $id,
+                    'specialization_id' => $value,
+                ]);
+            }
+        }
         return redirect()->route('doctors.index')->with('message', 'Doctor updated successfully.');
     }
 

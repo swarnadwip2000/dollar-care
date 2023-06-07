@@ -1,0 +1,122 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Dollar CARE",
+        "_postman_id": "209e7533-5aad-49bd-8b06-a7147cabc324",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Patient Authentication",
+            "description": "",
+            "item": [
+                {
+                    "name": "Login Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/patient\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/patient\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"Login successfully\",\n     \"data\": {\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM\",\n    \"user\": {\n        \"id\": 3,\n        \"name\": \"John Doe\",\n        \"email\": \"john@yopmail.com\",\n        \"status\": 1\n    }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n   \"message\": [\n      \"The email field is required.\",\n     \"The password field is required.\"\n  ]\n}\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n \"status\": false,\n \"statusCode\": 401,\n \"error\": \"Email id & password was invalid!\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Register Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/patient\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/patient\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"location\":\"John Doe\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": true,\n \"statusCode\": 200,\n \"data\": {\n  \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0\",\n   \"user\": {\n       \"name\": \"Shilpi Chaki\",\n       \"email\": \"shilpi@yopmail.com\",\n       \"gender\": \"Male\",\n       \"phone\": \"7485968600\",\n       \"status\": 1,\n       \"updated_at\": \"2023-06-07T08:28:31.000000Z\",\n       \"created_at\": \"2023-06-07T08:28:31.000000Z\",\n       \"id\": 5\n  }\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n \"status\": false,\n\"statusCode\": 401,\n\"error\": \"Email id & password was invalid!\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

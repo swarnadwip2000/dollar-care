@@ -107,7 +107,10 @@
                                                         <input type="text" name="location" id=""
                                                             class="form-control" value="{{ $patient['location'] }}"
                                                             placeholder="enter location">
-
+                                                        @if ($errors->has('location'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('location') }}</div>
+                                                        @endif
                                                     </div>
                                                    
                                                     <div class="col-md-6">

@@ -76,12 +76,15 @@
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label">
                                                             Specialization <span style="color: red;">*</span></label>
-                                                        <input type="text" name="specialization" id=""
-                                                            class="form-control" value="{{ old('specialization') }}"
-                                                            placeholder="Enter Specialization">
-                                                        @if ($errors->has('specialization'))
+                                                        <select name="specialization_id[]" id="specialization_id" class="form-control" multiple>
+                                                            <option value="">Select Specialization</option>
+                                                            @foreach ($specializations as $specialization)
+                                                            <option value="{{ $specialization['id'] }}">{{ $specialization['name'] }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @if ($errors->has('specialization_id'))
                                                             <div class="error" style="color:red;">
-                                                                {{ $errors->first('specialization') }}</div>
+                                                                {{ $errors->first('specialization_id') }}</div>
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6">
@@ -103,8 +106,7 @@
                                                                 type="radio" class="gender" name="gender" id="gender"
                                                                 value="Male" checked>
                                                             <span class="radio-gender">Female </span> <input type="radio"
-                                                                class="gender" name="gender" id="gender"
-                                                                value="Female">
+                                                                class="gender" name="gender" id="gender" value="Female">
                                                             <span class="radio-gender">Other </span> <input type="radio"
                                                                 class="gender" name="gender" id="gender"
                                                                 value="Other">
@@ -195,4 +197,9 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#specialization_id').select2();
+        });
+    </script>   
 @endpush

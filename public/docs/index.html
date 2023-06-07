@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Dollar CARE Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var tryItOutBaseUrl = "http://localhost";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-4.21.2.js"></script>
+
+    <script src="../docs/js/theme-default-4.21.2.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image"/>
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-patient-authentication" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="patient-authentication">
+                    <a href="#patient-authentication">Patient Authentication</a>
+                </li>
+                                    <ul id="tocify-subheader-patient-authentication" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="patient-authentication-POSTapi-v1-patient-login">
+                                <a href="#patient-authentication-POSTapi-v1-patient-login">Login Api</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="patient-authentication-POSTapi-v1-patient-register">
+                                <a href="#patient-authentication-POSTapi-v1-patient-register">Register Api</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+    <ul class="toc-footer" id="toc-footer">
+                    <li style="padding-bottom: 5px;"><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li style="padding-bottom: 5px;"><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+    </ul>
+
+    <ul class="toc-footer" id="last-updated">
+        <li>Last updated: June 7, 2023</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<aside>
+    <strong>Base URL</strong>: <code>http://localhost</code>
+</aside>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="patient-authentication">Patient Authentication</h1>
+
+    
+
+                                <h2 id="patient-authentication-POSTapi-v1-patient-login">Login Api</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-patient-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/patient/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"john@yopmail.com\",
+    \"password\": \"12345678\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/patient/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "john@yopmail.com",
+    "password": "12345678"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-patient-login">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+ &quot;status&quot;: true,
+ &quot;statusCode&quot;: 200,
+ &quot;message&quot;: &quot;Login successfully&quot;,
+     &quot;data&quot;: {
+    &quot;auth_token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM&quot;,
+    &quot;user&quot;: {
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@yopmail.com&quot;,
+        &quot;status&quot;: 1
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 401,
+    &quot;error&quot;: {
+        &quot;message&quot;: [
+            &quot;The email field is required.&quot;,
+            &quot;The password field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 401,
+    &quot;error&quot;: &quot;Email id &amp; password was invalid!&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-patient-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-patient-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-patient-login"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-patient-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-patient-login">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-patient-login" data-method="POST"
+      data-path="api/v1/patient/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-patient-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-patient-login"
+                    onclick="tryItOut('POSTapi-v1-patient-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-patient-login"
+                    onclick="cancelTryOut('POSTapi-v1-patient-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-patient-login"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/patient/login</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-v1-patient-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-v1-patient-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="email"                data-endpoint="POSTapi-v1-patient-login"
+               value="john@yopmail.com"
+               data-component="body">
+    <br>
+<p>The email of the user. Example: <code>john@yopmail.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="password"                data-endpoint="POSTapi-v1-patient-login"
+               value="12345678"
+               data-component="body">
+    <br>
+<p>The password of the user. Example: <code>12345678</code></p>
+        </div>
+        </form>
+
+                    <h2 id="patient-authentication-POSTapi-v1-patient-register">Register Api</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-patient-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/patient/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"email\": \"john@yopmail.com\",
+    \"gender\": \"Male,Female,Other\",
+    \"phone\": \"9876543210\",
+    \"password\": \"12345678\",
+    \"confirm_password\": \"12345678\",
+    \"location\": \"John Doe\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/patient/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "email": "john@yopmail.com",
+    "gender": "Male,Female,Other",
+    "phone": "9876543210",
+    "password": "12345678",
+    "confirm_password": "12345678",
+    "location": "John Doe"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-patient-register">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;statusCode&quot;: 200,
+    &quot;data&quot;: {
+        &quot;auth_token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0&quot;,
+        &quot;user&quot;: {
+            &quot;name&quot;: &quot;Shilpi Chaki&quot;,
+            &quot;email&quot;: &quot;shilpi@yopmail.com&quot;,
+            &quot;gender&quot;: &quot;Male&quot;,
+            &quot;phone&quot;: &quot;7485968600&quot;,
+            &quot;status&quot;: 1,
+            &quot;updated_at&quot;: &quot;2023-06-07T08:28:31.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2023-06-07T08:28:31.000000Z&quot;,
+            &quot;id&quot;: 5
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 401,
+    &quot;error&quot;: &quot;Email id &amp; password was invalid!&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-patient-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-patient-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-patient-register"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-patient-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-patient-register">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-patient-register" data-method="POST"
+      data-path="api/v1/patient/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-patient-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-patient-register"
+                    onclick="tryItOut('POSTapi-v1-patient-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-patient-register"
+                    onclick="cancelTryOut('POSTapi-v1-patient-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-patient-register"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/patient/register</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-v1-patient-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-v1-patient-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="name"                data-endpoint="POSTapi-v1-patient-register"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="email"                data-endpoint="POSTapi-v1-patient-register"
+               value="john@yopmail.com"
+               data-component="body">
+    <br>
+<p>The email of the user. Example: <code>john@yopmail.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>gender</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+               name="gender"                data-endpoint="POSTapi-v1-patient-register"
+               value="Male,Female,Other"
+               data-component="body">
+    <br>
+<p>required. Example: <code>Male,Female,Other</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>numeric</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="phone"                data-endpoint="POSTapi-v1-patient-register"
+               value="9876543210"
+               data-component="body">
+    <br>
+<p>The phone of the user. Example: <code>9876543210</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="password"                data-endpoint="POSTapi-v1-patient-register"
+               value="12345678"
+               data-component="body">
+    <br>
+<p>The password of the user. Example: <code>12345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>confirm_password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="confirm_password"                data-endpoint="POSTapi-v1-patient-register"
+               value="12345678"
+               data-component="body">
+    <br>
+<p>The confirm_password of the user. Example: <code>12345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+               name="location"                data-endpoint="POSTapi-v1-patient-register"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The name of the user. Example: <code>John Doe</code></p>
+        </div>
+        </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
