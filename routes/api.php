@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Patient\AuthController;
+use App\Http\Controllers\Api\Patient\ForgetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('patient')->group(function () {
         Route::post('login',[AuthController::class,'login']);
         Route::post('register',[AuthController::class,'register']);
+        Route::post('forget-password',[ForgetPasswordController::class,'forgetPassword']);
+        Route::post('otp-verification',[ForgetPasswordController::class,'otpVerification']);
     });
 });
