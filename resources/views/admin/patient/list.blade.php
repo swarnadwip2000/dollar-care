@@ -11,9 +11,6 @@
 @endpush
 
 @section('content')
-    @php
-        use App\Models\User;
-    @endphp
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -63,42 +60,6 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($patients as $key => $patient)
-                                    <tr>
-                                        <td>{{ $patient->name }}</td>
-                                        <td>{{ $patient->email }}</td>
-                                        <td>{{ $patient->phone }}</td>
-                                        <td>
-                                            {{ $patient->location }}
-                                        </td>
-                                        <td>
-                                            {{ $patient->gender }}
-                                        </td>
-                                        <td>
-                                            {{ $patient->age }}
-                                        </td>
-                                        <td>
-                                            <div class="button-switch">
-                                                <input type="checkbox" id="switch-orange" class="switch toggle-class"
-                                                    data-id="{{ $patient['id'] }}"
-                                                    {{ $patient['status'] ? 'checked' : '' }} />
-                                                <label for="switch-orange" class="lbl-off"></label>
-                                                <label for="switch-orange" class="lbl-on"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a title="Edit Patient" data-route=""
-                                                href="{{ route('patients.edit', $patient->id) }}"><i
-                                                    class="fas fa-edit"></i></a> &nbsp;&nbsp;
-
-                                            <a title="Delete Patient"
-                                                data-route="{{ route('patients.delete', $patient->id) }}"
-                                                href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -112,17 +73,47 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            //Default data table
-            $('#myTable').DataTable({
-                "aaSorting": [],
-                "columnDefs": [{
-                        "orderable": false,
-                        "targets": [6, 7]
+
+            var table = $('#myTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('patients.list-ajax') }}",
+                columns: [{
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        "orderable": true,
-                        "targets": [0, 1, 2, 3, 4, 5]
-                    }
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'location',
+                        name: 'location'
+                    },
+                    {
+                        data: 'gender',
+                        name: 'gender'
+                    },
+                    {
+                        data: 'date_of_birth',
+                        name: 'date_of_birth'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
                 ]
             });
 
@@ -151,7 +142,7 @@
         });
     </script>
     <script>
-        $('.toggle-class').change(function() {
+        $(document).on('change', '.toggle-class', function(e) {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var user_id = $(this).data('id');
 

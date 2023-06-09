@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Docotor\AuthController as DocotorAuthController;
+use App\Http\Controllers\Api\Docotor\ForgetPasswordController as DocotorForgetPasswordController;
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\Patient\AuthController;
 use App\Http\Controllers\Api\Patient\ForgetPasswordController;
 use Illuminate\Http\Request;
@@ -23,5 +26,17 @@ Route::prefix('v1')->group(function () {
         Route::post('register',[AuthController::class,'register']);
         Route::post('forget-password',[ForgetPasswordController::class,'forgetPassword']);
         Route::post('otp-verification',[ForgetPasswordController::class,'otpVerification']);
+        Route::post('reset-password',[ForgetPasswordController::class,'resetPassword']);
     });
+
+    Route::prefix('doctor')->group(function () {
+        Route::post('login',[DocotorAuthController::class,'login']);
+        Route::post('register',[DocotorAuthController::class,'register']);
+        Route::post('forget-password',[DocotorForgetPasswordController::class,'forgetPassword']);
+        Route::post('otp-verification',[DocotorForgetPasswordController::class,'otpVerification']);
+        Route::post('reset-password',[DocotorForgetPasswordController::class,'resetPassword']);
+    });
+
+    Route::post('symptoms',[HomeController::class,'symptoms']);
+    Route::post('specializations',[HomeController::class,'specializations']);
 });

@@ -1,0 +1,129 @@
+name: "Home Page Api's"
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/symptoms
+    metadata:
+      groupName: "Home Page Api's"
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Symptoms Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 2,
+                  "specialization_id": 2,
+                  "symptom_name": "Oral Piercing Infection",
+                  "symptom_description": "<p>Visit your doctor for joint pain, sprains, arthritis, and other bone pains.</p>",
+                  "symptom_image": "symptoms/J1Qbab05PP4gVTbBJ3bJ5bW6up46R99VaXpp4uXi.png",
+                  "symptom_status": 1,
+                  "created_at": "2023-06-06T07:13:51.000000Z",
+                  "updated_at": "2023-06-06T07:13:51.000000Z"
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+          "status": false,
+          "statusCode": 404,
+          "message": "No Symptoms Found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/specializations
+    metadata:
+      groupName: "Home Page Api's"
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Specialization Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "status": true,
+           "statusCode": 200,
+           "data": [
+               {
+                   "id": 3,
+                   "name": "Dermatologist",
+                   "slug": "dermatologist",
+                   "image": "specializations/V2TlHIoJvN7dL2bYdkUoh2GYhwitQotuohwGNqKe.png",
+                   "description": "Visit your doctor for joint pain, sprains, arthritis, and other bone pains.",
+                   "status": 1,
+                   "created_at": "2023-06-06T10:55:47.000000Z",
+                   "updated_at": "2023-06-06T10:55:47.000000Z"
+               }
+             ]
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+          "status": false,
+           "statusCode": 404,
+           "message": "No Specialization Found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

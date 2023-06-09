@@ -7,6 +7,618 @@ servers:
   -
     url: 'http://localhost'
 paths:
+  /api/v1/doctor/login:
+    post:
+      summary: 'Login Api'
+      operationId: loginApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"Login successfully\",\n     \"data\": {\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM\",\n    \"user\": {\n        \"id\": 3,\n        \"name\": \"John Doe\",\n        \"email\": \"john@yopmail.com\",\n        \"status\": 1\n    }\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'Email id & password was invalid!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'Email id & password was invalid!'
+      tags:
+        - 'Doctor Authentication'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the Doctor.'
+                  example: john@yopmail.com
+                password:
+                  type: string
+                  description: 'The password of the Doctor.'
+                  example: '12345678'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/doctor/register:
+    post:
+      summary: 'Register Api'
+      operationId: registerApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    auth_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0
+                    user:
+                      name: 'Shilpi Chaki'
+                      email: shilpi@yopmail.com
+                      gender: Male
+                      phone: '7485968600'
+                      status: 1
+                      updated_at: '2023-06-07T08:28:31.000000Z'
+                      created_at: '2023-06-07T08:28:31.000000Z'
+                      id: 5
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      auth_token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0
+                      user:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: 'Shilpi Chaki'
+                          email:
+                            type: string
+                            example: shilpi@yopmail.com
+                          gender:
+                            type: string
+                            example: Male
+                          phone:
+                            type: string
+                            example: '7485968600'
+                          status:
+                            type: integer
+                            example: 1
+                          updated_at:
+                            type: string
+                            example: '2023-06-07T08:28:31.000000Z'
+                          created_at:
+                            type: string
+                            example: '2023-06-07T08:28:31.000000Z'
+                          id:
+                            type: integer
+                            example: 5
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'Email id & password was invalid!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'Email id & password was invalid!'
+      tags:
+        - 'Doctor Authentication'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the doctor.'
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: 'The email of the doctor.'
+                  example: john@yopmail.com
+                gender:
+                  type: string
+                  description: required.
+                  example: 'Male,Female,Other'
+                phone:
+                  type: numeric
+                  description: 'The phone of the doctor.'
+                  example: '9876543210'
+                password:
+                  type: string
+                  description: 'The password of the doctor.'
+                  example: '12345678'
+                confirm_password:
+                  type: string
+                  description: 'The confirm_password of the doctor.'
+                  example: '12345678'
+                location:
+                  type: string
+                  description: 'The name of the doctor.'
+                  example: 'John Doe'
+              required:
+                - name
+                - email
+                - phone
+                - password
+                - confirm_password
+      security: []
+  /api/v1/doctor/forget-password:
+    post:
+      summary: 'Forget Password Api'
+      operationId: forgetPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'OTP has been sent to your email'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'OTP has been sent to your email'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    email:
+                      - 'The email field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Email of the Doctor.'
+                  example: james@yopmail.com
+              required:
+                - email
+      security: []
+  /api/v1/doctor/otp-verification:
+    post:
+      summary: 'OTP Verification Api'
+      operationId: oTPVerificationApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'OTP verified successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'OTP verified successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'OTP is expired'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'OTP is expired'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: numeric
+                  description: 'OTP of the Patient.'
+                  example: '123456'
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: james@yopmail.com
+              required:
+                - otp
+                - email
+      security: []
+  /api/v1/doctor/reset-password:
+    post:
+      summary: 'Reset Password Api'
+      operationId: resetPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Password has been reset successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Password has been reset successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    password:
+                      - 'The password field is required.'
+                    confirm_password:
+                      - 'The confirm password field is required.'
+                    email:
+                      - 'The email field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+                      confirm_password:
+                        type: array
+                        example:
+                          - 'The confirm password field is required.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 'Password of the Patient.'
+                  example: '123456'
+                confirm_password:
+                  type: string
+                  description: 'Confirm Password of the Patient.'
+                  example: '123456'
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: james@yopmail.com
+              required:
+                - password
+                - confirm_password
+                - email
+      security: []
+  /api/v1/symptoms:
+    post:
+      summary: 'Symptoms Api'
+      operationId: symptomsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    -
+                      id: 2
+                      specialization_id: 2
+                      symptom_name: 'Oral Piercing Infection'
+                      symptom_description: '<p>Visit your doctor for joint pain, sprains, arthritis, and other bone pains.</p>'
+                      symptom_image: symptoms/J1Qbab05PP4gVTbBJ3bJ5bW6up46R99VaXpp4uXi.png
+                      symptom_status: 1
+                      created_at: '2023-06-06T07:13:51.000000Z'
+                      updated_at: '2023-06-06T07:13:51.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        specialization_id: 2
+                        symptom_name: 'Oral Piercing Infection'
+                        symptom_description: '<p>Visit your doctor for joint pain, sprains, arthritis, and other bone pains.</p>'
+                        symptom_image: symptoms/J1Qbab05PP4gVTbBJ3bJ5bW6up46R99VaXpp4uXi.png
+                        symptom_status: 1
+                        created_at: '2023-06-06T07:13:51.000000Z'
+                        updated_at: '2023-06-06T07:13:51.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        specialization_id:
+                          type: integer
+                          example: 2
+                        symptom_name:
+                          type: string
+                          example: 'Oral Piercing Infection'
+                        symptom_description:
+                          type: string
+                          example: '<p>Visit your doctor for joint pain, sprains, arthritis, and other bone pains.</p>'
+                        symptom_image:
+                          type: string
+                          example: symptoms/J1Qbab05PP4gVTbBJ3bJ5bW6up46R99VaXpp4uXi.png
+                        symptom_status:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          example: '2023-06-06T07:13:51.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-06-06T07:13:51.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 404
+                  message: 'No Symptoms Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'No Symptoms Found'
+      tags:
+        - "Home Page Api's"
+      security: []
+  /api/v1/specializations:
+    post:
+      summary: 'Specialization Api'
+      operationId: specializationApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    -
+                      id: 3
+                      name: Dermatologist
+                      slug: dermatologist
+                      image: specializations/V2TlHIoJvN7dL2bYdkUoh2GYhwitQotuohwGNqKe.png
+                      description: 'Visit your doctor for joint pain, sprains, arthritis, and other bone pains.'
+                      status: 1
+                      created_at: '2023-06-06T10:55:47.000000Z'
+                      updated_at: '2023-06-06T10:55:47.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 3
+                        name: Dermatologist
+                        slug: dermatologist
+                        image: specializations/V2TlHIoJvN7dL2bYdkUoh2GYhwitQotuohwGNqKe.png
+                        description: 'Visit your doctor for joint pain, sprains, arthritis, and other bone pains.'
+                        status: 1
+                        created_at: '2023-06-06T10:55:47.000000Z'
+                        updated_at: '2023-06-06T10:55:47.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 3
+                        name:
+                          type: string
+                          example: Dermatologist
+                        slug:
+                          type: string
+                          example: dermatologist
+                        image:
+                          type: string
+                          example: specializations/V2TlHIoJvN7dL2bYdkUoh2GYhwitQotuohwGNqKe.png
+                        description:
+                          type: string
+                          example: 'Visit your doctor for joint pain, sprains, arthritis, and other bone pains.'
+                        status:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 404
+                  message: 'No Specialization Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'No Specialization Found'
+      tags:
+        - "Home Page Api's"
+      security: []
   /api/v1/patient/login:
     post:
       summary: 'Login Api'
@@ -193,7 +805,255 @@ paths:
                 - password
                 - confirm_password
       security: []
+  /api/v1/patient/forget-password:
+    post:
+      summary: 'Forget Password Api'
+      operationId: forgetPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'OTP has been sent to your email'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'OTP has been sent to your email'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    email:
+                      - 'The email field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Patient Forget Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: john@yopmail.com
+              required:
+                - email
+      security: []
+  /api/v1/patient/otp-verification:
+    post:
+      summary: 'OTP Verification Api'
+      operationId: oTPVerificationApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'OTP verified successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'OTP verified successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'OTP is expired'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'OTP is expired'
+      tags:
+        - 'Patient Forget Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: numeric
+                  description: 'OTP of the Patient.'
+                  example: '123456'
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: john@yopmail.com
+              required:
+                - otp
+                - email
+      security: []
+  /api/v1/patient/reset-password:
+    post:
+      summary: 'Reset Password Api'
+      operationId: resetPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Password has been reset successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Password has been reset successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    password:
+                      - 'The password field is required.'
+                    confirm_password:
+                      - 'The confirm password field is required.'
+                    email:
+                      - 'The email field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+                      confirm_password:
+                        type: array
+                        example:
+                          - 'The confirm password field is required.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Patient Forget Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 'Password of the Patient.'
+                  example: '123456'
+                confirm_password:
+                  type: string
+                  description: 'Confirm Password of the Patient.'
+                  example: '123456'
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: john@yopmail.com
+              required:
+                - password
+                - confirm_password
+                - email
+      security: []
 tags:
   -
+    name: 'Doctor Authentication'
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: "Home Page Api's"
+    description: ''
+  -
     name: 'Patient Authentication'
+    description: ''
+  -
+    name: 'Patient Forget Password'
     description: ''

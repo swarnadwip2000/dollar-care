@@ -23,8 +23,76 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = User::Role('DOCTOR')->get();
-        return view('admin.doctor.list')->with(compact('doctors'));
+        return view('admin.doctor.list');
+    }
+
+    public function ajaxList(Request $request)
+    {
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+        // Total records
+        $totalRecords = User::role('DOCTOR')->orderBy('id','desc')->count();
+        $totalRecordswithFilter = User::role('DOCTOR')->orderBy('id','desc')->count();
+
+        // Fetch records
+        $records = User::query();
+        $columns = ['name','email','phone','year_of_experience','gender','location', 'status'];
+        foreach($columns as $column){
+            $records->orWhere($column, 'like', '%' . $searchValue . '%');
+        }
+        $records->orderBy($columnName,$columnSortOrder);
+        $records->skip($start);
+        $records->take($rowperpage);
+
+        $records = $records->role('DOCTOR')->get();
+
+        $data_arr = array();
+
+        foreach($records as $record){
+            // get doctor specialization
+            $specialization = '';
+            foreach($record->doctorSpecializations as $key => $value){
+                // don't add comma for last element
+                if($key == count($record->doctorSpecializations) - 1){
+                    $specialization .= $value['specialization']['name'];
+                    continue;
+                }
+                $specialization .= $value['specialization']['name'] . ', ';
+            }
+            
+            $data_arr[] = array(
+               "name" => $record->name,
+               "email" => $record->email,
+               "phone" => $record->phone,
+               "specialization" => '<span class="badge bg-primary">'. $specialization  .'</span>',
+               "year_of_experience" => $record->year_of_experience,
+               "gender" => $record->gender,
+                "location" => $record->location,
+                "status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="'.$record->id.'"'.($record->status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
+                "action" => '<a href="'.route('doctors.edit',$record->id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Doctor"  data-route="'.route('doctors.delete', $record->id).'" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>'
+            );
+        }                                                                                                                                                   
+                                                                                                                                                    
+        $response = array(
+           "draw" => intval($draw),
+           "iTotalRecords" => $totalRecords,
+           "iTotalDisplayRecords" => $totalRecordswithFilter,
+           "aaData" => $data_arr
+        );
+
+        return response()->json($response); 
     }
 
     /**

@@ -88,12 +88,14 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         Route::get('/plans-delete/{id}', [PlanController::class, 'delete'])->name('plans.delete');
     });
     Route::get('/changePatientStatus', [PatientController::class, 'changePatientsStatus'])->name('patients.change-status');
-
+    Route::get('/patient-ajax-list', [PatientController::class, 'ajaxList'])->name('patients.list-ajax');
     // Doctor Routes
     Route::get('/changeDoctorStatus', [DoctorController::class, 'changeDoctorsStatus'])->name('doctors.change-status');
     Route::prefix('doctors')->group(function () {
         Route::get('/doctor-delete/{id}', [DoctorController::class, 'delete'])->name('doctors.delete');
+       
     });
+    Route::get('/doctor-ajax-list', [DoctorController::class, 'ajaxList'])->name('doctors.list-ajax');
 
     Route::prefix('blogs')->name('blogs.')->group(function(){
         Route::prefix('categories')->name('categories.')->group(function(){

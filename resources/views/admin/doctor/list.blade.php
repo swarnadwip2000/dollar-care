@@ -64,51 +64,6 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($doctors as $key => $doctor)
-                                    <tr>
-                                        <td>{{ $doctor->name }}</td>
-                                        <td>{{ $doctor->email }}</td>
-                                        <td>{{ $doctor->phone }}</td>
-                                        <td>
-                                            @if ($doctor->doctorSpecializations->count() > 0)
-                                            {{-- @dd($doctor->doctorSpecializations) --}}
-                                                @foreach ($doctor->doctorSpecializations as $item)
-                                                    <span class="badge bg-primary">{{ $item->specialization->name }}</span>
-                                                @endforeach
-                                            @else
-                                                <span class="badge bg-danger">No Specialization</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <i>{{ $doctor->year_of_experience }} Year </i>
-                                        <td>
-                                            {{ $doctor->gender }}
-                                        </td>
-                                        <td>
-                                            {{ $doctor->location }}
-                                        </td>
-                                        <td>
-                                            <div class="button-switch">
-                                                <input type="checkbox" id="switch-orange" class="switch toggle-class"
-                                                    data-id="{{ $doctor['id'] }}"
-                                                    {{ $doctor['status'] ? 'checked' : '' }} />
-                                                <label for="switch-orange" class="lbl-off"></label>
-                                                <label for="switch-orange" class="lbl-on"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a title="Edit Doctor" data-route=""
-                                                href="{{ route('doctors.edit', $doctor->id) }}"><i
-                                                    class="fas fa-edit"></i></a> &nbsp;&nbsp;
-
-                                            <a title="Delete Doctor"
-                                                data-route="{{ route('doctors.delete', $doctor->id) }}"
-                                                href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -122,17 +77,51 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            //Default data table
-            $('#myTable').DataTable({
-                "aaSorting": [],
-                "columnDefs": [{
-                        "orderable": false,
-                        "targets": [6, 7, 8]
+
+            var table = $('#myTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('doctors.list-ajax') }}",
+                columns: [{
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        "orderable": true,
-                        "targets": [0, 1, 2, 3, 4, 5]
-                    }
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'specialization',
+                        name: 'specialization'
+                    },
+                    {
+                        data: 'year_of_experience',
+                        name: 'year_of_experience'
+                    },
+                    {
+                        data: 'gender',
+                        name: 'gender'
+                    },
+                    {
+                        data: 'location',
+                        name: 'location'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
                 ]
             });
 
@@ -161,7 +150,7 @@
         });
     </script>
     <script>
-        $('.toggle-class').change(function() {
+        $(document).on('change', '.toggle-class', function(e) {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var user_id = $(this).data('id');
 

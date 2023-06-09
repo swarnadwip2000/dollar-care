@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Patient;
+namespace App\Http\Controllers\Api\Docotor;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendOtpMail;
@@ -12,15 +12,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-/**
- * @group Patient Forget Password
- */
 class ForgetPasswordController extends Controller
 {
     public $successStatus = 200;
     /**
      * Forget Password Api
-     * @bodyparam email string required Email of the Patient. Example: john@yopmail.com
+     * @bodyparam email string required Email of the Doctor. Example: james@yopmail.com
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
@@ -53,7 +50,7 @@ class ForgetPasswordController extends Controller
 
         try {
             $user = User::where('email', $request->email)->first();
-            if ($user->hasRole('PATIENT')) {
+            if ($user->hasRole('DOCTOR')) {
                 PasswordReset::where('email', $request->email)->delete();
                 $otp = rand(100000, 999999);
                 PasswordReset::create([
@@ -92,7 +89,7 @@ class ForgetPasswordController extends Controller
      * OTP Verification Api
      * 
      * @bodyparam otp numeric required OTP of the Patient. Example: 123456
-     * @bodyparam email string required Email of the Patient. Example: john@yopmail.com
+     * @bodyparam email string required Email of the Patient. Example: james@yopmail.com
      * @response 200{
      * "status": true,
      * "statusCode": 200,
@@ -167,7 +164,7 @@ class ForgetPasswordController extends Controller
      * 
      * @bodyparam password string required Password of the Patient. Example: 123456
      * @bodyparam confirm_password string required Confirm Password of the Patient. Example: 123456
-     * @bodyparam email string required Email of the Patient. Example: john@yopmail.com
+     * @bodyparam email string required Email of the Patient. Example: james@yopmail.com
      * @response 200{
      * "status": true,
      * "statusCode": 200,
