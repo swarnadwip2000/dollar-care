@@ -233,7 +233,7 @@
             </div>
         </div>
     </section>
-    <section class="abt-sec">
+    {{-- <section class="abt-sec">
         <div class="container">
             <div class="abt-sec-wrap">
                 <div class="row justify-content-between">
@@ -500,7 +500,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="blog-sec">
         <div class="container">
             <div class="blog-sec-wrap">

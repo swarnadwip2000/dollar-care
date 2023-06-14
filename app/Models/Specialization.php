@@ -25,4 +25,14 @@ class Specialization extends Model
     {
         return $this->hasMany(DoctorSpecialization::class, 'specialization_id');
     }
+
+    public function doctors()
+    {
+        return $this->belongsToMany(User::class, 'doctor_specializations', 'specialization_id', 'doctor_id');
+    }
+
+    public function getDoctorCountAttribute()
+    {
+        return $this->doctors()->count();
+    }
 }

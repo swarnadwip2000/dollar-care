@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CmsController;
 use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPasswordController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
+use App\Http\Controllers\Frontend\TeleHealthController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -144,8 +145,7 @@ Route::post('/contact-us', [CmsController::class, 'contactUsSubmit'])->name('con
 Route::get('/qna', [CmsController::class, 'qna'])->name('qna');
 // membership plans
 Route::get('/membership-plans', [CmsController::class, 'membershipPlans'])->name('membership-plans');
-// telehealth
-Route::get('/telehealth', [CmsController::class, 'telehealth'])->name('telehealth');
+
 // Mobile health coverage
 Route::get('/mobile-health-coverage', [CmsController::class, 'mobileHealthCoverage'])->name('mobile-health-coverage');
 
@@ -169,3 +169,11 @@ Route::post('/reset-password', [FrontendForgetPasswordController::class, 'resetP
 
 // newsletter
 Route::post('/newsletter', [FrontendNewsletterController::class, 'newsletter'])->name('newsletter');
+
+// telehealth
+Route::get('/telehealth', [TeleHealthController::class, 'telehealth'])->name('telehealth');
+Route::get('/view-all-specializations', [TeleHealthController::class, 'viewAllSpecializations'])->name('all-specializations');
+Route::get('/search-specilzation', [TeleHealthController::class, 'searchSpecialization'])->name('search.specilzation');
+
+// doctors
+Route::get('/doctor/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');

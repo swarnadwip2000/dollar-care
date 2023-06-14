@@ -21,4 +21,11 @@ class Symptoms extends Model
     {
         return $this->belongsTo(Specialization::class);
     }
+
+    public function getDoctorCountAttribute()
+    {
+        return $this->specialization->doctors()->count();
+    }
+
+    // user 
 }

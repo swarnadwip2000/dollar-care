@@ -64,7 +64,17 @@
                                                                 {{ $errors->first('symptom_name') }}</div>
                                                         @endif
                                                     </div>
-                                                    
+                                                    <div class="col-md-6">
+                                                        <label for="inputEnterYourName" class="col-form-label"> Symptom Slug <span
+                                                                style="color: red;">*</span></label>
+                                                        <input type="text" name="symptom_slug" id=""
+                                                            class="form-control" value="{{ $symptom['symptom_slug'] }}"
+                                                            placeholder="Enter Symptom Slug">
+                                                        @if ($errors->has('symptom_slug'))
+                                                            <div class="error" style="color:red;">
+                                                                {{ $errors->first('symptom_slug') }}</div>
+                                                        @endif
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <label for="inputEnterYourName" class="col-form-label"> Status
                                                             <span style="color: red;">*</span></label>
@@ -101,7 +111,7 @@
                                                                 Profile Picture </label>
                                                             <br>
                                                             <img src="{{ Storage::url($symptom['symptom_image']) }}"
-                                                                alt="" class="img-design" style="height:50px; width: 50px;">
+                                                                alt="" class="img-design" style="height:50px; width: 50px; ">
                                                         </div>
                                                     @endif
                                                     <div class="col-md-12">

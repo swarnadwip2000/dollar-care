@@ -70,11 +70,6 @@ class CmsController extends Controller
         return view('frontend.membership-plans')->with(compact('plans'));
     }
 
-    public function telehealth()
-    {
-        return view('frontend.telehealth');
-    }
-
     public function mobileHealthCoverage()
     {
         return view('frontend.mobile-health-coverage');

@@ -52,6 +52,7 @@
                                 <tr>
                                     <th>Symptoms Name </th>
                                     <th> Specialization </th>
+                                    <th>Slug</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -67,9 +68,12 @@
                                             {{ $symptom->specialization->name }}
                                         </td>
                                         <td>
+                                            {{ $symptom['symptom_slug'] }}
+                                        </td>
+                                        <td>
                                             @if ($symptom['symptom_image'])
                                             <img src="{{ Storage::url($symptom->symptom_image) }}" alt="Symptom Image"
-                                            width="70px" height="70px" style="border-radius: 50%">
+                                            width="70px" height="70px" style="border-radius: 50%; ">
                                             @endif
                                         </td>
                                         <td>

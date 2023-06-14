@@ -266,3 +266,194 @@ AOS.init({
     return window.innerWidth < maxWidth;
   }
 });
+
+
+
+$('.feel-slide').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  dots: false,
+  speed: 300,
+  infinite: true,
+  autoplaySpeed: 2000,
+  autoplay: false,
+  prevArrow: '<div class="slick-nav prev-arrow"><i class="fa fa-arrow-left"></i></div>',
+  nextArrow: '<div class="slick-nav next-arrow"><i class="fa fa-arrow-right"></i></div>',
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 799,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+
+$('.app-doc-wrap').slick({
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  arrows: false,
+  dots: false,
+  speed: 300,
+  infinite: true,
+  autoplaySpeed: 2000,
+  autoplay: true,
+  prevArrow: '<div class="slick-nav prev-arrow"><i class="fa fa-arrow-left"></i></div>',
+  nextArrow: '<div class="slick-nav next-arrow"><i class="fa fa-arrow-right"></i></div>',
+  responsive: [
+    {
+      breakpoint: 1500,
+      settings: {
+        arrows: false,
+        slidesToShow: 4
+      }
+    },
+    {
+      breakpoint: 1450,
+      settings: {
+        arrows: false,
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        arrows: false,
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 799,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+
+
+$('.find-doc-slide').slick({
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  arrows: true,
+  dots: false,
+  speed: 300,
+  infinite: true,
+  autoplaySpeed: 2000,
+  autoplay: true,
+  prevArrow: '<div class="slick-nav prev-arrow"><i class="fa fa-arrow-left"></i></div>',
+  nextArrow: '<div class="slick-nav next-arrow"><i class="fa fa-arrow-right"></i></div>',
+  responsive: [
+    {
+      breakpoint: 1500,
+      settings: {
+        arrows: false,
+        slidesToShow: 4
+      }
+    },
+    {
+      breakpoint: 1450,
+      settings: {
+        arrows: false,
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 1199  ,
+      settings: {
+        arrows: false,
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 799,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+

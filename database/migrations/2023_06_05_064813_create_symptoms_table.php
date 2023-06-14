@@ -17,8 +17,9 @@ class CreateSymptomsTable extends Migration
             $table->id();
             $table->foreignId('specialization_id')->references('id')->on('specializations')->onDelete('cascade')->nullable();
             $table->string('symptom_name');
-            $table->string('symptom_description');
-            $table->string('symptom_image');
+            $table->longText('symptom_description')->nullable();
+            $table->string('symptom_slug')->unique();
+            $table->string('symptom_image')->nullable();
             $table->boolean('symptom_status')->default(true);
             $table->timestamps();
         });

@@ -49,11 +49,13 @@ class SymptomsController extends Controller
             'symptom_description' => 'required',
             'symptom_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
             'symptom_status' => 'required',
+            'symptom_slug' => 'required|unique:symptoms,symptom_slug',
         ]);
 
         $symptom = new Symptoms();
         $symptom->specialization_id = $request->specialization_id;
         $symptom->symptom_name = $request->symptom_name;
+        $symptom->symptom_slug = $request->symptom_slug;
         $symptom->symptom_description = $request->symptom_description;
         $symptom->symptom_status = $request->symptom_status;
         $symptom->symptom_image = $this->imageUpload($request->file('symptom_image'), 'symptoms');
@@ -100,11 +102,13 @@ class SymptomsController extends Controller
             'symptom_name' => 'required',
             'symptom_description' => 'required',
             'symptom_status' => 'required',
+            'symptom_slug' => 'required|unique:symptoms,symptom_slug,' .$id,
         ]);
 
         $symptom = Symptoms::findOrFail($id);
         $symptom->specialization_id = $request->specialization_id;
         $symptom->symptom_name = $request->symptom_name;
+        $symptom->symptom_slug = $request->symptom_slug;
         $symptom->symptom_description = $request->symptom_description;
         $symptom->symptom_status = $request->symptom_status;
         if ($request->hasFile('symptom_image')) {
