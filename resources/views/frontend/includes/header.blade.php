@@ -11,32 +11,28 @@
                 <div id="cssmenu">
                     <ul>
                         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
-                        @if (Auth::check() && (Auth::user()->hasRole('DOCTOR') || Auth::user()->hasRole('PATIENT')))
                             <li class="{{ Request::is('telehealth') ? 'active' : '' }}"><a
                                     href="{{ route('telehealth') }}">Telehealth</a></li>
-                        @else
-                            <li><a href="{{ route('login') }}">Telehealth</a></li>
-                        @endif
                         <!-- <ul>
-                <li><a href="#">Product 1</a>
-                  <ul>
-                    <li><a href="#">Sub Product</a></li>
-                    <li><a href="#">Sub Product</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Product 2</a>
-                  <ul>
-                    <li><a href="#">Sub Product</a></li>
-                    <li><a href="#">Sub Product</a></li>
-                  </ul>
-                </li>
-              </ul> -->
+                            <li><a href="#">Product 1</a>
+                            <ul>
+                                <li><a href="#">Sub Product</a></li>
+                                <li><a href="#">Sub Product</a></li>
+                            </ul>
+                            </li>
+                            <li><a href="#">Product 2</a>
+                            <ul>
+                                <li><a href="#">Sub Product</a></li>
+                                <li><a href="#">Sub Product</a></li>
+                            </ul>
+                            </li>
+                        </ul> -->
                         </li>
                         <li class="{{ Request::is('membership-plans') ? 'active' : '' }}"><a
                                 href="{{ route('membership-plans') }}">Membership Plans</a></li>
                         {{-- <li class="{{ Request::is('mobile-health-coverage') ? 'active' : '' }}"><a href="{{ route('mobile-health-coverage') }}">Mobile Health Coverage</a></li> --}}
                         {{-- <li class="{{ Request::is('qna') ? 'active' : '' }}"><a href="{{ route('qna') }}">Q&A</a></li> --}}
-                        <li class="{{ Request::is('qna-blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Q&A /
+                        <li class="{{ Request::is('qna-blogs/*')||Request::is('blog-details/*') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Q&A /
                                 Blogs</a>
                         </li>
                         <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a

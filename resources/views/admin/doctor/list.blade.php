@@ -79,6 +79,15 @@
         $(document).ready(function() {
 
             var table = $('#myTable').DataTable({
+                "columnDefs": [{
+                        "orderable": false,
+                        "targets": [7,8]
+                    },
+                    {
+                        "orderable": true,
+                        "targets": [0, 1, 2, 3, 4, 5, 6]
+                    }
+                ], 
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('doctors.list-ajax') }}",

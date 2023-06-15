@@ -77,7 +77,6 @@
                                                         <label for="inputEnterYourName" class="col-form-label">
                                                             Specialization <span style="color: red;">*</span></label>
                                                         <select name="specialization_id[]" id="specialization_id" class="form-control" multiple>
-                                                            <option value="">Select Specialization</option>
                                                             @foreach ($specializations as $specialization)
                                                             <option value="{{ $specialization['id'] }}">{{ $specialization['name'] }}</option>
                                                             @endforeach

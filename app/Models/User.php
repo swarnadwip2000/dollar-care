@@ -47,4 +47,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(DoctorSpecialization::class, 'doctor_id');
     }
+
+    // specialization
+    public function specializations()
+    {
+        return $this->belongsToMany(Specialization::class, 'doctor_specializations', 'doctor_id', 'specialization_id');
+    }
+
+    public static function getDoctorSpecializations($id)
+    {
+        $specializations = DoctorSpecialization::where('doctor_id', $id)->get();
+        $data = [];
+        foreach ($specializations as $specialization) {
+            $data[] = $specialization->specialization->name;
+        }
+        return implode(', ', $data);
+    }
 }

@@ -26,7 +26,7 @@
                     </div>
                    
                     <div class="feel-slide">
-                      @foreach ($symptoms->chunk(6) as $items)
+                      @foreach ($symptoms->chunk(12) as $items)
                         <div class="feel-slide-wrap">
                             <div class="row row-cols-xxl-6 row-cols-lg-4 row-cols-md-2 row-cols-1 pb-5">
                               @foreach ($items as $symptom)
@@ -108,8 +108,8 @@
                             </div>
                         </a>
                         <div class="app-doc-text">
-                            <h3>{{ $speciliaztion['name'] }}</h3>
-                            <p>{{ $speciliaztion['description'] }}
+                            <a href="{{ route('doctors', ['type'=>'speciaization', 'slug'=>$speciliaztion['slug']]) }}"> <h3>{{ $speciliaztion['name'] }}</h3> </a>
+                            <p>{{ substr($speciliaztion['description'], 0,80) }}
                             </p>
                         </div>
                         @if($speciliaztion['doctor_count'] > 0)

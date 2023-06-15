@@ -51,6 +51,7 @@ class TeleHealthController extends Controller
             $data = Specialization::where('slug', $slug)->first();
             $doctors = $data->doctors()->where('status', 1)->get();
             $type = 'specialization';
+            
             return view('frontend.doctors')->with(compact('doctors', 'data','type'));
         }
     }

@@ -56,7 +56,7 @@ class DoctorController extends Controller
         $records->skip($start);
         $records->take($rowperpage);
 
-        $records = $records->role('DOCTOR')->get();
+        $records = $records->orderBy('id','desc')->role('DOCTOR')->get();
 
         $data_arr = array();
 

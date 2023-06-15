@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
+use App\Http\Controllers\Frontend\BookingAndConsultancyController;
 use App\Http\Controllers\Frontend\CmsController;
 use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPasswordController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
@@ -49,16 +50,16 @@ Route::get('forget-password/show', [ForgetPasswordController::class, 'forgetPass
 Route::get('reset-password/{id}/{token}', [ForgetPasswordController::class, 'resetPassword'])->name('admin.reset.password');
 Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
 
-Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
     Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('admin.profile.update');
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
-    
+
     Route::prefix('password')->group(function () {
         Route::get('/', [ProfileController::class, 'password'])->name('admin.password'); // password change
         Route::post('/update', [ProfileController::class, 'passwordUpdate'])->name('admin.password.update'); // password update
-    });    
+    });
 
     Route::resources([
         'patients' => PatientController::class,
@@ -80,7 +81,7 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         Route::get('/specialization-delete/{id}', [SpecializationController::class, 'delete'])->name('specializations.delete');
     });
     Route::get('/specialization-status', [SpecializationController::class, 'changeStatus'])->name('specializations.change-status');
-    
+
     //  Customer Routes
     Route::prefix('patients')->group(function () {
         Route::get('/patient-delete/{id}', [PatientController::class, 'delete'])->name('patients.delete');
@@ -94,12 +95,11 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     Route::get('/changeDoctorStatus', [DoctorController::class, 'changeDoctorsStatus'])->name('doctors.change-status');
     Route::prefix('doctors')->group(function () {
         Route::get('/doctor-delete/{id}', [DoctorController::class, 'delete'])->name('doctors.delete');
-       
     });
     Route::get('/doctor-ajax-list', [DoctorController::class, 'ajaxList'])->name('doctors.list-ajax');
 
-    Route::prefix('blogs')->name('blogs.')->group(function(){
-        Route::prefix('categories')->name('categories.')->group(function(){
+    Route::prefix('blogs')->name('blogs.')->group(function () {
+        Route::prefix('categories')->name('categories.')->group(function () {
             Route::get('/', [BlogController::class, 'categoryIndex'])->name('index');
             Route::get('/create', [BlogController::class, 'categoryCreate'])->name('create');
             Route::post('/store', [BlogController::class, 'categoryStore'])->name('store');
@@ -116,17 +116,17 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus'])->name('change-status');
     });
 
-    Route::prefix('cms')->name('cms.')->group(function(){
-        Route::prefix('qna')->name('qna.')->group(function(){
+    Route::prefix('cms')->name('cms.')->group(function () {
+        Route::prefix('qna')->name('qna.')->group(function () {
             Route::get('/', [AdminCmsController::class, 'qnaIndex'])->name('index');
             Route::post('/store', [AdminCmsController::class, 'qnaStore'])->name('store');
             Route::post('/edit/{id}', [AdminCmsController::class, 'qnaEdit'])->name('edit');
             Route::post('/update', [AdminCmsController::class, 'qnaUpdate'])->name('update');
             Route::get('/delete/{id}', [AdminCmsController::class, 'qnaDelete'])->name('delete');
-            Route::get('/qnaChangeStatus',[AdminCmsController::class, 'qnaChangeStatus'])->name('change-status');
+            Route::get('/qnaChangeStatus', [AdminCmsController::class, 'qnaChangeStatus'])->name('change-status');
         });
 
-        Route::prefix('contact-us')->name('contact-us.')->group(function(){
+        Route::prefix('contact-us')->name('contact-us.')->group(function () {
             Route::get('/', [AdminCmsController::class, 'contactUsIndex'])->name('index');
             Route::post('/update', [AdminCmsController::class, 'contactUsUpdate'])->name('update');
         });
@@ -170,10 +170,12 @@ Route::post('/reset-password', [FrontendForgetPasswordController::class, 'resetP
 // newsletter
 Route::post('/newsletter', [FrontendNewsletterController::class, 'newsletter'])->name('newsletter');
 
-// telehealth
-Route::get('/telehealth', [TeleHealthController::class, 'telehealth'])->name('telehealth');
-Route::get('/view-all-specializations', [TeleHealthController::class, 'viewAllSpecializations'])->name('all-specializations');
-Route::get('/search-specilzation', [TeleHealthController::class, 'searchSpecialization'])->name('search.specilzation');
-
-// doctors
-Route::get('/doctor/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
+Route::group(['middleware' => 'access.telehealth'], function () {
+    // telehealth
+    Route::get('/telehealth', [TeleHealthController::class, 'telehealth'])->name('telehealth');
+    Route::get('/view-all-specializations', [TeleHealthController::class, 'viewAllSpecializations'])->name('all-specializations');
+    Route::get('/search-specilzation', [TeleHealthController::class, 'searchSpecialization'])->name('search.specilzation');
+    // doctors
+    Route::get('/doctor/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
+    Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
+});

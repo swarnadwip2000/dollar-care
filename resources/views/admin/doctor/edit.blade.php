@@ -79,7 +79,6 @@
                                                             Specialization <span style="color: red;">*</span></label>
                                                         <select name="specialization_id[]" id="specialization_id"
                                                             class="form-control" multiple>
-                                                            <option value="">Select Specialization</option>
                                                             @foreach ($specializations as $specialization)
                                                                 <option value="{{ $specialization['id'] }}" @if($doctor->doctorSpecializations->count() > 0) @foreach($doctor->doctorSpecializations as $item) @if($item['specialization_id'] == $specialization['id']) selected @endif @endforeach @endif>
                                                                     {{ $specialization['name'] }}</option>

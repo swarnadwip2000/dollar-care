@@ -57,7 +57,7 @@ class PatientController extends Controller
         $records->skip($start);
         $records->take($rowperpage);
 
-        $records = $records->role('PATIENT')->get();
+        $records = $records->orderBy('id','desc')->role('PATIENT')->get();
 
         $data_arr = array();
 
