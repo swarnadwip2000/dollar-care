@@ -26,6 +26,4 @@ class Symptoms extends Model
     {
         return $this->specialization->doctors()->count();
     }
-
-    // user 
 }

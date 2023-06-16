@@ -34,7 +34,7 @@
                         {{-- <li class="{{ Request::is('qna') ? 'active' : '' }}"><a href="{{ route('qna') }}">Q&A</a></li> --}}
                         <li
                             class="{{ Request::is('qna-blogs/*') || Request::is('blog-details/*') || Request::is('qna-blogs') ? 'active' : '' }}">
-                            <a href="{{ route('blogs') }}">Q&A /
+                            <a href="{{ route('blogs') }}">Q&A / 
                                 Blogs</a>
                         </li>
                         <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a
