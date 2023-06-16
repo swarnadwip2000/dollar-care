@@ -11,8 +11,8 @@
                 <div id="cssmenu">
                     <ul>
                         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="{{ Request::is('telehealth') ? 'active' : '' }}"><a
-                                    href="{{ route('telehealth') }}">Telehealth</a></li>
+                        <li class="{{ Request::is('telehealth') ? 'active' : '' }}"><a
+                                href="{{ route('telehealth') }}">Telehealth</a></li>
                         <!-- <ul>
                             <li><a href="#">Product 1</a>
                             <ul>
@@ -32,7 +32,9 @@
                                 href="{{ route('membership-plans') }}">Membership Plans</a></li>
                         {{-- <li class="{{ Request::is('mobile-health-coverage') ? 'active' : '' }}"><a href="{{ route('mobile-health-coverage') }}">Mobile Health Coverage</a></li> --}}
                         {{-- <li class="{{ Request::is('qna') ? 'active' : '' }}"><a href="{{ route('qna') }}">Q&A</a></li> --}}
-                        <li class="{{ Request::is('qna-blogs/*')||Request::is('blog-details/*') ? 'active' : '' }}"><a href="{{ route('blogs') }}">Q&A /
+                        <li
+                            class="{{ Request::is('qna-blogs/*') || Request::is('blog-details/*') || Request::is('qna-blogs') ? 'active' : '' }}">
+                            <a href="{{ route('blogs') }}">Q&A /
                                 Blogs</a>
                         </li>
                         <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a
@@ -43,10 +45,10 @@
             <li><a href="blog.html">Blog</a></li>
             <li><a href="contact.html">Contact Us</a></li> -->
                         @if (Auth::check() && Auth::user()->hasRole('PATIENT'))
-                        <li>
-                            <a href="{{ route('logout') }}"><span class="u-i"><i
-                                        class="fa-regular fa-user"></i></span>Profile</a>
-                        </li>
+                            <li>
+                                <a href="{{ route('logout') }}"><span class="u-i"><i
+                                            class="fa-regular fa-user"></i></span>Profile</a>
+                            </li>
                         @else
                             <li>
                                 <a href="{{ route('login') }}"><span class="u-i"><i
@@ -123,7 +125,8 @@
             <a class="text-secondary mx-2 fs-5" href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
             <a class="text-secondary mx-2 fs-5" href="#" target="_blank"><i
                     class="fa-brands fa-instagram"></i></a>
-            <a class="text-secondary mx-2 fs-5" href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a class="text-secondary mx-2 fs-5" href="#" target="_blank"><i
+                    class="fa-brands fa-youtube"></i></a>
         </div>
     </div>
 </div>

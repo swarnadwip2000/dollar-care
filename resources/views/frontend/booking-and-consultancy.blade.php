@@ -74,7 +74,7 @@
                                 </div>
                             </a>
                             <a href="{{ route('membership-plans') }}">
-                                <div class="slot-1 "> {{-- add chat class when implemetation start--}}
+                                <div class="slot-1"> {{-- add chat class when implemetation start--}}
                                     <h3>Chat / Video Consultation</h3>
                                 </div>
                             </a>

@@ -43,7 +43,7 @@
         @include('frontend.includes.footer')
     </main>
     <!-- Scroll top -->
-    <a href="#top-btn" alt="Top" title="Back to top" id="scrl">
+    {{-- <a href="#top-btn" alt="Top" title="Back to top" id="scrl">
         <div class="scroll_btm">
             <div class="scroll_btm_btn">
                 <div class="scroll_text">
@@ -51,7 +51,10 @@
                 </div>
             </div>
         </div>
-    </a>
+    </a> --}}
+    <div class="float-btn">
+        <a href=""><span><i class="fa-regular fa-comment"></i></span>Chat With Us</a>
+     </div>
     <!-- Modal -->
     <div class="modal_1">
         <div class="mn-btn">
