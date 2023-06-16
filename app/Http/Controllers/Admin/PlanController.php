@@ -115,6 +115,6 @@ class PlanController extends Controller
         $plan_delete = Plan::findOrFail($id);
         $plan_delete->delete();
         $plan_specification_delete = PlanSpecfication::where('plan_id',$id)->delete();
-        return redirect()->route('patients.index')->with('error', 'Plan has been deleted successfully.');
+        return redirect()->route('plans.index')->with('error', 'Plan has been deleted successfully.');
     }
 }
