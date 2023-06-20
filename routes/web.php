@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\BookingAndConsultancyController;
 use App\Http\Controllers\Frontend\CmsController;
 use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPasswordController;
+use App\Http\Controllers\Frontend\MembershipController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
 use App\Http\Controllers\Frontend\TeleHealthController;
 use Illuminate\Support\Facades\Artisan;
@@ -179,3 +180,8 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/doctor/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
 });
+
+
+// member ship 
+Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');    
+Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');                                                                                                                                                                                                                                     

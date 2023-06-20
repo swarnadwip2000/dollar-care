@@ -63,4 +63,14 @@ class User extends Authenticatable
         }
         return implode(', ', $data);
     }
+
+    public function getMembershipStatusAttribute()
+    {
+        $count = UserMembership::where('user_id', $this->id)->count();
+        if ($count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -29,9 +29,9 @@
                                 <div class="col-xl-3 col-md-3 col-12">
                                     <div class="find-doc-slide-img">
                                         @if ($doctor['profile_picture'])
-                                        <img src="{{ Storage::url($doctor['profile_picture']) }}" alt="">
+                                            <img src="{{ Storage::url($doctor['profile_picture']) }}" alt="">
                                         @else
-                                        <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
+                                            <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
                                         @endif
                                     </div>
                                 </div>
@@ -73,8 +73,10 @@
                                     <h3>Clinic Visit Slots</h3>
                                 </div>
                             </a>
-                            <a href="{{ route('membership-plans') }}">
-                                <div class="slot-1"> {{-- add chat class when implemetation start--}}
+                            <a
+                                href="@if (Auth::user()->MembershipStatus == false) {{ route('membership-plans') }} @else javascript:void(0); @endif">
+                                <div class="slot-1 {{ Auth::user()->MembershipStatus == false ? '' : 'chat' }} ">
+                                    {{-- add chat class when implemetation start --}}
                                     <h3>Chat / Video Consultation</h3>
                                 </div>
                             </a>
@@ -145,8 +147,8 @@
                                                     <p>Lorem ipsum dolor sit amet consectetur</p>
                                                 </div>
                                                 <!-- <div class="tm-div d-block pt-2">
-                                                                <h4>09:34 PM</h4>
-                                                            </div> -->
+                                                                    <h4>09:34 PM</h4>
+                                                                </div> -->
                                             </div>
                                             <div class="chat-sec-left-img ps-3">
                                                 <div class="find-doc-slide-img cht-img">
@@ -164,8 +166,8 @@
                                                     <p>sit amet consectetur. Nunc ac </p>
                                                 </div>
                                                 <!-- <div class="tm-div d-block pt-2">
-                                                                <h4>09:34 PM</h4>
-                                                            </div> -->
+                                                                    <h4>09:34 PM</h4>
+                                                                </div> -->
                                             </div>
                                             <div class="chat-sec-left-img ps-3">
                                                 <div class="find-doc-slide-img cht-img">
@@ -462,10 +464,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                             <div class="find-doc-slide-img">
-                                 <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                             </div>
-                         </div> -->
+                                 <div class="find-doc-slide-img">
+                                     <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                 </div>
+                             </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
