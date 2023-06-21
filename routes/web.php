@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\MembershipHistoryController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
@@ -51,11 +52,13 @@ Route::get('forget-password/show', [ForgetPasswordController::class, 'forgetPass
 Route::get('reset-password/{id}/{token}', [ForgetPasswordController::class, 'resetPassword'])->name('admin.reset.password');
 Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
 
+
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
     Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('admin.profile.update');
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
+    Route::get('/membership-bar-chart', [DashboardController::class, 'membershipBarChart'])->name('admin.membership.bar.chart');
 
     Route::prefix('password')->group(function () {
         Route::get('/', [ProfileController::class, 'password'])->name('admin.password'); // password change
@@ -131,6 +134,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
             Route::get('/', [AdminCmsController::class, 'contactUsIndex'])->name('index');
             Route::post('/update', [AdminCmsController::class, 'contactUsUpdate'])->name('update');
         });
+    });
+
+    Route::prefix('membership-history')->name('membership-history.')->group(function(){
+        Route::get('/', [MembershipHistoryController::class, 'index'])->name('index');
+        Route::get('/list-ajax', [MembershipHistoryController::class, 'listAjax'])->name('list-ajax');
+        Route::get('/delete', [MembershipHistoryController::class, 'delete'])->name('delete');
     });
 });
 

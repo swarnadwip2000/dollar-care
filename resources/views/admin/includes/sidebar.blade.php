@@ -48,6 +48,9 @@
                 <li class="{{ Request::is('admin/plans*') ? 'active' : ' ' }}">
                     <a href="{{ route('plans.index') }}" ><i class="la la-address-card"></i> <span>Membership Plans</span></a>                 
                 </li>
+                <li class="{{ Request::is('admin/membership-history*') ? 'active' : ' ' }}">
+                    <a href="{{ route('membership-history.index') }}" ><i class="la la-credit-card"></i> <span>Membership History</span></a>                 
+                </li>
 
                 <li class="menu-title">
                     <span>Others</span>

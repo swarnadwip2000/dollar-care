@@ -34,7 +34,7 @@ class AuthController extends Controller
                 if ($user->hasRole('DOCTOR')) {
                     return "Doctor";
                 } else if ($user->hasRole('PATIENT')) {
-                    return "Patient";
+                    return redirect()->route('telehealth');
                 } else {
                     Auth::logout();
                     return redirect()->back()->with('error', 'Your account is not active. Please contact with admin');

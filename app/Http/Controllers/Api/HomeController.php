@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Specialization;
 use App\Models\Symptoms;
 use Illuminate\Http\Request;
+
 /**
  * @group Home Page Api's
  */
@@ -42,17 +43,17 @@ class HomeController extends Controller
 
     public function symptoms(Request $request)
     {
-       try {
-         $count = Symptoms::where('symptom_status', 1)->count();
-         if($count > 0){
-            $symptoms = Symptoms::where('symptom_status', 1)->orderBy('id','desc')->get();
-            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $symptoms]);
-            }else{
-            return response()->json(['status' => false, 'statusCode' => 404, 'message' => 'No Symptoms Found']);
+        try {
+            $count = Symptoms::where('symptom_status', 1)->count();
+            if ($count > 0) {
+                $symptoms = Symptoms::where('symptom_status', 1)->orderBy('id', 'desc')->get();
+                return response()->json(['status' => true, 'statusCode' => 200, 'data' => $symptoms]);
+            } else {
+                return response()->json(['status' => false, 'statusCode' => 404, 'message' => 'No Symptoms Found']);
             }
-       } catch (\Throwable $th) {
-        return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
-       }
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -94,5 +95,16 @@ class HomeController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
         }
+    }
+
+    public function intents(Request $request)
+    {
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $request->amount *100,
+            'currency' => $request->currency,
+        ]);
+       return response()->json(['status' => true, 'statusCode' => 200, 'data' => $intent]);
     }
 }
