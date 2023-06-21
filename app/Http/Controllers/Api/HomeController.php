@@ -97,14 +97,5 @@ class HomeController extends Controller
         }
     }
 
-    public function intents(Request $request)
-    {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $request->amount *100,
-            'currency' => $request->currency,
-        ]);
-       return response()->json(['status' => true, 'statusCode' => 200, 'data' => $intent]);
-    }
+   
 }

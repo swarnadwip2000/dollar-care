@@ -39,5 +39,4 @@ Route::prefix('v1')->group(function () {
 
     Route::post('symptoms',[HomeController::class,'symptoms']);
     Route::post('specializations',[HomeController::class,'specializations']);
-    Route::post('intents',[HomeController::class,'intents']);
 });
