@@ -24,6 +24,7 @@ use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPass
 use App\Http\Controllers\Frontend\MembershipController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
 use App\Http\Controllers\Frontend\TeleHealthController;
+use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -136,7 +137,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         });
     });
 
-    Route::prefix('membership-history')->name('membership-history.')->group(function(){
+    Route::prefix('membership-history')->name('membership-history.')->group(function () {
         Route::get('/', [MembershipHistoryController::class, 'index'])->name('index');
         Route::get('/list-ajax', [MembershipHistoryController::class, 'listAjax'])->name('list-ajax');
         Route::get('/delete', [MembershipHistoryController::class, 'delete'])->name('delete');
@@ -192,5 +193,11 @@ Route::group(['middleware' => 'access.telehealth'], function () {
 
 
 // member ship 
-Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');    
-Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');                                                                                                                                                                                                                                     
+Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');
+Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');
+
+
+/**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/
+Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(function () {
+    Route::get('/dashboard', [PatientDashboardController::class, 'dashboard'])->name('dashboard');
+});

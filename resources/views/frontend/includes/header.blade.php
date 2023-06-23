@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row justify-content-between align-items-center">
             <div class="col-xl-2 col-lg-2 col-md-2 col-5">
-                <div class="logo">
+                <div class="logo {{ Request::is('patient/*') ? 'logo-d' : '' }}">
                     <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}"
                             alt="" /></a>
                 </div>
@@ -46,7 +46,7 @@
             <li><a href="contact.html">Contact Us</a></li> -->
                         @if (Auth::check() && Auth::user()->hasRole('PATIENT'))
                             <li>
-                                <a href="{{ route('logout') }}"><span class="u-i"><i
+                                <a href="{{ route('patient.dashboard') }}"><span class="u-i"><i
                                             class="fa-regular fa-user"></i></span>Profile</a>
                             </li>
                         @else
