@@ -107,9 +107,9 @@ class AuthController extends Controller
         return redirect()->route('login')->with('message', 'Registration successful. Please login');
     }
 
-    public function logout()
+    public function PatientLogout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }

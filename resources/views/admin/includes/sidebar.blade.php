@@ -73,6 +73,9 @@
                 <li class="{{ Request::is('admin/newsletters*') ? 'active' : ' ' }}">
                     <a href="{{ route('newsletters.index') }}" ><i class="la la-paper-plane"></i> <span>Newsletter</span></a>                 
                 </li>
+                <li class="{{ Request::is('admin/notifications*') ? 'active' : ' ' }}">
+                    <a href="{{ route('notifications.index') }}" ><i class="la la-bell"></i> <span>Send Notification</span></a>                 
+                </li>
                 <li class="submenu">
                     <a href="#" class="{{ Request::is('admin/cms*') ? 'active' : ' ' }}"><i class="la la-cog"></i> <span>Settings</span> <span
                             class="menu-arrow"></span></a>

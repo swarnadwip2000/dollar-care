@@ -19,6 +19,7 @@ class CreateUserMembershipsTable extends Migration
             $table->foreignId('plan_id')->nullable();
             $table->string('payment_id')->nullable();
             $table->string('amount')->nullable();
+            $table->string('membership_expiry_date')->nullable();
             $table->string('currency')->nullable();
             $table->longText('payment_response')->nullable();
             $table->timestamps();

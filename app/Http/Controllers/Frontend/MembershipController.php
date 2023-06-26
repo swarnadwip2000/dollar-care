@@ -58,6 +58,7 @@ class MembershipController extends Controller
                     $userMembership->payment_id = $charge->id;
                     $userMembership->currency = 'usd';
                     $userMembership->amount = $charge->amount / 100;
+                    $userMembership->membership_expiry_date = date('Y-m-d', strtotime('+' . $plan->plan_duration . 'months'));
                     $userMembership->payment_response = json_encode($charge);
                     $userMembership->save();
                     $details = [

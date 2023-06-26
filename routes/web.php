@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\MembershipHistoryController;
 use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
@@ -25,6 +26,9 @@ use App\Http\Controllers\Frontend\MembershipController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
 use App\Http\Controllers\Frontend\TeleHealthController;
 use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
+use App\Http\Controllers\Patient\NotificationController;
+use App\Http\Controllers\Patient\PaymentHistoryController;
+use App\Http\Controllers\Patient\ProfileController as PatientProfileController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -74,7 +78,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         'plans' => PlanController::class,
         'symptoms' => SymptomsController::class,
         'specializations' => SpecializationController::class,
+        'notifications' => AdminNotificationController::class,
     ]);
+
+    Route::get('notification-list-ajax', [AdminNotificationController::class, 'notificationListAjax'])->name('notifications.list-ajax');
+    Route::get('notifications/delete/{id}', [AdminNotificationController::class, 'delete'])->name('notifications.delete');
 
     // symptom routes
     Route::prefix('symptoms')->group(function () {
@@ -169,7 +177,7 @@ Route::get('/login', [FrontendAuthController::class, 'login'])->name('login');
 Route::get('/register', [FrontendAuthController::class, 'register'])->name('register');
 Route::post('/register-store', [FrontendAuthController::class, 'registerStore'])->name('register.store');
 Route::post('/user-login-check', [FrontendAuthController::class, 'loginCheck'])->name('login.check');
-Route::get('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
+
 // forget password
 Route::get('/forget-password', [FrontendForgetPasswordController::class, 'forgetPassword'])->name('forget.password');
 Route::post('/forget-password', [FrontendForgetPasswordController::class, 'forgetPasswordSubmit'])->name('forget.password.submit');
@@ -200,4 +208,13 @@ Route::post('/membership-payment', [MembershipController::class, 'membershipPaym
 /**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/
 Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(function () {
     Route::get('/dashboard', [PatientDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [PatientProfileController::class, 'profile'])->name('profile');
+    Route::post('/profile-update', [PatientProfileController::class, 'profileUpdate'])->name('profile.update');
+    // notifications
+    Route::get('/notifications', [NotificationController::class, 'notifications'])->name('notifications');
+    // logout
+    Route::get('/logout', [FrontendAuthController::class, 'PatientLogout'])->name('logout');
+
+    // Payment History
+    Route::get('/payment-history', [PaymentHistoryController::class, 'paymentHistory'])->name('payment-history');
 });

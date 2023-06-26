@@ -60,12 +60,12 @@
                                 <a href="contact.html"><span>donate</span></a>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <button class="btn t-btn" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasHeader" aria-controls="offcanvasHeader">
                                 <i class="fa-solid fa-bars"></i>
                             </button>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
