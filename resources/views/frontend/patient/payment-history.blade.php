@@ -48,8 +48,8 @@
                                             </div>
                                             <div class="col-xl-4">
                                                 <div class="plan-e">
-                                                    <p>Plan ends on within {{ Helper::countExpireDays($membership['membership_expiry_date']) }} days please renew your plan again
-                                                        to continue</p>
+                                                    @if(Helper::countExpireDays($membership['membership_expiry_date']) < 7)<p>Plan ends on within @if(Helper::countExpireDays($membership['membership_expiry_date']) == 0) today @else {{ Helper::countExpireDays($membership['membership_expiry_date']) }} days @endif please renew your plan again
+                                                        to continue</p> @endif
                                                 </div>
                                             </div>
                                             @else

@@ -457,3 +457,106 @@ $('.find-doc-slide').slick({
   ]
 });
 
+
+AOS.init();
+
+
+/*----- slier --------*/
+
+$(".circle_percent").each(function () {
+  var $this = $(this),
+    $dataV = $this.data("percent"),
+    $dataDeg = $dataV * 3.6,
+    $round = $this.find(".round_per");
+  $round.css("transform", "rotate(" + parseInt($dataDeg + 180) + "deg)");
+  $this.append(
+    '<div class="circle_inbox"><span class="percent_text"></span></div>'
+  );
+  $this.prop("Counter", 0).animate(
+    { Counter: $dataV },
+    {
+      duration: 2000,
+      easing: "swing",
+      step: function (now) {
+        $this.find(".percent_text").text(Math.ceil(now) + "%");
+      },
+    }
+  );
+  if ($dataV >= 51) {
+    $round.css("transform", "rotate(" + 360 + "deg)");
+    setTimeout(function () {
+      $this.addClass("percent_more");
+    }, 1000);
+    setTimeout(function () {
+      $round.css("transform", "rotate(" + parseInt($dataDeg + 180) + "deg)");
+    }, 1000);
+  }
+});
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+// scroll top
+
+var $btnTop = $("#scrl");
+$(window).on("scroll", function () {
+  if ($(window).scrollTop() >= 20) {
+    $btnTop.fadeIn();
+  } else {
+    $btnTop.fadeOut();
+  }
+});
+
+$btnTop.on("click", function () {
+  $("html, body").animate({ scrollTop: 0 }, 300);
+});
+
+AOS.init({
+  disable: function () {
+    var maxWidth = 800;
+    return window.innerWidth < maxWidth;
+  },
+});
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  const showNavbar = (toggleId, navId, bodyId, headerId) => {
+    const toggle = document.getElementById(toggleId),
+      nav = document.getElementById(navId),
+      bodypd = document.getElementById(bodyId),
+      headerpd = document.getElementById(headerId);
+
+    // Validate that all variables exist
+    if (toggle && nav && bodypd && headerpd) {
+      toggle.addEventListener("click", () => {
+        // show navbar
+        nav.classList.toggle("show");
+        // change icon
+        toggle.classList.toggle("bx-x");
+        // add padding to body
+        bodypd.classList.toggle("body-pd");
+        // add padding to header
+        headerpd.classList.toggle("body-pd");
+      });
+    }
+  };
+
+  showNavbar("header-toggle", "nav-bar", "body-pd", "header");
+
+  /*===== LINK ACTIVE =====*/
+  const linkColor = document.querySelectorAll(".nav_link");
+
+  function colorLink() {
+    if (linkColor) {
+      linkColor.forEach((l) => l.classList.remove("active"));
+      this.classList.add("active");
+    }
+  }
+  linkColor.forEach((l) => l.addEventListener("click", colorLink));
+
+  // Your code to run since DOM is loaded and ready
+});

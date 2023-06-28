@@ -502,6 +502,7 @@
     }
     .l-navbar {
         top: 32px;
+        height: 100%;
     }
     .profile-img {
         margin: inherit;
@@ -1121,63 +1122,62 @@
         padding-bottom: 10px;
     }
     /* Dashboard */
-  .l-navbar {
-    left: 0%;
-    display: none;
-    top: 12%;
-  }
-  .l-navbar.show{
-     display: block;
-     position: absolute;
-    width: 80%;
-  }
-  .header {
-    top: 8%;
-    left: 0%;
-    z-index: 0;
-
-  }
-  .body-pd{
-    padding-left: 0;
-  }
-  .basic-plan h2 {
-    font-size: 16px;
-  }
-  .basic-plan h4 {
-    font-size: 30px;
-  }
-  .basic-plan h3 {
-    font-size: 14px;
-  }
-  .plan-e p {
-    font-size: 16px;
-}
-.content-head h2 {
-  font-size: 24px;
-  text-align: center;
-}
-.clinicl-head h3 {
-  font-size: 16px;
-}
-.for-vdo h3 {
-  font-size: 16px;
-}
-.for-vdo h4 {
-  font-size: 16px;
-}
-.notice-p p {
-  font-size: 14px;
-  line-height: 22px;
-}
-.notice-div-wrap {
-  margin-bottom: 15px;
-}
-.my-profile-div{
-  margin-bottom: 20px;
-}
-.sidebar-right {
- margin-top: 12%;
-}
+    .l-navbar {
+        left: 0%;
+        display: none;
+        top: 12%;
+    }
+    .l-navbar.show {
+        display: block;
+        position: absolute;
+        width: 80%;
+    }
+    .header {
+        top: 8%;
+        left: 0%;
+        z-index: 0;
+    }
+    .body-pd {
+        padding-left: 0;
+    }
+    .basic-plan h2 {
+        font-size: 16px;
+    }
+    .basic-plan h4 {
+        font-size: 30px;
+    }
+    .basic-plan h3 {
+        font-size: 14px;
+    }
+    .plan-e p {
+        font-size: 16px;
+    }
+    .content-head h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+    .clinicl-head h3 {
+        font-size: 16px;
+    }
+    .for-vdo h3 {
+        font-size: 16px;
+    }
+    .for-vdo h4 {
+        font-size: 16px;
+    }
+    .notice-p p {
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .notice-div-wrap {
+        margin-bottom: 15px;
+    }
+    .my-profile-div {
+        margin-bottom: 20px;
+    }
+    .sidebar-right {
+        margin-top: 12%;
+    }
 }
 
 @media (max-width: 375.98px) {

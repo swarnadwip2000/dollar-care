@@ -10,6 +10,7 @@
 @section('content')
     @php
         use App\Models\User;
+        use App\Helpers\Helper;
     @endphp
     <section class="inr-bnr">
         <div class="inr-bnr-img">
@@ -73,9 +74,8 @@
                                     <h3>Clinic Visit Slots</h3>
                                 </div>
                             </a>
-                            <a
-                                href="@if (Auth::user()->MembershipStatus == false) {{ route('membership-plans') }} @else javascript:void(0); @endif">
-                                <div class="slot-1 {{ Auth::user()->MembershipStatus == false ? '' : 'chat' }} ">
+                            <a href="javascript:void(0);">
+                                <div class="slot-1 chat" id="show-chat">
                                     {{-- add chat class when implemetation start --}}
                                     <h3>Chat / Video Consultation</h3>
                                 </div>
@@ -86,173 +86,8 @@
             </div>
         </div>
     </section>
-    <section class="chat-sec chat-slot">
-        <div class="container">
-            <div class="chat-sec-wrap">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="chat-sec-box">
-                            <div class="row">
-                                <div class="col-xl-10">
-                                    <div class="chat-sec-left pb-3">
-                                        <div class="chat-sec-left-wrap d-flex align-items-center">
-                                            <div class="chat-sec-left-img">
-                                                <div class="find-doc-slide-img cht-img">
-                                                    <img src="{{ asset('frontend_assets/images/fd-2.png') }}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                            <div class="chat-sec-left-text-box">
-                                                <div class="chat-sec-left-text">
-                                                    <h4>Dr. Sam Rungta</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur. Pellentesque viverra
-                                                        imperdiet ipsum augue id aliquam orci integer.</p>
-                                                </div>
-                                                <div class="tm-div d-block pt-2">
-                                                    <h4>09:34 PM</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat-sec-left pb-3">
-                                        <div class="chat-sec-left-wrap d-flex align-items-center">
-                                            <div class="chat-sec-left-img">
-                                                <div class="find-doc-slide-img cht-img">
-                                                    <img src="{{ asset('frontend_assets/images/fd-2.png') }}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                            <div class="chat-sec-left-text-box">
-                                                <div class="chat-sec-left-text">
-                                                    <h4>Dr. Sam Rungta</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur. Pellentesque viverra
-                                                        imperdiet ipsum augue id aliquam orci integer.</p>
-                                                </div>
-                                                <div class="tm-div d-block pt-2">
-                                                    <h4>09:34 PM</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-end">
-                                <div class="col-xl-10">
-                                    <div class="chat-sec-left chat-sec-right pb-3">
-                                        <div class="chat-sec-left-wrap d-flex align-items-center justify-content-end">
-                                            <div class="chat-sec-left-text-box">
-                                                <div class="chat-sec-left-text">
-                                                    <h4>Adam Smith</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur</p>
-                                                </div>
-                                                <!-- <div class="tm-div d-block pt-2">
-                                                                    <h4>09:34 PM</h4>
-                                                                </div> -->
-                                            </div>
-                                            <div class="chat-sec-left-img ps-3">
-                                                <div class="find-doc-slide-img cht-img">
-                                                    <img src="{{ asset('frontend_assets/images/fd-1.png') }}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat-sec-left chat-sec-right pb-3">
-                                        <div class="chat-sec-left-wrap d-flex align-items-center justify-content-end">
-                                            <div class="chat-sec-left-text-box">
-                                                <div class="chat-sec-left-text">
-                                                    <h4>Adam Smith</h4>
-                                                    <p>sit amet consectetur. Nunc ac </p>
-                                                </div>
-                                                <!-- <div class="tm-div d-block pt-2">
-                                                                    <h4>09:34 PM</h4>
-                                                                </div> -->
-                                            </div>
-                                            <div class="chat-sec-left-img ps-3">
-                                                <div class="find-doc-slide-img cht-img">
-                                                    <img src="{{ asset('frontend_assets/images/fd-1.png') }}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat-sec-left chat-sec-right pb-3">
-                                        <div class="chat-sec-left-wrap d-flex align-items-center justify-content-end">
-                                            <div class="chat-sec-left-text-box">
-                                                <div class="chat-sec-left-text">
-                                                    <h4>Adam Smith</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur. Turpis interdum
-                                                        sollicitudin quam tincidunt nisl scelerisque nunc et. Amet
-                                                        sed
-                                                        nec nunc est et proin odio at. Feugiat velit tincidunt et
-                                                        mattis
-                                                        sed odio malesuada posuere odio. Adipiscing nibh consectetur
-                                                        non
-                                                        a tincidunt malesuada faucibus consectetur arcu. </p>
-                                                </div>
-                                                <div class="tm-div tm-div-2 d-block pt-2">
-                                                    <h4>09:34 PM</h4>
-                                                </div>
-                                            </div>
-                                            <div class="chat-sec-left-img ps-3">
-                                                <div class="find-doc-slide-img cht-img">
-                                                    <img src="{{ asset('frontend_assets/images/fd-1.png') }}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xl-10">
-                                    <div class="chat-sec-left pb-3">
-                                        <div class="chat-sec-left-wrap d-flex align-items-center">
-                                            <div class="chat-sec-left-img">
-                                                <div class="find-doc-slide-img cht-img">
-                                                    <img src="{{ asset('frontend_assets/images/fd-2.png') }}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                            <div class="chat-sec-left-text-box">
-                                                <div class="chat-sec-left-text">
-                                                    <h4>Dr. Sam Rungta</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur. Pellentesque viverra
-                                                        imperdiet ipsum augue id aliquam orci integer.</p>
-                                                </div>
-                                                <div class="tm-div d-block pt-2">
-                                                    <h4>09:34 PM</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="type-sec d-flex justify-content-center align-items-center">
-                                <div class="link-div">
-                                    {{-- <a href="#"> <i class="fa-solid fa-link"></i></a> --}}
-                                </div>
-                                <div class="type-div">
-                                    <form action="">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="" value=""
-                                                placeholder="Type here..." required="">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="send-div">
-                                    <a href="#"> <img src="{{ asset('frontend_assets/images/send.png') }}"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="chat-sec chat-slot" id="chat-view">
+        @include('frontend.chat')
     </section>
     <section class="cl-tm-slot booking-slot">
         <div class="container">
@@ -464,10 +299,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                                 <div class="find-doc-slide-img">
-                                     <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                 </div>
-                             </div> -->
+                                                     <div class="find-doc-slide-img">
+                                                         <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                                     </div>
+                                                 </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -584,12 +419,22 @@
                 $('.booking-slot').css('display', 'block');
                 $('.chat-slot').css('display', 'none');
             });
-
-            $('.chat').on('click', function() {
-                $('.clinic-visit').removeClass('active-slot');
-                $(this).addClass('active-slot');
-                $('.booking-slot').css('display', 'none');
-                $('.chat-slot').css('display', 'block');
+            $('#show-chat').on('click', function() {
+                $.ajax({
+                    url: "{{ route('doctor.chat') }}",
+                    type: 'GET',
+                    success: function(resp) {
+                        if (resp.status == true) {
+                            $('.booking-slot').css('display', 'none');
+                            $('.clinic-visit').removeClass('active-slot');
+                            $('#show-chat').addClass('active-slot');
+                            $('.chat-slot').css('display', 'block');
+                            $('.chat-slot').html(resp.view);
+                        } else {
+                            toastr.error(resp.message);
+                        }
+                    }
+                });
             });
         });
     </script>

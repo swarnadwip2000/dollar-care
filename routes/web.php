@@ -25,10 +25,12 @@ use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPass
 use App\Http\Controllers\Frontend\MembershipController;
 use App\Http\Controllers\Frontend\NewsletterController as FrontendNewsletterController;
 use App\Http\Controllers\Frontend\TeleHealthController;
+use App\Http\Controllers\Patient\AppointmentController;
 use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
 use App\Http\Controllers\Patient\NotificationController;
 use App\Http\Controllers\Patient\PaymentHistoryController;
 use App\Http\Controllers\Patient\ProfileController as PatientProfileController;
+use App\Http\Controllers\Patient\SettingController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -197,6 +199,7 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     // doctors
     Route::get('/doctor/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
+    Route::get('/doctor-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
 });
 
 
@@ -217,4 +220,8 @@ Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(
 
     // Payment History
     Route::get('/payment-history', [PaymentHistoryController::class, 'paymentHistory'])->name('payment-history');
+    // Setting
+    Route::get('/setting', [SettingController::class, 'setting'])->name('settings');
+    // my appointment
+    Route::get('/my-appointment', [AppointmentController::class, 'myAppointment'])->name('appointment');
 });

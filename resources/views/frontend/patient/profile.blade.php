@@ -21,25 +21,30 @@
                             <h2>My Profile</h2>
                         </div>
                         <div class="my-profile-div">
-                            <div class="col-xl-2">
-                                <div class="profile-img">
-                                    @if (Auth::user()->profile_picture)
-                                        <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
-                                    @else
-                                        <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
-                                    @endif
-                                    <a href="#">
-                                        <div class="pro-cam-img">
-                                            <span><i class="fa-solid fa-camera"></i></span>
+                            <form action="{{ route('patient.profile.update') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-xl-2">
+                                    <div class="profile-img">
+                                        @if (Auth::user()->profile_picture)
+                                            <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
+                                        @else
+                                            <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
+                                        @endif
+                                        <div class="pro-cam-img-1">
+                                            <label for="file-input">
+                                                <img src="{{ asset('frontend_assets/images/cam-img.png') }}" />
+                                            </label>
+                                            <input id="file-input" type="file" name="profile_picture" />
+                                            @if ($errors->has('profile_picture'))
+                                                <span class="text-danger">{{ $errors->first('profile_picture') }}</span>
+                                            @endif
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-10">
-                                <div class="profile-form">
-                                    <form action="{{ route('patient.profile.update') }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
+                                <div class="col-10">
+                                    <div class="profile-form">
+
                                         <div class="row">
                                             <div class="form-group col-lg-6 col-md-12">
                                                 <input type="text" class="form-control" id=""
@@ -88,9 +93,9 @@
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="gender"
-                                                            value="Other" id="inlineRadio2" value="option2"
+                                                            value="Other" id="inlineRadio3" value="option2"
                                                             @if (Auth::user()->gender == 'Other') checked @endif>
-                                                        <label class="form-check-label" for="inlineRadio2">Other</label>
+                                                        <label class="form-check-label" for="inlineRadio3">Other</label>
                                                     </div>
                                                     @if ($errors->has('gender'))
                                                         <span class="text-danger">{{ $errors->first('gender') }}</span>
@@ -118,9 +123,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

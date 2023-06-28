@@ -73,4 +73,14 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function getMembershipExpireDateAttribute()
+    {
+        $membership = UserMembership::where('user_id', $this->id)->first();
+        if ($membership) {
+            return $membership->membership_expiry_date;
+        } else {
+            return null;
+        }
+    }
 }
