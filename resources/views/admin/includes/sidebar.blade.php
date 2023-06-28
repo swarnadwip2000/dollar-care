@@ -70,6 +70,9 @@
                 <li class="{{ Request::is('admin/contact-us*') ? 'active' : ' ' }}">
                     <a href="{{ route('contact-us.index') }}" ><i class="la la-phone"></i> <span>Contact Us</span></a>                 
                 </li>
+                <li class="{{ Request::is('admin/help-and-support*') ? 'active' : ' ' }}">
+                    <a href="{{ route('contact-us.index') }}" ><i class="la la-support"></i> <span>Help & Support</span></a>                 
+                </li>
                 <li class="{{ Request::is('admin/newsletters*') ? 'active' : ' ' }}">
                     <a href="{{ route('newsletters.index') }}" ><i class="la la-paper-plane"></i> <span>Newsletter</span></a>                 
                 </li>
@@ -85,6 +88,12 @@
                         </li>         
                         <li class="{{ Request::is('admin/cms/contact-us*') ? 'active' : ' ' }}">
                             <a href="{{ route('cms.contact-us.index') }}">Contact Us Page</a>
+                        </li>  
+                        <li class="{{ Request::is('admin/cms/about-us*') ? 'active' : ' ' }}">
+                            <a href="{{ route('cms.about-us.index') }}">About Us Page</a>
+                        </li>   
+                        <li class="{{ Request::is('admin/cms/privacy-policy*') ? 'active' : ' ' }}">
+                            <a href="{{ route('cms.privacy-policy.index') }}">Privacy Policy Page</a>
                         </li>     
                     </ul>
                 </li>

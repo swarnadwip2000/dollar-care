@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AboutUs;
 use App\Models\ContactPageCms;
 use App\Models\ContactUs;
+use App\Models\PrivacyPolicy;
 use App\Models\Qna;
 use Illuminate\Http\Request;
+use Psy\CodeCleaner\ReturnTypePass;
 
 class CmsController extends Controller
 {
@@ -93,5 +96,41 @@ class CmsController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }
+    }
+
+    public function aboutUsIndex()
+    {
+        $aboutUs = AboutUs::orderBy('id', 'desc')->first();
+        return view('admin.cms.about-us.update')->with(compact('aboutUs'));
+    }
+
+    public function aboutUsUpdate(Request $request)
+    {
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        $aboutUs = AboutUs::findOrFail($request->id);
+        $aboutUs->content = $request->content;
+        $aboutUs->save();
+        return redirect()->back()->with('message', 'About us page details has been updated successfully');
+    }
+
+    public function privacyPolicyIndex()
+    {
+        $privacyPolicy = PrivacyPolicy::orderBy('id', 'desc')->first();
+        return view('admin.cms.privacy-policy.update')->with(compact('privacyPolicy'));
+    }
+
+    public function privacyPolicyUpdate(Request $request)
+    {
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        $privacyPolicy = PrivacyPolicy::findOrFail($request->id);
+        $privacyPolicy->content = $request->content;
+        $privacyPolicy->save();
+        return redirect()->back()->with('message', 'Privacy policy page details has been updated successfully');
     }
 }

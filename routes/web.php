@@ -145,6 +145,16 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
             Route::get('/', [AdminCmsController::class, 'contactUsIndex'])->name('index');
             Route::post('/update', [AdminCmsController::class, 'contactUsUpdate'])->name('update');
         });
+
+        Route::prefix('about-us')->name('about-us.')->group(function () {
+            Route::get('/', [AdminCmsController::class, 'aboutUsIndex'])->name('index');
+            Route::post('/update', [AdminCmsController::class, 'aboutUsUpdate'])->name('update');
+        });
+
+        Route::prefix('privacy-policy')->name('privacy-policy.')->group(function () {
+            Route::get('/', [AdminCmsController::class, 'privacyPolicyIndex'])->name('index');
+            Route::post('/update', [AdminCmsController::class, 'privacyPolicyUpdate'])->name('update');
+        });
     });
 
     Route::prefix('membership-history')->name('membership-history.')->group(function () {
@@ -222,6 +232,8 @@ Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(
     Route::get('/payment-history', [PaymentHistoryController::class, 'paymentHistory'])->name('payment-history');
     // Setting
     Route::get('/setting', [SettingController::class, 'setting'])->name('settings');
+    Route::post('/help-and-support', [SettingController::class, 'helpAndSupport'])->name('help-and-support');
     // my appointment
     Route::get('/my-appointment', [AppointmentController::class, 'myAppointment'])->name('appointment');
+
 });

@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             // assignAdminSeeder::class,
             // AddQnaSeeder::class,
             // ContactPageCmsSeeder::class,
-            AddPlanSeeder::class,
+            // AddPlanSeeder::class,
+            // AboutUsSeeder::class,
+            PrivacyPolicySeeder::class
         ]);
     }
 }
