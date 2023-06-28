@@ -12,9 +12,6 @@
                   <a href="{{ route('patient.appointment') }}" class="nav_link {{ Request::is('patient/my-appointment') ? 'active' : '' }}">
                       <i class='bx bx-calendar nav_icon'></i><span class="nav_name">My
                           Appointment</span> </a>
-                  {{-- <a href="my-feedback.html" class="nav_link">
-                      <i class='bx bx-conversation nav_icon'></i>
-                      <span class="nav_name">My Feedback</span> </a> --}}
                   <a href="{{ route('patient.payment-history') }}" class="nav_link {{ Request::is('patient/payment-history') ? 'active' : '' }}"> <i
                           class='bx bx-notepad nav_icon'></i> <span class="nav_name">Payment
                           History</span> </a>
