@@ -32,7 +32,7 @@ class AuthController extends Controller
             $user = Auth::user();
             if ($user->status == true) {
                 if ($user->hasRole('DOCTOR')) {
-                    return "Doctor";
+                    return redirect()->route('doctor.dashboard');
                 } else if ($user->hasRole('PATIENT')) {
                     return redirect()->route('patient.dashboard');
                 } else {
@@ -107,7 +107,13 @@ class AuthController extends Controller
         return redirect()->route('login')->with('message', 'Registration successful. Please login');
     }
 
-    public function PatientLogout()
+    public function patientLogout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
+    }
+
+    public function doctorLogout()
     {
         Auth::logout();
         return redirect()->route('home');

@@ -2,7 +2,7 @@
 @section('meta_title')
 @endsection
 @section('title')
-    Patient Profile
+    Doctor Profile
 @endsection
 @push('styles')
 @endpush
@@ -11,7 +11,7 @@
     <section class="sidebar-sec" id="body-pd">
         <div class="container-fluid">
             <div class="sidebar-wrap d-flex justify-content-between">
-                @include('frontend.patient.partials.sidebar')
+                @include('frontend.doctor.partials.sidebar')
             </div>
             <!-- Content -->
             <div class="sidebar-right height-100">
@@ -21,8 +21,7 @@
                             <h2>My Profile</h2>
                         </div>
                         <div class="my-profile-div">
-                            <form action="{{ route('patient.profile.update') }}" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="{{ route('doctor.profile.update') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-xl-2">
                                     <div class="profile-img">
@@ -35,7 +34,8 @@
                                             <label for="file-input">
                                                 <img src="{{ asset('frontend_assets/images/cam-img.png') }}" />
                                             </label>
-                                            <input id="file-input" type="file" name="profile_picture" onchange="readURL(this);"/>
+                                            <input id="file-input" type="file" name="profile_picture"
+                                                onchange="readURL(this);" />
                                             @if ($errors->has('profile_picture'))
                                                 <span class="text-danger">{{ $errors->first('profile_picture') }}</span>
                                             @endif
@@ -135,12 +135,12 @@
 @endsection
 
 @push('scripts')
-<script>
-         function readURL(input) {
+    <script>
+        function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     $('#blah')
                         .attr('src', e.target.result);
                 };
@@ -148,5 +148,5 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-</script>
+    </script>
 @endpush

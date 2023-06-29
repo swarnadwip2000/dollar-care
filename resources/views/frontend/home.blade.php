@@ -1,7 +1,9 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')Home @endsection
+@section('title')
+    Home
+@endsection
 @push('styles')
 @endpush
 
@@ -28,8 +30,10 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
-                                    class="fa-solid fa-arrow-right"></i></span></a>
+                        @if (!Auth::check())
+                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -53,8 +57,10 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
-                                    class="fa-solid fa-arrow-right"></i></span></a>
+                        @if (!Auth::check())
+                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -78,8 +84,10 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
-                                    class="fa-solid fa-arrow-right"></i></span></a>
+                        @if (!Auth::check())
+                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -103,8 +111,10 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        <a href="{{ route('about-us') }}"><span>get started</span><span class="btn-arw"><i
-                                    class="fa-solid fa-arrow-right"></i></span></a>
+                        @if (!Auth::check())
+                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -114,8 +124,7 @@
         <div class="container">
             <div class="wht-we-do-wrap">
                 <div class="row">
-                    <div class="col-xl-3" data-aos="fade-up" data-aos-easing="linear"
-                        data-aos-duration="1000">
+                    <div class="col-xl-3" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                         <div class="head-1 h-b">
                             <h2>Why Do We Stand Out?</h2>
                         </div>
@@ -521,51 +530,62 @@
             </div>
             <div class="blog-box-wrap">
                 <div class="row justify-content-between">
-                    @if($blogs->count() > 0)
-                    <div class="col-xl-6 col-md-12 col-12">
-                        <div class="blog-box-img">
-                           <a href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}"> <img src="{{ Storage::url($blog['image']) }}" alt="" /></a>
-                        </div>
-                        <div class="blog-rit d-flex" data-aos="fade-up" data-aos-easing="linear"
-                            data-aos-duration="600">
-                            <div class="bl-text bl-text-1">
-                                <a href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}"><h3>{{ $blog['title'] }}</h3></a>
-                                <p>
-                                    {!! substr($blog['content'], 0,200) !!}...
-                                </p>
-                                <div class="date-box d-flex align-items-center">
-                                    <div class="bl-date-img">
-                                        <img src="{{ asset('frontend_assets/images/date.png') }}" alt="" />
-                                    </div>
-                                    <div class="bl-date">
-                                        <h4>{{ date("d M' Y", strtotime($blog['created_at'])) }}</h4>
-                                    </div>
-                                </div>
+                    @if ($blogs->count() > 0)
+                        <div class="col-xl-6 col-md-12 col-12">
+                            <div class="blog-box-img">
+                                <a
+                                    href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}">
+                                    <img src="{{ Storage::url($blog['image']) }}" alt="" /></a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-12 col-12">
-                        @foreach ($blogs as $item)
                             <div class="blog-rit d-flex" data-aos="fade-up" data-aos-easing="linear"
                                 data-aos-duration="600">
-                                <div class="bl-lft">
-                                    <a href="{{ route('blogs.details', ['category_slug' => $item['category']['slug'], 'blog_slug' => $item['slug']]) }}"><img src="{{ Storage::url($item['image']) }}" alt="" /></a>
-                                </div>
-                                <div class="bl-text">
-                                    <a href="{{ route('blogs.details', ['category_slug' => $item['category']['slug'], 'blog_slug' => $item['slug']]) }}"><h3>{{ $item['title'] }}</h3></a>
-                                    <div class="date-box d-flex align-items-center pt-3">
+                                <div class="bl-text bl-text-1">
+                                    <a
+                                        href="{{ route('blogs.details', ['category_slug' => $blog['category']['slug'], 'blog_slug' => $blog['slug']]) }}">
+                                        <h3>{{ $blog['title'] }}</h3>
+                                    </a>
+                                    <p>
+                                        {!! substr($blog['content'], 0, 200) !!}...
+                                    </p>
+                                    <div class="date-box d-flex align-items-center">
                                         <div class="bl-date-img">
                                             <img src="{{ asset('frontend_assets/images/date.png') }}" alt="" />
                                         </div>
                                         <div class="bl-date">
-                                            <h4>{{ date("d M' Y", strtotime($item['created_at'])) }}</h4>
+                                            <h4>{{ date("d M' Y", strtotime($blog['created_at'])) }}</h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                        <div class="col-xl-6 col-md-12 col-12">
+                            @foreach ($blogs as $item)
+                                <div class="blog-rit d-flex" data-aos="fade-up" data-aos-easing="linear"
+                                    data-aos-duration="600">
+                                    <div class="bl-lft">
+                                        <a
+                                            href="{{ route('blogs.details', ['category_slug' => $item['category']['slug'], 'blog_slug' => $item['slug']]) }}"><img
+                                                src="{{ Storage::url($item['image']) }}" alt="" /></a>
+                                    </div>
+                                    <div class="bl-text">
+                                        <a
+                                            href="{{ route('blogs.details', ['category_slug' => $item['category']['slug'], 'blog_slug' => $item['slug']]) }}">
+                                            <h3>{{ $item['title'] }}</h3>
+                                        </a>
+                                        <div class="date-box d-flex align-items-center pt-3">
+                                            <div class="bl-date-img">
+                                                <img src="{{ asset('frontend_assets/images/date.png') }}"
+                                                    alt="" />
+                                            </div>
+                                            <div class="bl-date">
+                                                <h4>{{ date("d M' Y", strtotime($item['created_at'])) }}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
 
-                    </div>
+                        </div>
                     @endif
                 </div>
             </div>

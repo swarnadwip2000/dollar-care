@@ -9,7 +9,7 @@
     <meta name="generator" content="Hugo 0.84.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     @yield('meta')
-    <title{{ env('APP_NAME') }} | @yield('title')</title>
+    <title{{ env('APP_NAME') }}| @yield('title')</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
         <!-- Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         @stack('styles')
 </head>
 
@@ -53,11 +53,11 @@
             </div>
         </div>
     </a> --}}
-    <div class="float-btn">
+    <div class="float-btn" style="{{ Auth::check() && Auth::user()->hasRole('DOCTOR') ? 'display:none;' : '' }}">
         <a href=""><span><i class="fa-regular fa-comment"></i></span>Chat With Us</a>
-     </div>
+    </div>
     <!-- Modal -->
-    <div class="modal_1">
+    <div class="modal_1" style="{{ Auth::check() && Auth::user()->hasRole('DOCTOR') ? 'display:none;' : '' }}">
         <div class="mn-btn">
             <a href="#"><span>Ask a Question</span></a>
         </div>

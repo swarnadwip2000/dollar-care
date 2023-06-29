@@ -18,6 +18,10 @@ use App\Http\Controllers\Admin\NotificationController as AdminNotificationContro
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
+use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Doctor\NotificationController as DoctorNotificationController;
+use App\Http\Controllers\Doctor\ProfileController as DoctorProfileController;
+use App\Http\Controllers\Doctor\SettingsController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\BookingAndConsultancyController;
@@ -229,7 +233,7 @@ Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(
     // notifications
     Route::get('/notifications', [NotificationController::class, 'notifications'])->name('notifications');
     // logout
-    Route::get('/logout', [FrontendAuthController::class, 'PatientLogout'])->name('logout');
+    Route::get('/logout', [FrontendAuthController::class, 'patientLogout'])->name('logout');
 
     // Payment History
     Route::get('/payment-history', [PaymentHistoryController::class, 'paymentHistory'])->name('payment-history');
@@ -239,4 +243,18 @@ Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(
     // my appointment
     Route::get('/my-appointment', [AppointmentController::class, 'myAppointment'])->name('appointment');
 
+});
+
+/**------------------------------------------------------------- Doctor  ----------------------------------------------------------------------------------------------*/
+
+Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(function() {
+    Route::get('/dashboard', [DoctorDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [DoctorProfileController::class, 'profile'])->name('profile');
+    Route::post('/profile-update', [DoctorProfileController::class, 'profileUpdate'])->name('profile.update');
+    // notifications
+    Route::get('/notifications', [DoctorNotificationController::class, 'notifications'])->name('notifications');
+    Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
+    Route::post('/help-and-support', [SettingsController::class, 'helpAndSupport'])->name('help-and-support');
+     // logout
+     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
 });

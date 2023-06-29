@@ -37,12 +37,12 @@
                                                     target="_blank">
                                                     <img src="{{ asset('admin_assets/img/profiles/avatar-21.jpg') }}"
                                                         class="rounded-circle shadow" width="130px" height="130px"
-                                                        alt="" /></a>
+                                                        id="blah" alt="" /></a>
                                             @else
                                                 <a href="{{ Storage::url(Auth::user()->profile_picture) }}" target="_blank">
                                                     <img src="{{ Storage::url(Auth::user()->profile_picture) }}"
                                                         class="rounded-circle shadow" width="130px" height="130px"
-                                                        alt=""></a>
+                                                        id="blah" alt=""></a>
                                             @endif
                                         </div>
                                         <div class="ms-md-4 flex-grow-1">
@@ -70,7 +70,7 @@
                                                             <div class="col-12">
                                                                 <label class="form-label">Profile Picture</label>
                                                                 <input type="file" name="profile_picture"
-                                                                    class="form-control">
+                                                                    class="form-control" onchange="readURL(this);">
                                                                 @if ($errors->has('profile_picture'))
                                                                     <div class="error" style="color:red;">
                                                                         {{ $errors->first('profile_picture') }}</div>
@@ -97,7 +97,7 @@
 
                                                             <div class="col-6">
                                                                 <button type="submit"
-                                                                    class="btn btn-primary submit-btn">Update</button> 
+                                                                    class="btn btn-primary submit-btn">Update</button>
                                                             </div>
 
                                                         </form>
@@ -119,4 +119,18 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endpush

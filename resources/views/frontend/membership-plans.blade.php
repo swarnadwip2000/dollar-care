@@ -176,7 +176,9 @@
                             $('#plan_id').val(response.data.id);
                             $("#Modal2").modal('show');
                         } else {
-                            toastr.error('Please login first to buy membership plan');
+                            toastr.error(response.message, 'Error Alert', {
+                                timeOut: 8000
+                            });
                             window.location.href = "{{ route('login') }}";
                         }
                     }

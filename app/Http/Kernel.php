@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'access.telehealth' => \App\Http\Middleware\AccessTelehealth::class,
         'access.patient' => \App\Http\Middleware\Patient::class,
+        'access.doctor' => \App\Http\Middleware\Doctor::class,
     ];
 }
