@@ -71,7 +71,7 @@
                     <a href="{{ route('contact-us.index') }}" ><i class="la la-phone"></i> <span>Contact Us</span></a>                 
                 </li>
                 <li class="{{ Request::is('admin/help-and-support*') ? 'active' : ' ' }}">
-                    <a href="{{ route('contact-us.index') }}" ><i class="la la-support"></i> <span>Help & Support</span></a>                 
+                    <a href="{{ route('help-and-support.index') }}" ><i class="la la-support"></i> <span>Help & Support</span></a>                 
                 </li>
                 <li class="{{ Request::is('admin/newsletters*') ? 'active' : ' ' }}">
                     <a href="{{ route('newsletters.index') }}" ><i class="la la-paper-plane"></i> <span>Newsletter</span></a>                 

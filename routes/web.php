@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\HelpAndSupportController;
 use App\Http\Controllers\Admin\MembershipHistoryController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
@@ -162,6 +163,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         Route::get('/list-ajax', [MembershipHistoryController::class, 'listAjax'])->name('list-ajax');
         Route::get('/delete', [MembershipHistoryController::class, 'delete'])->name('delete');
     });
+
+    Route::get('/help-and-support', [HelpAndSupportController::class, 'helpAndSupport'])->name('help-and-support.index');
 });
 
 
