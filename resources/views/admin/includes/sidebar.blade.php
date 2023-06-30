@@ -49,7 +49,7 @@
                     <a href="{{ route('plans.index') }}" ><i class="la la-address-card"></i> <span>Membership Plans</span></a>                 
                 </li>
                 <li class="{{ Request::is('admin/membership-history*') ? 'active' : ' ' }}">
-                    <a href="{{ route('membership-history.index') }}" ><i class="la la-credit-card"></i> <span>Membership History</span></a>                 
+                    <a href="{{ route('membership-history.index') }}" ><i class="la la-usd"></i> <span>Membership Transaction</span></a>                 
                 </li>
 
                 <li class="menu-title">
@@ -62,7 +62,7 @@
                         <li class="{{ Request::is('admin/blogs/categories*') ? 'active' : ' ' }}">
                             <a href="{{ route('blogs.categories.index') }}">Category</a>
                         </li>
-                        <li class="{{ Request::is('admin/blogs') | Request::is('admin/blogs/create') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/blogs') || Request::is('admin/blogs/create') || Request::is('admin/blogs/edit/*') ? 'active' : ' ' }}">
                             <a href="{{ route('blogs.index') }}">Details</a>
                         </li>                
                     </ul>

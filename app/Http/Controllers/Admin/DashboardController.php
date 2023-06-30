@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $count['patient'] = User::Role('PATIENT')->count();
         $count['doctor'] = User::Role('DOCTOR')->count();
-
+        $count['membership_total_payment'] = UserMembership::sum('amount');
         $total_membership_transaction['january'] = UserMembership::whereMonth('created_at', 1)->whereYear('created_at', date('Y'))->sum('amount');
         $total_membership_transaction['february'] = UserMembership::whereMonth('created_at', 2)->whereYear('created_at', date('Y'))->sum('amount');
         $total_membership_transaction['march'] = UserMembership::whereMonth('created_at', 3)->whereYear('created_at', date('Y'))->sum('amount');

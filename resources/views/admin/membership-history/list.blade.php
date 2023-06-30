@@ -23,11 +23,12 @@
                     <div class="col">
                         <h3 class="page-title">Membership History Information</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('membership-history.index') }}">Membership History</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('membership-history.index') }}">Membership
+                                    History</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -36,7 +37,7 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Membership  history Details</h4>
+                                <h4 class="mb-0">Membership history Details</h4>
                             </div>
 
                         </div>
@@ -46,17 +47,18 @@
                     <div class="table-responsive">
                         <table id="myTable" class="dd table table-striped table-bordered" style="width:100%">
                             <thead>
-                               <tr>
-                                <th>Patient Name</th>
-                                <th>Patient Email</th>
-                                <th>Membership Plan</th>
-                                <th>Membership Start Date</th>
-                                <th>Plan Amount ($)</th>
-                                {{-- <th>Action</th> --}}
-                               </tr>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Patient Email</th>
+                                    <th>Membership Plan</th>
+                                    <th>Membership Start Date</th>
+                                    <th>Membership End Date</th>
+                                    <th>Plan Amount ($)</th>
+                                    {{-- <th>Action</th> --}}
+                                </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -69,49 +71,52 @@
 @endsection
 
 @push('scripts')
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
 
-        var table = $('#myTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('membership-history.list-ajax') }}",
-            columns: [
-                {
-                    data: 'patient_name',
-                    name: 'patient_name',
-                    orderable: false,
-                },
-                {
-                    data: 'patient_email',
-                    name: 'patient_email',
-                    orderable: false,
-                },
-                {
-                    data: 'membership_plan',
-                    name: 'membership_plan',
-                    orderable: false,
-                },
-                {
-                    data: 'membership_start_date',
-                    name: 'membership_start_date'
-                },
-                {
-                    data: 'plan_amount',
-                    name: 'plan_amount'
-                },
-                // {
-                //     data: 'action',
-                //     name: 'action',
-                //     orderable: false,
-                //     searchable: false
-                // },
-                
-            ]
+            var table = $('#myTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('membership-history.list-ajax') }}",
+                columns: [{
+                        data: 'patient_name',
+                        name: 'patient_name',
+                        orderable: false,
+                    },
+                    {
+                        data: 'patient_email',
+                        name: 'patient_email',
+                        orderable: false,
+                    },
+                    {
+                        data: 'membership_plan',
+                        name: 'membership_plan',
+                        orderable: false,
+                    },
+                    {
+                        data: 'membership_start_date',
+                        name: 'membership_start_date'
+                    },
+                    {
+                        data: 'membership_end_date',
+                        name: 'membership_end_date',
+                    },
+                    {
+                        data: 'plan_amount',
+                        name: 'plan_amount'
+                    },
+                    // {
+                    //     data: 'action',
+                    //     name: 'action',
+                    //     orderable: false,
+                    //     searchable: false
+                    // },
+
+                ]
+            });
+
         });
-
-    });
-</script>
+    </script>
     <script>
         $(document).on('click', '#delete', function(e) {
             swal({
@@ -134,5 +139,4 @@
                 })
         });
     </script>
-   
 @endpush

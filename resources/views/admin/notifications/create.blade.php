@@ -67,7 +67,7 @@
                                                     <div class="row" style="margin-top: 20px; float: left;">
                                                         <div class="col-sm-9">
                                                             <button type="submit"
-                                                                class="btn px-5 submit-btn"><i class="la la-paper-plane"></i> Send</button>
+                                                                class="btn px-5 submit-btn"><i class="la la-paper-plane"></i> Send Notification</button>
                                                         </div>
                                                     </div>
                                                 </div>

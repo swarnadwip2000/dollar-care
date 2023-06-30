@@ -14,9 +14,8 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $notifications = Notification::orderBy('id','desc')->get();    
-        return view('admin.notifications.list')->with(compact('notifications'));                          
+    {   
+        return view('admin.notifications.list');                          
     }
 
     public function notificationListAjax(Request $request)
@@ -56,7 +55,7 @@ class NotificationController extends Controller
         foreach($records as $key => $record){
             
             $data_arr[] = array(
-               "id" => $key+1,
+               "id" => $record->id,
                 "send_to" => $record->send_to,
                 "message" => $record->message,
                 "action" => '<a href="'.route('notifications.edit',$record->id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Doctor"  data-route="'.route('notifications.delete', $record->id).'" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>'

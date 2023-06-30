@@ -57,25 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($helpAndSupports as $key => $helpAndSupport)
-                                    <tr>
-                                        <td>
-                                            {{ $helpAndSupport->name }}
-                                         </td>
-                                         <td>
-                                            {{ $helpAndSupport->email }}
-                                         </td>
-                                         <td>
-                                            {{ $helpAndSupport->phone }}
-                                         </td>
-                                         <td>
-                                            {{ $helpAndSupport->subject }}
-                                         </td>
-                                         <td>
-                                            {{ $helpAndSupport->message }}
-                                         </td>
-                                    </tr>
-                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -88,23 +70,47 @@
 @endsection
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            //Default data table
-            $('#myTable').DataTable({
-                "aaSorting": [],
-                "columnDefs": [{
-                        "orderable": false,
-                        "targets": []
-                    },
-                    {
-                        "orderable": true,
-                        "targets": [0, 1, 2, 3, 4]
-                    }
-                ]
-            });
+<script>
+    $(document).ready(function() {
 
+        var table = $('#myTable').DataTable({
+            "columnDefs": [{
+                    "orderable": false,
+                    "targets": []
+                },
+                {
+                    "orderable": true,
+                    "targets": [0, 1, 2, 3, 4]
+                }
+            ], 
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('help-and-support.list-ajax') }}",
+            columns: [
+                {
+                    data : 'name',
+                    name : 'name'
+                },
+                {
+                    data : 'email',
+                    name : 'email'
+                },
+                {
+                    data : 'phone',
+                    name : 'phone'
+                },
+                {
+                    data : 'subject',
+                    name : 'subject'
+                },
+                {
+                    data : 'message',
+                    name : 'message'
+                },  
+            ]
         });
-    </script>
+
+    });
+</script>
    
 @endpush

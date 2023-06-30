@@ -134,6 +134,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         Route::post('/update', [BlogController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('delete');
         Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus'])->name('change-status');
+        // blog ajax list
+        Route::get('/blog-ajax-list', [BlogController::class, 'ajaxList'])->name('list-ajax');
     });
 
     Route::prefix('cms')->name('cms.')->group(function () {
@@ -169,6 +171,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     });
 
     Route::get('/help-and-support', [HelpAndSupportController::class, 'helpAndSupport'])->name('help-and-support.index');
+    // help and support list ajax
+    Route::get('/help-and-support-list-ajax', [HelpAndSupportController::class, 'helpAndSupportListAjax'])->name('help-and-support.list-ajax');
+
 });
 
 

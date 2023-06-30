@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Blog Details - {{env('APP_NAME')}} admin
+    All Blog Details - {{ env('APP_NAME') }} admin
 @endsection
 @push('styles')
-<style>
-    .dataTables_filter{
-        margin-bottom: 10px !important;
-    }
-</style>
+    <style>
+        .dataTables_filter {
+            margin-bottom: 10px !important;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -28,8 +28,7 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('blogs.create') }}" class="btn add-btn" ><i
-                                class="fa fa-plus"></i> Add a Blog</a>
+                        <a href="{{ route('blogs.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a Blog</a>
                     </div>
                 </div>
             </div>
@@ -59,41 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($blogs as $key => $blog)
-                                    <tr>
-                                        <td>
-                                            {{ $blog['title'] }}
-                                        </td>
-                                        <td>
-                                            {{ $blog->category->name }}
-                                        </td>
-                                        <td>
-                                            {{ $blog['slug'] }}
-                                        </td>
-                                        <td>
-                                            @if($blog->image)
-                                            <img src="{{ Storage::url($blog->image) }}" alt="Blog Image"
-                                                width="70px" height="70px" style="border-radius: 50%">
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="button-switch">
-                                                <input type="checkbox" id="switch-orange" class="switch toggle-class"
-                                                    data-id="{{ $blog['id'] }}"
-                                                    {{ $blog['status'] ? 'checked' : '' }} />
-                                                <label for="switch-orange" class="lbl-off"></label>
-                                                <label for="switch-orange" class="lbl-on"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a title="Edit Blog" data-route=""
-                                                href="{{ route('blogs.edit', $blog->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
-
-                                            <a title="Delete Blog" data-route="{{ route('blogs.delete', $blog->id) }}"
-                                                href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                              
                             </tbody>
                         </table>
                     </div>
@@ -108,9 +73,8 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            //Default data table
-            $('#myTable').DataTable({
-                "aaSorting": [],
+
+            var table = $('#myTable').DataTable({
                 "columnDefs": [{
                         "orderable": false,
                         "targets": [3, 4, 5]
@@ -118,6 +82,40 @@
                     {
                         "orderable": true,
                         "targets": [0, 1, 2]
+                    }
+                ],
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('blogs.list-ajax') }}",
+                columns: [{
+                        data: 'title',
+                        name: 'title'
+                    },
+                    {
+                        data: 'category_name',
+                        name: 'category_name'
+                    },
+                    {
+                        data: 'slug',
+                        name: 'slug'
+                    },
+                    {
+                        data: 'image',
+                        name: 'image',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
                     }
                 ]
             });
@@ -150,11 +148,11 @@
         $('.toggle-class').change(function() {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var id = $(this).data('id');
-    
+
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route("blogs.change-status")}}',
+                url: '{{ route('blogs.change-status') }}',
                 data: {
                     'status': status,
                     'id': id

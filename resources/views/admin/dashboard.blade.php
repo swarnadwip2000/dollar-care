@@ -34,15 +34,17 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="card dash-widget">
-                        <div class="card-body">
-                            <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
-                            <div class="dash-widget-info">
-                                <h3>44</h3>
-                                <span>Total Categories</span>
+                    <a href="{{ route('membership-history.index') }}" style="color: black">
+                        <div class="card dash-widget">
+                            <div class="card-body">
+                                <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+                                <div class="dash-widget-info">
+                                    <h3>${{ $count['membership_total_payment'] }}</h3>
+                                    <span>Membership Transaction</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                     <a href="{{ route('patients.index') }}" style="color: black">
@@ -83,16 +85,16 @@
                             <div>
                                 <select name="" id="year" class="form-control">
                                     @for ($i = $year; $i <= date('Y'); $i++)
-                                    <option value="{{ $year }}"
-                                        @if ($year == date('Y')) selected="" @endif>
-                                        {{ $year }}</option>
-                                    @php $year++ @endphp
-                                @endfor
+                                        <option value="{{ $year }}"
+                                            @if ($year == date('Y')) selected="" @endif>
+                                            {{ $year }}</option>
+                                        @php $year++ @endphp
+                                    @endfor
                                 </select>
                             </div>
-                           <div id="membership-bar-chart">
-                             @include('admin.membership-bar-chart') 
-                           </div>
+                            <div id="membership-bar-chart">
+                                @include('admin.membership-bar-chart')
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,19 +201,21 @@
 @endsection
 
 @push('scripts')
-   <script>
-    $(document).ready(function(){
-        $('#year').change(function(){
-            var year = $(this).val();
-            $.ajax({
-                url: "{{ route('admin.membership.bar.chart') }}",
-                type: "GET",
-                data: {year:year},
-                success:function(resp){
-                    $('#membership-bar-chart').html(resp.view);
-                }
+    <script>
+        $(document).ready(function() {
+            $('#year').change(function() {
+                var year = $(this).val();
+                $.ajax({
+                    url: "{{ route('admin.membership.bar.chart') }}",
+                    type: "GET",
+                    data: {
+                        year: year
+                    },
+                    success: function(resp) {
+                        $('#membership-bar-chart').html(resp.view);
+                    }
+                });
             });
         });
-    });
-   </script>
+    </script>
 @endpush

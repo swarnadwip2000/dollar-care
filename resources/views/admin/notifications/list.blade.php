@@ -71,12 +71,21 @@
         $(document).ready(function() {
 
             var table = $('#myTable').DataTable({
+                "columnDefs": [{
+                        "orderable": false,
+                        "targets": [3]
+                    },
+                    {
+                        "orderable": true,
+                        "targets": [0, 1,2]
+                    }
+                ],
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('notifications.list-ajax') }}",
                 columns: [{
                         data: 'id',
-                        name: 'id'
+                        name: 'id',
                     },
                     {
                         data: 'send_to',

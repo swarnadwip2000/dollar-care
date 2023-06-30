@@ -46,7 +46,7 @@ class MembershipHistoryController extends Controller
         $records->orWhereHas('user', function($query) use ($searchValue){
             $query->where('email', 'like', '%' . $searchValue . '%');
         });
-        $coulmns = ['amount', 'created_at'];
+        $coulmns = ['amount', 'created_at','membership_expiry_date'];
         foreach($coulmns as $column){
             $records->orWhere($column, 'like', '%' . $searchValue . '%');
         }
@@ -75,6 +75,9 @@ class MembershipHistoryController extends Controller
             if ($columnName == 'plan_amount') {
                 $records->orderBy('amount', $columnSortOrder);
             }
+            if ($columnName == 'membership_expiry_date') {
+                $records->orderBy('amount', $columnSortOrder);
+            }
                                                                                                                                                                                                                   
         $records->skip($start);
         $records->take($rowperpage);
@@ -89,6 +92,7 @@ class MembershipHistoryController extends Controller
                 "patient_email" => $record->user->email,
                 "membership_plan" => $record->plan->plan_name,
                 "membership_start_date" => $record->created_at->format('d-m-Y'),
+                "membership_end_date" => $record->membership_expiry_date,
                 "plan_amount" => $record->amount,
                 // "action" => '<a title="Delete Doctor"  data-route="'.route('membership-history.delete', $record->id).'" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>'
             );
