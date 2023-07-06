@@ -11,7 +11,7 @@
     </div>
     @endforeach
     <div>
-        {{ $notifications->render() }}
+        {{ $notifications->links() }}
     </div>
     @else
     <div class="col-xl-12">

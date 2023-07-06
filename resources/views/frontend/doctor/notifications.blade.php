@@ -31,48 +31,30 @@
 @endsection
 
 @push('scripts')
-<script type="text/javascript">
-  
-    $(window).on('hashchange', function() {
-        if (window.location.hash) {
-            var page = window.location.hash.replace('#', '');
-            if (page == Number.NaN || page <= 0) {
-                return false;
-            }else{
-                getData(page);
+  <script type="text/javascript">
+   $(function() {
+            $('body').on('click', '.pagination a', function(e) {
+                e.preventDefault();
+
+                // $('#load a').css('color', '#dfecf6');
+                // $('#load').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="/images/loading.gif" />');
+
+                var url = $(this).attr('href');
+                getArticles(url);
+                window.history.pushState("", "", url);
+            });
+
+            function getArticles(url) {
+                $.ajax({
+                    url : url
+                }).done(function (data) {
+                    $('#item-lists').html(data);
+                }).fail(function () {
+                    alert('Notifications could not be loaded.');
+                });
             }
-        }
-    });
-      
-    $(document).ready(function()
-    {
-        $(document).on('click', '.pagination a',function(event)
-        {
-            $('li').removeClass('active');
-            $(this).parent('li').addClass('active');
-            event.preventDefault();
-      
-            var myurl = $(this).attr('href');
-            var page=$(this).attr('href').split('page=')[1];
-      
-            getData(page);
         });
-    });
-      
-    function getData(page){
-        $.ajax({
-            url: '?page=' + page,
-            type: "get",
-            datatype: "html",
-        })
-        .done(function(data){
-            $("#item-lists").empty().html(data);
-            location.hash = page;
-        })
-        .fail(function(jqXHR, ajaxOptions, thrownError){
-              alert('No response from server');
-        });
-    }
       
     </script>
+      
 @endpush

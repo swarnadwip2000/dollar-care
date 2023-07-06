@@ -9,12 +9,22 @@ use Illuminate\View\View;
 
 class NotificationController extends Controller
 {
-    public function notifications(Request $request): View
+    protected $notifications;
+
+    public function __construct(Notification $notifications) {
+        $this->notifications = $notifications;
+    }
+
+    
+    public function notifications(Request $request)
     {
-        $notifications = Notification::where('send_to', 'Patient')->orWhere('send_to', 'All')->orderBy('id','desc')->paginate(5);
+        $notifications = $this->notifications->where('send_to', 'Patient')->orWhere('send_to', 'All')->orderBy('id','desc')->paginate(5);
+
         if ($request->ajax()) {
-            return view('frontend.patient.partials.message')->with(compact('notifications'));
+            // return view('frontend.patient.partials.message')->with(compact('notifications'))->render();
+            return view('frontend.patient.partials.message', ['notifications' => $notifications])->render();  
         }
+
         return view('frontend.patient.notifications')->with(compact('notifications'));
     }
 }
