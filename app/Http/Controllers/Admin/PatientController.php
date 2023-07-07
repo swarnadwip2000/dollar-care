@@ -53,7 +53,12 @@ class PatientController extends Controller
         foreach($columns as $column){
             $records->orWhere($column, 'like', '%' . $searchValue . '%');
         }
-        $records->orderBy($columnName,$columnSortOrder);
+        // $records->orderBy($columnName,$columnSortOrder);
+        if ($columnName == 'date_of_birth') {
+            $records->orderBy('age',$columnSortOrder);
+        } else {
+            $records->orderBy($columnName,$columnSortOrder);
+        }
         $records->skip($start);
         $records->take($rowperpage);
 

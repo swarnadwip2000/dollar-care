@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 1600px) {
-    #cssmenu > ul > li > a {
+    #cssmenu>ul>li>a {
         padding: 18px 16px;
         font-size: 16px;
     }
@@ -75,6 +75,16 @@
     .slick-initialized .slick-slide {
         margin: 15px;
     }
+    .edit-btn-1 {
+        margin-right: 6px;
+    }
+
+    .cl-edit {
+        padding: 15px 0px;
+    }
+    .l-navbar{
+        height: 100%;
+    }
 }
 
 @media (max-width: 1440px) {
@@ -83,7 +93,7 @@
         line-height: 22px;
     }
 
-    #cssmenu > ul > li > a {
+    #cssmenu>ul>li>a {
         padding: 15px 12px;
         font-size: 14px;
     }
@@ -140,6 +150,9 @@
 
     .find-doc-slide {
         padding: 20px 0px;
+    }
+    .slct-date-time::before {
+        width: 70%;
     }
 }
 
@@ -199,6 +212,13 @@
     .wrk-div {
         background-image: none;
     }
+    .edit-btn-1 span {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    
 }
 
 @media (max-width: 1280px) {
@@ -220,7 +240,7 @@
         padding: 30px;
     }
 
-    #cssmenu > ul > li > a {
+    #cssmenu>ul>li>a {
         padding: 15px 12px;
         font-size: 12px;
     }
@@ -286,6 +306,19 @@
     .app-doc-img img {
         width: 100%;
     }
+
+    .edit-btn-1 span {
+        width: 35px;
+        height: 35px;
+    }
+
+    .edit-btn-1 {
+        margin-right: 10px;
+    }
+
+    .cl-edit {
+        padding: 0;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -322,7 +355,7 @@
         min-height: 456px;
     }
 
-    #cssmenu > ul > li:last-child > a {
+    #cssmenu>ul>li:last-child>a {
         color: var(--white-color);
     }
 
@@ -448,7 +481,7 @@
         width: 100%;
     }
 
-    #cssmenu > ul > li.active a::before {
+    #cssmenu>ul>li.active a::before {
         width: 50px;
         height: 50px;
         margin: 0 auto;
@@ -500,12 +533,23 @@
     .sidebar-right {
         height: auto;
     }
+
     .l-navbar {
         top: 32px;
         height: 100%;
     }
+
     .profile-img {
         margin: inherit;
+    }
+    .cl-edit {
+        padding: 10px 20px;
+    }
+    .slct-date-time::before {
+        width: 50%;
+    }
+    .add-address-form-box .input-group select {
+        margin-bottom: 10px;
     }
 }
 
@@ -656,7 +700,7 @@
         display: none;
     }
 
-    #cssmenu > ul > li.active a::before {
+    #cssmenu>ul>li.active a::before {
         width: 50px;
         height: 50px;
         margin: 0 auto;
@@ -689,9 +733,21 @@
         font-size: 14px;
         line-height: 18px;
     }
+
     /* Dashboard */
     .l-navbar {
         top: 24px;
+    }
+    .content-head h2 {
+        font-size: 26px;;
+    }
+    .add-address a {
+        padding: 9px 13px;
+        font-size: 10px;
+    }
+    .content-head-wrap{
+      display: block!important;
+      margin-bottom: 20px;
     }
 }
 
@@ -997,8 +1053,7 @@
         width: 70%;
     }
 
-    .date-box {
-    }
+    .date-box {}
 
     .main-btn {
         padding-top: 0px !important;
@@ -1118,65 +1173,102 @@
     .find-doc-slide-img {
         margin: 0 auto;
     }
+
     .slot-sec {
         padding-bottom: 10px;
     }
+
     /* Dashboard */
     .l-navbar {
         left: 0%;
         display: none;
         top: 12%;
     }
+
     .l-navbar.show {
         display: block;
         position: absolute;
-        width: 80%;
+        width: 100%;
     }
+
     .header {
         top: 8%;
         left: 0%;
         z-index: 0;
     }
+
     .body-pd {
         padding-left: 0;
     }
+
     .basic-plan h2 {
         font-size: 16px;
     }
+
     .basic-plan h4 {
         font-size: 30px;
     }
+
     .basic-plan h3 {
         font-size: 14px;
     }
+
     .plan-e p {
         font-size: 16px;
     }
+
     .content-head h2 {
-        font-size: 24px;
-        text-align: center;
+        font-size: 16px;
+        text-align: left;
     }
+
     .clinicl-head h3 {
         font-size: 16px;
     }
+
     .for-vdo h3 {
         font-size: 16px;
     }
+
     .for-vdo h4 {
         font-size: 16px;
     }
+
     .notice-p p {
         font-size: 14px;
         line-height: 22px;
     }
+
     .notice-div-wrap {
         margin-bottom: 15px;
     }
+
     .my-profile-div {
         margin-bottom: 20px;
     }
+
     .sidebar-right {
         margin-top: 12%;
+    }
+
+    .nav_name {
+        font-size: 14px;
+    }
+
+    .sub-head h4 {
+        font-size: 10px;
+    }
+
+    .nav_link {
+        margin-bottom: 0;
+    }
+
+    .add-address-form-box .input-group select {
+        margin-bottom: 10px;
+    }
+
+    .slct-date-time::before {
+        display: none;
     }
 }
 

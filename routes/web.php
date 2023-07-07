@@ -256,6 +256,9 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::get('/dashboard', [DoctorDashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [DoctorProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [DoctorProfileController::class, 'profileUpdate'])->name('profile.update');
+    // change password
+    Route::get('/change-password', [DoctorProfileController::class, 'changePassword'])->name('change.password');
+    Route::post('/change-password', [DoctorProfileController::class, 'changePasswordSubmit'])->name('change.password.submit');
     // notifications
     Route::get('/notifications', [DoctorNotificationController::class, 'notifications'])->name('notifications');
     Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');

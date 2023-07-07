@@ -14,7 +14,7 @@
 
         @include('frontend.patient.partials.sidebar')
 
-        </div>
+       
         <!-- Content -->
         <div class="sidebar-right height-100">
           <div class="content">
@@ -233,6 +233,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
   </section>
 @endsection

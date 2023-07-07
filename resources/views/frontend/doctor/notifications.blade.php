@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="sidebar-wrap d-flex justify-content-between">
                 @include('frontend.doctor.partials.sidebar')
-            </div>
+           
             <!-- Content -->
             <div class="sidebar-right height-100">
                 <div class="content">
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

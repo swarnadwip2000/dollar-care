@@ -81,11 +81,11 @@
             var table = $('#myTable').DataTable({
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [7,8]
+                        "targets": [3, 7,8]
                     },
                     {
                         "orderable": true,
-                        "targets": [0, 1, 2, 3, 4, 5, 6]
+                        "targets": [0, 1, 2, 4, 5, 6]
                     }
                 ], 
                 processing: true,
@@ -105,7 +105,9 @@
                     },
                     {
                         data: 'specialization',
-                        name: 'specialization'
+                        name: 'specialization',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'year_of_experience',

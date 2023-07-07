@@ -22,9 +22,9 @@ class NotificationController extends Controller
 
         if ($request->ajax()) {
             // return view('frontend.patient.partials.message')->with(compact('notifications'))->render();
-            return view('frontend.patient.partials.message', ['notifications' => $notifications])->render();  
+            return view('frontend.doctor.partials.message', ['notifications' => $notifications])->render();  
         }
 
-        return view('frontend.patient.notifications')->with(compact('notifications'));
+        return view('frontend.doctor.notifications')->with(compact('notifications'));
     }
 }

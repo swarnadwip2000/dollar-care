@@ -54,4 +54,23 @@ class ProfileController extends Controller
         $user->save();
         return redirect()->back()->with('message', 'Your profile updated successfully.');
     }
+
+    public function changePassword()
+    {
+        return view('frontend.doctor.change-password');
+    }
+
+    public function changePasswordSubmit(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|min:8|current_password|different:new_password|different:confirm_password',
+            'new_password' => 'required|min:8|different:current_password|same:confirm_password',
+            'confirm_password' => 'required|min:8|different:current_password|same:new_password',
+        ]);
+
+        $user = User::findOrFail(auth()->user()->id);
+        $user->password = bcrypt($request->new_password);
+        $user->save();
+        return redirect()->back()->with('message', 'Your password changed successfully.');
+    }
 }
