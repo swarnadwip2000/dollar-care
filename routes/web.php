@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Doctor\ManageClinicController;
 use App\Http\Controllers\Doctor\NotificationController as DoctorNotificationController;
 use App\Http\Controllers\Doctor\ProfileController as DoctorProfileController;
 use App\Http\Controllers\Doctor\SettingsController;
@@ -173,7 +174,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::get('/help-and-support', [HelpAndSupportController::class, 'helpAndSupport'])->name('help-and-support.index');
     // help and support list ajax
     Route::get('/help-and-support-list-ajax', [HelpAndSupportController::class, 'helpAndSupportListAjax'])->name('help-and-support.list-ajax');
-
 });
 
 
@@ -219,9 +219,9 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/view-all-specializations', [TeleHealthController::class, 'viewAllSpecializations'])->name('all-specializations');
     Route::get('/search-specilzation', [TeleHealthController::class, 'searchSpecialization'])->name('search.specilzation');
     // doctors
-    Route::get('/doctor/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
+    Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
-    Route::get('/doctor-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
+    Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
 });
 
 
@@ -247,12 +247,11 @@ Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(
     Route::post('/help-and-support', [SettingController::class, 'helpAndSupport'])->name('help-and-support');
     // my appointment
     Route::get('/my-appointment', [AppointmentController::class, 'myAppointment'])->name('appointment');
-
 });
 
 /**------------------------------------------------------------- Doctor  ----------------------------------------------------------------------------------------------*/
 
-Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(function() {
+Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(function () {
     Route::get('/dashboard', [DoctorDashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [DoctorProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [DoctorProfileController::class, 'profileUpdate'])->name('profile.update');
@@ -263,6 +262,10 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::get('/notifications', [DoctorNotificationController::class, 'notifications'])->name('notifications');
     Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
     Route::post('/help-and-support', [SettingsController::class, 'helpAndSupport'])->name('help-and-support');
-     // logout
-     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
+    Route::prefix('manage-clinic')->name('manage-clinic.')->group(function () {
+        Route::get('/', [ManageClinicController::class, 'manageClinic'])->name('index');
+        Route::get('/add-address', [ManageClinicController::class, 'addAddress'])->name('create');
+    });
+    // logout
+    Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
 });

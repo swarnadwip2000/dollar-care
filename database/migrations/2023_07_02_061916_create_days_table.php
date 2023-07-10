@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClinicOpeningDaysTable extends Migration
+class CreateDaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateClinicOpeningDaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('clinic_opening_days', function (Blueprint $table) {
+        Schema::create('days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('clinic_details_id')->references('id')->on('clinic_details')->onDelete('cascade')->nullable();
-            $table->foreignId('day_id')->references('id')->on('days')->onDelete('cascade')->nullable();
+            $table->string('day')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateClinicOpeningDaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clinic_opening_days');
+        Schema::dropIfExists('days');
     }
 }

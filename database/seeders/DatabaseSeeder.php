@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             // ContactPageCmsSeeder::class,
             // AddPlanSeeder::class,
             // AboutUsSeeder::class,
-            PrivacyPolicySeeder::class
+            // PrivacyPolicySeeder::class
+            AddDaySeeder::class
         ]);
     }
 }
