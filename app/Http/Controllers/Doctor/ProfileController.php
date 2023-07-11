@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\DoctorSpecialization;
+use App\Models\Specialization;
 use App\Models\User;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -15,7 +18,8 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        return view('frontend.doctor.profile');
+        $specializations = Specialization::orderBy('name', 'asc')->get();
+        return view('frontend.doctor.profile')->with(compact('specializations'));
     }
 
     public function profileUpdate(Request $request)
@@ -26,7 +30,9 @@ class ProfileController extends Controller
             'gender' => 'required',
             'age' => 'required',
             'phone' => 'required|numeric',
-        ]);
+            'specialization_id' => 'required',
+            'license_number' => 'required',
+         ]);
 
         $user = User::findOrFail(auth()->user()->id);
         $user->name = $request->name;
@@ -34,6 +40,7 @@ class ProfileController extends Controller
         $user->gender = $request->gender;
         $user->age = $request->age;
         $user->phone = $request->phone;
+        $user->license_number = $request->license_number;
         if ($request->password != null) {
             $request->validate([
                 'password' => 'min:8',
@@ -52,6 +59,17 @@ class ProfileController extends Controller
             $user->profile_picture = $this->imageUpload($request->file('profile_picture'), 'doctor');
         }
         $user->save();
+
+        if ($request->specialization_id) {
+            DoctorSpecialization::where('doctor_id', Auth::user()->id)->delete();
+            foreach ($request->specialization_id as $key => $value) {
+                $doctorSpecialization = DoctorSpecialization::create([
+                    'doctor_id' => Auth::user()->id,
+                    'specialization_id' => $value,
+                ]);
+            }
+        }
+
         return redirect()->back()->with('message', 'Your profile updated successfully.');
     }
 

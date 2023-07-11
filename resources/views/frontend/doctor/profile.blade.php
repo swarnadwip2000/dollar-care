@@ -76,8 +76,8 @@
                                                     <span class="text-danger">{{ $errors->first('age') }}</span>
                                                 @endif
                                             </div>
-                                            <div class="check-box">
-                                                <div class="form-group col-lg-6 col-md-12">
+                                            <div class="row check-box m-0 p-0">
+                                                <div class="form-group col-lg-3 col-md-12">
                                                     <label>Gender</label>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="gender"
@@ -99,6 +99,26 @@
                                                     </div>
                                                     @if ($errors->has('gender'))
                                                         <span class="text-danger">{{ $errors->first('gender') }}</span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group col-lg-5 col-md-12">
+                                                    <select name="specialization_id[]" id="specialization_id"
+                                                    class="form-control" multiple>
+                                                    @foreach ($specializations as $specialization)
+                                                        <option value="{{ $specialization['id'] }}" @if(Auth::user()->doctorSpecializations->count() > 0) @foreach(Auth::user()->doctorSpecializations as $item) @if($item['specialization_id'] == $specialization['id']) selected @endif @endforeach @endif>
+                                                            {{ $specialization['name'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('specialization_id'))
+                                                    <div class="error" style="color:red;">
+                                                        {{ $errors->first('specialization_id') }}</div>
+                                                @endif
+                                                </div>
+                                                <div class="form-group col-lg-4 col-md-12">
+                                                    <input type="text" class="form-control" id="" value="{{ Auth::user()->license_number }}" name="license_number"
+                                                        placeholder="License Number">
+                                                    @if ($errors->has('license_number'))
+                                                        <span class="text-danger">{{ $errors->first('license_number') }}</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -149,5 +169,10 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    </script>
+     <script>
+        $(document).ready(function() {
+            $('#specialization_id').select2();
+        });
     </script>
 @endpush

@@ -265,6 +265,7 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::prefix('manage-clinic')->name('manage-clinic.')->group(function () {
         Route::get('/', [ManageClinicController::class, 'manageClinic'])->name('index');
         Route::get('/add-address', [ManageClinicController::class, 'addAddress'])->name('create');
+        Route::post('/add-address', [ManageClinicController::class, 'addAddressSubmit'])->name('create.submit');
     });
     // logout
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');

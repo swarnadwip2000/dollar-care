@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('profile_picture')->nullable();
             $table->string('year_of_experience')->nullable();
+            $table->string('license_number')->nullable();
             $table->text('location')->nullable();
             $table->enum('gender',['Male','Female','Other'])->nullable();
             $table->string('age')->nullable();
