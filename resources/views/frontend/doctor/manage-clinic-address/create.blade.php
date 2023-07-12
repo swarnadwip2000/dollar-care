@@ -34,8 +34,19 @@
                                     <div class="clinical-consultation-wrap">
                                         <div class="add-address-wrap">
                                             <div class="add-address-form-box">
-                                                <form action="{{ route('doctor.manage-clinic.create.submit') }}" method="POST">
+                                                <form action="{{ route('doctor.manage-clinic.create.submit') }}"
+                                                    method="POST">
                                                     @csrf
+                                                    <div class="form-group" id="latitudeArea">
+                                                        <label>Latitude</label>
+                                                        <input type="text" id="latitude" name="latitude"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div class="form-group" id="longtitudeArea">
+                                                        <label>Longitude</label>
+                                                        <input type="text" name="longitude" id="longitude"
+                                                            class="form-control">
+                                                    </div>
                                                     <div class="row g-3">
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <input type="text" class="form-control" id="clinic_name"
@@ -56,7 +67,7 @@
                                                             @endif
                                                         </div>
                                                         <div class="form-group col-lg-12 col-md-12">
-                                                            <input type="text" class="form-control" id="clinic_address"
+                                                            <input type="text" class="form-control" id="autocomplete"
                                                                 name="clinic_address" value=""
                                                                 placeholder="Clinic Address" required="">
                                                             @if ($errors->has('clinic_address'))
@@ -92,13 +103,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="time-pick">
-                                                                                <input type="radio" id="tm1" name="animal" value="">
-                                                                                <label for="tm1">9.00 am</label>
-                                                                             </div> -->
+                                                                                    <input type="radio" id="tm1" name="animal" value="">
+                                                                                    <label for="tm1">9.00 am</label>
+                                                                                 </div> -->
                                                             <div class="slct-date-time">
                                                                 <h4>SELECT DATE AND TIME</h4>
                                                             </div>
-                                                            <div id="append-add-more"> 
+                                                            <div id="append-add-more">
                                                                 <div class="sl-slot-div">
                                                                     <div class="row">
                                                                         <div class="form-group col-lg-5 col-md-12">
@@ -106,33 +117,49 @@
                                                                                 name="slot_date[]" value=""
                                                                                 placeholder="Select Date" required=""
                                                                                 class="textbox-n" type="text"
-                                                                                onfocus="(this.type='date')" id="date" />
+                                                                                onfocus="(this.type='date')"
+                                                                                id="date" />
                                                                         </div>
                                                                         <div class="form-group col-lg-6 col-md-12">
                                                                             <div class="row">
                                                                                 <div class="col-xl-5 col-lg-5 col-12">
                                                                                     <div class="input-group">
-                                                                                        <label for="">Time Slot</label>
+                                                                                        <label for="">Time
+                                                                                            Slot</label>
                                                                                         <select class="form-select"
                                                                                             aria-label="Default select example"
                                                                                             name="slot_start_time[]">
-                                                                                            <option value="1" selected>1
+                                                                                            <option value="1"
+                                                                                                selected>1
                                                                                             </option>
-                                                                                            <option value="1">2</option>
-                                                                                            <option value="2">3</option>
-                                                                                            <option value="3">4</option>
-                                                                                            <option value="5">5</option>
-                                                                                            <option value="6">6</option>
-                                                                                            <option value="7">7</option>
-                                                                                            <option value="8">8</option>
-                                                                                            <option value="9">9</option>
-                                                                                            <option value="10">10</option>
-                                                                                            <option value="11">11</option>
-                                                                                            <option value="12">12</option>
+                                                                                            <option value="1">2
+                                                                                            </option>
+                                                                                            <option value="2">3
+                                                                                            </option>
+                                                                                            <option value="3">4
+                                                                                            </option>
+                                                                                            <option value="5">5
+                                                                                            </option>
+                                                                                            <option value="6">6
+                                                                                            </option>
+                                                                                            <option value="7">7
+                                                                                            </option>
+                                                                                            <option value="8">8
+                                                                                            </option>
+                                                                                            <option value="9">9
+                                                                                            </option>
+                                                                                            <option value="10">10
+                                                                                            </option>
+                                                                                            <option value="11">11
+                                                                                            </option>
+                                                                                            <option value="12">12
+                                                                                            </option>
                                                                                         </select>
                                                                                         <select class="form-select"
-                                                                                            aria-label="Default select example" name="first_time_mode[]">
-                                                                                            <option value="AM" selected>AM</option>
+                                                                                            aria-label="Default select example"
+                                                                                            name="first_time_mode[]">
+                                                                                            <option value="AM"
+                                                                                                selected>AM</option>
                                                                                             <option value="PM">PM
                                                                                             </option>
                                                                                         </select>
@@ -144,26 +171,40 @@
                                                                                         <select class="form-select"
                                                                                             aria-label="Default select example"
                                                                                             name="slot_end_time[]">
-                                                                                            <option value="1" selected>1
+                                                                                            <option value="1"
+                                                                                                selected>1
                                                                                             </option>
-                                                                                            <option value="1">2</option>
-                                                                                            <option value="2">3</option>
-                                                                                            <option value="3">4</option>
-                                                                                            <option value="5">5</option>
-                                                                                            <option value="6">6</option>
-                                                                                            <option value="7">7</option>
-                                                                                            <option value="8">8</option>
-                                                                                            <option value="9">9</option>
-                                                                                            <option value="10">10</option>
-                                                                                            <option value="11">11</option>
-                                                                                            <option value="12">12</option>
+                                                                                            <option value="1">2
+                                                                                            </option>
+                                                                                            <option value="2">3
+                                                                                            </option>
+                                                                                            <option value="3">4
+                                                                                            </option>
+                                                                                            <option value="5">5
+                                                                                            </option>
+                                                                                            <option value="6">6
+                                                                                            </option>
+                                                                                            <option value="7">7
+                                                                                            </option>
+                                                                                            <option value="8">8
+                                                                                            </option>
+                                                                                            <option value="9">9
+                                                                                            </option>
+                                                                                            <option value="10">10
+                                                                                            </option>
+                                                                                            <option value="11">11
+                                                                                            </option>
+                                                                                            <option value="12">12
+                                                                                            </option>
                                                                                         </select>
                                                                                         <select class="form-select"
-                                                                                        aria-label="Default select example" name="second_time_mode[]">
-                                                                                        <option value="AM" selected>AM</option>
-                                                                                        <option value="PM">PM
-                                                                                        </option>
-                                                                                    </select>
+                                                                                            aria-label="Default select example"
+                                                                                            name="second_time_mode[]">
+                                                                                            <option value="AM"
+                                                                                                selected>AM</option>
+                                                                                            <option value="PM">PM
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -171,8 +212,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
-                                                            {{-- append--}}
+
+                                                            {{-- append --}}
                                                         </div>
                                                         <div class="add-more-div">
                                                             <div class="row">
@@ -207,11 +248,36 @@
 @endsection
 
 @push('scripts')
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script>
+    <script>
+        $(document).ready(function() {
+            $("#latitudeArea").addClass("d-none");
+            $("#longtitudeArea").addClass("d-none");
+        });
+    </script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        function initialize() {
+            var input = document.getElementById('autocomplete');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                $('#latitude').val(place.geometry['location'].lat());
+                $('#longitude').val(place.geometry['location'].lng());
+                // $("#latitudeArea").removeClass("d-none");
+                // $("#longtitudeArea").removeClass("d-none");
+            });
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('.add-more').on('click', function() {
-                $('#append-add-more').append('<div class="sl-slot-div"><div class="row"><div class="form-group col-lg-5 col-md-12"><input class="form-control" id="slot_date" name="slot_date[] "value="" placeholder="Select Date" required="" class="textbox-n" type="date" id="date" /></div><div class="form-group col-lg-6 col-md-12"><div class="row"><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">Time Slot</label><select class="form-select"aria-label="Default select example" name="slot_start_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="first_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">to</label><select class="form-select"aria-label="Default select example" name="slot_end_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="second_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-2 col-lg-2 col-12"><div class="delet-btn"><a href="javascript:void(0);" class="remove-slot"><span><i class="fa-solid fa-trash"></i></span></a></div></div></div></div></div></div>');
-                
+                $('#append-add-more').append(
+                    '<div class="sl-slot-div"><div class="row"><div class="form-group col-lg-5 col-md-12"><input class="form-control" id="slot_date" name="slot_date[] "value="" placeholder="Select Date" required="" class="textbox-n" type="date" id="date" /></div><div class="form-group col-lg-6 col-md-12"><div class="row"><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">Time Slot</label><select class="form-select"aria-label="Default select example" name="slot_start_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="first_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">to</label><select class="form-select"aria-label="Default select example" name="slot_end_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="second_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-2 col-lg-2 col-12"><div class="delet-btn"><a href="javascript:void(0);" class="remove-slot"><span><i class="fa-solid fa-trash"></i></span></a></div></div></div></div></div></div>'
+                    );
+
             });
 
             $(document).on('click', '.remove-slot', function() {
