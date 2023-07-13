@@ -47,7 +47,7 @@
                         <li><a href="{{ route('doctor.notifications') }}" class="nav_link {{ Request::is('doctor/notifications') ? 'active' : '' }}"> <i
                                     class='bx bx-clipboard nav_icon'></i> <span
                                     class="nav_name">Notification</span> </a></li>
-                        <li><a href="{{ route('doctor.manage-clinic.index') }}" class="nav_link {{ Request::is('doctor/manage-clinic') ? 'active' : '' }}"> <i
+                        <li><a href="{{ route('doctor.manage-clinic.index') }}" class="nav_link {{ Request::is('doctor/manage-clinic*') ? 'active' : '' }}"> <i
                                     class='bx bxs-map nav_icon'></i> <span class="nav_name">Manage
                                     Clinic Address</span> </a></li>
                         <li><a href="{{ route('doctor.settings') }}" class="nav_link {{ Request::is('doctor/settings') ? 'active' : '' }}">

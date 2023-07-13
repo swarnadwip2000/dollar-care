@@ -265,6 +265,11 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::prefix('manage-clinic')->name('manage-clinic.')->group(function () {
         Route::get('/', [ManageClinicController::class, 'manageClinic'])->name('index');
         Route::get('/add-address', [ManageClinicController::class, 'addAddress'])->name('create');
+        Route::post('/add-address', [ManageClinicController::class, 'addAddressSubmit'])->name('create.submit');
+        Route::get('/delete/{id}', [ManageClinicController::class, 'delete'])->name('delete');
+        Route::get('/edit/{id}', [ManageClinicController::class, 'edit'])->name('edit');
+        Route::post('/update', [ManageClinicController::class, 'update'])->name('update');
+        Route::get('/slot-delete/{id}', [ManageClinicController::class, 'slotDelete'])->name('slot-delete');
     });
     // logout
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
