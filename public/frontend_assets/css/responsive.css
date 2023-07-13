@@ -327,6 +327,9 @@
     .cl-edit {
         padding: 0;
     }
+    .location-div{
+        width: 60%;
+      }
 }
 
 @media (max-width: 1024px) {
@@ -761,6 +764,9 @@
       display: block!important;
       margin-bottom: 20px;
     }
+    .location-div{
+        width: 90%;
+      }
 }
 
 @media (max-width: 767px) {
