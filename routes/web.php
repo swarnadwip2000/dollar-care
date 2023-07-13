@@ -192,6 +192,9 @@ Route::get('/membership-plans', [CmsController::class, 'membershipPlans'])->name
 // Mobile health coverage
 Route::get('/mobile-health-coverage', [CmsController::class, 'mobileHealthCoverage'])->name('mobile-health-coverage');
 
+//store location
+Route::post('/store-location', [CmsController::class, 'storeLocation'])->name('store.location');
+
 Route::get('/qna-blogs/{slug?}', [FrontendBlogController::class, 'blogs'])->name('blogs');
 Route::get('/blog-details/{category_slug}/{blog_slug}', [FrontendBlogController::class, 'blogDetails'])->name('blogs.details');
 // search result
@@ -228,6 +231,7 @@ Route::group(['middleware' => 'access.telehealth'], function () {
 // member ship 
 Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');
 Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');
+
 
 
 /**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/

@@ -7,18 +7,16 @@
             <button type="submit"><i class="fas fa-search"></i></button>
           </div>
         </div>
-        <div class="get-location">
-           <a href="">
+        <div class="get-location" >
              <div class="get-location-box d-flex justify-content-between">
               <div class="get-location-icon">
                 <span><i class="fa-solid fa-location-crosshairs"></i></span>   
               </div>
-              <div class="get-location-text">
-                <h2>Get your location</h2>   
+              <div class="get-location-text" >
+                <button id="find-me" type="button">Get your location</button>   
                 <h3>Using GPS</h3>
               </div>
-             </div>
-           </a>     
+             </div>    
         </div>
        </div>
     </div>
@@ -40,9 +38,8 @@
                     <i class="fa-solid fa-location-dot"></i>
                   </div>
                   <div class="address_loa">
-                    <span>Deliver to</span>
-                    17581 Sultana St, Hesperia, CA
-                    92345, USA
+                    <span id="status">Please Set Your Location</span>
+                    <span id="map-link"></span>
                   </div>
                 </div>
             </div>

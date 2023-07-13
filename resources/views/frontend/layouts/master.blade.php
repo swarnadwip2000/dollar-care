@@ -174,15 +174,78 @@
         });
     </script>
     <script>
-        / Set the width of the side navigation to 250px /
+        /* Set the width of the side navigation to 250px */
         function openNav() {
             document.getElementById("mySidenav").style.width = "100%";
         }
 
-        / Set the width of the side navigation to 0 /
+        /* Set the width of the side navigation to 0 */
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+    </script>
+    <script>
+        function geoFindMe() {
+            const status = document.querySelector("#status");
+            const mapLink = document.querySelector("#map-link");
+
+            mapLink.href = "";
+            mapLink.textContent = "";
+
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                status.textContent = "";
+                mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+                // mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+                console.log(latitude, longitude);
+
+                // get location by lat long
+                $.ajax({
+                    type
+                    : 'GET',
+                    url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE`,
+                    success: function(data) {
+                        if (data.status == 'OK') {
+                            $('#status').text(data.results[0].formatted_address);
+                            console.log(data.results[0].formatted_address);
+                        }
+                    }
+                });
+                // call ajax to store lat long
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('store.location') }}",
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                        'latitude': latitude,
+                        'longitude': longitude,
+                    },
+                    success: function(data) {
+                        if (data.success == true) {
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    }
+                });
+                //call closenav function
+                closeNav();
+            }
+            function error() {
+                status.textContent = "Unable to retrieve your location";
+            }
+
+            if (!navigator.geolocation) {
+                status.textContent = "Geolocation is not supported by your browser";
+            } else {
+                status.textContent = "Locating…";
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+        }
+
+        document.querySelector("#find-me").addEventListener("click", geoFindMe);
     </script>
     @stack('scripts')
 </body>

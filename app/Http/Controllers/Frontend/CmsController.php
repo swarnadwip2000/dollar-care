@@ -74,4 +74,19 @@ class CmsController extends Controller
     {
         return view('frontend.mobile-health-coverage');
     }
+
+    public function storeLocation(Request $request)
+    {
+        $request->validate([
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        $request->session()->put('latitude', $request->latitude);
+        $request->session()->put('longitude', $request->longitude);
+
+        
+
+        return response()->json(['session' => $request->session()->all()]);
+    }
 }
