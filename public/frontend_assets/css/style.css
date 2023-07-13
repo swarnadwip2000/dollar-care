@@ -3648,7 +3648,7 @@ a .dt-slot-div p {
 }
 
 .height-100 {
-    height: 100vh;
+    height: 100%;
 }
 
 @media screen and (min-width: 768px) {
@@ -3950,7 +3950,7 @@ a .dt-slot-div p {
 }
 
 .my-app-div-wrap {
-    margin: 25px 0px;
+    margin: 25px 0px 10px;
 }
 
 .clinical-box-1 .app-time-wrap {
@@ -4199,7 +4199,7 @@ a .dt-slot-div p {
     outline: none;
 }
 
-.form-group label {
+.profile-form .form-group label {
     display: block;
 }
 
@@ -4534,6 +4534,21 @@ a .dt-slot-div p {
 .add-more-div {
     margin: 20px 0px;
 }
+/* 12-07-2023 */
+.srl-3 {
+    max-height: 545px;
+}
+.past-history .table-responsive .table tbody tr td:last-child{
+    background: #fff;
+    text-align: center;
+}
+
+
+
+
+
+
+
 
 /*  */
 
@@ -4692,12 +4707,299 @@ a .dt-slot-div p {
     box-shadow: 7px 4px 53px 0px rgba(0, 0, 0, 0.11);
     text-align: center;
 }
-.t-left{
+
+.t-left {
     text-align: left;
 }
-.t-right{
+
+.t-right {
     text-align: right;
 }
-.dr-cam-img{
+
+.dr-cam-img {
     float: right;
 }
+
+.delete-add a {
+    background: rgb(238 27 36 / 30%);
+    color: #EE1B24;
+}
+
+/* Booking History */
+.booking-history-table .table-responsive .table thead tr th {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgb(30 30 30 / 50%);
+    text-align: left;
+    margin-bottom: 0;
+    padding-top: 10px;
+    border-bottom: none;
+}
+
+.booking-history-table .table-responsive .table thead tr th span {
+    color: #EE1B24;
+    padding-right: 5px;
+}
+
+.booking-history-table .table-responsive .table tbody tr td {
+    font-size: 14px;
+    border-bottom: none;
+    padding: 15px;
+}
+
+.booking-history-table .table-responsive .table tbody tr {
+    border-radius: 6px;
+    background: #F7F7F7;
+}
+
+.profile-div-2 .profile-img {
+    width: 40px;
+    height: 40px;
+}
+
+.status-1 {
+    color: #02B434;
+    text-transform: uppercase;
+}
+
+.status-2 {
+    color: #FD9800;
+    text-transform: uppercase;
+}
+
+.status-3 {
+    color: #EE1B24;
+    text-transform: uppercase;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+#box {
+    width: 300px;
+    height: 0px;
+    background: white;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+    box-shadow: 0 0 39px rgb(0 0 0 / 20%);
+    border-radius: 15px;
+}
+
+#box.active {
+    height: auto;
+    padding: 17px;
+    transition: all 0.3s ease;
+}
+
+#deletebtn {
+    width: 40px;
+    height: 40px;
+    background: none;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    right: 7px;
+    top: 11px;
+    color: #EE1B24;
+    font-size: 22px;
+}
+
+#box h6 i {
+    color: #1D50B1;
+}
+
+#box h6 {
+    border-bottom: 1px solid rgb(0 0 0 / 10%);
+    padding-bottom: 10px;
+    color: var(--black-color);
+}
+
+#box h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e1e1e;
+    padding: 10px 0px;
+}
+
+.btn_cin {
+    padding: 10px 20px;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.btn_cin h4 {
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.btn_cin span {
+    margin-bottom: 4px;
+    display: block;
+}
+
+.filter_aplly {
+    padding: 12px;
+    font-size: 18px;
+    background: #FFBF1C;
+    color: #1e1e1e;
+    display: block;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.filter_aplly:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sem_btn .form-group input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.sem_btn .form-group label {
+    position: relative;
+    cursor: pointer;
+    padding: 14px 7px 14px 33px;
+    width: 100%;
+}
+
+.sem_btn .form-group label:before {
+    content: '';
+    -webkit-appearance: none;
+    background-color: #CADCFF;
+    border: none;
+    box-shadow: none;
+    padding: 7px;
+    display: inline-block;
+    position: absolute;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 3px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sem_btn .form-group input:checked+label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 17px;
+    left: 16px;
+    width: 6px;
+    height: 14px;
+    border: solid #00BF13;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.sem_btn .form-group {
+    margin-bottom: 4px;
+}
+
+.sem_btn .form-group label span {
+    position: relative;
+    font-weight: 600;
+}
+
+.sem_btn .form-group input:checked+label:before {
+    border: 1px solid #1F6AFD;
+}
+
+.sem_btn .form-group input:checked+label {
+    color: #1F6AFD;
+}
+
+.stockist_name {
+    text-transform: uppercase;
+    color: #1E1E1E;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.delete_icon {
+    color: #EE3C3C;
+}
+
+.funel_box .form-group label {
+    color: #000;
+    padding: 5px 0px;
+}
+
+.funel_box .btn-light {
+    color: #1D50B1;
+}
+
+.date-btn input {
+    border: none;
+    display: inline-block;
+    padding: 0;
+}
+/* date Picker */
+
+/* 
+
+
+.filter span{
+  color: #1D50B1;
+  border: 1px solid #D8DEFF;
+  padding: 15px;
+  border-radius: 6px;
+}
+.filter a{
+  padding-right: 10px;
+  color: #000;
+}
+.filter .form-control{
+  border: none;
+  box-shadow: none;
+}
+a{
+   color: #000;
+}
+a:hover{
+    color: #000;
+ }
+.filter-box-wrap{
+  background: var(--white-color);
+  border-radius: 15px;
+  background: #FFF;
+  box-shadow: 0px 8px 71px 37px rgba(0, 0, 0, 0.12);
+  padding: 20px;
+  width: 300px;
+  height: 100%;
+}
+.filter-box-1 span{ 
+     border: none;     
+     padding-left: 10px;
+}
+.filter-box-1 h4{
+    font-size: 18px;
+}
+.filter-box{
+    border-bottom: 1px solid #EBEBEB;
+    padding: 10px 0px;
+}
+.filter-dropdown{
+    padding: 10px 0px;
+}
+.filter-dropdown h4{
+    font-size: 20px;
+    font-weight: 600;
+} */

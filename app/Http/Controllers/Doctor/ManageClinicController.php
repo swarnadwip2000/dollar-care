@@ -70,4 +70,15 @@ class ManageClinicController extends Controller
         $clinic->delete();
         return redirect()->route('doctor.manage-clinic.index')->with('error', 'Clinic Address Deleted Successfully');
     }
+
+    public function edit($id)
+    {
+        // delete previous slots
+        Slot::where('slot_date', '<', date('Y-m-d'))->where('clinic_detail_id', $id)->delete();
+        $slots = Slot::where('clinic_detail_id', $id)->get();
+        // dd($slots);
+        $clinic = ClinicDetails::find($id);
+        $days = Day::all();
+        return view('frontend.doctor.manage-clinic-address.edit')->with(compact('clinic', 'days','slots'));
+    }
 }

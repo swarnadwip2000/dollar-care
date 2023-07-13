@@ -76,7 +76,7 @@
                                                     <div class="cl-edit">
                                                         <div class="edit-btn d-flex align-items-center">
                                                             <div class="edit-btn-1">
-                                                                <a href="{{ route('doctor.manage-clinic.create') }}"><span><i
+                                                                <a href="{{ route('doctor.manage-clinic.edit', $clinic['id']) }}"><span><i
                                                                             class="fa-solid fa-pen-to-square"></i></span></a>
                                                             </div>
                                                             <div class="edit-btn-1 edit-btn-2">

@@ -217,7 +217,15 @@
         height: 40px;
         font-size: 15px;
     }
-
+    .confirm-btn {
+        padding: 10px;
+    }
+    .confirm-btn a h4{
+        font-size: 0;
+    }
+    .confirm-btn a h4 span{
+        font-size: 12px;
+    }
     
 }
 
