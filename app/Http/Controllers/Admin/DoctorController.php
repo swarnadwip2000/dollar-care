@@ -77,11 +77,11 @@ class DoctorController extends Controller
                "email" => $record->email,
                "phone" => $record->phone,
                "specialization" => '<span class="badge bg-primary">'. $specialization  .'</span>',
-               "year_of_experience" => $record->year_of_experience,
+               "year_of_experience" => $record->year_of_experience . ' Years',
                "gender" => $record->gender,
                 "location" => $record->location,
                 "status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="'.$record->id.'"'.($record->status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
-                "action" => '<a href="'.route('doctors.edit',$record->id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Doctor"  data-route="'.route('doctors.delete', $record->id).'" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>'
+                "action" => '<a href="'.route('doctors.edit',$record->id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Doctor"  data-route="'.route('doctors.delete', $record->id).'" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>&nbsp;&nbsp;<a title="View Doctor Clinic Details"  href="'.route('doctors.show', $record->id).'" href="javascipt:void(0);"><i class="fas fa-eye"></i></a>'
             );
         }                                                                                                                                                   
                                                                                                                                                     
@@ -166,7 +166,9 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $doctor = User::with('doctorSpecializations')->findOrFail($id);
+        $clinics = $doctor->clinicDetails;
+        return view('admin.doctor.view')->with(compact('doctor', 'clinics'));
     }
 
     /**
