@@ -29,7 +29,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.plan.create');
     }
 
     /**
@@ -40,7 +40,31 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'plan_name' => 'required',
+            'plan_price' => 'required',
+            'plan_type' => 'required',
+            'plan_duration' => 'required',
+        ]);
+
+        $new_plan = Plan::create([
+            'plan_name' => $request->plan_name,
+            'plan_price' => $request->plan_price,
+            'plan_type' => $request->plan_type,
+            'plan_duration' => $request->plan_duration
+        ]);
+
+        $id = $new_plan->id;
+        foreach ($request->plan_specification as $key => $specification) {
+            if($specification != null){
+                
+                $plan = PlanSpecfication::create([
+                    'plan_id' => $id,
+                    'specification_name' => $specification
+                ]);
+            }    
+        }
+        return redirect()->route('plans.index')->with('message', 'Plan added successfully.');
     }
 
     /**

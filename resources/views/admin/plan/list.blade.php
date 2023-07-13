@@ -41,6 +41,12 @@
                             <div class="col-md-6">
                                 <h4 class="mb-0">Plan Details</h4>
                             </div>
+                            <div class="col-md-6">
+                            <div class="col-auto float-end ms-auto">
+                                     <a href="{{ route('plans.create') }}" class="btn add-btn" ><i
+                                        class="fa fa-plus"></i> Add Plan</a> 
+                                </div>
+                            </div>
 
                         </div>
                     </div>

@@ -12,6 +12,7 @@ class Plan extends Model
         'plan_name',
         'plan_price',
         'plan_type',
+        'plan_duration',
     ];
 
     public function specifications()

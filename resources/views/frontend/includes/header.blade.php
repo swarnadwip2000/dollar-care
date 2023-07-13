@@ -1,13 +1,54 @@
+<div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+       <div class="location-div">
+        <div class="search_box">
+          <div class="search_field">
+            <input type="text" class="input" placeholder="Search your location">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="get-location">
+           <a href="">
+             <div class="get-location-box d-flex justify-content-between">
+              <div class="get-location-icon">
+                <span><i class="fa-solid fa-location-crosshairs"></i></span>   
+              </div>
+              <div class="get-location-text">
+                <h2>Get your location</h2>   
+                <h3>Using GPS</h3>
+              </div>
+             </div>
+           </a>     
+        </div>
+       </div>
+    </div>
+
 <div class="main_manu">
     <div class="container-fluid">
         <div class="row justify-content-between align-items-center">
-            <div class="col-xl-2 col-lg-2 col-md-2 col-5">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-2">
                 <div class="logo {{ Request::is('patient/*') || Request::is('doctor/*') ? 'logo-d' : '' }}">
                     <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}"
                             alt="" /></a>
                 </div>
             </div>
-            <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-6">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-7">
+            <div id="main">
+              <a href="javascript:void(0)" onclick="openNav()">
+                <div class="location d-flex">
+                  <div class="location_icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div class="address_loa">
+                    <span>Deliver to</span>
+                    17581 Sultana St, Hesperia, CA
+                    92345, USA
+                  </div>
+                </div>
+            </div>
+            </a>
+          </div>
+          <div class="col-xxl-7 col-xl-7 col-lg-6 col-md-6 col-3">
                 <div id="cssmenu">
                     <ul>
                         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>

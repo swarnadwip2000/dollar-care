@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            // assignRoleSeeder::class,
-            // assignAdminSeeder::class,
-            // AddQnaSeeder::class,
-            // ContactPageCmsSeeder::class,
-            // AddPlanSeeder::class,
-            // AboutUsSeeder::class,
-            // PrivacyPolicySeeder::class
+            assignRoleSeeder::class,
+            assignAdminSeeder::class,
+            AddQnaSeeder::class,
+            ContactPageCmsSeeder::class,
+            AddPlanSeeder::class,
+            AboutUsSeeder::class,
+            PrivacyPolicySeeder::class,
             AddDaySeeder::class
         ]);
     }
