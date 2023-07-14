@@ -89,4 +89,4 @@ class CmsController extends Controller
 
         return response()->json(['session' => $request->session()->all()]);
     }
-}
+}  
