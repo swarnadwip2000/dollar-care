@@ -1,22 +1,23 @@
+
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="location-div">
     <div class="search_box">
         <div class="search_field">
-        <input type="text" class="input" id="autocomplete" placeholder="Search your location">
-        <button type="submit"><i class="fas fa-search"></i></button>
+            <input type="text" class="input" id="autocomplete" placeholder="Search your location">
+            <button type="submit"><i class="fas fa-search"></i></button>
         </div>
     </div>
     <div class="get-location">
-        <a href="">
+        <a href="javascript:void(0)">
             <div class="get-location-box d-flex justify-content-between">
-            <div class="get-location-icon">
-            <span><i class="fa-solid fa-location-crosshairs"></i></span>   
-            </div>
-            <div class="get-location-text" >
-            <button id="find-me" type="button">Get your location</button>   
-            <h3>Using GPS</h3>
-            </div>
+                <div class="get-location-icon">
+                    <span><i class="fa-solid fa-location-crosshairs"></i></span>   
+                </div>
+                <div class="get-location-text" >
+                    <button id="find-me" type="button">Get your location</button>   
+                    <h3>Using GPS</h3>
+                </div>
             </div>
         </a>     
     </div>

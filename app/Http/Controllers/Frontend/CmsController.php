@@ -83,14 +83,15 @@ class CmsController extends Controller
             'latitude' => 'required',
             'longitude' => 'required',
         ]);
-
+        
         $location = new Location();
         if(auth()->check()) {
             $location->user_id = auth()->user()->id;
+            $location->session_id = null;
         } else {
             $location->user_id = null;
-        }
-        $location->session_id = $request->session_id;
+            $location->session_id = $request->session_id;
+        }        
         $location->ip_address = $request->ip_address;
         $location->address = $request->address;
         $location->latitude = $request->latitude;

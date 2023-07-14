@@ -210,7 +210,9 @@
                         if (data.status == 'OK') {
                             // $('#status').text(data.results[0].formatted_address);
                             // document.getElementById("loc").style.display = "none";
-                            status.textContent = data.results[0].formatted_address;
+                            var address = data.results[0].formatted_address;
+                            status.textContent = address.substring(0, 40);
+                            status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
                             console.log(status.textContent);
 
                             // call ajax to store lat long
@@ -221,7 +223,7 @@
                                     '_token': "{{ csrf_token() }}",
                                     'latitude': latitude,
                                     'longitude': longitude,
-                                    'address': status.textContent,
+                                    'address': address,
                                     'session_id': '{{ Session::getId() }}',
                                     'ip_address': '{{ Request::ip() }}'
                                 },
@@ -269,7 +271,9 @@
                         $('#latitude').val(place.geometry['location'].lat());
                         $('#longitude').val(place.geometry['location'].lng());
                         // document.getElementById("loc").style.display = "none";
-                        status.textContent = place.formatted_address;
+                        address = place.formatted_address;
+                        status.textContent = address.substring(0, 40);
+                        status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
 
                         // call ajax to store lat long
                         $.ajax({
@@ -279,7 +283,7 @@
                                 '_token': "{{ csrf_token() }}",
                                 'latitude': place.geometry['location'].lat(),
                                 'longitude': place.geometry['location'].lng(),
-                                'address': place.formatted_address,
+                                'address': address,
                                 'session_id': '{{ Session::getId() }}',
                                 'ip_address': '{{ Request::ip() }}'
                             },
