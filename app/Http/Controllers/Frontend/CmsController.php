@@ -8,6 +8,7 @@ use App\Models\ContactPageCms;
 use App\Models\ContactUs;
 use App\Models\Plan;
 use App\Models\Qna;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class CmsController extends Controller
@@ -77,16 +78,31 @@ class CmsController extends Controller
 
     public function storeLocation(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'latitude' => 'required',
             'longitude' => 'required',
         ]);
 
+        $location = new Location();
+        if(auth()->check()) {
+            $location->user_id = auth()->user()->id;
+        } else {
+            $location->user_id = null;
+        }
+        $location->session_id = $request->session_id;
+        $location->ip_address = $request->ip_address;
+        $location->address = $request->address;
+        $location->latitude = $request->latitude;
+        $location->longitude = $request->longitude;
+        $location->save();
+
+
         $request->session()->put('latitude', $request->latitude);
         $request->session()->put('longitude', $request->longitude);
 
         
-
-        return response()->json(['session' => $request->session()->all()]);
+        // return response()->json(['success' => true]);
+        // return response()->json(['session' => $request->session()->all()]);
     }
 }  
