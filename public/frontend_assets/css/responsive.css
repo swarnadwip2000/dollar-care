@@ -590,6 +590,9 @@
         position: absolute;
         right: auto;
     }
+    .logo a {
+        width: 90px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -704,7 +707,7 @@
     }
 
     .logo a {
-        width: 100px;
+        width: 85px;
     }
 
     .dev-con-wrap {
@@ -1288,6 +1291,28 @@
     .slct-date-time::before {
         display: none;
     }
+    .location .address_loa span {
+        font-size: 10px;
+    }
+    #main {
+        padding: 0px 15px;
+    }
+    .get-location {
+        padding: 5px 0px;
+    }
+    .search_box .search_field {
+        padding: 5px 0px;
+    }
+    .search_box .search_field .input{
+        padding: 5px 0px;
+    }
+    .search_box .search_field .input{
+        padding-left: 10px;
+        font-size: 12px;
+    }
+    .get-location-text button{
+        font-size: 14px;
+     }
 }
 
 @media (max-width: 375.98px) {
