@@ -1,36 +1,38 @@
 <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-       <div class="location-div">
-        <div class="search_box">
-          <div class="search_field">
-            <input type="text" class="input" placeholder="Search your location">
-            <button type="submit"><i class="fas fa-search"></i></button>
-          </div>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="location-div">
+    <div class="search_box">
+        <div class="search_field">
+        <input type="text" class="input" id="autocomplete" placeholder="Search your location">
+        <button type="submit"><i class="fas fa-search"></i></button>
         </div>
-        <div class="get-location" >
-             <div class="get-location-box d-flex justify-content-between">
-              <div class="get-location-icon">
-                <span><i class="fa-solid fa-location-crosshairs"></i></span>   
-              </div>
-              <div class="get-location-text" >
-                <button id="find-me" type="button">Get your location</button>   
-                <h3>Using GPS</h3>
-              </div>
-             </div>    
-        </div>
-       </div>
     </div>
+    <div class="get-location">
+        <a href="">
+            <div class="get-location-box d-flex justify-content-between">
+            <div class="get-location-icon">
+            <span><i class="fa-solid fa-location-crosshairs"></i></span>   
+            </div>
+            <div class="get-location-text" >
+            <button id="find-me" type="button">Get your location</button>   
+            <h3>Using GPS</h3>
+            </div>
+            </div>
+        </a>     
+    </div>
+    </div>
+</div>
 
 <div class="main_manu">
     <div class="container-fluid">
         <div class="row justify-content-between align-items-center">
-            <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+            <div class="col-xl-1 col-lg-1 col-md-1 col-2">
                 <div class="logo {{ Request::is('patient/*') || Request::is('doctor/*') ? 'logo-d' : '' }}">
                     <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}"
                             alt="" /></a>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-7">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-8">
             <div id="main">
               <a href="javascript:void(0)" onclick="openNav()">
                 <div class="location d-flex">
@@ -40,12 +42,13 @@
                   <div class="address_loa">
                     <span id="status">Please Set Your Location</span>
                     <span id="map-link"></span>
+                    <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                   </div>
                 </div>
             </div>
             </a>
           </div>
-          <div class="col-xxl-7 col-xl-7 col-lg-6 col-md-6 col-3">
+          <div class="col-xxl-7 col-xl-7 col-lg-6 col-md-3 col-2">
                 <div id="cssmenu">
                     <ul>
                         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
@@ -95,7 +98,7 @@
                         @else
                             <li>
                                 <a href="{{ route('login') }}"><span class="u-i"><i
-                                            class="fa-regular fa-user"></i></span>LOGIN</a>
+                                            class="fa-regular fa-user"></i></span>Login</a>
                             </li>
                         @endif
                         <li>

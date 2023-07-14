@@ -196,7 +196,7 @@
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                status.textContent = "";
+                status.textContent = "Please Set Your Location";
                 mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
                 // mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
                 console.log(latitude, longitude);
@@ -208,28 +208,35 @@
                     url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE`,
                     success: function(data) {
                         if (data.status == 'OK') {
-                            $('#status').text(data.results[0].formatted_address);
-                            console.log(data.results[0].formatted_address);
+                            // $('#status').text(data.results[0].formatted_address);
+                            // document.getElementById("loc").style.display = "none";
+                            status.textContent = data.results[0].formatted_address;
+                            console.log(status.textContent);
+
+                            // call ajax to store lat long
+                            $.ajax({
+                                type: 'POST',
+                                url: "{{ route('store.location') }}",
+                                data: {
+                                    '_token': "{{ csrf_token() }}",
+                                    'latitude': latitude,
+                                    'longitude': longitude,
+                                    'address': status.textContent,
+                                    'session_id': '{{ Session::getId() }}',
+                                    'ip_address': '{{ Request::ip() }}'
+                                },
+                                success: function(data) {
+                                    // if (data.success == true) {
+                                    //     toastr.success(data.message);
+                                    // } else {
+                                    //     toastr.error(data.error);
+                                    // }
+                                }
+                            });
                         }
                     }
                 });
-                // call ajax to store lat long
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('store.location') }}",
-                    data: {
-                        '_token': "{{ csrf_token() }}",
-                        'latitude': latitude,
-                        'longitude': longitude,
-                    },
-                    success: function(data) {
-                        if (data.success == true) {
-                            toastr.success(data.message);
-                        } else {
-                            toastr.error(data.error);
-                        }
-                    }
-                });
+                // end get location by lat long
                 //call closenav function
                 closeNav();
             }
@@ -244,8 +251,49 @@
                 navigator.geolocation.getCurrentPosition(success, error);
             }
         }
-
+    
         document.querySelector("#find-me").addEventListener("click", geoFindMe);
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script> 
+
+        <script>
+                // google.maps.event.addDomListener(window, 'load', initialize);
+
+                function initialize() {
+                    const status = document.querySelector("#status");
+                    var input = document.getElementById('autocomplete');
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                    status.textContent = "Please Set Your Location";
+                    autocomplete.addListener('place_changed', function() {
+                        var place = autocomplete.getPlace();
+                        $('#latitude').val(place.geometry['location'].lat());
+                        $('#longitude').val(place.geometry['location'].lng());
+                        // document.getElementById("loc").style.display = "none";
+                        status.textContent = place.formatted_address;
+
+                        // call ajax to store lat long
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('store.location') }}",
+                            data: {
+                                '_token': "{{ csrf_token() }}",
+                                'latitude': place.geometry['location'].lat(),
+                                'longitude': place.geometry['location'].lng(),
+                                'address': place.formatted_address,
+                                'session_id': '{{ Session::getId() }}',
+                                'ip_address': '{{ Request::ip() }}'
+                            },
+                            success: function(data) {
+                                // if (data.success == true) {
+                                //     toastr.success(data.message);
+                                // } else {
+                                //     toastr.error(data.error);
+                                // }
+                            }
+                        });
+                        closeNav();
+                    });
+                }
     </script>
     @stack('scripts')
 </body>
