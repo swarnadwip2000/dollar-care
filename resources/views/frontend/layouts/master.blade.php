@@ -251,7 +251,7 @@
                 navigator.geolocation.getCurrentPosition(success, error);
             }
         }
-
+    
         document.querySelector("#find-me").addEventListener("click", geoFindMe);
     </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script> 
