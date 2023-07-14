@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -29,15 +30,22 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // dd(session()->all());
             $user = Auth::user();
+            $location = Location::where('user_id', $user->id)->latest('id')->first();
             if ($user->status == true) {
-                if ($user->hasRole('DOCTOR')) {
-                    return redirect()->route('doctor.dashboard');
-                } else if ($user->hasRole('PATIENT')) {
-                    return redirect()->route('patient.dashboard');
+                if ($location || session()->has('latitude')) {
+                    if ($user->hasRole('DOCTOR')) {
+                        return redirect()->route('doctor.dashboard');
+                    } else if ($user->hasRole('PATIENT')) {
+                        return redirect()->route('patient.dashboard');
+                    } else {
+                        Auth::logout();
+                        return redirect()->back()->with('error', 'Your account is not active. Please contact with admin');
+                    }
                 } else {
                     Auth::logout();
-                    return redirect()->back()->with('error', 'Your account is not active. Please contact with admin');
+                    return view('frontend.auth.location');
                 }
             } else {
                 Auth::logout();
