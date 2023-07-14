@@ -29,7 +29,7 @@
                     <div class="search-text">
                         <h3>Search Doctor</h3>
                     </div>
-                    <div class="search-box-wrap d-flex">
+                    <div class="search-box-wrap d-flex mt-2">
                         <div class="search-box">
                             <form action="">
                                 <input type="text" class="form-control" id="exampleFormControlInput1"
@@ -89,7 +89,7 @@
                     <h2>{{ $data['symptom_name'] }}</h2>
                     @endif
                 </div>
-                <div class="doc-avl d-flex">
+                <div class="doc-avl d-flex mt-2">
                     <div class="doc-avl-img">
                         <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
                     </div>

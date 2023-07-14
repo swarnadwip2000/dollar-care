@@ -24,31 +24,33 @@
                         <h2>Not feeling too well?</h2>
                         <p><b>Treat common symptoms with top specialists</b></p>
                     </div>
-                   
+
                     <div class="feel-slide">
-                      @foreach ($symptoms->chunk(12) as $items)
-                        <div class="feel-slide-wrap">
-                            <div class="row row-cols-xxl-6 row-cols-lg-4 row-cols-md-2 row-cols-1 pb-5">
-                              @foreach ($items as $symptom)
-                                <div class="col">
-                                    <div class="feel-box">
-                                        <a href="{{ route('doctors', ['type'=>'symptoms', 'slug'=>$symptom['symptom_slug']]) }}">
-                                            <div class="feel-icon-div">
-                                                <div class="feel-icon-box-1 feel-icon">
-                                                    <img src="{{ Storage::url($symptom['symptom_image']) }}" alt="">
-                                                </div>
+                        @foreach ($symptoms->chunk(12) as $items)
+                            <div class="feel-slide-wrap">
+                                <div class="row row-cols-xxl-6 row-cols-lg-4 row-cols-md-2 row-cols-1 pb-5">
+                                    @foreach ($items as $symptom)
+                                        <div class="col">
+                                            <div class="feel-box">
+                                                <a
+                                                    href="{{ route('doctors', ['type' => 'symptoms', 'slug' => $symptom['symptom_slug']]) }}">
+                                                    <div class="feel-icon-div">
+                                                        <div class="feel-icon-box-1 feel-icon">
+                                                            <img src="{{ Storage::url($symptom['symptom_image']) }}"
+                                                                alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="feel-text">
+                                                        <h4>
+                                                            {{ $symptom['symptom_name'] }}
+                                                        </h4>
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="feel-text">
-                                                <h4>
-                                                    {{ $symptom['symptom_name'] }}
-                                                </h4>
-                                            </div>
-                                        </a>
-                                    </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -82,61 +84,66 @@
             </div>
         </section>
     @endif
-    @if(count($speciliaztions) > 0)
-    <section class="bk-app-sec">
-        <div class="container">
-            <div class="bk-app-sec-wrap">
-                <div class="row justify-content-between">
-                    <div class="col-xl-6 col-12">
-                        <div class="head-1 h-b">
-                            <h2>Book appointments with top specialist in your city</h2>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-12">
-                        <div class="main-btn pt-4">
-                            <a href="{{ route('all-specializations') }}" tabindex="0"><span>View all Specialization</span><span class="btn-arw"><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="app-doc-wrap">
-                  @foreach($speciliaztions as $speciliaztion)
-                    <div class="app-doc-box">
-                        <a href="{{ route('doctors', ['type'=>'speciaization', 'slug'=>$speciliaztion['slug']]) }}">
-                            <div class="app-doc-img">
-                                <img src="{{ Storage::url($speciliaztion['image']) }}" alt="">
-                            </div>
-                        </a>
-                        <div class="app-doc-text">
-                            <a href="{{ route('doctors', ['type'=>'speciaization', 'slug'=>$speciliaztion['slug']]) }}"> <h3>{{ $speciliaztion['name'] }}</h3> </a>
-                            <p>{{ substr($speciliaztion['description'], 0,80) }}
-                            </p>
-                        </div>
-                        @if($speciliaztion['doctor_count'] > 0)
-                        <div class="doc-avl d-flex">
-                            <div class="doc-avl-img">
-                                <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
-                            </div>
-                            <div class="doc-avl-text">
-                                <h4>{{ $speciliaztion['doctor_count'] }} Doctors available</h4>
+    @if (count($speciliaztions) > 0)
+        <section class="bk-app-sec bg-white">
+            <div class="container">
+                <div class="bk-app-sec-wrap">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-6 col-12">
+                            <div class="head-1 h-b">
+                                <h2>Book appointments with top specialist in your city</h2>
                             </div>
                         </div>
-                        @else 
-                        <div class="doc-avl d-flex">
-                          <div class="doc-avl-img">
-                              <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
-                          </div>
-                          <div class="doc-avl-text">
-                              <h4>Doctors not available</h4>
-                          </div>
-                      </div>
-                        @endif
+                        <div class="col-xl-3 col-12">
+                            <div class="main-btn pt-4">
+                                <a href="{{ route('all-specializations') }}" tabindex="0"><span>View all
+                                        Specialization</span><span class="btn-arw"><i
+                                            class="fa-solid fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
                     </div>
-                    @endforeach
+                    <div class="app-doc-wrap">
+                        @foreach ($speciliaztions as $speciliaztion)
+                            <div class="app-doc-box">
+                                <a
+                                    href="{{ route('doctors', ['type' => 'speciaization', 'slug' => $speciliaztion['slug']]) }}">
+                                    <div class="app-doc-img">
+                                        <img src="{{ Storage::url($speciliaztion['image']) }}" alt="">
+                                    </div>
+                                </a>
+                                <div class="app-doc-text">
+                                    <a
+                                        href="{{ route('doctors', ['type' => 'speciaization', 'slug' => $speciliaztion['slug']]) }}">
+                                        <h3>{{ $speciliaztion['name'] }}</h3>
+                                    </a>
+                                    <p>{{ substr($speciliaztion['description'], 0, 80) }}
+                                    </p>
+                                </div>
+                                @if ($speciliaztion['doctor_count'] > 0)
+                                    <div class="doc-avl d-flex">
+                                        <div class="doc-avl-img">
+                                            <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
+                                        </div>
+                                        <div class="doc-avl-text">
+                                            <h4>{{ $speciliaztion['doctor_count'] }} Doctors available</h4>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="doc-avl d-flex">
+                                        <div class="doc-avl-img">
+                                            <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
+                                        </div>
+                                        <div class="doc-avl-text">
+                                            <h4>Doctors not available</h4>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     @endif
     {{-- <section class="bk-app-sec inst-vdo">
         <div class="container">
@@ -441,13 +448,13 @@
     <section class="hw-wrks">
         <div class="container">
             <div class="hw-wrks-wrap">
-                <div class="head-1 h-b text-center p-5">
+                <div class="head-1 h-b text-center">
                     <h2>How it works</h2>
                 </div>
                 <div class="wrk-div">
                     <!-- <div class="wrk-div-bg">
-                         <img src="{{ asset('frontend_assets/images/wv.png') }}" alt="">
-                      </div> -->
+                                     <img src="{{ asset('frontend_assets/images/wv.png') }}" alt="">
+                                  </div> -->
                     <div class="row justify-content-center">
                         <div class="col-xl-3 col-md-12 col-12">
                             <div class="wrk-div-box">

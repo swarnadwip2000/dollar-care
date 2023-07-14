@@ -15,9 +15,9 @@
 }
 
 @media (max-width: 1600px) {
-    #cssmenu>ul>li>a {
+    #cssmenu > ul > li > a {
         padding: 18px 10px;
-        font-size: 14px;    
+        font-size: 14px;
     }
 
     .slide .slide__content--headings .title {
@@ -82,7 +82,7 @@
     .cl-edit {
         padding: 15px 0px;
     }
-    .l-navbar{
+    .l-navbar {
         height: 100%;
     }
 }
@@ -93,7 +93,7 @@
         line-height: 22px;
     }
 
-    #cssmenu>ul>li>a {
+    #cssmenu > ul > li > a {
         padding: 12px 9px;
         font-size: 14px;
     }
@@ -220,13 +220,12 @@
     .confirm-btn {
         padding: 10px;
     }
-    .confirm-btn a h4{
+    .confirm-btn a h4 {
         font-size: 0;
     }
-    .confirm-btn a h4 span{
+    .confirm-btn a h4 span {
         font-size: 12px;
     }
-    
 }
 
 @media (max-width: 1280px) {
@@ -248,7 +247,7 @@
         padding: 30px;
     }
 
-    #cssmenu>ul>li>a {
+    #cssmenu > ul > li > a {
         padding: 15px 12px;
         font-size: 12px;
     }
@@ -327,9 +326,9 @@
     .cl-edit {
         padding: 0;
     }
-    .location-div{
+    .location-div {
         width: 60%;
-      }
+    }
 }
 
 @media (max-width: 1024px) {
@@ -366,7 +365,7 @@
         min-height: 456px;
     }
 
-    #cssmenu>ul>li:last-child>a {
+    #cssmenu > ul > li:last-child > a {
         color: var(--white-color);
     }
 
@@ -492,7 +491,7 @@
         width: 100%;
     }
 
-    #cssmenu>ul>li.active a::before {
+    #cssmenu > ul > li.active a::before {
         width: 50px;
         height: 50px;
         margin: 0 auto;
@@ -531,14 +530,6 @@
 
     .profile-div-2 .profile-img {
         margin: inherit;
-    }
-
-    .app-time-wrap {
-        justify-content: center;
-    }
-
-    .app-time h3 {
-        text-align: center;
     }
 
     .sidebar-right {
@@ -586,7 +577,7 @@
     .abt-sec {
         padding: 50px 0px;
     }
-     #box{
+    #box {
         position: absolute;
         right: auto;
     }
@@ -718,7 +709,7 @@
         display: none;
     }
 
-    #cssmenu>ul>li.active a::before {
+    #cssmenu > ul > li.active a::before {
         width: 50px;
         height: 50px;
         margin: 0 auto;
@@ -757,19 +748,71 @@
         top: 24px;
     }
     .content-head h2 {
-        font-size: 26px;;
+        font-size: 26px;
     }
     .add-address a {
         padding: 9px 13px;
         font-size: 10px;
     }
-    .content-head-wrap{
-      display: block!important;
-      margin-bottom: 20px;
+    .content-head-wrap {
+        display: block !important;
+        margin-bottom: 20px;
     }
-    .location-div{
+    .location-div {
         width: 90%;
-      }
+    }
+    .header {
+        display: block;
+    }
+    .profile-div-2 {
+        justify-content: left;
+    }
+    .my-app-div {
+        min-height: auto;
+    }
+    .dr-name {
+        justify-content: center;
+    }
+    .app-time {
+        text-align: center;
+    }
+    .mem-sec {
+        padding: 20px 0px;
+    }
+    .mem-box {
+        padding: 15px 0px;
+    }
+    .price-box {
+        padding: 20px 0px;
+    }
+    .price-box h2 {
+        font-weight: 700;
+        font-size: 38px;
+    }
+    .mem-list ul li {
+        padding-bottom: 15px;
+    }
+    .mem-box-wrap {
+        margin-bottom: 20px;
+    }
+    .profile-img {
+        text-align: center;
+        margin: 0 auto;
+    }
+    .app-time h3 {
+        text-align: left;
+    }
+    .app-time {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    .app-time-img span {
+        padding-right: 15px;
+        font-size: 22px;
+    }
+    .app-time-wrap {
+        justify-content: start;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1074,7 +1117,8 @@
         width: 70%;
     }
 
-    .date-box {}
+    .date-box {
+    }
 
     .main-btn {
         padding-top: 0px !important;
@@ -1203,13 +1247,13 @@
     .l-navbar {
         left: 0%;
         display: none;
-        top: 12%;
+        top: 10%;
     }
 
     .l-navbar.show {
         display: block;
         position: absolute;
-        width: 100%;
+        width: 90%;
     }
 
     .header {
@@ -1223,11 +1267,11 @@
     }
 
     .basic-plan h2 {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .basic-plan h4 {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .basic-plan h3 {
@@ -1241,6 +1285,7 @@
     .content-head h2 {
         font-size: 16px;
         text-align: left;
+        padding-bottom: 10px;
     }
 
     .clinicl-head h3 {
@@ -1269,7 +1314,7 @@
     }
 
     .sidebar-right {
-        margin-top: 12%;
+        margin-top: 5%;
     }
 
     .nav_name {
@@ -1303,16 +1348,33 @@
     .search_box .search_field {
         padding: 5px 0px;
     }
-    .search_box .search_field .input{
+    .search_box .search_field .input {
         padding: 5px 0px;
     }
-    .search_box .search_field .input{
+    .search_box .search_field .input {
         padding-left: 10px;
         font-size: 12px;
     }
-    .get-location-text button{
+    .get-location-text button {
         font-size: 14px;
-     }
+    }
+    .nav_link {
+        padding: 10px 15px 15px;
+    }
+    .my-app-head h3 {
+        font-size: 14px;
+    }
+    .my-app-head h4 {
+        font-size: 14px;
+    }
+    .nav.nav-tabs .nav-link {
+        font-size: 12px;
+        margin: 0px 5px;
+        padding: 5px 5px;
+    }
+    .nav.nav-tabs {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 375.98px) {
