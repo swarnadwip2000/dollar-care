@@ -41,7 +41,7 @@ class ForgetPasswordController extends Controller
             ];
 
             Mail::to($request->email)->send(new SendOtpMail($details));
-            return redirect()->route('otp.verification',base64_encode($user->id))->with('success', 'OTP has been sent to your email');
+            return redirect()->route('otp.verification',base64_encode($user->id))->with('message', 'OTP has been sent to your email');
         }
     }
 
@@ -64,7 +64,7 @@ class ForgetPasswordController extends Controller
             if ($newtime < $currenttime) {
                 return redirect()->back()->with('error', 'OTP has been expired');
             } else {
-                return redirect()->route('reset.password', base64_encode($user->id))->with('success', 'OTP verified successfully');
+                return redirect()->route('reset.password', base64_encode($user->id))->with('message', 'OTP verified successfully');
             }
         } else {
             return redirect()->back()->with('error', 'OTP does not match');
@@ -87,6 +87,6 @@ class ForgetPasswordController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         PasswordReset::where('email', $user->email)->delete();
-        return redirect()->route('login')->with('success', 'Password reset successfully');
+        return redirect()->route('login')->with('message', 'Password reset successfully');
     }
 }
