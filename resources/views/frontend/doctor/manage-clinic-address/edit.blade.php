@@ -36,6 +36,7 @@
                                             <div class="add-address-form-box">
                                                 <form action="{{ route('doctor.manage-clinic.update') }}" method="POST">
                                                     @csrf
+                                                    <input type="hidden" name="id" value="{{ $clinic->id }}">
                                                     <div class="form-group" id="latitudeArea">
                                                         <label>Latitude</label>
                                                         <input type="text" id="latitude" name="latitude"
@@ -115,7 +116,7 @@
                                                                         <div class="form-group col-lg-5 col-md-12">
                                                                             <input class="form-control" id="slot_date"
                                                                                 name="slot_date[]" value=""
-                                                                                placeholder="Select Date" required=""
+                                                                                placeholder="Select Date" 
                                                                                 class="textbox-n" type="text"
                                                                                 onfocus="(this.type='date')"
                                                                                 id="date" />
@@ -240,6 +241,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(count($slots) > 0)
                             <div class="my-app-div-wrap">
                                 <div class="content-head-wrap d-flex justify-content-between align-items-center">
                                     <div class="content-head mb-4">
@@ -269,7 +271,7 @@
                                                         <td>{{ $slot['slot_end_time'] }}</td>
                                                         <td>
                                                             <div class="delet-btn">
-                                                                <a href="{{ route() }}"><span><i
+                                                                <a href="javascript:void(0);" data-route="{{ route('doctor.manage-clinic.slot-delete', $slot['id']) }}" id="delete"><span><i
                                                                             class="fa-solid fa-trash-can"></i></span></a>
                                                             </div>
                                                         </td>
@@ -281,6 +283,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -325,5 +328,27 @@
                 $(this).closest('.sl-slot-div').remove();
             });
         });
+    </script>
+    <script>
+         $(document).on('click', '#delete', function(e) {
+        swal({
+                title: "Are you sure?",
+                text: "To delete the slot.",
+                type: "warning",
+                confirmButtonText: "Yes",
+                showCancelButton: true
+            })
+            .then((result) => {
+                if (result.value) {
+                    window.location = $(this).data('route');
+                } else if (result.dismiss === 'cancel') {
+                    swal(
+                        'Cancelled',
+                        'Your stay here :)',
+                        'error'
+                    )
+                }
+            })
+    });
     </script>
 @endpush

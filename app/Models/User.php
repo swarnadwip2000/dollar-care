@@ -83,4 +83,9 @@ class User extends Authenticatable
             return null;
         }
     }
+
+    public function clinicDetails()
+    {
+        return $this->hasMany(ClinicDetails::class, 'user_id', 'id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\ClinicOpeningDay;
+use App\Models\DoctorSpecialization;
 use Illuminate\Support\Str;
 class Helper {
 
@@ -35,6 +36,16 @@ class Helper {
             return substr(ucfirst($clinicOpeningDay['day']['day']), 0, 3);
         }, $clinicOpeningDays->toArray());
         return implode('-', $days);
+    }
+
+    public static function getDoctorSpecializations($id)
+    {
+        $specializations = DoctorSpecialization::where('doctor_id', $id)->get();
+        $data = [];
+        foreach ($specializations as $specialization) {
+            $data[] = $specialization->specialization->name;
+        }
+        return implode(', ', $data);
     }
 
 }
