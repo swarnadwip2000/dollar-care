@@ -41,9 +41,32 @@
                     <i class="fa-solid fa-location-dot"></i>
                   </div>
                   <div class="address_loa">
-                    <span id="status">Please Set Your Location</span>
-                    <span id="map-link"></span>
-                    <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                    @if (Auth::check())
+                        @if (Auth::user()->locations->count() > 0)
+                            <span id="status">{{ substr((Auth::user()->locations[0]->address), 0, 50) }}</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @elseif (session()->has('address'))
+                            <span id="status">{{ substr(session()->get('address'), 0, 50) }}</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @else
+                            <span id="status">Please Set Your Location</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @endif
+                    @else
+                        @if (session()->has('address'))
+                            <span id="status">{{ substr(session()->get('address'), 0, 50) }}</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @else
+                            <span id="status">Please Set Your Location</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @endif
+                    @endif
+                    
                   </div>
                 </div>
             </div>

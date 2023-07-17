@@ -193,6 +193,50 @@
         });
     </script>
     <script>
+        $(document).ready(function() {
+            openNav();
+            var lat = {{ Session::get('latitude') ?? '' }};
+            var user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
+            // check if user has location
+            var location = JSON.parse("{{ Auth::check() ? Auth::user()->locations : 0 }}".replace(/&quot;/g,'"'));
+            if(user_id){
+                if(location){
+                    closeNav();
+                    const status = document.querySelector("#status");
+                    // status.textContent = "Please Set Your Location";
+                    status.textContent = location[0].address;
+                    status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
+                } else if(lat){
+                    closeNav();
+                    var latitude = {{ Session::get('latitude') }};
+                    var longitude = {{ Session::get('longitude') }};
+                    // get location by lat long
+                    $.ajax({
+                        type
+                        : 'GET',
+                        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE`,
+                        success: function(data) {
+                            if (data.status == 'OK') {
+                                var address = data.results[0].formatted_address;
+                                const status = document.querySelector("#status");
+                                // status.textContent = "Please Set Your Location";
+                                status.textContent = address.substring(0, 40);
+                                status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
+                                $('#status').text(status.textContent);
+                                console.log(status.textContent);
+                            }
+                        }
+                    });
+                } else {
+                    openNav();
+                }
+            }
+            
+            
+            
+        });
+    </script>
+    <script>
         /* Set the width of the side navigation to 250px */
         function openNav() {
             document.getElementById("mySidenav").style.width = "100%";
