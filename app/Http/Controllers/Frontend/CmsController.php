@@ -101,6 +101,7 @@ class CmsController extends Controller
 
         $request->session()->put('latitude', $request->latitude);
         $request->session()->put('longitude', $request->longitude);
+        $request->session()->put('address', $request->address);
 
         
         // return response()->json(['success' => true]);

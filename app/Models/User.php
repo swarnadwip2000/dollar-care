@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $this->hasMany(DoctorSpecialization::class, 'doctor_id');
     }
 
+    // relationship with location
+    public function locations()
+    {
+        return $this->hasMany(Location::class, 'user_id');
+    }
+
     // specialization
     public function specializations()
     {
