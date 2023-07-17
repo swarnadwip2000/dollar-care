@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->text('location')->nullable();
             $table->enum('gender',['Male','Female','Other'])->nullable();
             $table->string('age')->nullable();
+            $table->longText('fcm_token')->nullable();
             $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->timestamps();

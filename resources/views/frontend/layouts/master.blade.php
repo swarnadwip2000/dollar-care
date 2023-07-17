@@ -35,6 +35,25 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/select2.min.css') }}">
+        <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB-XF7sdkBhl3qwsUFnvIeBwqPUB9E0LXo",
+            authDomain: "dollar-care-2d690.firebaseapp.com",
+            projectId: "dollar-care-2d690",
+            storageBucket: "dollar-care-2d690.appspot.com",
+            messagingSenderId: "293505905939",
+            appId: "1:293505905939:web:ecbe54f5f847212919d6e6"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        </script>
         @stack('styles')
 </head>
 
@@ -203,8 +222,7 @@
 
                 // get location by lat long
                 $.ajax({
-                    type
-                    : 'GET',
+                    type: 'GET',
                     url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE`,
                     success: function(data) {
                         if (data.status == 'OK') {
@@ -212,7 +230,8 @@
                             // document.getElementById("loc").style.display = "none";
                             var address = data.results[0].formatted_address;
                             status.textContent = address.substring(0, 40);
-                            status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
+                            status.textContent = status.textContent.substr(0, Math.min(status.textContent
+                                .length, status.textContent.lastIndexOf(" ")));
                             console.log(status.textContent);
 
                             // call ajax to store lat long
@@ -242,6 +261,7 @@
                 //call closenav function
                 closeNav();
             }
+
             function error() {
                 status.textContent = "Unable to retrieve your location";
             }
@@ -253,51 +273,53 @@
                 navigator.geolocation.getCurrentPosition(success, error);
             }
         }
-    
+
         document.querySelector("#find-me").addEventListener("click", geoFindMe);
     </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script> 
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script>
 
-        <script>
-                google.maps.event.addDomListener(window, 'load', initialize);
+    <script>
+        google.maps.event.addDomListener(window, 'load', initialize);
 
-                function initialize() {
-                    const status = document.querySelector("#status");
-                    var input = document.getElementById('autocomplete');
-                    var autocomplete = new google.maps.places.Autocomplete(input);
-                    status.textContent = "Please Set Your Location";
-                    autocomplete.addListener('place_changed', function() {
-                        var place = autocomplete.getPlace();
-                        $('#latitude').val(place.geometry['location'].lat());
-                        $('#longitude').val(place.geometry['location'].lng());
-                        // document.getElementById("loc").style.display = "none";
-                        address = place.formatted_address;
-                        status.textContent = address.substring(0, 40);
-                        status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
+        function initialize() {
+            const status = document.querySelector("#status");
+            var input = document.getElementById('autocomplete');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            status.textContent = "Please Set Your Location";
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                $('#latitude').val(place.geometry['location'].lat());
+                $('#longitude').val(place.geometry['location'].lng());
+                // document.getElementById("loc").style.display = "none";
+                address = place.formatted_address;
+                status.textContent = address.substring(0, 40);
+                status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status
+                    .textContent.lastIndexOf(" ")));
 
-                        // call ajax to store lat long
-                        $.ajax({
-                            type: 'POST',
-                            url: "{{ route('store.location') }}",
-                            data: {
-                                '_token': "{{ csrf_token() }}",
-                                'latitude': place.geometry['location'].lat(),
-                                'longitude': place.geometry['location'].lng(),
-                                'address': address,
-                                'session_id': '{{ Session::getId() }}',
-                                'ip_address': '{{ Request::ip() }}'
-                            },
-                            success: function(data) {
-                                // if (data.success == true) {
-                                //     toastr.success(data.message);
-                                // } else {
-                                //     toastr.error(data.error);
-                                // }
-                            }
-                        });
-                        closeNav();
-                    });
-                }
+                // call ajax to store lat long
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('store.location') }}",
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                        'latitude': place.geometry['location'].lat(),
+                        'longitude': place.geometry['location'].lng(),
+                        'address': address,
+                        'session_id': '{{ Session::getId() }}',
+                        'ip_address': '{{ Request::ip() }}'
+                    },
+                    success: function(data) {
+                        // if (data.success == true) {
+                        //     toastr.success(data.message);
+                        // } else {
+                        //     toastr.error(data.error);
+                        // }
+                    }
+                });
+                closeNav();
+            });
+        }
     </script>
     @stack('scripts')
 </body>

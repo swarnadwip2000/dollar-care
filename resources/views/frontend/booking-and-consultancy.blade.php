@@ -438,4 +438,8 @@
             });
         });
     </script>
+    <script>
+        const messaging = firebase.messaging();
+         messaging.usePublicVapidKey("{{ env('FIREBASE_PUBLIC_VAPID_KEY') }}");
+    </script>
 @endpush
