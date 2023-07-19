@@ -5180,6 +5180,7 @@ a:hover{
     line-height: 18px;
 }
 .modal-2 .modal-body .form-control {
+.modal-2 .modal-body .form-control{    
     padding: 3px;
     border-radius: 10px;
 }
