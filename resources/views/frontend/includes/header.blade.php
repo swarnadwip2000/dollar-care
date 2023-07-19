@@ -56,15 +56,9 @@
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                         @endif
                     @else
-                        @if (session()->has('address'))
-                            <span id="status">{{ substr(session()->get('address'), 0, 50) }}</span>
-                            <span id="map-link"></span>
-                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
-                        @else
                             <span id="status">Please Set Your Location</span>
                             <span id="map-link"></span>
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
-                        @endif
                     @endif
                     
                   </div>
@@ -76,8 +70,15 @@
                 <div id="cssmenu">
                     <ul>
                         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="{{ Request::is('telehealth') ? 'active' : '' }}"><a
-                                href="{{ route('telehealth') }}">Telehealth</a></li>
+                        <li class="{{ Request::is('telehealth') ? 'active' : '' }}">
+                            @if (auth()->check())
+                                @if (auth()->user()->hasRole('PATIENT') || auth()->user()->hasRole('DOCTOR'))
+                                    <a href="{{ route('telehealth') }}">Telehealth</a>
+                                @endif
+                            @else
+                                <a href="javascript:void(0)" onclick="javascript:openTelehealth()" role="button" class="btn">Telehealth</a>
+                            @endif
+
                         <!-- <ul>
                             <li><a href="#">Product 1</a>
                             <ul>
@@ -200,3 +201,6 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+
