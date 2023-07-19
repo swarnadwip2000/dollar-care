@@ -43,9 +43,10 @@ class TeleHealthController extends Controller
     {
         if($type == 'symptoms'){
             $data = Symptoms::where('symptom_slug', $slug)->where('symptom_status', 1)->first();
-            $doctors = $data->specialization->doctors()->where('status', 1)->get();
+            //get doctors with locations
+            $doctors = $data->specialization->doctors()->where('status', 1)->with('locations')->get();
             $type = 'symptoms';
-            // dd($doctors->locations);
+            dd($doctors);
             return view('frontend.doctors')->with(compact('doctors', 'data','type'));
         } else {
             $data = Specialization::where('slug', $slug)->first();
