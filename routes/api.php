@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Docotor\AuthController as DocotorAuthController;
 use App\Http\Controllers\Api\Docotor\ForgetPasswordController as DocotorForgetPasswordController;
+use App\Http\Controllers\Api\FCMController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\Patient\AuthController;
 use App\Http\Controllers\Api\Patient\ForgetPasswordController;
@@ -39,4 +40,7 @@ Route::prefix('v1')->group(function () {
 
     Route::post('symptoms',[HomeController::class,'symptoms']);
     Route::post('specializations',[HomeController::class,'specializations']);
+
 });
+
+Route::post('/save-token', [FCMController::class,'index']);

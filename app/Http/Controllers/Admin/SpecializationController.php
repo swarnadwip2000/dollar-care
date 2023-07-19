@@ -141,7 +141,15 @@ class SpecializationController extends Controller
 
     public function delete($id)
     {
-        
+            
+            $specialization = Specialization::findOrFail($id);
+            if ($specialization->image) {
+                $currentImageFilename = $specialization->image; // get current image name
+                Storage::delete('app/' . $currentImageFilename);
+            }
+            $specialization->delete();
+    
+            return redirect()->back()->with('error', 'Specialization deleted successfully.');
     }
 
     public function changeStatus(Request $request)

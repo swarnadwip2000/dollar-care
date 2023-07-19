@@ -35,25 +35,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/select2.min.css') }}">
-        <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+       
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB-XF7sdkBhl3qwsUFnvIeBwqPUB9E0LXo",
-            authDomain: "dollar-care-2d690.firebaseapp.com",
-            projectId: "dollar-care-2d690",
-            storageBucket: "dollar-care-2d690.appspot.com",
-            messagingSenderId: "293505905939",
-            appId: "1:293505905939:web:ecbe54f5f847212919d6e6"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        </script>
         @stack('styles')
 </head>
 
@@ -149,7 +132,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // export 'default' from './firebase-app.js';
+        var firebaseConfig = {
+          apiKey: "AIzaSyB-XF7sdkBhl3qwsUFnvIeBwqPUB9E0LXo",
+          authDomain: "dollar-care-2d690.firebaseapp.com",
+          projectId: "dollar-care-2d690",
+          storageBucket: "dollar-care-2d690.appspot.com",
+          messagingSenderId: "293505905939",
+          appId: "1:293505905939:web:32e4e935d5f1c48b19d6e6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+   
     <script>
         @if (Session::has('message'))
             toastr.options = {
