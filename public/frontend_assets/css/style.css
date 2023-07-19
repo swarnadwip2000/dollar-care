@@ -5159,7 +5159,7 @@ a:hover{
     font-weight: 600;
 } */
 /* 18-07-2023 */
- .toggle-1{
+.toggle-1 {
     position: absolute;
     top: 50%;
     right: 0;
@@ -5167,22 +5167,77 @@ a:hover{
     border: none;
     background: transparent;
 }
-.toggle-1 i{
-  font-size: 16px;
+.toggle-1 i {
+    font-size: 16px;
 }
 
-.modal-2 .modal-body p{
-   font-size: 14px;
-   line-height: 18px;
-}
-.modal-2 .modal-body .form-group label{
+.modal-2 .modal-body p {
     font-size: 14px;
     line-height: 18px;
 }
-.modal-2 .modal-body .form-control{
+.modal-2 .modal-body .form-group label {
+    font-size: 14px;
+    line-height: 18px;
+}
+.modal-2 .modal-body .form-control {
     padding: 3px;
     border-radius: 10px;
 }
-.modal-2 .modal-footer .btn{
+.modal-2 .modal-footer .btn {
     background-image: linear-gradient(90deg, #1851b5 0%, #ed1b24 100%);
+}
+/* congratulation-sec */
+.congratulation-sec {
+    padding: 100px 0px;
+}
+.congo-text h2 {
+    font-size: 48px;
+    line-height: 60px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--main-color);
+}
+.congo-text h3 {
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: 400;
+    color: var(--black-color);
+}
+.congratulation-sec-wrap {
+    text-align: center;
+}
+.congo-img {
+    /* width: 100%;
+    height: 50px; */
+}
+.congo-img img {
+    /* width: 100%;
+    height: 100%;
+    object-fit: cover; */
+}
+/* booking-and-consultancy */
+.cl-name-div {
+    margin-bottom: 20px;
+}
+.clinic-name-ck .form-check .form-text h3 {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    color: var(--semi-black);
+}
+.clinic-name-ck .form-check .form-text p {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: rgb(64 64 64 / 50%);
+}
+.clinic-name-ck .form-check .form-text {
+    margin-top: 0;
+}
+.clinic-name-ck .form-check {
+    margin-bottom: 15px;
+}
+.clinic-name-ck .form-check-input:checked {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }

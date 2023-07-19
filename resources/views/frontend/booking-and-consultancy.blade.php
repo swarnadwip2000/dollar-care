@@ -91,6 +91,83 @@
     </section>
     <section class="cl-tm-slot booking-slot">
         <div class="container">
+            <div class="cl-name-div">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="cl-slot-wrap">
+                            <div class="cl-slot-icon d-flex align-items-center">
+                                <i class="fa-solid fa-house-chimney-medical"></i>
+                                <h3>Clinic Name</h3>
+                            </div>
+                            <div class="clinic-name-ck-div">
+                                <div class="clinic-name-ck">
+                                    <form action="">
+                                        <div class="row align-items-center justify-content-between">
+                                            <div class="col-xl-5 col-12">
+                                                <div class="form-check d-flex">
+                                                    <div class="form-check-box">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="flexRadioDefault" id="flexRadioDefault2">
+                                                    </div>
+                                                    <div class="form-text">
+                                                        <h3>ABCD Medical Hall </h3>
+                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
+                                                            United
+                                                            States</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-5 col-12">
+                                                <div class="form-check d-flex">
+                                                    <div class="form-check-box">
+                                                        <input class="form-check-input" name="flexRadioDefault" type="radio" value=""
+                                                            id="flexRadioDefault1">
+                                                    </div>
+                                                    <div class="form-text">
+                                                        <h3>RRR Medical Hall </h3>
+                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
+                                                            United
+                                                            States</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-5 col-12">
+                                                <div class="form-check d-flex">
+                                                    <div class="form-check-box">
+                                                        <input class="form-check-input" name="flexRadioDefault" type="radio" value=""
+                                                            id="flexRadioDefault4">
+                                                    </div>
+                                                    <div class="form-text">
+                                                        <h3>BBAS Medical Hall </h3>
+                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
+                                                            United
+                                                            States</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-5 col-12">
+                                                <div class="form-check d-flex">
+                                                    <div class="form-check-box"> 
+                                                        <input class="form-check-input" name="flexRadioDefault" type="radio" value=""
+                                                            id="flexRadioDefault3">
+                                                    </div>
+                                                    <div class="form-text">
+                                                        <h3>RRR Medical Hall </h3>
+                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
+                                                            United
+                                                            States</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <div class="cl-tm-slot-wrap">
                 <div class="row">
                     <div class="col-xl-6 col-md-12">
@@ -299,10 +376,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                                                         <div class="find-doc-slide-img">
-                                                             <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                                         </div>
-                                                     </div> -->
+                                                                                                                                                                                                                                                                                             <div class="find-doc-slide-img">
+                                                                                                                                                                                                                                                                                                 <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                                                                                                                                                                                                                                                                             </div>
+                                                                                                                                                                                                                                                                                         </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -445,7 +522,8 @@
         function sendTokenToServer(fcm_token) {
             const user_id = "{{ Auth::user()->id }}";
             axios.post('/api/save-token', {
-                fcm_token , user_id
+                fcm_token,
+                user_id
             }).then(res => {
                 console.log(res);
             })

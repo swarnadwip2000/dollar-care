@@ -59,7 +59,7 @@ Route::get('clear', function () {
 Route::get('/admin', [AuthController::class, 'redirectAdminLogin']);
 Route::get('/admin/login', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/login-check', [AuthController::class, 'loginCheck'])->name('admin.login.check');  //login check
-Route::post('forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('admin.forget.password');
+Route::post('admin/forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('admin.forget.password');
 Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
 Route::get('forget-password/show', [ForgetPasswordController::class, 'forgetPasswordShow'])->name('admin.forget.password.show');
 Route::get('reset-password/{id}/{token}', [ForgetPasswordController::class, 'resetPassword'])->name('admin.reset.password');
@@ -277,4 +277,9 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     });
     // logout
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
+});
+
+
+Route::get('/thanks', function () {
+    return view('frontend.thanks');
 });
