@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-xl-3 col-md-3 col-12">
                                     <div class="find-doc-slide-text">
-                                        <h5>Beadon Street</h5>
+                                        <h5></h5>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
     <section class="cl-tm-slot booking-slot">
         <div class="container">
             <div class="cl-tm-slot-wrap">
-                <div class="row">
+                <div class="row justify-content-center align-items-center">
                     <div class="col-xl-6 col-md-12">
                         <div class="cl-slot-wrap">
                             <div class="cl-slot-icon d-flex align-items-center">
@@ -258,6 +258,13 @@
                         </div>
                     </div>
                 </div>
+               <div class="row justify-content-center align-items-center">
+                <div class="col-xl-4 col-md-6 col-12">
+                <div class="main-btn-p pt-4">
+                  <input type="submit" value="Book" class="sub-btn">
+                 </div>     
+                </div>     
+               </div>
             </div>
         </div>
     </section>

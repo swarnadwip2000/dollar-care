@@ -15,7 +15,7 @@ class BookingAndConsultancyController extends Controller
     {
         $id = decrypt($id);
         $doctor = User::find($id);
-        // dd($user);
+        // dd($user->locations);
         return view('frontend.booking-and-consultancy')->with(compact('doctor'));
     }
 
