@@ -35,25 +35,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/select2.min.css') }}">
-        <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+       
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB-XF7sdkBhl3qwsUFnvIeBwqPUB9E0LXo",
-            authDomain: "dollar-care-2d690.firebaseapp.com",
-            projectId: "dollar-care-2d690",
-            storageBucket: "dollar-care-2d690.appspot.com",
-            messagingSenderId: "293505905939",
-            appId: "1:293505905939:web:ecbe54f5f847212919d6e6"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        </script>
         @stack('styles')
 </head>
 
@@ -92,7 +75,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // export 'default' from './firebase-app.js';
+        var firebaseConfig = {
+          apiKey: "AIzaSyB-XF7sdkBhl3qwsUFnvIeBwqPUB9E0LXo",
+          authDomain: "dollar-care-2d690.firebaseapp.com",
+          projectId: "dollar-care-2d690",
+          storageBucket: "dollar-care-2d690.appspot.com",
+          messagingSenderId: "293505905939",
+          appId: "1:293505905939:web:32e4e935d5f1c48b19d6e6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+   
     <script>
         @if (Session::has('message'))
             toastr.options = {
@@ -198,22 +197,22 @@
             var lat = {{ Session::get('latitude') ?? '' }};
             var user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
             // check if user has location
-            var location = JSON.parse("{{ Auth::check() ? Auth::user()->locations : 0 }}".replace(/&quot;/g,'"'));
-            if(user_id){
-                if(location){
+            var location = JSON.parse("{{ Auth::check() ? Auth::user()->locations : 0 }}".replace(/&quot;/g, '"'));
+            if (user_id) {
+                if (location) {
                     closeNav();
                     const status = document.querySelector("#status");
                     // status.textContent = "Please Set Your Location";
                     status.textContent = location[0].address;
-                    status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
-                } else if(lat){
+                    status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status
+                        .textContent.lastIndexOf(" ")));
+                } else if (lat) {
                     closeNav();
                     var latitude = {{ Session::get('latitude') }};
                     var longitude = {{ Session::get('longitude') }};
                     // get location by lat long
                     $.ajax({
-                        type
-                        : 'GET',
+                        type: 'GET',
                         url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE`,
                         success: function(data) {
                             if (data.status == 'OK') {
@@ -221,7 +220,8 @@
                                 const status = document.querySelector("#status");
                                 // status.textContent = "Please Set Your Location";
                                 status.textContent = address.substring(0, 40);
-                                status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
+                                status.textContent = status.textContent.substr(0, Math.min(status
+                                    .textContent.length, status.textContent.lastIndexOf(" ")));
                                 $('#status').text(status.textContent);
                                 console.log(status.textContent);
                             }
@@ -231,9 +231,9 @@
                     openNav();
                 }
             }
-            
-            
-            
+
+
+
         });
     </script>
     <script>

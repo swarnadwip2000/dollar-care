@@ -299,10 +299,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                                                     <div class="find-doc-slide-img">
-                                                         <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                                     </div>
-                                                 </div> -->
+                                                         <div class="find-doc-slide-img">
+                                                             <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                                         </div>
+                                                     </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -440,6 +440,27 @@
     </script>
     <script>
         const messaging = firebase.messaging();
-         messaging.usePublicVapidKey("{{ env('FIREBASE_PUBLIC_VAPID_KEY') }}");
+        messaging.usePublicVapidKey("{{ env('FIREBASE_PUBLIC_VAPID_KEY') }}");
+        // Request Permission of Notifications
+        function sendTokenToServer(fcm_token) {
+            const user_id = "{{ Auth::user()->id }}";
+            axios.post('/api/save-token', {
+                fcm_token , user_id
+            }).then(res => {
+                console.log(res);
+            })
+        }
+
+        messaging.getToken().then((currentToken) => {
+            if (currentToken) {
+                sendTokenToServer(currentToken);
+            } else {
+                console.warn('Cannot get token');
+                requestPermission();
+            }
+        }).catch(err => {
+            console.warn(err);
+            // showToken('Error retrieving Instance ID token', err);
+        });
     </script>
 @endpush
