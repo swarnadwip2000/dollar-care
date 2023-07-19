@@ -216,9 +216,9 @@ Route::post('/reset-password', [FrontendForgetPasswordController::class, 'resetP
 // newsletter
 Route::post('/newsletter', [FrontendNewsletterController::class, 'newsletter'])->name('newsletter');
 
+Route::get('/telehealth', [TeleHealthController::class, 'telehealth'])->name('telehealth');
 Route::group(['middleware' => 'access.telehealth'], function () {
     // telehealth
-    Route::get('/telehealth', [TeleHealthController::class, 'telehealth'])->name('telehealth');
     Route::get('/view-all-specializations', [TeleHealthController::class, 'viewAllSpecializations'])->name('all-specializations');
     Route::get('/search-specilzation', [TeleHealthController::class, 'searchSpecialization'])->name('search.specilzation');
     // doctors

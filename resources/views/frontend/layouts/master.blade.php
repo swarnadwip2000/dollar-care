@@ -82,6 +82,63 @@
             <a href="#"><span>Ask a Question</span></a>
         </div>
     </div>
+
+    <div class="modal modal-2" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please Login!!</p>
+
+        <form class="" action="{{ route('login.check') }}" method="post">
+            @csrf
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label">Email ID</label>
+                <input type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" value="{{ old('email') }}" name="email" />
+                @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="txtPassword">Password</label>
+                <div class="position-relative">
+                    <input type="password" id="password-field" class="form-control"
+                        name="password" />
+                    <button type="button" id="btnToggle" class="toggle toggle-1">
+                        <i id="eyeIcon" toggle="#password-field" class="fa fa-eye-slash toggle"></i>
+                    </button>
+                </div>
+                @if ($errors->has('password'))
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                @endif
+                <div class="login-text text-right">
+                    <p>
+                        <a href="{{ route('forget.password') }}">Forgot Password?</a>
+                    </p>
+                </div>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn-login">
+                LOGIN
+            </button>
+            <div class="login-text login-text-2 text-center">
+                <p>
+                    Don’t Have an Account? <a href="{{ route('register') }}">Register NOW</a>
+                </p>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script src="{{ asset('frontend_assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -192,50 +249,7 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            openNav();
-            var lat = {{ Session::get('latitude') ?? '' }};
-            var user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
-            // check if user has location
-            var location = JSON.parse("{{ Auth::check() ? Auth::user()->locations : 0 }}".replace(/&quot;/g,'"'));
-            if(user_id){
-                if(location){
-                    closeNav();
-                    const status = document.querySelector("#status");
-                    // status.textContent = "Please Set Your Location";
-                    status.textContent = location[0].address;
-                    status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
-                } else if(lat){
-                    closeNav();
-                    var latitude = {{ Session::get('latitude') }};
-                    var longitude = {{ Session::get('longitude') }};
-                    // get location by lat long
-                    $.ajax({
-                        type
-                        : 'GET',
-                        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE`,
-                        success: function(data) {
-                            if (data.status == 'OK') {
-                                var address = data.results[0].formatted_address;
-                                const status = document.querySelector("#status");
-                                // status.textContent = "Please Set Your Location";
-                                status.textContent = address.substring(0, 40);
-                                status.textContent = status.textContent.substr(0, Math.min(status.textContent.length, status.textContent.lastIndexOf(" ")));
-                                $('#status').text(status.textContent);
-                                console.log(status.textContent);
-                            }
-                        }
-                    });
-                } else {
-                    openNav();
-                }
-            }
-            
-            
-            
-        });
-    </script>
+    
     <script>
         /* Set the width of the side navigation to 250px */
         function openNav() {
@@ -259,7 +273,7 @@
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                status.textContent = "Please Set Your Location";
+                // status.textContent = "Please Set Your Location";
                 mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
                 // mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
                 console.log(latitude, longitude);
@@ -330,7 +344,7 @@
             const status = document.querySelector("#status");
             var input = document.getElementById('autocomplete');
             var autocomplete = new google.maps.places.Autocomplete(input);
-            status.textContent = "Please Set Your Location";
+            // status.textContent = "Please Set Your Location";
             autocomplete.addListener('place_changed', function() {
                 var place = autocomplete.getPlace();
                 $('#latitude').val(place.geometry['location'].lat());
@@ -363,6 +377,10 @@
                 });
                 closeNav();
             });
+        }
+
+        function openTelehealth() {
+            $("#myModal").modal('show');
         }
     </script>
     @stack('scripts')

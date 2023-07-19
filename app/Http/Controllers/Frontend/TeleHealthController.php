@@ -17,7 +17,7 @@ class TeleHealthController extends Controller
         $blog = Blog::orderBy('id', 'desc')->first();
         $symptoms = Symptoms::orderBy('id', 'desc')->where('symptom_status', 1)->get();
         $speciliaztions = Specialization::orderBy('id', 'desc')->where('status', 1)->get();
-        return view('frontend.telehealth')->with(compact('blogs', 'blog', 'symptoms', 'speciliaztions'));
+        return view('frontend.telehealth')->with(compact('blogs', 'blog', 'symptoms', 'speciliaztions'));                
     }
 
     public function  viewAllSpecializations()

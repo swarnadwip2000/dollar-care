@@ -5158,3 +5158,31 @@ a:hover{
     font-size: 20px;
     font-weight: 600;
 } */
+/* 18-07-2023 */
+ .toggle-1{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: transparent;
+}
+.toggle-1 i{
+  font-size: 16px;
+}
+
+.modal-2 .modal-body p{
+   font-size: 14px;
+   line-height: 18px;
+}
+.modal-2 .modal-body .form-group label{
+    font-size: 14px;
+    line-height: 18px;
+}
+.modal-2 .modal-body .form-control{
+    padding: 3px;
+    border-radius: 10px;
+}
+.modal-2 .modal-footer .btn{
+    background-image: linear-gradient(90deg, #1851b5 0%, #ed1b24 100%);
+}

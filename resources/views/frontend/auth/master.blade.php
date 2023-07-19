@@ -81,6 +81,12 @@
         @endif
     </script>
 
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal('show');
+        });
+    </script>
+
     @stack('scripts')
 </body>
 
