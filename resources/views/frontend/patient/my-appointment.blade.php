@@ -8,6 +8,9 @@
 @endpush
 
 @section('content')
+@php
+    use App\Helpers\Helper;
+@endphp
     <section class="sidebar-sec" id="body-pd">
         <div class="container-fluid">
             <div class="sidebar-wrap d-flex justify-content-between">
@@ -26,6 +29,7 @@
                                     <div class="clinicl-head">
                                         <h3>Clinical Consultation</h3>
                                     </div>
+                                    @if($appointments->count() > 0)
                                     <div class="clinical-box-wrap">
                                         <div class="row">
                                             <div class="col-xl-4 col-12">
@@ -37,7 +41,7 @@
                                                         <div class="row">
                                                             <div class="col-xl-8">
                                                                 <div class="my-app-head">
-                                                                    <h4>00.15 min left</h4>
+                                                                    {{-- <h4>00.15 min left</h4> --}}
                                                                 </div>
                                                                 <div
                                                                     class="profile-div profile-div-2 d-flex justify-content-center align-items-center">
@@ -46,10 +50,11 @@
                                                                             alt="">
                                                                     </div>
                                                                     <div class="profile-text">
-                                                                        <h2>Dr. Sandip Rungta</h2>
-                                                                        <p> Ear-Nose-Throat (ENT)
-                                                                            Special</p>
-                                                                        <p>14-17 years experience</p>
+                                                                        <h2>Dr. {{ $appointments[0]['doctor']['name'] }}</h2>
+                                                                        <p> 
+                                                                            {{ Helper::getDoctorSpecializations($appointments[0]['doctor']['id']) }}
+                                                                        </p>
+                                                                        <p>{{ $appointments[0]['doctor']['year_of_experience'] }} years experience</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -59,18 +64,16 @@
                                                             <div class="app-time app-time-1 me-3">
                                                                 <h3><i class="fa-solid fa-house-chimney-medical"></i>
                                                                     Clinic Details</h3>
-                                                                <p>ABCD Medical Hall
-                                                                    <span>JC 16 & JK 02 block
-                                                                        7777</span>
+                                                                <p>
+                                                                    {{ $appointments[0]['clinic_name'] }}
+                                                                    <span>{{ $appointments[0]['clinic_address'] }}</span>
                                                                 </p>
                                                             </div>
 
                                                             <div class="app-time app-time-2">
                                                                 <h3><i class="fa-regular fa-clock"></i>
                                                                     Appointment time</h3>
-                                                                <p>Mon, 24 Apr 05.00 PM <span>in 1 hour
-                                                                        and
-                                                                        15min</span>
+                                                                <p>{{ date('D, m M Y',strtotime($appointments[0]['appointment_date'])) }} 
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -268,6 +271,17 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @else 
+                                    <div class="clinical-box-wrap">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="no-data-found-img text-center">
+                                                    <img src="{{ asset('frontend_assets/images/no-data-found-removebg-preview.png') }}" alt="No Data Found" style="height: 150px; width:150px;">
+                                                    <h3>No Data Found</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="clinical-consultation-wrap">
                                     <div class="clinicl-head">
