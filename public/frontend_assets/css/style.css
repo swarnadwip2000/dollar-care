@@ -4036,6 +4036,17 @@ a .dt-slot-div p {
     background-color: var(--main-color);
 }
 
+#srl_2::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+#srl_2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--main-color);
+}
 /* My appointment */
 .clinicl-head {
     background: linear-gradient(79.92deg, #ed1b24 -8.2%, #1851b5 100.72%);

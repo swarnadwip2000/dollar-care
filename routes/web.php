@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\NotificationController as AdminNotificationContro
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
+use App\Http\Controllers\Doctor\BookingHistoryController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Doctor\ManageClinicController;
 use App\Http\Controllers\Doctor\NotificationController as DoctorNotificationController;
@@ -275,6 +276,8 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
         Route::post('/update', [ManageClinicController::class, 'update'])->name('update');
         Route::get('/slot-delete/{id}', [ManageClinicController::class, 'slotDelete'])->name('slot-delete');
     });
+    Route::get('/booking-history', [BookingHistoryController::class, 'bookingHistory'])->name('booking-history');
+    Route::get('/booking-history-ajax', [BookingHistoryController::class, 'bookingHistoryAjax'])->name('booking-history-ajax');
     // logout
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
 });

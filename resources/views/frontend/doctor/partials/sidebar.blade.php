@@ -41,7 +41,7 @@
                         <div class="sub-head">
                             <h4>CLINIC VISIT</h4>
                         </div>
-                        <li> <a href="booking-history.html" class="nav_link"><i
+                        <li> <a href="{{ route('doctor.booking-history') }}" class="nav_link {{ Request::is('doctor/booking-history') ? 'active' : '' }}"><i
                                     class='bx bxs-calendar nav_icon'></i> <span
                                     class="nav_name">Booking History</span> </a></li>
                         <li><a href="{{ route('doctor.notifications') }}" class="nav_link {{ Request::is('doctor/notifications') ? 'active' : '' }}"> <i
