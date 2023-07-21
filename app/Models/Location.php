@@ -9,6 +9,10 @@ class Location extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'session_id'
+    ];
+
     // relationship with user
     public function user()
     {

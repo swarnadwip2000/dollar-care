@@ -10,6 +10,7 @@ use App\Models\Plan;
 use App\Models\Qna;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CmsController extends Controller
 {
@@ -89,8 +90,10 @@ class CmsController extends Controller
             $location->user_id = auth()->user()->id;
             $location->session_id = null;
         } else {
+            $session_id = Session::getId();
             $location->user_id = null;
-            $location->session_id = $request->session_id;
+            $location->session_id = $session_id;
+            $request->session()->put('session_id', $session_id);
         }        
         $location->ip_address = $request->ip_address;
         $location->address = $request->address;
@@ -98,7 +101,7 @@ class CmsController extends Controller
         $location->longitude = $request->longitude;
         $location->save();
 
-
+       
         $request->session()->put('latitude', $request->latitude);
         $request->session()->put('longitude', $request->longitude);
         $request->session()->put('address', $request->address);

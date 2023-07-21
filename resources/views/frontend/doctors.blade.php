@@ -54,9 +54,8 @@
                             <form action="">
                                 <label for="exampleFormControlInput1" class="form-label">Filter</label>
                                 <select class="form-select" aria-label="Default select example">
-                                    <option selected>Clinical & Video consultation</option>
-                                    <option value="1">Clinical Consultation</option>
-                                    <option value="2">Video Consultation</option>
+                                    <option value="1" selected>Clinical Consultation</option>
+                                    <option value="2">Clinical & Video consultation</option>
                                 </select>
                             </form>
                         </div>
@@ -65,8 +64,8 @@
                                 <label for="exampleFormControlInput1" class="form-label">Sort by</label>
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Alphabetic</option>
-                                    <option value="1">Alphabetic 1</option>
-                                    <option value="2">Alphabetic 2</option>
+                                    <option value="1">A-Z</option>
+                                    <option value="2">Z-A</option>
                                     <option value="3">Alphabetic 3</option>
                                 </select>
                             </form>
@@ -93,7 +92,7 @@
                         <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
                     </div>
                     <div class="doc-avl-text">
-                        
+                      <h4> {{ $doctors->count() }} Doctors available</h4>
                     </div>
                 </div>
             </div>

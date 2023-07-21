@@ -248,6 +248,13 @@
             });
         });
     </script>
+    <script>
+        @if(!Auth::check() || !Session::has('latitude'))
+        $(document).ready(function(){
+            openNav();
+        });
+        @endif
+    </script>
     
     <script>
         /* Set the width of the side navigation to 250px */

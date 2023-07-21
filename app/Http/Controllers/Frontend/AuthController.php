@@ -9,6 +9,7 @@ use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -32,12 +33,22 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // dd(session()->all());
             $user = Auth::user();
-            $location = Location::where('user_id', $user->id)->latest('id')->first();
+             $location = Location::where('user_id', $user->id)->latest('id')->first();
             if ($user->status == true) {
                 if ($location || session()->has('latitude')) {
                     if ($user->hasRole('DOCTOR')) {
+                        // dd(Session::all());
+                        if (Session::has('session_id')) {
+                            // return Session::get('session_id');
+                            Location::where('user_id', $user->id)->delete();
+                            Location::where('session_id', Session::get('session_id'))->update(['user_id'=>Auth::user()->id]);
+                        }
                         return redirect()->route('doctor.dashboard');
                     } else if ($user->hasRole('PATIENT')) {
+                        if (Session::has('session_id')) {
+                            Location::where('user_id', $user->id)->delete();
+                            Location::where('session_id', Session::get('session_id'))->update(['user_id'=>Auth::user()->id]);
+                        }
                         return redirect()->route('patient.dashboard');
                     } else {
                         Auth::logout();
@@ -45,7 +56,7 @@ class AuthController extends Controller
                     }
                 } else {
                     Auth::logout();
-                    return view('frontend.auth.location');
+                    return redirect()->route('home');
                 }
             } else {
                 Auth::logout();
