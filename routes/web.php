@@ -231,6 +231,7 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     // doctors
     Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
+    Route::post('/appointment-store', [TeleHealthController::class, 'storeAppointment'])->name('appointment-store');
     Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
 });
 
