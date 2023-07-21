@@ -40,13 +40,13 @@ class AuthController extends Controller
                         // dd(Session::all());
                         if (Session::has('session_id')) {
                             // return Session::get('session_id');
-                            Location::where('user_id', $user->id)->delete();
+                            // Location::where('user_id', $user->id)->delete();
                             Location::where('session_id', Session::get('session_id'))->update(['user_id'=>Auth::user()->id]);
                         }
                         return redirect()->route('doctor.dashboard');
                     } else if ($user->hasRole('PATIENT')) {
                         if (Session::has('session_id')) {
-                            Location::where('user_id', $user->id)->delete();
+                            // Location::where('user_id', $user->id)->delete();
                             Location::where('session_id', Session::get('session_id'))->update(['user_id'=>Auth::user()->id]);
                         }
                         return redirect()->route('patient.dashboard');

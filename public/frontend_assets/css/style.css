@@ -5252,3 +5252,31 @@ a:hover{
     background-color: var(--main-color);
     border-color: var(--main-color);
 }
+/* 21-07-2023 */
+.date-pick .form-check-label h3 {
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+    color: var(--semi-black);
+}
+.date-pick .form-check-label p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #02b434;
+    margin: 0;
+}
+.date-pick .form-check label {
+    padding: 20px 30px;
+    border: 0.5px solid #1e1e1e;
+    border-radius: 3px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.date-pick input[type="radio"] {
+    display: none;
+}
+.date-pick input[type="radio"]:checked + label {
+    color: #1e1e1e;
+    border-radius: 4px;
+    background: #bfd5ff;
+}

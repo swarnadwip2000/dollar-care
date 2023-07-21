@@ -249,7 +249,7 @@
         });
     </script>
     <script>
-        @if(!Auth::check() || !Session::has('latitude'))
+        @if(!Auth::check() && !Session::has('latitude'))
         $(document).ready(function(){
             openNav();
         });

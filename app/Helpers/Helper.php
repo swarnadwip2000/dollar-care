@@ -2,10 +2,15 @@
 
 namespace App\Helpers;
 
+use App\Models\Appointment;
 use App\Models\ClinicOpeningDay;
 use App\Models\DoctorSpecialization;
+use App\Models\Slot;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
-class Helper {
+
+class Helper
+{
 
     public static function countExpireDays($date)
     {
@@ -20,9 +25,9 @@ class Helper {
         $now = time(); // or your date as well
         $your_date = strtotime($date);
         $datediff = $your_date - $now;
-        if(round($datediff / (60 * 60 * 24)) < 0){
+        if (round($datediff / (60 * 60 * 24)) < 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -32,7 +37,7 @@ class Helper {
         // implode clinic opening days by "-" and return
         $clinicOpeningDays = ClinicOpeningDay::with('day')->where('clinic_details_id', $clinic_id)->get();
         // dd($clinicOpeningDays->toArray());
-        $days = array_map(function($clinicOpeningDay){
+        $days = array_map(function ($clinicOpeningDay) {
             return substr(ucfirst($clinicOpeningDay['day']['day']), 0, 3);
         }, $clinicOpeningDays->toArray());
         return implode('-', $days);
@@ -52,19 +57,62 @@ class Helper {
     {
         // get time in day:hour:minute:second format
         $now = time(); // or your date as well
-        $your_date = strtotime($date.' '.$time);
+        $your_date = strtotime($date . ' ' . $time);
         $datediff = $your_date - $now;
         $days = floor($datediff / (60 * 60 * 24));
         $hours = floor(($datediff - $days * (60 * 60 * 24)) / (60 * 60));
         $minutes = floor(($datediff - $days * (60 * 60 * 24) - $hours * (60 * 60)) / 60);
         $seconds = floor(($datediff - $days * (60 * 60 * 24) - $hours * (60 * 60) - $minutes * 60));
         // ruturn only days if days is greater than 0
-        if($days > 0){
-            return $days.' days';
-        }else{
-        //    return hours, minutes and seconds
-            return $hours.' hours '.$minutes.' minutes '.$seconds.' seconds';
-        }   
+        if ($days > 0) {
+            return $days . ' days';
+        } else {
+            //    return hours, minutes and seconds
+            return $hours . ' hours ' . $minutes . ' minutes ' . $seconds . ' seconds';
+        }
     }
 
+    public static function slotAvailable($slot_id)
+    {
+        $slot = Slot::where('id', $slot_id)->first();
+        $slot_start_time = $slot['slot_start_time'];
+        $slot_end_time = $slot['slot_end_time'];
+        $intervals = [];
+        $currentTime = Carbon::parse($slot_start_time);
+        $endTime = Carbon::parse($slot_end_time);
+
+        while ($currentTime->lte($endTime)) {
+            $intervals[] = $currentTime->format('h:i A');
+            $currentTime->addMinutes(30);
+        }
+        $slotAvailable = 0;
+        $slot_count = count($intervals);
+        foreach ($intervals as $key => $value) {
+           $appointment = Appointment::where(['appointment_date'=>$slot['slot_date'],'appointment_time'=>$intervals ])->first();
+            if ($appointment) {
+                $slotAvailable++;
+            }
+        }
+
+      
+
+        return $slot_count - $slotAvailable;
+    }
+
+    public static function slotSlice($slot_id)
+    {
+        $slot = Slot::where('id', $slot_id)->first();
+        $slot_start_time = $slot['slot_start_time'];
+        $slot_end_time = $slot['slot_end_time'];
+        $intervals = [];
+        $currentTime = Carbon::parse($slot_start_time);
+        $endTime = Carbon::parse($slot_end_time);
+
+        while ($currentTime->lte($endTime)) {
+            $intervals[] = $currentTime->format('h:i A');
+            $currentTime->addMinutes(30);
+        }
+
+        return $intervals;
+    }
 }

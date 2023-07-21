@@ -232,12 +232,16 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
     Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
+    Route::get('/visitSlotAjax', [BookingAndConsultancyController::class, 'visitSlotAjax'])->name('clinic.visit.slot-ajax');
+    Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
+    
 });
 
 
 // member ship 
 Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');
 Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');
+// clinic visit slot ajax
 
 
 

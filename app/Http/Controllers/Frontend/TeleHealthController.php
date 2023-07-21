@@ -48,7 +48,8 @@ class TeleHealthController extends Controller
         if ($type == 'symptoms') {
             $data = Symptoms::where('symptom_slug', $slug)->where('symptom_status', 1)->first();
             // get clinics within 10km radius
-            $latitude = AutH::user()->locations->latitude;
+            // dd(Auth::user());
+            $latitude = Auth::user()->locations->latitude;
             $longitude = Auth::user()->locations->longitude;
             $radius = 10;
             $clinics = ClinicDetails::select('id', 'user_id', 'clinic_name', 'clinic_address', 'clinic_phone', 'longitute', 'latitute', DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance'))->having('distance', '<', $radius)->with('users')->get()->groupBy('user_id');

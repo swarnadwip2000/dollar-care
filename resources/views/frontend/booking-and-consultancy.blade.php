@@ -40,7 +40,11 @@
                                     <div class="find-doc-slide-text">
                                         <h3>Dr. {{ $doctor['name'] }}</h3>
                                         <h4>{{ User::getDoctorSpecializations($doctor['id']) }}</h4>
-                                        <h4>License No. MD124563</h4>
+                                        <h4>
+                                            @if ($doctor['license_number'])
+                                                License No. {{ $doctor['license_number'] }}
+                                            @endif
+                                        </h4>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-md-3 col-12">
@@ -53,7 +57,7 @@
                                 </div>
                                 <div class="col-xl-3 col-md-3 col-12">
                                     <div class="find-doc-slide-text">
-                                        <h5></h5>
+                                        <h5>{{ $doctor['location'] }}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -69,11 +73,13 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8">
                         <div class="slot-div d-flex justify-content-center">
-                            <a href="javascript:void(0);">
-                                <div class="slot-1 slot-2 lft active-slot clinic-visit">
-                                    <h3>Clinic Visit Slots</h3>
-                                </div>
-                            </a>
+                            @if ($clinics->count() > 0)
+                                <a href="javascript:void(0);">
+                                    <div class="slot-1 slot-2 lft active-slot clinic-visit">
+                                        <h3>Clinic Visit Slots</h3>
+                                    </div>
+                                </a>
+                            @endif
                             <a href="javascript:void(0);">
                                 <div class="slot-1 chat" id="show-chat">
                                     {{-- add chat class when implemetation start --}}
@@ -89,265 +95,70 @@
     <section class="chat-sec chat-slot" id="chat-view">
         @include('frontend.chat')
     </section>
-    <section class="cl-tm-slot booking-slot">
-        <div class="container">
-            <div class="cl-name-div">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="cl-slot-wrap">
-                            <div class="cl-slot-icon d-flex align-items-center">
-                                <i class="fa-solid fa-house-chimney-medical"></i>
-                                <h3>Clinic Name</h3>
-                            </div>
-                            <div class="clinic-name-ck-div">
-                                <div class="clinic-name-ck">
-                                    <form action="">
-                                        <div class="row align-items-center justify-content-between">
-                                            <div class="col-xl-5 col-12">
-                                                <div class="form-check d-flex">
-                                                    <div class="form-check-box">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault2">
+    @if ($clinics->count() > 0)
+        <section class="cl-tm-slot booking-slot">
+            <form action="{{ route('appointment-store') }}" method="POST">
+                @csrf
+            <div class="container">
+                <div class="cl-name-div">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="cl-slot-wrap">
+                                <div class="cl-slot-icon d-flex align-items-center">
+                                    <i class="fa-solid fa-house-chimney-medical"></i>
+                                    <h3>Clinic Name</h3>
+                                </div>
+                                <div class="clinic-name-ck-div">
+                                    <div class="clinic-name-ck">
+                                       
+                                            <div class="row align-items-center justify-content-between">
+                                                @foreach ($clinics as $key => $clinic)
+                                                    <div class="col-xl-5 col-12">
+                                                        <div class="form-check d-flex">
+                                                            <div class="form-check-box">
+                                                                <input class="form-check-input clinic_add" type="radio" value="{{ $clinic['id'] }}"
+                                                                    name="clinic_name" id="clinic_name_{{ $clinic['id'] }}">
+                                                            </div>
+                                                            <div class="form-text">
+                                                                <h3>{{ $clinic['clinic_name'] }} </h3>
+                                                                <p>{{ $clinic['clinic_address'] }}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-text">
-                                                        <h3>ABCD Medical Hall </h3>
-                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
-                                                            United
-                                                            States</p>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
-                                            <div class="col-xl-5 col-12">
-                                                <div class="form-check d-flex">
-                                                    <div class="form-check-box">
-                                                        <input class="form-check-input" name="flexRadioDefault" type="radio" value=""
-                                                            id="flexRadioDefault1">
-                                                    </div>
-                                                    <div class="form-text">
-                                                        <h3>RRR Medical Hall </h3>
-                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
-                                                            United
-                                                            States</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-5 col-12">
-                                                <div class="form-check d-flex">
-                                                    <div class="form-check-box">
-                                                        <input class="form-check-input" name="flexRadioDefault" type="radio" value=""
-                                                            id="flexRadioDefault4">
-                                                    </div>
-                                                    <div class="form-text">
-                                                        <h3>BBAS Medical Hall </h3>
-                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
-                                                            United
-                                                            States</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-5 col-12">
-                                                <div class="form-check d-flex">
-                                                    <div class="form-check-box"> 
-                                                        <input class="form-check-input" name="flexRadioDefault" type="radio" value=""
-                                                            id="flexRadioDefault3">
-                                                    </div>
-                                                    <div class="form-text">
-                                                        <h3>RRR Medical Hall </h3>
-                                                        <p>2953 Duff Avenue, Winooski, Vermont, +1 802-445-4042, 05404,
-                                                            United
-                                                            States</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                     
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <div class="cl-tm-slot-wrap">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-xl-6 col-md-12">
-                        <div class="cl-slot-wrap">
-                            <div class="cl-slot-icon d-flex align-items-center">
-                                <i class="fa-solid fa-house-chimney-medical"></i>
-                                <h3>Clinic Visit Slots</h3>
-                            </div>
-                            <div class="dt-slot">
-                                <div class="row row-cols-xxl-3 row-cols-lg-2 row-cols-1">
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>Today, 24 Apr</h3>
-                                                <p>4 slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div p-blk">
-                                                <h3>25 Apr to 26 Apr</h3>
-                                                <p>No slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>Thu, 27 Apr</h3>
-                                                <p>4 slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>Today, 27 Apr</h3>
-                                                <p>4 slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>Today, 27 Apr</h3>
-                                                <p>4 slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>Today, 27 Apr</h3>
-                                                <p>4 slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>Today, 27 Apr</h3>
-                                                <p>4 slots available</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-md-12">
-                        <div class="cl-slot-wrap">
-                            <div class="cl-slot-icon d-flex align-items-center">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <h3>Today, 24 Apr</h3>
-                            </div>
-                            <div class="dt-slot">
-                                <div class="row row-cols-xxl-5 row-cols-lg-3 row-cols-md-2 row-cols-1">
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">
-                                            <div class="dt-slot-div">
-                                                <h3>05.00 PM</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                </div>
+                <div class="cl-tm-slot-wrap">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-xl-6 col-md-12" id="clinic_visit_slots">
+                            @include('frontend.ajax-clinic-visit')
+                        </div>
+                        <div class="col-xl-6 col-md-12" id="clinic_visit_slots_time">
+                            @include('frontend.ajax-clinic-visit-slot-time')
+                           
+                        </div>
+                    </div>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-xl-4 col-md-6 col-12">
+                            <div class="main-btn-p pt-4">
+                                <input type="submit" value="Book" class="sub-btn">
                             </div>
                         </div>
                     </div>
                 </div>
-               <div class="row justify-content-center align-items-center">
-                <div class="col-xl-4 col-md-6 col-12">
-                <div class="main-btn-p pt-4">
-                  <input type="submit" value="Book" class="sub-btn">
-                 </div>     
-                </div>     
-               </div>
             </div>
-        </div>
-    </section>
+        </form>
+        </section>
+    @endif
     <!-- Modal Start-->
-    <div class="modal on-modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal on-modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="mdl-img">
@@ -383,10 +194,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                                                                                                                                                                                                                                                                                             <div class="find-doc-slide-img">
-                                                                                                                                                                                                                                                                                                 <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                         </div> -->
+                                                                                                                                                                                                                                                                                                             <div class="find-doc-slide-img">
+                                                                                                                                                                                                                                                                                                                 <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                                                                                                                                                                                                                                                                                             </div>
+                                                                                                                                                                                                                                                                                                         </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -548,4 +359,42 @@
             // showToken('Error retrieving Instance ID token', err);
         });
     </script>
+
+    <script>
+        $('.clinic_add').on('change', function(){
+            var clinic_id = $(this).val();
+
+            $.ajax({
+                    url: "{{ route('clinic.visit.slot-ajax') }}",
+                    type: 'GET',
+                    data :{
+                        clinic_id :clinic_id
+                    },
+                    success: function(resp) {
+                        // console.log(resp.clinic.slots);
+
+                        $('#clinic_visit_slots').html(resp.view)
+                    }
+                });
+        });
+    </script>
+    
+<script>
+    $('.appointment-date').on('change', function(){
+        var slot_id = $(this).val();
+        // alert(slot_id)
+        $.ajax({
+                url: "{{ route('clinic.ajax-clinic-visit-slot-time') }}",
+                type: 'GET',
+                data :{
+                    slot_id :slot_id
+                },
+                success: function(resp) {
+                    // console.log(resp.clinic.slots);
+
+                    $('#clinic_visit_slots_time').html(resp.view)
+                }
+            });
+    });
+</script>
 @endpush
