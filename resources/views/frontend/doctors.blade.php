@@ -20,7 +20,7 @@
     </div>
 </section>
 
-
+@if($doctors->count() > 0)
 <section class="search-doc">
     <div class="container">
         <div class="search-doc-wrap">
@@ -66,7 +66,6 @@
                                     <option selected>Alphabetic</option>
                                     <option value="1">A-Z</option>
                                     <option value="2">Z-A</option>
-                                    <option value="3">Alphabetic 3</option>
                                 </select>
                             </form>
                         </div>
@@ -92,7 +91,11 @@
                         <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
                     </div>
                     <div class="doc-avl-text">
-                      <h4> {{ $doctors->count() }} Doctors available</h4>
+                        @if($doctors->count() > 0)
+                        <h4>{{ $doctors->count() }} Doctors available</h4>
+                        @else
+                        <h4>No Doctors available</h4>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -129,6 +132,17 @@
         </div>
     </div>
 </section>
+@else
+<section class="career">
+    <div class="container">
+      <div class="wrapper">
+        <div class="content">
+          <h1>No Doctor Found</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+@endif
 
 @endsection
 
