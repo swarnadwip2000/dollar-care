@@ -29,7 +29,7 @@ class ManageClinicController extends Controller
         $request->validate([
             'clinic_name' => 'required',
             'clinic_address' => 'required',
-            'clinic_phone' => 'required|numeric|min:10|max:12',
+            'clinic_phone' => 'required|numeric|digits_between:10,12',
             'day_id' => 'required',
         ], [
             'day_id.required' => 'Please select at least one day',
@@ -42,6 +42,7 @@ class ManageClinicController extends Controller
         $clinicDetail->clinic_phone = $request->clinic_phone;
         $clinicDetail->longitute = $request->longitude;
         $clinicDetail->latitute = $request->latitude;
+        $clinicDetail->address = $request->address;
         $clinicDetail->save();
 
         foreach ($request->day_id as $day) {

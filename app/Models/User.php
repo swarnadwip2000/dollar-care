@@ -51,7 +51,7 @@ class User extends Authenticatable
     // relationship with location
     public function locations()
     {
-        return $this->hasMany(Location::class, 'user_id');
+        return $this->hasOne(Location::class, 'user_id');
     }
 
     // specialization
