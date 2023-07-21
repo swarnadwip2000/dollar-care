@@ -20,7 +20,7 @@
     </div>
 </section>
 
-@if($doctors->count() > 0)
+
 <section class="search-doc">
     <div class="container">
         <div class="search-doc-wrap">
@@ -54,10 +54,9 @@
                             <form action="">
                                 <label for="exampleFormControlInput1" class="form-label">Filter</label>
                                 <select class="form-select" aria-label="Default select example">
-                                    <option selected>Clinical Consultation</option>
-                                    <option value="1">Clinical Consultation 1</option>
-                                    <option value="2">Clinical Consultation 2</option>
-                                    <option value="3">Clinical Consultation 3</option>
+                                    <option selected>Clinical & Video consultation</option>
+                                    <option value="1">Clinical Consultation</option>
+                                    <option value="2">Video Consultation</option>
                                 </select>
                             </form>
                         </div>
@@ -94,11 +93,7 @@
                         <img src="{{ asset('frontend_assets/images/doc-v.png') }}" alt="">
                     </div>
                     <div class="doc-avl-text">
-                        @if($data['doctor_count'] > 0)
-                        <h4>{{ $data['doctor_count'] }} Doctors available</h4>
-                        @else
-                        <h4>No Doctors available</h4>
-                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -118,7 +113,7 @@
                         <div class="find-doc-slide-text">
                             <h3>Dr. {{ $doctor->name }}</h3>
                             <h4>{{ User::getDoctorSpecializations($doctor['id']) }}</h4>
-                            <h5>Beadon Street</h5>
+                            <h5></h5>
                             <div class="pec-div">
                                 <span class="pec"><i class="fa-solid fa-thumbs-up"></i>99%</span>
                                 <span class="exp"><span class="dot-1"></span> {{ $doctor->year_of_experience }} Years Exp</span>
@@ -135,17 +130,7 @@
         </div>
     </div>
 </section>
-@else
-<section class="career">
-    <div class="container">
-      <div class="wrapper">
-        <div class="content">
-          <h1>No Doctor Found</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-@endif
+
 @endsection
 
 @push('scripts')

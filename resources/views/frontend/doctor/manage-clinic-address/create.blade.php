@@ -47,6 +47,11 @@
                                                         <input type="text" name="longitude" id="longitude"
                                                             class="form-control">
                                                     </div>
+                                                    <div class="form-group" id="addressArea">
+                                                        <label>Address</label>
+                                                        <input type="text" name="address" id="address"
+                                                            class="form-control">
+                                                    </div>
                                                     <div class="row g-3">
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <input type="text" class="form-control" id="clinic_name"
@@ -254,6 +259,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4
         $(document).ready(function() {
             $("#latitudeArea").addClass("d-none");
             $("#longtitudeArea").addClass("d-none");
+            $("#addressArea").addClass("d-none");
         });
     </script>
     <script>
@@ -266,6 +272,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4
                 var place = autocomplete.getPlace();
                 $('#latitude').val(place.geometry['location'].lat());
                 $('#longitude').val(place.geometry['location'].lng());
+                $('#address').val(place.formatted_address);
                 // $("#latitudeArea").removeClass("d-none");
                 // $("#longtitudeArea").removeClass("d-none");
             });

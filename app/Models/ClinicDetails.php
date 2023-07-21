@@ -13,4 +13,9 @@ class ClinicDetails extends Model
     {
         return $this->hasMany(ClinicOpeningDay::class, 'clinic_details_id', 'id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'clinic_details', 'id', 'user_id');
+    }
 }

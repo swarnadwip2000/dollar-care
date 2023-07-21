@@ -4,7 +4,7 @@
     <div class="location-div">
     <div class="search_box">
         <div class="search_field">
-            <input type="text" class="input" id="autocomplete" placeholder="Search your location">
+            <input type="text" class="input" id="autocomplete1" placeholder="Search your location">
             <button type="submit"><i class="fas fa-search"></i></button>
         </div>
     </div>
@@ -42,8 +42,8 @@
                   </div>
                   <div class="address_loa">
                     @if (Auth::check())
-                        @if (Auth::user()->locations->count() > 0)
-                            <span id="status">{{ substr((Auth::user()->locations[0]->address), 0, 50) }}</span>
+                        @if (Auth::user()->locations)
+                            <span id="status">{{ substr((Auth::user()->locations->address), 0, 50) }}</span>
                             <span id="map-link"></span>
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                         @elseif (session()->has('address'))

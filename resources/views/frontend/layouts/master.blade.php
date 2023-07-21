@@ -341,7 +341,7 @@
 
         function initialize() {
             const status = document.querySelector("#status");
-            var input = document.getElementById('autocomplete');
+            var input = document.getElementById('autocomplete1');
             var autocomplete = new google.maps.places.Autocomplete(input);
             // status.textContent = "Please Set Your Location";
             autocomplete.addListener('place_changed', function() {
