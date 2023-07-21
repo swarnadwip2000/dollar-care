@@ -8,6 +8,9 @@
 @endpush
 
 @section('content')
+@php
+    use App\Helpers\Helper;
+@endphp
 <section class="sidebar-sec" id="body-pd">
     <div class="container-fluid">
       <div class="sidebar-wrap d-flex justify-content-between">
@@ -37,6 +40,7 @@
             </div>
             <div class="my-app-div-wrap">
               <div class="row">
+                @if($upcominAppontment)
                 <div class="col-xl-6 col-12">
                   <div class="my-app-div">
                     <div class="my-app-head-wrap d-flex justify-content-between align-items-center">
@@ -44,7 +48,7 @@
                         <h3>My Appointment</h3>
                       </div>
                       <div class="my-app-head">
-                        <h4>00.15 min left</h4>
+                        <h4> {{ Helper::getLeftTimeFromDate($upcominAppontment['appointment_date'], $upcominAppontment['appointment_time']) }} left</h4>
                       </div>
                     </div>
                     <hr/>
@@ -55,9 +59,9 @@
                             <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
                           </div>
                           <div class="profile-text">
-                            <h2>Dr. Sandip Rungta</h2>
-                            <p> Ear-Nose-Throat (ENT) Special</p>
-                            <p>14-17 years experience</p>
+                            <h2>Dr. {{ $upcominAppontment['doctor']['name'] }}</h2>
+                            <p> {{ Helper::getDoctorSpecializations($upcominAppontment['doctor']['id']) }}</p>
+                            <p>{{ $upcominAppontment['doctor']['year_of_experience'] }} years experience</p>
                           </div>
                         </div>
                       </div>
@@ -69,7 +73,7 @@
                             </div>
                             <div class="app-time me-3">
                               <h3> Appointment time</h3>
-                              <p>Mon, 24 Apr 05.00 PM | <span>in 1 hour and 15min</span></p>
+                              <p>{{ date('D, d M Y',strtotime($upcominAppontment['appointment_date'])) }} {{$upcominAppontment['appointment_time']  }}</span></p>
                             </div>
                           </div>
                         </div>
@@ -82,8 +86,8 @@
                             </div>
                             <div class="app-time app-time-1">
                               <h3>Clinic Details</h3>
-                              <p>ABCD Medical Hall
-                                <span>JC 16 JK 02 block 7777</span>
+                              <p>{{ $upcominAppontment['clinic_name'] }}
+                                <span>{{ $upcominAppontment['clinic_address'] }}</span>
                               </p>
                             </div>
                           </div>
@@ -93,6 +97,7 @@
 
                   </div>
                 </div>
+                @endif
                 <div class="col-xl-6 col-12">
                   <div class="my-app-div justify-content-between align-items-center">
                     <div class="my-app-head-wrap d-flex justify-content-between align-items-center">

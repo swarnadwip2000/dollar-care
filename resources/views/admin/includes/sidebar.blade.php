@@ -43,7 +43,14 @@
                 </li>
 
                 <li class="menu-title">
-                    <span>Plan Management</span>
+                    <span>Clinic Management</span>
+                </li>
+                <li class="{{ Request::is('admin/appointments*') ? 'active' : ' ' }}">
+                    <a href="{{ route('appointments.index') }}" ><i class="fa fa-calendar"></i> <span>Appointments</span></a>                 
+                </li>
+
+                <li class="menu-title">
+                    <span>Plan Section</span>
                 </li>
                 <li class="{{ Request::is('admin/plans*') ? 'active' : ' ' }}">
                     <a href="{{ route('plans.index') }}" ><i class="la la-crown"></i> <span>Membership Plans</span></a>                 

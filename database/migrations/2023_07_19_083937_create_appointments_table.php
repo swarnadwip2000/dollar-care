@@ -24,6 +24,7 @@ class CreateAppointmentsTable extends Migration
             $table->enum('appointment_status', ['Done', 'Cancel', 'Pending'])->nullable();
             $table->string('booking_time')->nullable();
             $table->string('clinic_name')->nullable();
+            $table->string('clinic_phone')->nullable();
             $table->string('clinic_address')->nullable();
             $table->timestamps();
         });
