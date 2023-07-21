@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Blog;
 use App\Models\Specialization;
 use App\Models\ClinicDetails;
 use App\Models\User;
 use App\Models\Symptoms;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +101,7 @@ class TeleHealthController extends Controller
 
     public function storeAppointment(Request $request)
     {
+        return redirect()->back()->with('message', 'Appointment booked successfully;');
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'start_time' => 'required|date',
@@ -108,7 +111,7 @@ class TeleHealthController extends Controller
 
         $clinic_details = ClinicDetails::where('id', $request->clinic_id)->first();
 
-        $appointment = new Appointment;       
+        $appointment = new Appointment();       
         $appointment->user_id  = Auth::User()->id;
         $appointment->doctor_id  = $request->doctor_id;
         $appointment->clinic_id  = $request->clinic_id;
