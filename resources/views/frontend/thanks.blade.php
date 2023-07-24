@@ -27,6 +27,7 @@
             </div>
         </div>
     </section>
+    @Session::forget('remember')
 @endsection
 
 @push('scripts')

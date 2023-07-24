@@ -102,6 +102,7 @@
         <section class="cl-tm-slot booking-slot">
             <form action="{{ route('appointment-store') }}" method="POST">
                 @csrf
+                <input type="hidden" name="doctor_id" value="{{ $doctor['id'] }}">
                 <div class="container">
                     <div class="cl-name-div">
                         <div class="row">
@@ -115,16 +116,17 @@
                                         <div class="clinic-name-ck">
 
                                             <div class="row align-items-center justify-content-between">
+                                                {{-- @dd(Helper::countSlotAvailability($clinics[1]['id'])) --}}
                                                 @foreach ($clinics as $key => $clinic)
-                                                    <div class="col-xl-5 col-12">
+                                                    <div class="col-xl-5 col-12 @if(Helper::countSlotAvailability($clinic['id']) == 0) disable-or-not @endif">
                                                         <div class="form-check d-flex">
                                                             <div class="form-check-box">
                                                                 <input class="form-check-input clinic_add" type="radio"
-                                                                    value="{{ $clinic['id'] }}" name="clinic_name"
-                                                                    id="clinic_name_{{ $clinic['id'] }}">
+                                                                    value="{{ $clinic['id'] }}" name="clinic_id"
+                                                                    id="clinic_name_{{ $clinic['id'] }}" @if(Helper::countSlotAvailability($clinic['id']) == 0) disabled @endif>
                                                             </div>
                                                             <div class="form-text">
-                                                                <h3>{{ $clinic['clinic_name'] }} </h3>
+                                                                <h3 >{{ $clinic['clinic_name'] }} </h3>
                                                                 <p>{{ $clinic['clinic_address'] }}</p>
                                                             </div>
                                                         </div>
@@ -388,7 +390,7 @@
 
     <script>
         $('.appointment-date').on('change', function() {
-            var slot_id = $(this).val();
+            var slot_id = $(this).data('id');
             $('#loading').addClass('loading');
             $('#loading-content').addClass('loading-content');
             // alert(slot_id)

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Mail\ThankYouMail;
+use App\Models\Appointment;
 use App\Models\ClinicDetails;
 use App\Models\Slot;
 use App\Models\User;
@@ -12,6 +14,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 class BookingAndConsultancyController extends Controller
@@ -25,11 +30,9 @@ class BookingAndConsultancyController extends Controller
         $latitude = Auth::user()->locations->latitude;
         $longitude = Auth::user()->locations->longitude;
         $radius = 10;
-        $clinics = ClinicDetails::with(array('slots' => function($query) {
-            $query->whereBetween('slot_date',[date('Y-m-d'), date('Y-m-d', strtotime('+' . 7 . 'days'))]);
-        }))->where('user_id', $id)->select('id', 'user_id', 'clinic_name', 'clinic_address', 'clinic_phone', 'longitute', 'latitute', DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance'))->having('distance', '<', $radius)->get();
+        $clinics = ClinicDetails::where('user_id', $id)->select('id', 'user_id', 'clinic_name', 'clinic_address', 'clinic_phone', 'longitute', 'latitute', DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance'))->having('distance', '<', $radius)->get();
         // dd($clinics);   
-        return view('frontend.booking-and-consultancy')->with(compact('doctor','clinics'));
+        return view('frontend.booking-and-consultancy')->with(compact('doctor', 'clinics'));
     }
 
     public function doctorChat(Request $request)
@@ -55,7 +58,9 @@ class BookingAndConsultancyController extends Controller
     public function visitSlotAjax(Request $request)
     {
         if ($request->ajax()) {
-            $clinic_details = ClinicDetails::with('slots')->where('id', $request->clinic_id)->first();
+            $clinic_details = ClinicDetails::with(array('clinic_slots' => function ($query) {
+                $query->whereBetween('slot_date', [date('Y-m-d'), date('Y-m-d', strtotime('+' . 7 . 'days'))]);
+            }))->where('id', $request->clinic_id)->first();
             return response()->json(['view' => (string)View::make('frontend.ajax-clinic-visit')->with(compact('clinic_details'))]);
         }
     }
@@ -68,5 +73,55 @@ class BookingAndConsultancyController extends Controller
         }
     }
 
-    
+    public function storeAppointment(Request $request)
+    {
+        // return $request->all();
+        $validator = Validator::make($request->all(), [
+            'clinic_id' => 'required',
+            'appointment_date' => 'required',
+            'appointment_time' => 'required',
+            // Add other validation rules for your fields
+        ], [
+            'clinic_id.required' => 'Please Select Clinic for booking slot.',
+            'appointment_date.required' => 'Please Select Appointment Date for booking slot.',
+            'appointment_time.required' => 'Please Select Appointment Time for booking slot.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+        }
+
+        $count = Appointment::where(['user_id' => Auth::user()->id, 'appointment_date' => $request->appointment_date, 'appointment_status' => 'Done'])->count();
+        if ($count > 0) {
+            return redirect()->back()->with('error', 'You have already booked a appointment in this date !!');
+        }
+
+        $clinic_details = ClinicDetails::where('id', $request->clinic_id)->first();
+
+        $appointment = new Appointment();
+        $appointment->user_id  = Auth::User()->id;
+        $appointment->doctor_id  = $request->doctor_id;
+        $appointment->clinic_id  = $request->clinic_id;
+        $appointment->appointment_id = rand(000000, 999999);
+        $appointment->appointment_date  = $request->appointment_date;
+        $appointment->appointment_time  = $request->appointment_time;
+        $appointment->appointment_status = 'Done';
+        $appointment->booking_time  = Carbon::now();
+        $appointment->clinic_name  = $clinic_details->clinic_name;
+        $appointment->clinic_address = $clinic_details->clinic_address;
+        $appointment->clinic_phone = $clinic_details->clinic_phone;
+        $appointment->save();
+        Session::put('remember', 1);
+        $body = [
+            'appointment' => $appointment
+        ];
+        $email = Auth::user()->email;
+        Mail::to($email)->send(new ThankYouMail($body));
+        return redirect()->route('thank-you')->with('message', 'Appointment booked successfully!');
+    }
+
+    public function thankYou()
+    {
+        return view('frontend.thanks');
+    }
 }

@@ -88,7 +88,7 @@ class Helper
         $slotAvailable = 0;
         $slot_count = count($intervals);
         foreach ($intervals as $key => $value) {
-           $appointment = Appointment::where(['appointment_date'=>$slot['slot_date'],'appointment_time'=>$intervals ])->first();
+           $appointment = Appointment::where(['clinic_id'=>$slot['clinic_detail_id'],'appointment_date'=>$slot['slot_date'],'appointment_time'=>$value, 'appointment_status' => 'Done' ])->first();
             if ($appointment) {
                 $slotAvailable++;
             }
@@ -114,5 +114,17 @@ class Helper
         }
 
         return $intervals;
+    }
+
+    public static function countSlotAvailability($clinic_id)
+    {
+        $count = Slot::whereBetween('slot_date', [date('Y-m-d'), date('Y-m-d', strtotime('+' . 7 . 'days'))])->where('clinic_detail_id',$clinic_id)->count();
+        return $count;
+    }
+
+    public static function countSlotTimeAvailability($clinic_id, $time)
+    {
+        $count = Appointment::where(['clinic_id' => $clinic_id, 'appointment_time'=> $time, 'appointment_status' => 'Done'])->count();
+        return $count;
     }
 }

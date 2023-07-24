@@ -99,32 +99,5 @@ class TeleHealthController extends Controller
     }
 
 
-    public function storeAppointment(Request $request)
-    {
-        return redirect()->back()->with('message', 'Appointment booked successfully;');
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
-            // Add other validation rules for your fields
-        ]);
-
-        $clinic_details = ClinicDetails::where('id', $request->clinic_id)->first();
-
-        $appointment = new Appointment();       
-        $appointment->user_id  = Auth::User()->id;
-        $appointment->doctor_id  = $request->doctor_id;
-        $appointment->clinic_id  = $request->clinic_id;
-        $appointment->appointment_id = $request->appointment_id;
-        $appointment->appointment_date  = $request->appointment_date;
-        $appointment->appointment_time  = $request->appointment_time ;
-        $appointment->appointment_status = 'Pending';
-        $appointment->booking_time  = Carbon::now();
-        $appointment->clinic_name  = $clinic_details->clinic_name ;
-        $appointment->clinic_address = $clinic_details->clinic_address;
-        $appointment->clinic_phone = $clinic_details->clinic_phone;
-        $appointment->save();
-
-        return redirect()->route('appointments.index')->with('success', 'Appointment booked successfully!');
-    }
+    
 }

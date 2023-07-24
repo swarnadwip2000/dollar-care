@@ -231,10 +231,11 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     // doctors
     Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
-    Route::post('/appointment-store', [TeleHealthController::class, 'storeAppointment'])->name('appointment-store');
+    Route::post('/appointment-store', [BookingAndConsultancyController::class, 'storeAppointment'])->name('appointment-store');
     Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
     Route::get('/visitSlotAjax', [BookingAndConsultancyController::class, 'visitSlotAjax'])->name('clinic.visit.slot-ajax');
     Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
+    Route::get('/thank-you', [BookingAndConsultancyController::class, 'thankYou'])->name('thank-you');
     
 });
 
@@ -263,6 +264,7 @@ Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(
     Route::post('/help-and-support', [SettingController::class, 'helpAndSupport'])->name('help-and-support');
     // my appointment
     Route::get('/my-appointment', [AppointmentController::class, 'myAppointment'])->name('appointment');
+    Route::get('/my-appointment/cancel/{id}', [AppointmentController::class, 'myAppointmentCancel'])->name('my-appointment.cancel');
 });
 
 /**------------------------------------------------------------- Doctor  ----------------------------------------------------------------------------------------------*/

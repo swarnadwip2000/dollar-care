@@ -3358,6 +3358,7 @@ a .dt-slot-div p {
     box-shadow: 0px 4px 59px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 30px;
+    /* min-height: 375px; */
 }
 
 /* chat-sec */
@@ -3972,8 +3973,8 @@ a .dt-slot-div p {
 
 .app-time-img span {
     color: var(--main-color);
-    font-size: 30px;
-    padding-right: 30px;
+    font-size: 24px;
+    padding-right: 25px;
 }
 
 .app-time-1 p span {
@@ -3990,20 +3991,22 @@ a .dt-slot-div p {
 }
 
 .dr-name-img {
-    width: 80px;
-    height: 80px;
-    padding-right: 20px;
+    width: 50px;
+    height: 50px;
 }
-
+.dr-name-text {
+    padding-left: 10px;
+}
 .dr-name-img img {
     width: 100%;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     border-radius: 50%;
 }
 
 .dr-name-text h2 {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .dr-suggestion {
@@ -4151,10 +4154,14 @@ a .dt-slot-div p {
 
 .status-3 .app-time-2 h2 {
     color: #ee1b24;
+    font-weight: 500;
+    font-size: 12px;
 }
 
 .status-2 .app-time-2 h2 {
     color: #f8bf2d;
+    font-weight: 500;
+    font-size: 12px;
 }
 
 .clinical-consultation-wrap {
@@ -4219,7 +4226,7 @@ a .dt-slot-div p {
 
 .basic-plan h2 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     color: #1e1e1e;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -4227,14 +4234,14 @@ a .dt-slot-div p {
 
 .basic-plan h3 {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     color: #1e1e1e;
     text-transform: uppercase;
 }
 
 .basic-plan h4 {
     font-weight: 700;
-    font-size: 48px;
+    font-size: 40px;
     color: #1e1e1e;
     text-transform: uppercase;
     padding: 0px 10px;
@@ -4304,10 +4311,16 @@ a .dt-slot-div p {
     margin-bottom: 15px;
     padding: 20px;
 }
-
+.for-vdo {
+    padding: 10px 0px;
+}
 .for-vdo h3 {
     font-weight: 500;
-    font-size: 23px;
+    font-size: 20px;
+}
+.for-vdo h4 {
+    font-weight: 500;
+    font-size: 20px;
 }
 
 .for-vdo h3 span {
@@ -4769,7 +4782,7 @@ a .dt-slot-div p {
 }
 
 .profile-div-3 .profile-text h2 {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .patient-age h3 {
@@ -4908,6 +4921,7 @@ a .dt-slot-div p {
     font-size: 14px;
     border-bottom: none;
     padding: 15px;
+    width: 15%;
 }
 
 .booking-history-table .table-responsive .table tbody tr {
@@ -5261,7 +5275,7 @@ a:hover{
 }
 .date-pick .form-check-label p {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     color: #02b434;
     margin: 0;
 }
@@ -5314,3 +5328,46 @@ a:hover{
 }
 
 /* end loader */
+
+/*24-07-2023*/
+.myapp-div-wrap {
+    margin-bottom: 20px;
+    background: #ffffff;
+    box-shadow: 7px 4px 53px rgba(0, 0, 0, 0.11);
+    border-radius: 6px;
+    padding: 20px 15px;
+}
+.cancel_btn_1 {
+    background: #ffc0c0;
+    border: 1px solid #ee1b24;
+    color: #ee1b24;
+    font-size: 14px;
+    padding: 15px 25px;
+}
+.cancel_btn_1:hover {
+    color: #000;
+    background: #fff;
+    transition: all ease-in 0.3s;
+}
+.cancel_btn_1_div {
+    padding-top: 20px;
+    text-align: right;
+}
+
+.disable-or-not .form-text h3 {
+    color: #8e8e8e !important;
+}
+.disable-or-not .form-text p {
+    color: #8e8e8e !important;
+}
+
+.same-size {
+    min-height: 375px;
+}
+
+.size-fix {
+}
+
+.red-color{
+    color: #ee1b24 !important;
+}

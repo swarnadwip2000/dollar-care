@@ -22,8 +22,8 @@
         <div class="sidebar-right height-100">
           <div class="content">
             <div class="row">
-              <div class="col-xl-3">
-                <div class="profile-div d-flex justify-content-center align-items-center">
+              <div class="col-xl-12">
+                <div class="profile-div d-flex align-items-center">
                   <div class="profile-img">
                     @if(Auth::user()->profile_picture)
                     <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
@@ -53,8 +53,8 @@
                     </div>
                     <hr/>
                     <div class="row">
-                      <div class="col-xl-6 col-12">
-                        <div class="profile-div profile-div-2 d-flex align-items-center">
+                      <div class="col-xl-12 col-12">
+                        <div class="profile-div profile-div-2 d-flex">
                           <div class="profile-img">
                             <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
                           </div>
@@ -128,7 +128,7 @@
                             </div>
                           </div>
                           <div class="col-xl-4 col-md-6 col-12">
-                            <div class="app-time app-time-1 me-3">
+                            <div class="app-time app-time-1">
                               <h3><i class="fa-solid fa-house-chimney-medical"></i>
                                   Clinic Details</h3>
                               <p>ABCD Medical Hall

@@ -13,9 +13,9 @@ class DashboardController extends Controller
     public function dashboard()
     {
          // return date('h:i A');
-         $date =  date('d-m-Y');
+         $date =  date('Y-m-d');
          $time = date('h:i A');
-         $combinedDT = date('d-m-Y H:i A', strtotime("$date $time"));
+         $combinedDT = date('Y-m-d H:i A', strtotime("$date $time"));
          $upcominAppontment = Appointment::where('user_id', Auth::user()->id)->where(DB::raw("concat(appointment_date, ' ', appointment_time)"), '>=' , $combinedDT)->orderBy('id', 'DESC')->first();
         // dd($upcominAppontment);
         return view('frontend.patient.dashboard')->with(compact('upcominAppontment'));

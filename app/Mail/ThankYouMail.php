@@ -7,19 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendOtpMail extends Mailable
+class ThankYouMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      *
-     * @ret$details
+     * @return void
      */
-    public $details;
-    public function __construct($details)
+    public $body;
+
+    public function __construct($body)
     {
-        $this->details = $details;
+        $this->body = $body;
     }
 
     /**
@@ -29,6 +30,6 @@ class SendOtpMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('frontend.emails.send-otp')->subject('Send OTP')->with('details', $this->details);
+        return $this->markdown('frontend.emails.thankYouMail')->subject('Thank You for Booking an Appointment')->with('body', $this->body);
     }
 }
