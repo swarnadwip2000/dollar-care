@@ -12,6 +12,9 @@
         use App\Models\User;
         use App\Helpers\Helper;
     @endphp
+    <section id="loading">
+        <div id="loading-content"></div>
+    </section>
     <section class="inr-bnr">
         <div class="inr-bnr-img">
             <img src="{{ asset('frontend_assets/images/tele-bg.jpg') }}" alt="" />
@@ -99,25 +102,26 @@
         <section class="cl-tm-slot booking-slot">
             <form action="{{ route('appointment-store') }}" method="POST">
                 @csrf
-            <div class="container">
-                <div class="cl-name-div">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="cl-slot-wrap">
-                                <div class="cl-slot-icon d-flex align-items-center">
-                                    <i class="fa-solid fa-house-chimney-medical"></i>
-                                    <h3>Clinic Name</h3>
-                                </div>
-                                <div class="clinic-name-ck-div">
-                                    <div class="clinic-name-ck">
-                                       
+                <div class="container">
+                    <div class="cl-name-div">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="cl-slot-wrap">
+                                    <div class="cl-slot-icon d-flex align-items-center">
+                                        <i class="fa-solid fa-house-chimney-medical"></i>
+                                        <h3>Clinic Name</h3>
+                                    </div>
+                                    <div class="clinic-name-ck-div">
+                                        <div class="clinic-name-ck">
+
                                             <div class="row align-items-center justify-content-between">
                                                 @foreach ($clinics as $key => $clinic)
                                                     <div class="col-xl-5 col-12">
                                                         <div class="form-check d-flex">
                                                             <div class="form-check-box">
-                                                                <input class="form-check-input clinic_add" type="radio" value="{{ $clinic['id'] }}"
-                                                                    name="clinic_name" id="clinic_name_{{ $clinic['id'] }}">
+                                                                <input class="form-check-input clinic_add" type="radio"
+                                                                    value="{{ $clinic['id'] }}" name="clinic_name"
+                                                                    id="clinic_name_{{ $clinic['id'] }}">
                                                             </div>
                                                             <div class="form-text">
                                                                 <h3>{{ $clinic['clinic_name'] }} </h3>
@@ -127,34 +131,34 @@
                                                     </div>
                                                 @endforeach
                                             </div>
-                                     
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="cl-tm-slot-wrap">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-xl-6 col-md-12" id="clinic_visit_slots">
-                            @include('frontend.ajax-clinic-visit')
+                    <div class="cl-tm-slot-wrap">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-xl-6 col-md-12" id="clinic_visit_slots">
+                                @include('frontend.ajax-clinic-visit')
+                            </div>
+                            <div class="col-xl-6 col-md-12" id="clinic_visit_slots_time">
+                                @include('frontend.ajax-clinic-visit-slot-time')
+
+                            </div>
                         </div>
-                        <div class="col-xl-6 col-md-12" id="clinic_visit_slots_time">
-                            @include('frontend.ajax-clinic-visit-slot-time')
-                           
-                        </div>
-                    </div>
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-xl-4 col-md-6 col-12">
-                            <div class="main-btn-p pt-4">
-                                <input type="submit" value="Book" class="sub-btn">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-xl-4 col-md-6 col-12">
+                                <div class="main-btn-p pt-4">
+                                    <input type="submit" value="Book" class="sub-btn">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
         </section>
     @endif
     <!-- Modal Start-->
@@ -194,10 +198,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                                                                                                                                                                                                                                                                                                             <div class="find-doc-slide-img">
-                                                                                                                                                                                                                                                                                                                 <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                                         </div> -->
+                                                                                                                                                                                                                                                                                                                         <div class="find-doc-slide-img">
+                                                                                                                                                                                                                                                                                                                             <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                                                                                                                                                                                                                                                                                                         </div>
+                                                                                                                                                                                                                                                                                                                     </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -361,40 +365,47 @@
     </script>
 
     <script>
-        $('.clinic_add').on('change', function(){
+        $('.clinic_add').on('change', function() {
             var clinic_id = $(this).val();
-
+            $('#loading').addClass('loading');
+            $('#loading-content').addClass('loading-content');
             $.ajax({
-                    url: "{{ route('clinic.visit.slot-ajax') }}",
-                    type: 'GET',
-                    data :{
-                        clinic_id :clinic_id
-                    },
-                    success: function(resp) {
-                        // console.log(resp.clinic.slots);
+                url: "{{ route('clinic.visit.slot-ajax') }}",
+                type: 'GET',
+                data: {
+                    clinic_id: clinic_id
+                },
+                success: function(resp) {
+                    // console.log(resp.clinic.slots);
 
-                        $('#clinic_visit_slots').html(resp.view)
-                    }
-                });
+                    $('#clinic_visit_slots').html(resp.view)
+                    $('#loading').removeClass('loading');
+                    $('#loading-content').removeClass('loading-content');
+                }
+            });
         });
     </script>
-    
-<script>
-    $('.appointment-date').on('change', function(){
-        var slot_id = $(this).val();
-        // alert(slot_id)
-        $.ajax({
+
+    <script>
+        $('.appointment-date').on('change', function() {
+            var slot_id = $(this).val();
+            $('#loading').addClass('loading');
+            $('#loading-content').addClass('loading-content');
+            // alert(slot_id)
+            $.ajax({
                 url: "{{ route('clinic.ajax-clinic-visit-slot-time') }}",
                 type: 'GET',
-                data :{
-                    slot_id :slot_id
+                data: {
+                    slot_id: slot_id
                 },
                 success: function(resp) {
                     // console.log(resp.clinic.slots);
 
                     $('#clinic_visit_slots_time').html(resp.view)
+                    $('#loading').removeClass('loading');
+                    $('#loading-content').removeClass('loading-content');
                 }
             });
-    });
-</script>
+        });
+    </script>
 @endpush

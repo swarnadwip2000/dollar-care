@@ -37,7 +37,8 @@
 <script>
     $('.appointment-date').on('change', function() {
         var slot_id = $(this).val();
-
+        $('#loading').addClass('loading');
+            $('#loading-content').addClass('loading-content');
         $.ajax({
             url: "{{ route('clinic.ajax-clinic-visit-slot-time') }}",
             type: 'GET',
@@ -47,7 +48,9 @@
             success: function(resp) {
                 // console.log(resp.clinic.slots);
 
-                $('#clinic_visit_slots_time').html(resp.view)
+                $('#clinic_visit_slots_time').html(resp.view);
+                $('#loading').removeClass('loading');
+                    $('#loading-content').removeClass('loading-content');
             }
         });
     });
