@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Mail\ThankYouMail;
 use App\Models\Appointment;
+use App\Models\Chat;
 use App\Models\ClinicDetails;
 use App\Models\Slot;
 use App\Models\User;
@@ -42,7 +43,9 @@ class BookingAndConsultancyController extends Controller
                 if (Auth::check() && Auth::user()->membership_status == true) {
                     $userMembership = UserMembership::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->where('membership_expiry_date', '>=', date('Y-m-d'))->first();
                     if ($userMembership) {
-                        return response()->json(['status' => true, 'view' => (string)View::make('frontend.chat')]);
+                        $chat_call = 1;
+                        $chats = Chat::where(['sender_id'=> Auth::user()->id, 'reciver_id'=> $request->doctor_id])->get();
+                        return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call'))]);
                     } else {
                         return response()->json(['status' => false, 'message' => 'Your membership has been expired.']);
                     }
@@ -123,5 +126,21 @@ class BookingAndConsultancyController extends Controller
     public function thankYou()
     {
         return view('frontend.thanks');
+    }
+
+    public function createChat(Request $request)
+    {
+        $input = $request->all();
+        $message = $input['message'];
+
+        $chat = new Chat([
+            'sender_id' => Auth::user()->id,
+            'reciver_id' => $input['reciver_id'],
+            'message' => $input['message']
+        ]);
+
+        $chat->save();
+
+        return redirect()->back();
     }
 }

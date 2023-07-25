@@ -321,9 +321,13 @@
                 $('.chat-slot').css('display', 'none');
             });
             $('#show-chat').on('click', function() {
+                var doctor_id = '{{ $doctor['id'] }}'
                 $.ajax({
                     url: "{{ route('doctor.chat') }}",
                     type: 'GET',
+                    data : {
+                        doctor_id : doctor_id,
+                    },
                     success: function(resp) {
                         if (resp.status == true) {
                             $('.booking-slot').css('display', 'none');
