@@ -31,24 +31,30 @@
                     </div>
                     <div class="search-box-wrap d-flex mt-2">
                         <div class="search-box">
-                            <form action="">
-                                <input type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Search location here...">
+                            <form action="{{ route('search-doctor') }}">
+                                <input type="search" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Search doctor here..." name="search">
+                                    <input type="hidden" name="type" value="{{ $type }}">
+                                    @if($type == 'symptoms')
+                                        <input type="hidden" name="slug" value="{{ $data->symptom_slug }}">
+                                    @elseif($type == 'specialization')
+                                        <input type="hidden" name="slug" value="{{ $data->slug }}">
+                                    @endif
                             </form>
                         </div>
                         <div class="mn-btn search-btn">
-                            <a href="#"><span>Search</span></a>
+                            <!-- <a href="#"><span>Search</span></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-7">
                     <div class="search-filter-box d-flex">
                         <div class="search-filter-box-1">
-                            <form action="">
+                            <!-- <form action="">
                                 <label for="exampleFormControlInput1" class="form-label">Location</label>
                                 <input type="text" class="form-control" id="exampleFormControlInput1"
                                     placeholder="Search location...">
-                            </form>
+                            </form> -->
                         </div>
                         <div class="search-filter-box-1">
                             <form action="">
@@ -60,13 +66,15 @@
                             </form>
                         </div>
                         <div class="search-filter-box-1">
-                            <form action="">
+                            <form action="{{ route('alphabetic-search') }}">
                                 <label for="exampleFormControlInput1" class="form-label">Sort by</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" name="alphabeticsearch">
                                     <option selected>Alphabetic</option>
                                     <option value="1">A-Z</option>
                                     <option value="2">Z-A</option>
                                 </select>
+                                <input type="hidden" name="type" value="{{ $type }}">
+                                <input type="hidden" name="slug" value="{{ $data->symptom_slug }}">
                             </form>
                         </div>
                     </div>
