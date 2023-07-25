@@ -55,6 +55,11 @@
                             <span id="map-link"></span>
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                         @endif
+                    @elseif(Session::has('session_id'))
+                    <span id="status">{{ substr(session()->get('address'), 0, 50) }}</span>
+                    <span id="map-link"></span>
+                    <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+
                     @else
                             <span id="status">Please Set Your Location</span>
                             <span id="map-link"></span>
