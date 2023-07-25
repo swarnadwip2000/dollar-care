@@ -122,9 +122,9 @@ class Helper
         return $count;
     }
 
-    public static function countSlotTimeAvailability($clinic_id, $time)
+    public static function countSlotTimeAvailability($clinic_id, $slot_date, $time)
     {
-        $count = Appointment::where(['clinic_id' => $clinic_id, 'appointment_time'=> $time, 'appointment_status' => 'Done'])->count();
+        $count = Appointment::where(['clinic_id' => $clinic_id,'appointment_date'=>$slot_date, 'appointment_time'=> $time, 'appointment_status' => 'Done'])->count();
         return $count;
     }
 }

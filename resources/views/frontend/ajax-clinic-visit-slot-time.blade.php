@@ -15,10 +15,10 @@
                         <div class="time-pick date-pick size-fix">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="appointment_time"
-                                    value="{{ $time }}" id="time_{{ $key }}" @if(Helper::countSlotTimeAvailability($slot_times['clinic_detail_id'], $time) > 0) disabled @endif>
+                                    value="{{ $time }}" id="time_{{ $key }}" @if(Helper::countSlotTimeAvailability($slot_times['clinic_detail_id'],$slot_times['slot_date'], $time) > 0) disabled @endif>
                                 <label class="form-check-label" for="time_{{ $key }}">
                                     <h3>{{ $time }}</h3>
-                                    <p class="@if(Helper::countSlotTimeAvailability($slot_times['clinic_detail_id'], $time) > 0) red-color @endif">@if(Helper::countSlotTimeAvailability($slot_times['clinic_detail_id'], $time) > 0) Not Available @else Available @endif</p>
+                                    <p class="@if(Helper::countSlotTimeAvailability($slot_times['clinic_detail_id'],$slot_times['slot_date'], $time) > 0) red-color @endif">@if(Helper::countSlotTimeAvailability($slot_times['clinic_detail_id'],$slot_times['slot_date'], $time) > 0) Not Available @else Available @endif</p>
                                 </label>
                             </div>
                         </div>
