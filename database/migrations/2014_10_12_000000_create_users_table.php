@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('age')->nullable();
             $table->longText('fcm_token')->nullable();
             $table->boolean('status')->default(0);
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
