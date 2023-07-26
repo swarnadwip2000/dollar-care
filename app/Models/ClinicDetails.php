@@ -24,6 +24,10 @@ class ClinicDetails extends Model
         return $this->hasMany(Slot::class, 'clinic_detail_id', 'id')->orderBy('slot_date', 'asc');
     }
 
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function users()
     {

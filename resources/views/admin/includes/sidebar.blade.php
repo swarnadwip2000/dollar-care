@@ -42,8 +42,11 @@
                     <a href="{{ route('doctors.index') }}" ><i class="fas fa-user-md"></i> <span>Manage Doctors</span></a>                 
                 </li>
 
-                <li class="menu-title">
+                <li class="menu-title"> 
                     <span>Clinic Management</span>
+                </li>
+                <li class="{{ Request::is('admin/clinics*') ? 'active' : ' ' }}">
+                    <a href="{{ route('clinics.index') }}" ><i class="fas fa-clinic-medical"></i> <span>Clinics</span></a>                 
                 </li>
                 <li class="{{ Request::is('admin/appointments*') ? 'active' : ' ' }}">
                     <a href="{{ route('appointments.index') }}" ><i class="fa fa-calendar"></i> <span>Appointments</span></a>                 

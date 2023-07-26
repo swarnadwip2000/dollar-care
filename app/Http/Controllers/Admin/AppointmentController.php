@@ -18,7 +18,7 @@ class AppointmentController extends Controller
 
     public function index(Request $request)
     {
-        $appointments = $this->appointments->orderBy('appointment_date', 'DESC')->paginate(2);
+        $appointments = $this->appointments->orderBy('appointment_date', 'DESC')->paginate(20);
         $clinics = ClinicDetails::orderBy('clinic_name','desc')->get();
 
         if ($request->ajax()) {
@@ -45,7 +45,7 @@ class AppointmentController extends Controller
                  $query->whereIn('appointment_status', $request->status);
             }
           
-             $appointments = $query->paginate(2);
+             $appointments = $query->paginate(20);
             return response()->json(['view'=>(String)View::make('admin.appointment.pagination-list')->with(compact('appointments'))]);
        }
     }
