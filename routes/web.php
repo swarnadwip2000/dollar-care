@@ -229,7 +229,7 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/view-all-specializations', [TeleHealthController::class, 'viewAllSpecializations'])->name('all-specializations');
     Route::get('/search-specilzation', [TeleHealthController::class, 'searchSpecialization'])->name('search.specilzation');
     Route::get('/search-doctor', [TeleHealthController::class, 'doctorSearch'])->name('search-doctor');
-    Route::get('/alphabetic-search', [TeleHealthController::class, 'alphabeticSearch'])->name('alphabetic-search');
+    Route::get('/doctor-filter',[TeleHealthController::class, 'doctorFilter'])->name('doctor-filter');
     // doctors
     Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');

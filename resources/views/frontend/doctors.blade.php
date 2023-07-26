@@ -40,11 +40,13 @@
                                     @elseif($type == 'specialization')
                                         <input type="hidden" name="slug" value="{{ $data->slug }}">
                                     @endif
+
+                                    <div class="mn-btn search-btn">
+                                        <button type="submit">Search</button>
+                                    </div>
                             </form>
                         </div>
-                        <div class="mn-btn search-btn">
-                            <!-- <a href="#"><span>Search</span></a> -->
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-xl-7">
@@ -59,22 +61,32 @@
                         <div class="search-filter-box-1">
                             <form action="">
                                 <label for="exampleFormControlInput1" class="form-label">Filter</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" name="clinicSearch" id="clinicSearch">
                                     <option value="1" selected>Clinical Consultation</option>
                                     <option value="2">Clinical & Video consultation</option>
                                 </select>
+                                <input type="hidden" name="type" id="type" value="{{ $type }}">
+                                @if($type == 'symptoms')
+                                    <input type="hidden" name="slug" id="slug" value="{{ $data->symptom_slug }}">
+                                @elseif($type == 'specialization')
+                                    <input type="hidden" name="slug" id="slug" value="{{ $data->slug }}">
+                                @endif
                             </form>
                         </div>
                         <div class="search-filter-box-1">
-                            <form action="{{ route('alphabetic-search') }}">
+                            <form action="">
                                 <label for="exampleFormControlInput1" class="form-label">Sort by</label>
-                                <select class="form-select" aria-label="Default select example" name="alphabeticsearch">
-                                    <option selected>Alphabetic</option>
+                                <select class="form-select" aria-label="Default select example" name="alphabeticsearch" id="alphabeticsearch">
+                                    <option selected>Sort by alphabet</option>
                                     <option value="1">A-Z</option>
                                     <option value="2">Z-A</option>
                                 </select>
-                                <input type="hidden" name="type" value="{{ $type }}">
-                                <input type="hidden" name="slug" value="{{ $data->symptom_slug }}">
+                                <input type="hidden" name="type" id="type" value="{{ $type }}">
+                                @if($type == 'symptoms')
+                                    <input type="hidden" name="slug" id="slug" value="{{ $data->symptom_slug }}">
+                                @elseif($type == 'specialization')
+                                    <input type="hidden" name="slug" id="slug" value="{{ $data->slug }}">
+                                @endif
                             </form>
                         </div>
                     </div>
@@ -83,8 +95,11 @@
         </div>
     </div>
 </section>
-<section class="doc-list">
-    <div class="container">
+<section class="doc-list" id="searchResultsContainer">
+    @if(!$status)
+        @include('frontend.ajax-doctor-list')
+    @else
+    <div class="container" >
         <div class="doc-list-wrap">
             <div class="doc-list-head">
                 <div class="head-1 h-b">
@@ -140,6 +155,7 @@
         </div>
     </div>
 </section>
+@endif
 @else
 <section class="career">
     <div class="container">
@@ -155,4 +171,59 @@
 @endsection
 
 @push('scripts')
+<script>
+  $(document).ready(function() {
+
+
+    // Function to fetch search results based on the selected alphabet
+    function fetchResults(alphabet, type, slug) {
+        var url = '{{route("doctor-filter")}}'
+      $.ajax({
+        url: url,
+        method: 'GET',
+        data: { alphabet: alphabet, type: type, slug: slug },
+        success: function(data) {
+            console.log(data);
+            $('#searchResultsContainer').html(data.view);
+        },
+        error: function() {
+          console.log('Error fetching results.');
+        }
+      });
+    }
+
+    // Function to fetch search results based on the selected alphabet
+    function fetchClinics(alphabet, type, slug) {
+        var url = '{{route("doctor-filter")}}'
+      $.ajax({
+        url: url,
+        method: 'GET',
+        data: { alphabet: alphabet, type: type, slug: slug },
+        success: function(data) {
+            console.log(data);
+            $('#searchResultsContainer').html(data.view);
+        },
+        error: function() {
+          console.log('Error fetching results.');
+        }
+      });
+    }
+
+    // Trigger the fetchResults function when the select box value changes
+    $('#alphabeticsearch').on('change', function() {
+      var selectedAlphabet = $(this).val();
+      var type = $("#type").val();
+      var slug = $("#slug").val();
+      fetchResults(selectedAlphabet, type, slug);
+    });
+
+    $('#clinicSearch').on('change', function() {
+      var selectedClinic = $(this).val();
+      var type = $("#type").val();
+      var slug = $("#slug").val();
+      fetchClinics(selectedClinic, type, slug);
+    });
+  });
+</script>
+
 @endpush
