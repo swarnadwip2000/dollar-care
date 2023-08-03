@@ -10,9 +10,12 @@ use App\Models\ClinicDetails;
 use App\Models\User;
 use App\Models\Symptoms;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session as SessionSession;
+use Illuminate\Support\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\View;
 
 class TeleHealthController extends Controller
@@ -93,28 +96,34 @@ class TeleHealthController extends Controller
             $latitude = Auth::user()->locations->latitude;
             $longitude = Auth::user()->locations->longitude;
             $radius = 10;
-            $clinics = DB::table('clinic_details')
-                ->join('users', 'clinic_details.user_id', '=', 'users.id')
-                ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
-                ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
-                ->select(
-                    'clinic_details.id',
-                    'clinic_details.user_id',
-                    'clinic_name',
-                    'clinic_address',
-                    'clinic_phone',
-                    'longitute',
-                    'latitute',
-                    DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
-                )
-                ->where('symptoms.id', $specialization_id)
-                ->having('distance', '<', $radius)
-                ->get()
-                ->groupBy('user_id');
+            $all_doctors = DB::table('users')
+                    ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
+                    ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
+                    ->leftJoin('locations', 'locations.user_id', '=', 'users.id')
+                    ->select(
+                        'users.id as user_id',
+                        'users.name',
+                        'users.email',
+                        'users.phone',
+                        'users.year_of_experience',
+                        'users.license_number',
+                        'users.profile_picture',
+                        'users.gender',
+                        'users.fcm_token',
+                        'locations.address as address',
+                        'locations.latitude as latitude',
+                        'locations.longitude as longitude',
+                        DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitude ) ) ) ) AS distance')
+                    )
+                    ->where('doctor_specializations.specialization_id', $specialization_id)
+                    ->having('distance', '<', $radius)
+                    ->get()
+                    ->groupBy('user_id');
             // dd($clinics);
             // get doctors from clinics
             $doctors_array = [];
-            foreach ($clinics as $key => $clinic) {
+            foreach ($all_doctors
+             as $key => $clinic) {
                 $doctors_array[] =  $key;
             }
             $doctors = User::whereIn('id', $doctors_array)->get();
@@ -138,7 +147,7 @@ class TeleHealthController extends Controller
             $latitude = AutH::user()->locations->latitude;
             $longitude = Auth::user()->locations->longitude;
             $radius = 10;
-            if ($request->alphabet == 1) {
+            if ($request->clinic == 1) {
                 $clinics = DB::table('clinic_details')
                     ->join('users', 'clinic_details.user_id', '=', 'users.id')
                     ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
@@ -164,29 +173,82 @@ class TeleHealthController extends Controller
 
                         $doctors_array[] =  $key;
                     }
-                    $doctors = User::whereIn('id', $doctors_array)->get();
+                    if($request->alphabet == 1) {
+                        if($request->doctor) {
+                            $doctors = User::whereIn('id', $doctors_array)->where('name', 'like', '%', $request->doctor)->get();
+                        } else {
+                            $doctors = User::whereIn('id', $doctors_array)->orderBy('name')->get();
+                        }
+                        
+                    } else if($request->alphabet == 2) {
+                        if($request->doctor) {
+                            $doctors = User::whereIn('id', $doctors_array)->orderByDesc('name')->where('name', 'like', '%', $request->doctor)->get();
+                        } else {
+                            $doctors = User::whereIn('id', $doctors_array)->orderByDesc('name')->get();
+                        }
+                        
+                    } else {
+                        if($request->doctor) {
+                            $doctors = User::whereIn('id', $doctors_array)->where('name', 'like', '%', $request->doctor)->get();
+                        } else {
+                            $doctors = User::whereIn('id', $doctors_array)->get();
+                        }
+                        
+                    }
+                    
             } else {
-            //     $doctors = DB::table('users')
-            //         ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
-            //         ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
-            //         ->select(
-            //             'users.id',
-            //             'name',
-            //             'email',
-            //             'phone',
-            //             'year_of_experience',
-            //             'license_number',
-            //             'profile_picture',
-            //             'gender',
-            //             'fcm_token',
-            //         )
-            //         ->where('symptoms.id', $symptom_id)
-            //         ->get()
-            //         ->groupBy('user_id');
-            } 
-            $doctors = User::with('doctorSpecializations', 'specializations.symptoms')->where()->get();
-            dd($doctors);
-            
+                $all_doctors = DB::table('users')
+                    ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
+                    ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
+                    ->leftJoin('locations', 'locations.user_id', '=', 'users.id')
+                    ->select(
+                        'users.id as user_id',
+                        'users.name',
+                        'users.email',
+                        'users.phone',
+                        'users.year_of_experience',
+                        'users.license_number',
+                        'users.profile_picture',
+                        'users.gender',
+                        'users.fcm_token',
+                        'locations.address as address',
+                        'locations.latitude as latitude',
+                        'locations.longitude as longitude',
+                        DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitude ) ) ) ) AS distance')
+                    )
+                    ->where('symptoms.id', $symptom_id)
+                    ->get()
+                    ->groupBy('user_id');
+
+                    $doctors_array = [];
+                    foreach ($all_doctors as $key => $clinic) {
+
+                        $doctors_array[] =  $key;
+                    }
+                    if($request->alphabet == 1) {
+                        if($request->doctor) {
+                            $doctors = User::whereIn('id', $doctors_array)->where('name', 'like', '%', $request->doctor)->get();
+                            dd($doctors);
+                        } else {
+                            $doctors = User::whereIn('id', $doctors_array)->orderBy('name')->get();
+                        }
+                        
+                    } else if($request->alphabet == 2) {
+                        if($request->doctor) {
+                            $doctors = User::whereIn('id', $doctors_array)->orderByDesc('name')->where('name', 'like', '%', $request->doctor)->get();
+                        } else {
+                            $doctors = User::whereIn('id', $doctors_array)->orderByDesc('name')->get();
+                        }
+                        
+                    } else {
+                        if($request->doctor) {
+                            $doctors = User::whereIn('id', $doctors_array)->where('name', 'like', '%', $request->doctor)->get();
+                        } else {
+                            $doctors = User::whereIn('id', $doctors_array)->get();
+                        }
+                        
+                    }
+            }             
             $type = 'symptoms';
             return response()->json(['view' => (string)View::make('frontend.ajax-doctor-list')->with(compact('doctors', 'data', 'type'))]);
         } else {
@@ -195,11 +257,10 @@ class TeleHealthController extends Controller
             $latitude = Auth::user()->locations->latitude;
             $longitude = Auth::user()->locations->longitude;
             $radius = 10;
-            if ($request->alphabet == 1) {
+            if ($request->clinic == 1) {
                 $clinics = DB::table('clinic_details')
                     ->join('users', 'clinic_details.user_id', '=', 'users.id')
                     ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
-                    ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
                     ->select(
                         'clinic_details.id',
                         'clinic_details.user_id',
@@ -210,35 +271,61 @@ class TeleHealthController extends Controller
                         'latitute',
                         DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
                     )
-                    ->where('symptoms.id', $specialization_id)
+                    ->where('doctor_specializations.specialization_id', $specialization_id)
                     ->having('distance', '<', $radius)
                     ->get()
                     ->groupBy('user_id');
+
+                    // get doctors from clinics
+                    $doctors_array = [];
+                    foreach ($clinics as $key => $clinic) {
+
+                        $doctors_array[] =  $key;
+                    }
+                    if($request->alphabet == 1) {
+                        $doctors = User::whereIn('id', $doctors_array)->orderBy('name')->get();
+                    } else if($request->alphabet == 2) {
+                        $doctors = User::whereIn('id', $doctors_array)->orderByDesc('name')->get();
+                    } else {
+                        $doctors = User::whereIn('id', $doctors_array)->get();
+                    }
             } else {
-                $clinics = DB::table('users')
+                $all_doctors = DB::table('users')
                     ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
                     ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
+                    ->leftJoin('locations', 'locations.user_id', '=', 'users.id')
                     ->select(
-                        'clinic_details.id',
-                        'clinic_details.user_id',
-                        'clinic_name',
-                        'clinic_address',
-                        'clinic_phone',
-                        'longitute',
-                        'latitute',
-                        DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
+                        'users.id as user_id',
+                        'users.name',
+                        'users.email',
+                        'users.phone',
+                        'users.year_of_experience',
+                        'users.license_number',
+                        'users.profile_picture',
+                        'users.gender',
+                        'users.fcm_token',
+                        'locations.address as address',
+                        'locations.latitude as latitude',
+                        'locations.longitude as longitude',
+                        DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitude ) ) ) ) AS distance')
                     )
-                    ->where('symptoms.id', $specialization_id)
-                    ->having('distance', '<', $radius)
+                    ->where('doctor_specializations.specialization_id', $specialization_id)
                     ->get()
                     ->groupBy('user_id');
+
+                    $doctors_array = [];
+                    foreach ($all_doctors as $key => $clinic) {
+
+                        $doctors_array[] =  $key;
+                    }
+                    if($request->alphabet == 1) {
+                        $doctors = User::whereIn('id', $doctors_array)->orderBy('name')->get();
+                    } else if($request->alphabet == 2) {
+                        $doctors = User::whereIn('id', $doctors_array)->orderByDesc('name')->get();
+                    } else {
+                        $doctors = User::whereIn('id', $doctors_array)->get();
+                    }
             }
-            // get doctors from clinics
-            $doctors_array = [];
-            foreach ($clinics as $key => $clinic) {
-                $doctors_array[] =  $key;
-            }
-            $doctors = User::whereIn('id', $doctors_array)->get();
             $type = 'specialization';
 
             return response()->json(['view' => (string)View::make('frontend.ajax-doctor-list')->with(compact('doctors', 'data', 'type'))]);

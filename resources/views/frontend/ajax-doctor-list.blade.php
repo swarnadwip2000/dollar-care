@@ -32,7 +32,7 @@
                 <div class="doc-spl-wrap-box">
                     <div class="doc-spl">
                         <div class="doc-spl-img-box">
-                            @if($doctor->profile_picture)
+                            @if($doctor['profile_picture'])
                             <img src="{{ Storage::url($doctor->profile_picture) }}" alt="">
                             @else
                             <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">

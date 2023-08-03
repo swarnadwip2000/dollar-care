@@ -31,7 +31,7 @@
                     </div>
                     <div class="search-box-wrap d-flex mt-2">
                         <div class="search-box">
-                            <form action="{{ route('search-doctor') }}">
+                            <form action="">
                                 <input type="search" class="form-control" id="exampleFormControlInput1"
                                     placeholder="Search doctor here..." name="search">
                                     <input type="hidden" name="type" value="{{ $type }}">
@@ -41,9 +41,9 @@
                                         <input type="hidden" name="slug" value="{{ $data->slug }}">
                                     @endif
 
-                                    <div class="mn-btn search-btn">
+                                    <!-- <div class="mn-btn search-btn">
                                         <button type="submit">Search</button>
-                                    </div>
+                                    </div> -->
                             </form>
                         </div>
                         
@@ -192,13 +192,13 @@
       });
     }
 
-    // Function to fetch search results based on the selected alphabet
-    function fetchClinics(alphabet, type, slug) {
+    // Function to fetch search results based on the selected clinic
+    function fetchClinics(clinic, type, slug) {
         var url = '{{route("doctor-filter")}}'
       $.ajax({
         url: url,
         method: 'GET',
-        data: { alphabet: alphabet, type: type, slug: slug },
+        data: { clinic: clinic, type: type, slug: slug },
         success: function(data) {
             console.log(data);
             $('#searchResultsContainer').html(data.view);
@@ -207,6 +207,23 @@
           console.log('Error fetching results.');
         }
       });
+    }
+
+    // Function to fetch Doctors
+    function fetchDoctor(doctor, type, slug) {
+        var url = '{{ route("doctor-filter") }}'
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: { doctor: doctor, type: type, slug: slug },
+            success: function(data) {
+                console.log(data);
+                $('#searchResultsContainer').html(data.view);
+            },
+            error: function() {
+                console.log('Error fetching results.');
+            }
+        });
     }
 
     // Trigger the fetchResults function when the select box value changes
@@ -222,6 +239,13 @@
       var type = $("#type").val();
       var slug = $("#slug").val();
       fetchClinics(selectedClinic, type, slug);
+    });
+
+    $('#exampleFormControlInput1').on('keyup change', function() {
+        var doctorName = $(this).val();
+        var type = $("#type").val();
+        var slug = $("#slug").val();
+        fetchDoctor(doctorName, type, slug);
     });
   });
 </script>

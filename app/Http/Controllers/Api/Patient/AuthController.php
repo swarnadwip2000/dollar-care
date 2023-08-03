@@ -74,7 +74,7 @@ class AuthController extends Controller
         try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
-                if ($user->hasRole('PATIENT') && $user->status == 1) {
+                if (($user->hasRole('PATIENT') && $user->status == 1) || ($user->hasRole('DOCTOR') && $user->status == 1)) {
                     $data['auth_token'] = $user->createToken('accessToken')->accessToken;
                     $data['user'] = $user->makeHidden('roles');
                     return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
@@ -135,6 +135,8 @@ class AuthController extends Controller
             'phone' => 'required|numeric|min:10|unique:users',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
+            'type' => 'required',
+            'age' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -159,12 +161,18 @@ class AuthController extends Controller
             $user->phone = $request->phone;
             $user->status = 1;
             $user->save();
-            $user->assignRole('PATIENT');
+            // $user->assignRole('PATIENT');
+            if ($user->type == 'Doctor') {
+                $user->assignRole('DOCTOR');
+            } else {
+                $user->assignRole('PATIENT');
+            }
             $data['auth_token'] = $user->createToken('accessToken')->accessToken;
             $data['user'] = $user->makeHidden('roles');
             return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()], 500);
         }
-     }
+    }
+
 }
