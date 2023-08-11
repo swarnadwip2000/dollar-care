@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ClinicController;
 use App\Http\Controllers\Admin\CmsController as AdminCmsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -170,6 +171,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::prefix('appointments')->name('appointments.')->group(function () {
         Route::get('/', [AdminAppointmentController::class, 'index'])->name('index');
         Route::get('/booking-history-ajax', [AdminAppointmentController::class, 'bookingHistoryAjax'])->name('booking-history-ajax');
+    });
+
+    Route::prefix('clinics')->name('clinics.')->group(function () {
+        Route::get('/', [ClinicController::class, 'index'])->name('index');
+        Route::get('/list-ajax', [ClinicController::class, 'listAjax'])->name('list-ajax');
     });
 
     Route::prefix('membership-history')->name('membership-history.')->group(function () {

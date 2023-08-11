@@ -118,15 +118,17 @@
                                             <div class="row align-items-center justify-content-between">
                                                 {{-- @dd(Helper::countSlotAvailability($clinics[1]['id'])) --}}
                                                 @foreach ($clinics as $key => $clinic)
-                                                    <div class="col-xl-5 col-12 @if(Helper::countSlotAvailability($clinic['id']) == 0) disable-or-not @endif">
+                                                    <div
+                                                        class="col-xl-5 col-12 @if (Helper::countSlotAvailability($clinic['id']) == 0) disable-or-not @endif">
                                                         <div class="form-check d-flex">
                                                             <div class="form-check-box">
                                                                 <input class="form-check-input clinic_add" type="radio"
                                                                     value="{{ $clinic['id'] }}" name="clinic_id"
-                                                                    id="clinic_name_{{ $clinic['id'] }}" @if(Helper::countSlotAvailability($clinic['id']) == 0) disabled @endif>
+                                                                    id="clinic_name_{{ $clinic['id'] }}"
+                                                                    @if (Helper::countSlotAvailability($clinic['id']) == 0) disabled @endif>
                                                             </div>
                                                             <div class="form-text">
-                                                                <h3 >{{ $clinic['clinic_name'] }} </h3>
+                                                                <h3>{{ $clinic['clinic_name'] }} </h3>
                                                                 <p>{{ $clinic['clinic_address'] }}</p>
                                                             </div>
                                                         </div>
@@ -200,10 +202,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <div class="mdl-img">
-                                                                                                                                                                                                                                                                                                                         <div class="find-doc-slide-img">
-                                                                                                                                                                                                                                                                                                                             <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                                                                                                                                                                                                                                                                                                         </div>
-                                                                                                                                                                                                                                                                                                                     </div> -->
+                                                                                                                                                                                                                                                                                                                                 <div class="find-doc-slide-img">
+                                                                                                                                                                                                                                                                                                                                     <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
+                                                                                                                                                                                                                                                                                                                                 </div>
+                                                                                                                                                                                                                                                                                                                             </div> -->
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -278,20 +280,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Start-->
 
-
-    <!-- Scroll top -->
-    <a href="#top-btn" alt="Top" title="Back to top" id="scrl">
-        <div class="scroll_btm">
-            <div class="scroll_btm_btn">
-                <div class="scroll_text">
-                    <h3>SCROLL up</h3>
-                </div>
-            </div>
-        </div>
-    </a>
-    <!-- Modal -->
 @endsection
 
 @push('scripts')
@@ -305,7 +294,6 @@
     <script>
         $(document).ready(function() {
             $("#payment_now").click(function() {
-
                 $("#Modal1").modal('hide');
                 $("#Modal2").modal('show');
             });
@@ -322,11 +310,13 @@
             });
             $('#show-chat').on('click', function() {
                 var doctor_id = '{{ $doctor['id'] }}'
+                $('#loading').addClass('loading');
+                $('#loading-content').addClass('loading-content');
                 $.ajax({
                     url: "{{ route('doctor.chat') }}",
                     type: 'GET',
-                    data : {
-                        doctor_id : doctor_id,
+                    data: {
+                        doctor_id: doctor_id,
                     },
                     success: function(resp) {
                         if (resp.status == true) {
@@ -335,6 +325,8 @@
                             $('#show-chat').addClass('active-slot');
                             $('.chat-slot').css('display', 'block');
                             $('.chat-slot').html(resp.view);
+                            $('#loading').removeClass('loading');
+                            $('#loading-content').removeClass('loading-content');
                         } else {
                             toastr.error(resp.message);
                         }

@@ -108,9 +108,9 @@
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="time-pick">
-                                                                                    <input type="radio" id="tm1" name="animal" value="">
-                                                                                    <label for="tm1">9.00 am</label>
-                                                                                 </div> -->
+                                                                                        <input type="radio" id="tm1" name="animal" value="">
+                                                                                        <label for="tm1">9.00 am</label>
+                                                                                     </div> -->
                                                             <div class="slct-date-time">
                                                                 <h4>SELECT DATE AND TIME</h4>
                                                             </div>
@@ -121,8 +121,8 @@
                                                                             <input class="form-control" id="slot_date"
                                                                                 name="slot_date[]" value=""
                                                                                 placeholder="Select Date" required=""
-                                                                                class="textbox-n" type="text"
-                                                                                onfocus="(this.type='date')"
+                                                                                class="textbox-n" type="date" onfocus="(this.type='date')"
+                                                                                min="{{ date('Y-m-d') }}"
                                                                                 id="date" />
                                                                         </div>
                                                                         <div class="form-group col-lg-6 col-md-12">
@@ -253,8 +253,8 @@
 @endsection
 
 @push('scripts')
-<script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script>
     <script>
         $(document).ready(function() {
             $("#latitudeArea").addClass("d-none");
@@ -282,8 +282,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4
         $(document).ready(function() {
             $('.add-more').on('click', function() {
                 $('#append-add-more').append(
-                    '<div class="sl-slot-div"><div class="row"><div class="form-group col-lg-5 col-md-12"><input class="form-control" id="slot_date" name="slot_date[] "value="" placeholder="Select Date" required="" class="textbox-n" type="date" id="date" /></div><div class="form-group col-lg-6 col-md-12"><div class="row"><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">Time Slot</label><select class="form-select"aria-label="Default select example" name="slot_start_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="first_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">to</label><select class="form-select"aria-label="Default select example" name="slot_end_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="second_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-2 col-lg-2 col-12"><div class="delet-btn"><a href="javascript:void(0);" class="remove-slot"><span><i class="fa-solid fa-trash"></i></span></a></div></div></div></div></div></div>'
-                    );
+                    '<div class="sl-slot-div"><div class="row"><div class="form-group col-lg-5 col-md-12"><input class="form-control" min="{{ date('Y-m-d') }}" id="slot_date" name="slot_date[] "value="" placeholder="Select Date" required="" class="textbox-n" type="date" id="date" /></div><div class="form-group col-lg-6 col-md-12"><div class="row"><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">Time Slot</label><select class="form-select"aria-label="Default select example" name="slot_start_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="first_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-5 col-lg-5 col-12"><div class="input-group"><label for="">to</label><select class="form-select"aria-label="Default select example" name="slot_end_time[]"><option value="1" selected>1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><select class="form-select" name="second_time_mode[]" aria-label="Default select example"><option value="AM" selected>AM</option><option value="PM">PM</option></select></div></div><div class="col-xl-2 col-lg-2 col-12"><div class="delet-btn"><a href="javascript:void(0);" class="remove-slot"><span><i class="fa-solid fa-trash"></i></span></a></div></div></div></div></div></div>'
+                );
 
             });
 
