@@ -14,20 +14,25 @@
         <!-- Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet" />
         <link rel="shortcut icon" type="image/png" href="{{ asset('admin_assets/img/favicon.ico') }}">
         <!-- Bootstrap core CSS -->
         <link href="{{ asset('frontend_assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css" />
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css" />
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
         <link href="{{ asset('frontend_assets/css/menu.css') }}" rel="stylesheet" />
         <link href="{{ asset('frontend_assets/css/style.css') }}" rel="stylesheet" />
         <link href="{{ asset('frontend_assets/css/responsive.css') }}" rel="stylesheet" />
         <!-- Custom styles for this template -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="{{ asset('frontend_assets/css/select2.min.css') }}">
 
@@ -61,7 +66,8 @@
         </div>
     </div>
 
-    <div class="modal modal-2" tabindex="-1" role="dialog" id="myModal">
+    {{-- modal for login --}}
+    {{-- <div class="modal modal-2" tabindex="-1" role="dialog" id="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -76,9 +82,10 @@
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="form-label">Email ID</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ old('email') }}" name="email" />
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" value="{{ old('email') }}" name="email" />
                             @if ($errors->has('email'))
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
                         <div class="form-group">
@@ -90,7 +97,7 @@
                                 </button>
                             </div>
                             @if ($errors->has('password'))
-                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
                             <div class="login-text text-right">
                                 <p>
@@ -113,7 +120,81 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="modal modal-login fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-xl-9 col-md-9 col-12
+                        ">
+                            <div class="main_hh">
+                                <div class="login_sec_right_text">
+                                    <div class="login-logo">
+                                        <a href="#"><img
+                                                src="{{ asset('frontend_assets/images/logo.png') }}"></a>
+                                    </div>
+                                    <div class="login-logo-head">
+                                        <h1>Login to explore more</h1>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                                            elit.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="login_form">
+                                    <form action="{{ route('login.check') }}" method="post" id="login-form">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Email
+                                                ID</label>
+                                            <input type="text" class="form-control" id="home_login_email"
+                                                name="email" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtPassword">Password</label>
+                                            <div class="position-relative">
+                                                <input type="text" id="txtPassword" class="form-control"
+                                                    name="password" name="txtPassword">
+                                               
+                                                <button type="button" class="toggle">
+                                                    <i id="eyeIcon-2" class="fa fa-eye toggle"
+                                                        toggle="#txtPassword"></i>
+                                                </button>
+                                            </div>
+                                            <span class="text-danger" id="home_login_email_msg"></span>
+                                            <div class="login-text text-right">
+                                                <p>
+                                                    <a href="#">Forgot Password?</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-lg btn-primary btn-block btn-login">
+                                            LOGIN
+                                        </button>
+                                        <div class="login-text login-text-2 text-center">
+                                            <p>
+                                                Don’t Have an Account? <a href="register.html">Register NOW</a>
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
     </div>
+    {{-- Login model end --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
@@ -141,38 +222,81 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#eyeIcon-2').on('click', function() {
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+
+            $('.btn-login').on('click', function(e) {
+                e.preventDefault();
+                var email = $('#home_login_email').val();
+                var password = $('#txtPassword').val();
+                var url = "{{ route('check.validation') }}";
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        'email': email,
+                        'password': password,
+                    },
+                    success: function(data) {
+                        if (data.status == false) {
+                            // show validation error
+                            $('#home_login_email_msg').text(data.message);
+
+                        } else {
+                            // toastr.error(data.error);
+                            $('#home_login_email_msg').text('');
+                            $('#home_login_email').val('');
+                            $('#txtPassword').val('');
+                            // form submit
+                            $('#myModal').modal('hide');
+                            $('#login-form').submit();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
     <script>
-        @if(Session::has('message'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-        toastr.success("{{ session('message') }}");
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
         @endif
 
-        @if(Session::has('error'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-        toastr.error("{{ session('error') }}");
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
         @endif
 
-        @if(Session::has('info'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-        toastr.info("{{ session('info') }}");
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
         @endif
 
-        @if(Session::has('warning'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-        toastr.warning("{{ session('warning') }}");
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
         @endif
     </script>
     <script>
@@ -242,10 +366,10 @@
         });
     </script>
     <script>
-        @if(!Auth::check() && !Session::has('latitude'))
-        $(document).ready(function() {
-            openNav();
-        });
+        @if (!Auth::check() && !Session::has('latitude'))
+            $(document).ready(function() {
+                openNav();
+            });
         @endif
     </script>
 
@@ -333,7 +457,8 @@
 
         document.querySelector("#find-me").addEventListener("click", geoFindMe);
     </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtdLUrYOZEPTIwBYj82DR13s4MU2ngtrE&libraries=places"></script>
 
     <script>
         google.maps.event.addDomListener(window, 'load', initialize);

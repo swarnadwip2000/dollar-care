@@ -217,6 +217,7 @@ Route::get('/login', [FrontendAuthController::class, 'login'])->name('login');
 Route::get('/register', [FrontendAuthController::class, 'register'])->name('register');
 Route::post('/register-store', [FrontendAuthController::class, 'registerStore'])->name('register.store');
 Route::post('/user-login-check', [FrontendAuthController::class, 'loginCheck'])->name('login.check');
+Route::get('/check-validation', [FrontendAuthController::class, 'checkValidation'])->name('check.validation');
 
 // forget password
 Route::get('/forget-password', [FrontendForgetPasswordController::class, 'forgetPassword'])->name('forget.password');

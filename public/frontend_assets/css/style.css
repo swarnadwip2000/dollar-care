@@ -5368,6 +5368,124 @@ a:hover{
 .size-fix {
 }
 
-.red-color{
+.red-color {
     color: #ee1b24 !important;
+}
+
+/* 11-08-2023 */
+
+.modal-login .login_sec_right_text {
+    text-align: center;
+}
+
+.modal-login .login-logo {
+    width: 150px;
+    height: 150px;
+    margin: 0px auto 20px;
+}
+
+.modal-login .login-logo img {
+    width: 100%;
+}
+
+.modal-login .login-logo-head {
+    padding-bottom: 30px;
+}
+
+.modal-login .login-logo-head h1 {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    color: var(--black-color);
+    text-transform: uppercase;
+    margin-bottom: 0;
+    padding-bottom: 2px;
+}
+
+.modal-login .login-logo-head p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--black-color);
+}
+
+.modal-login .login_form .form-group {
+    padding-bottom: 10px;
+}
+
+.modal-login .login_form label {
+    color: var(--black-color);
+}
+
+.modal-login .login_form .form-control {
+    background-color: transparent;
+    border: 1px solid rgb(0 0 0 / 50%);
+    border-radius: 0px !important;
+    margin-bottom: 0 !important;
+    padding: 0px 5px !important;
+}
+
+.modal-login .btn.btn-login {
+    width: 100%;
+    font-size: 16px;
+    background-image: linear-gradient(90deg, #1851b5 0%, #ed1b24 100%);
+    border: none;
+    border-radius: 0px !important;
+    padding: 5px;
+    color: var(--white-color);
+    transition: ease all 0.5s;
+}
+
+.modal-login .login-text {
+    margin-top: 5px;
+    text-align: right;
+}
+
+.modal-login .login-text-2 p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--semi-black);
+}
+
+.modal-login .modal-header {
+    border-bottom: none;
+}
+
+.modal-login .modal-dialog {
+    max-width: 500px;
+}
+
+.modal-login .modal-header {
+    padding: 0;
+}
+
+.modal-login .modal-header .btn-close {
+    padding: 20px;
+}
+
+.modal-login .login_form .btn {
+    margin-top: 0 !important;
+}
+
+.modal-login .login-text p a {
+    font-size: 14px;
+    color: #000;
+}
+
+.modal-login .modal-body {
+    padding: 0 !important;
+}
+
+.modal-login .modal-footer {
+    border-top: none;
+    padding-bottom: 40px;
+}
+.modal-login .login_form .toggle i {
+    font-size: 15px;
+}
+@media (max-width: 767px) {
+    .modal-login .modal-body {
+        padding: 20px !important;
+    }
 }
