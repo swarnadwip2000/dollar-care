@@ -38,12 +38,12 @@ Route::prefix('v1')->group(function () {
     //     Route::post('reset-password',[DocotorForgetPasswordController::class,'resetPassword']);
     // });
 
-    Route::group(['middleware' => ['auth:api'], 'prefix' => 'admin'], function () {
+    Route::group(['middleware' => ['auth:api']], function () {
         Route::post('symptoms',[HomeController::class,'symptoms']);
         Route::post('specializations',[HomeController::class,'specializations']);
         Route::post('all-doctors',[HomeController::class,'all_doctors']);
         Route::post('doctors',[HomeController::class,'doctorsList']);
-        Route::post('search-doctors',[HomeController::class,'searchDoctor']);
+        Route::post('search-doctors',[HomeController::class,'searchDoctorOrClinic']);
         Route::post('store-location', [HomeController::class,'storeLocation']);
     });
 
