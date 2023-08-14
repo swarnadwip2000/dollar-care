@@ -3417,9 +3417,13 @@ a .dt-slot-div p {
     width: 100%;
 }
 
-.send-div {
+/* .send-div {
     width: 30px;
     height: 30px;
+} */
+.send-div button {
+    border: none;
+    background: transparent;
 }
 
 .type-div {
@@ -5484,6 +5488,24 @@ a:hover{
 .modal-login .login_form .toggle i {
     font-size: 15px;
 }
+.error-msg {
+    background: rgb(252 199 202);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.error-text {
+    color: var(--main-color);
+}
+.cross-btn-1 {
+    cursor: pointer;
+}
+.set-active-green::before {
+    height: 11px !important;
+    width: 11px !important;
+    top: 59px !important;
+    right: 17px !important;
+}
+
 @media (max-width: 767px) {
     .modal-login .modal-body {
         padding: 20px !important;

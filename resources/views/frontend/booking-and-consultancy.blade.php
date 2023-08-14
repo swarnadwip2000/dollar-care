@@ -12,6 +12,7 @@
         use App\Models\User;
         use App\Helpers\Helper;
     @endphp
+    {{-- @dd(Auth::user()->id) --}}
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -31,7 +32,7 @@
                         <div class="cl-dc-bx">
                             <div class="row justify-content-between">
                                 <div class="col-xl-3 col-md-3 col-12">
-                                    <div class="find-doc-slide-img">
+                                    <div class="find-doc-slide-img" id="{{ $doctor['id'] }}-status">
                                         @if ($doctor['profile_picture'])
                                             <img src="{{ Storage::url($doctor['profile_picture']) }}" alt="">
                                         @else
@@ -335,32 +336,7 @@
             });
         });
     </script>
-    <script>
-        const messaging = firebase.messaging();
-        messaging.usePublicVapidKey("{{ env('FIREBASE_PUBLIC_VAPID_KEY') }}");
-        // Request Permission of Notifications
-        function sendTokenToServer(fcm_token) {
-            const user_id = "{{ Auth::user()->id }}";
-            axios.post('/api/save-token', {
-                fcm_token,
-                user_id
-            }).then(res => {
-                console.log(res);
-            })
-        }
-
-        messaging.getToken().then((currentToken) => {
-            if (currentToken) {
-                sendTokenToServer(currentToken);
-            } else {
-                console.warn('Cannot get token');
-                requestPermission();
-            }
-        }).catch(err => {
-            console.warn(err);
-            // showToken('Error retrieving Instance ID token', err);
-        });
-    </script>
+   
 
     <script>
         $('.clinic_add').on('change', function() {

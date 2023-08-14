@@ -25,7 +25,8 @@ class AuthController extends Controller
     }
 
     public function loginCheck(Request $request)
-    {                           
+    {        
+        // dd($request->all());                   
         $request->validate([
             'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|exists:users,email',
             'password' => 'required|min:8|max:20',
@@ -46,11 +47,16 @@ class AuthController extends Controller
                         }
                         return redirect()->route('doctor.dashboard');
                     } else if ($user->hasRole('PATIENT')) {
-                        if (Session::has('session_id')) {
+                        if (Session::has('session_id')) {   
                             // Location::where('user_id', $user->id)->delete();
                             Location::where('session_id', Session::get('session_id'))->update(['user_id'=>Auth::user()->id]);
                         }
-                        return redirect()->route('patient.dashboard');
+
+                        if ($request->type == 'telehealth_page') {
+                            return redirect()->route('telehealth')->with('message', 'Login successful');
+                        } else {
+                            return redirect()->route('patient.dashboard');
+                        }
                     } else {
                         Auth::logout();
                         return redirect()->back()->with('error', 'Your account is not active. Please contact with admin');

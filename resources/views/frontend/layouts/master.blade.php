@@ -146,9 +146,13 @@
                                         </p>
                                     </div>
                                 </div>
+                                <div id="home_login_email_msg">
+
+                                </div>
                                 <div class="login_form">
                                     <form action="{{ route('login.check') }}" method="post" id="login-form">
                                         @csrf
+                                        <input type="hidden" name="type" value="telehealth_page">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label">Email
                                                 ID</label>
@@ -160,13 +164,13 @@
                                             <div class="position-relative">
                                                 <input type="text" id="txtPassword" class="form-control"
                                                     name="password" name="txtPassword">
-                                               
+
                                                 <button type="button" class="toggle">
                                                     <i id="eyeIcon-2" class="fa fa-eye toggle"
                                                         toggle="#txtPassword"></i>
                                                 </button>
                                             </div>
-                                            <span class="text-danger" id="home_login_email_msg"></span>
+
                                             <div class="login-text text-right">
                                                 <p>
                                                     <a href="#">Forgot Password?</a>
@@ -209,18 +213,12 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+
     <script>
-        // export 'default' from './firebase-app.js';
-        var firebaseConfig = {
-            apiKey: "AIzaSyB-XF7sdkBhl3qwsUFnvIeBwqPUB9E0LXo",
-            authDomain: "dollar-care-2d690.firebaseapp.com",
-            projectId: "dollar-care-2d690",
-            storageBucket: "dollar-care-2d690.appspot.com",
-            messagingSenderId: "293505905939",
-            appId: "1:293505905939:web:32e4e935d5f1c48b19d6e6"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        var sender_id  = @json(Auth::user()->id ?? '');
+        var receiver_id;
     </script>
     <script>
         $(document).ready(function() {
@@ -249,19 +247,23 @@
                     success: function(data) {
                         if (data.status == false) {
                             // show validation error
-                            $('#home_login_email_msg').text(data.message);
+                            $('#home_login_email_msg').html('<div class="error-msg d-flex justify-content-between" ><span class="error-text" >'+ data.message +'</span><span class="cross-btn-1"><i class="fa-solid fa-xmark"></i></span></div>');
 
                         } else {
-                            // toastr.error(data.error);
-                            $('#home_login_email_msg').text('');
+                            $('#login-form').submit();
                             $('#home_login_email').val('');
                             $('#txtPassword').val('');
+
                             // form submit
                             $('#myModal').modal('hide');
-                            $('#login-form').submit();
+
                         }
                     }
                 });
+            });
+            $(document).on('click', '.cross-btn-1', function(){
+            //   don't show the error div
+                $('#home_login_email_msg').html('');
             });
         });
     </script>

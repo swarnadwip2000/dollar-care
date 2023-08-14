@@ -45,7 +45,8 @@ class BookingAndConsultancyController extends Controller
                     if ($userMembership) {
                         $chat_call = 1;
                         $chats = Chat::where(['sender_id'=> Auth::user()->id, 'reciver_id'=> $request->doctor_id])->get();
-                        return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call'))]);
+                        $doctor = User::find($request->doctor_id);
+                        return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call','doctor'))]);
                     } else {
                         return response()->json(['status' => false, 'message' => 'Your membership has been expired.']);
                     }

@@ -29,6 +29,7 @@ use App\Http\Controllers\Doctor\SettingsController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\BookingAndConsultancyController;
+use App\Http\Controllers\Frontend\ChatController;
 use App\Http\Controllers\Frontend\CmsController;
 use App\Http\Controllers\Frontend\ForgetPasswordController as FrontendForgetPasswordController;
 use App\Http\Controllers\Frontend\MembershipController;
@@ -245,6 +246,9 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/visitSlotAjax', [BookingAndConsultancyController::class, 'visitSlotAjax'])->name('clinic.visit.slot-ajax');
     Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
     Route::get('/thank-you', [BookingAndConsultancyController::class, 'thankYou'])->name('thank-you');
+
+    // chat
+    Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
     
 });
 

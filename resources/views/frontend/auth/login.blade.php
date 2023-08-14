@@ -32,6 +32,7 @@
                                 <div class="login_form">
                                     <form class="" action="{{ route('login.check') }}" method="post">
                                         @csrf
+                                        <input type="hidden" name="type" value="login_page">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label">Email ID</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
