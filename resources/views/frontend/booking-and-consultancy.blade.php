@@ -310,7 +310,7 @@
                 $('.chat-slot').css('display', 'none');
             });
             $('#show-chat').on('click', function() {
-                var doctor_id = '{{ $doctor['id'] }}'
+                var doctor_id = "{{ $doctor['id'] }}"
                 $('#loading').addClass('loading');
                 $('#loading-content').addClass('loading-content');
                 $.ajax({
@@ -330,6 +330,8 @@
                             $('#loading-content').removeClass('loading-content');
                         } else {
                             toastr.error(resp.message);
+                            $('#loading').removeClass('loading');
+                            $('#loading-content').removeClass('loading-content');
                         }
                     }
                 });
@@ -361,7 +363,7 @@
     </script>
 
     <script>
-        $('.appointment-date').on('change', function() {
+          $(document).on("change", ".appointment-date", function () {
             var slot_id = $(this).data('id');
             $('#loading').addClass('loading');
             $('#loading-content').addClass('loading-content');

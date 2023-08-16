@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
 use App\Http\Controllers\Doctor\BookingHistoryController;
+use App\Http\Controllers\Doctor\ChatController as DoctorChatController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Doctor\ManageClinicController;
 use App\Http\Controllers\Doctor\NotificationController as DoctorNotificationController;
@@ -306,6 +307,8 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::get('/booking-history-ajax', [BookingHistoryController::class, 'bookingHistoryAjax'])->name('booking-history-ajax');
     // logout
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
+    // chat
+    Route::get('/chat', [DoctorChatController::class, 'index'])->name('chat.index');
 });
 
 

@@ -44,7 +44,11 @@ class BookingAndConsultancyController extends Controller
                     $userMembership = UserMembership::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->where('membership_expiry_date', '>=', date('Y-m-d'))->first();
                     if ($userMembership) {
                         $chat_call = 1;
-                        $chats = Chat::where(['sender_id'=> Auth::user()->id, 'reciver_id'=> $request->doctor_id])->get();
+                        $chats = Chat::where(function ($query) use ($request) {
+                            $query->where('sender_id', Auth::user()->id)->where('reciver_id', $request->doctor_id);
+                        })->orWhere(function ($query) use ($request) {
+                            $query->where('sender_id', $request->doctor_id)->where('reciver_id', Auth::user()->id);
+                        })->get();
                         $doctor = User::find($request->doctor_id);
                         return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call','doctor'))]);
                     } else {

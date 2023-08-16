@@ -86,8 +86,8 @@
         height: 100%;
     }
     .dr-name-img {
-    height: auto;
-}
+        height: auto;
+    }
 }
 
 @media (max-width: 1440px) {
@@ -158,11 +158,11 @@
         width: 70%;
     }
     .myapp-div-wrap {
-     padding: 10px 15px;   
-}
-.profile-text {
-    padding-left: 10px;
-}
+        padding: 10px 15px;
+    }
+    .profile-text {
+        padding-left: 10px;
+    }
 }
 
 @media (max-width: 1366px) {
@@ -264,8 +264,8 @@
     .app-doc-img img {
         width: 100%;
     }
-    .booking-history-table .table-responsive .table tbody tr td{
-           width: 21%;
+    .booking-history-table .table-responsive .table tbody tr td {
+        width: 21%;
     }
 }
 
@@ -552,7 +552,7 @@
     }
 
     .l-navbar {
-        top: 32px;
+        /* top: 32px; */
         height: 100%;
     }
 
@@ -568,13 +568,12 @@
     .add-address-form-box .input-group select {
         margin-bottom: 10px;
     }
-    .clinical-box{
+    .clinical-box {
         padding: 10px;
     }
     .profile-text {
-    padding: 0px 5px;
-}
-    
+        padding: 0px 5px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -606,7 +605,7 @@
     .logo a {
         width: 90px;
     }
-    .app-time-1{
+    .app-time-1 {
         margin-bottom: 10px;
     }
 }
@@ -796,7 +795,7 @@
         min-height: auto;
     }
     .dr-name {
-         margin-bottom: 10px;
+        margin-bottom: 10px;
     }
     .app-time {
         text-align: center;
@@ -838,20 +837,23 @@
     .app-time-wrap {
         justify-content: start;
     }
-    .cancel_btn_1_div{
+    .cancel_btn_1_div {
         padding-top: 0px;
         text-align: center;
-         margin: 10px 0px;
+        margin: 10px 0px;
     }
-    .profile-div-2{
-      display: block!important;    
+    .profile-div-2 {
+        display: block !important;
     }
-    .profile-text{
+    .profile-text {
         padding: 10px 0px 0px;
     }
     .cancel_btn_1 {
-      padding: 15px;
-     }
+        padding: 15px;
+    }
+    .dr-chat-request-img {
+        display: none;
+    }
 }
 
 @media (max-width: 767px) {
