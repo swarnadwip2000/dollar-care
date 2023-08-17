@@ -248,8 +248,8 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
     Route::get('/thank-you', [BookingAndConsultancyController::class, 'thankYou'])->name('thank-you');
 
-    // chat
-    Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
+
+    
     
 });
 
@@ -258,7 +258,8 @@ Route::group(['middleware' => 'access.telehealth'], function () {
 Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');
 Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');
 // clinic visit slot ajax
-
+    // chat
+Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
 
 
 /**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/
@@ -309,6 +310,7 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
     // chat
     Route::get('/chat', [DoctorChatController::class, 'index'])->name('chat.index');
+    Route::post('/load-chats', [DoctorChatController::class, 'loadChat'])->name('chat.load');
 });
 
 

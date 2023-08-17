@@ -1,8 +1,29 @@
+$.ajaxSetup({
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
+});
+
 $(document).ready(function () {
+
+   
+
+
+    $(document).on("click", ".user-list", function (e) {
+        var getUserID = $(this).attr("data-id");
+        var dataQuery = $(this).attr("data-query");
+        receiver_id = getUserID;
+        if (dataQuery == 0) {
+            $(".chat-first-page").css("display", "none");
+            loadChats();
+        }
+    });
+
     $(document).on("submit", "#chat-form", function (e) {
         e.preventDefault();
+       
         var message = $("#user-chat").val();
-        var doctor_id = $(".doctor_id").val();
+        var receiver_id = $(".reciver_id").val();
         var url = "/user-chat";
         $.ajax({
             type: "POST",
@@ -10,7 +31,7 @@ $(document).ready(function () {
             data: {
                 _token: $("input[name=_token]").val(),
                 message: message,
-                reciver_id: doctor_id,
+                reciver_id: receiver_id,
                 sender_id: sender_id,
             },
             success: function (res) {
@@ -18,28 +39,54 @@ $(document).ready(function () {
                     $("#user-chat").val("");
                     let chat = res.chat.message;
                     let created_at = res.chat.created_at;
-                    let time_format_12 = moment(created_at, 'YYYY-MM-DD HH:mm:ss').format('hh:mm A');
+                    let time_format_12 = moment(
+                        created_at,
+                        "YYYY-MM-DD HH:mm:ss"
+                    ).format("hh:mm A");
                     let profile_picture = res.sender_profile_picture;
 
                     let html =
-                        `<div class="chat-sec-left chat-sec-right pb-3"><div class="chat-sec-left-wrap d-flex justify-content-end"><div class="chat-sec-left-text-box"><div class="chat-sec-left-text"><h4>`+res.chat.sender.name+`</h4><p>` +
+                        `<div class="chat-sec-left chat-sec-right pb-1"><div class="chat-sec-left-wrap d-flex justify-content-end"><div class="chat-sec-left-text-box"><div class="chat-sec-left-text"><p>` +
                         chat +
-                        `</p></div><div class="tm-div d-block pt-2 text-end"><h4>` + time_format_12 + `</h4></div></div><div class="chat-sec-left-img ps-3"><div class="find-doc-slide-img cht-img"><img src="` +
-                        profile_picture 
-                        + `" alt="" /></div></div></div></div>`;
+                        `</p></div><div class="tm-div d-block pt-2 text-end"><h4>` +
+                        time_format_12 +
+                        `</h4></div></div></div></div>`;
                     if (res.chat_count > 0) {
                         $("#chat-container").append(html);
-                    } else { 
+                        scrollChatToBottom();
+                    } else {
                         $("#chat-container").html(html);
                     }
-                    
                 } else {
-                    console.log("error");
+                    console.log(res.msg);
                 }
             },
         });
     });
 });
+
+
+
+// load chats
+function loadChats() {
+    $.ajax({
+        type: "POST",
+        url: "/doctor/load-chats",
+        data: {
+            _token: $("input[name=_token]").val(),
+            reciver_id: receiver_id,
+            sender_id: sender_id,
+        },
+        success: function (resp) {
+            if (resp.status == true) {
+                $(".chat-module").html(resp.view);
+                scrollChatToBottom();
+            } else {
+                console.log(resp.msg);
+            }
+        },
+    });
+}
 
 Echo.join("status-update")
     .here((users) => {
@@ -49,6 +96,10 @@ Echo.join("status-update")
                 $("#" + users[x].id + "-status").addClass(
                     "active-green set-active-green"
                 );
+
+                $("#" + users[x].id + "-userStatus").html(
+                    `<span class="online-user"></span>Online`
+                );
             }
         }
     })
@@ -56,12 +107,18 @@ Echo.join("status-update")
     .joining((user) => {
         // console.log(user + "--join");
         $("#" + user.id + "-status").addClass("active-green set-active-green");
+        $("#" + user.id + "-userStatus").html(
+            `<span class="online-user"></span>Online`
+        );
     })
 
     .leaving((user) => {
         // console.log(user + "--leave");
         $("#" + user.id + "-status").removeClass(
             "active-green set-active-green"
+        );
+        $("#" + user.id + "-userStatus").html(
+            `<span class="offline-user"></span>Offline`
         );
     })
 
@@ -70,23 +127,40 @@ Echo.join("status-update")
     });
 
 Echo.private("broadcast-message").listen(".getChatMessage", (data) => {
-    console.log(data);
+    // console.log(receiver_id);
     let chat = data.chat.message;
     let created_at = data.chat.created_at;
-    let time_format_12 = moment(created_at, 'YYYY-MM-DD HH:mm:ss').format('hh:mm A');
-    let profile_picture = data.reciver_profile_picture;
+    let time_format_12 = moment(created_at, "YYYY-MM-DD HH:mm:ss").format(
+        "hh:mm A"
+    );
+    let profile_picture = data.sender_profile_picture;
     if (
         data.chat.reciver_id == sender_id &&
-        reciver_id == data.chat.sender_id
+        receiver_id == data.chat.sender_id
     ) {
         let html =
-            `<div class="chat-sec-left pb-3"><div class="chat-sec-left-wrap d-flex"><div class="chat-sec-left-img"><div class="find-doc-slide-img cht-img"><img src="`+profile_picture+`" alt="" /></div></div><div class="chat-sec-left-text-box"><div class="chat-sec-left-text"><h4>Dr. Sam Rungta</h4><p>` +
+            `<div class="chat-sec-left pb-1"><div class="chat-sec-left-wrap d-flex"><div class="chat-sec-left-text-box"><div class="chat-sec-left-text"><p>` +
             chat +
-            `</p></div><div class="tm-div d-block pt-2"><h4>` + time_format_12 + `</h4></div></div></div></div>`;
-            if (data.chat_count > 0) {
-                $("#chat-container").append(html);
-            } else { 
-                $("#chat-container").html(html);
-            }
+            `</p></div><div class="tm-div d-block pt-2"><h4>` +
+            time_format_12 +
+            `</h4></div></div></div></div>`;
+        if (data.chat_count > 0) {
+            $("#chat-container").append(html);
+            scrollChatToBottom()
+        } else {
+            $("#chat-container").html(html);
+        }
     }
 });
+
+
+function scrollChatToBottom() {
+    var messages = document.getElementById('chat-container');
+    messages.scrollTop = messages.scrollHeight;
+}
+
+
+
+  
+
+ 

@@ -18,7 +18,7 @@ class ChatController extends Controller
             $chat_count = Chat::where(function ($query) use ($request) {
                 $query->where('sender_id', $request->sender_id)->where('reciver_id', $request->reciver_id);
             })->orWhere(function ($query) use ($request) {
-                $query->where('sender_id', $request->doctor_id)->where('reciver_id', $request->sender_id);
+                $query->where('sender_id', $request->reciver_id)->where('reciver_id', $request->sender_id);
             })->count();
 
             $chatData = Chat::create([
