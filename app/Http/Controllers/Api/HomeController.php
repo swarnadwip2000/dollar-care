@@ -404,7 +404,7 @@ class HomeController extends Controller
 
 
     /**
-     * Doctors List as per symptoms/specializations Api
+     * Doctors/Clinics List as per search Api
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
@@ -433,7 +433,7 @@ class HomeController extends Controller
      * @response 404{
      * "status": false,
      *  "statusCode": 404,
-     *  "message": "No Doctor Found"
+     *  "message": "No Doctor or Clinic Found"
      * }
      */
 
@@ -477,5 +477,104 @@ class HomeController extends Controller
         $results = $doctors->union($clinics)->get();
         
         return response()->json(['status' => true, 'statusCode' => 200, 'data' => $results]);
+    }
+
+
+    /**
+     * Appointment History Api
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "data": [
+     *    {
+     *       "id": 1,
+     *       "user_id": 14,
+     *       "doctor_id": 13,
+     *       "clinic_id": 1,
+     *       "appointment_date": "2021-06-06",
+     *       "appointment_time": "10:00 AM",
+     *       "appointment_status": 1,
+     *       "created_at": "2021-06-06T10:55:47.000000Z",
+     *       "updated_at": "2021-06-06T10:55:47.000000Z",
+     *       "deleted_at": null,
+     *       "doctor": {
+     *          "id": 13,
+     *          "name": "Shreeja Sadhukhan",
+     *          "email": "shreeja@mailinator.com"  
+     *      },
+     *      }]
+     *    }
+     * 
+     */
+
+    public function appointmentHistoryForUser(Request $request) {
+        try {
+            $user_id = auth()->user()->id;
+            $appointments = DB::table('appointments')
+            ->join('users', 'appointments.doctor_id', '=', 'users.id')
+            ->select(
+                'appointments.id',
+                'appointments.user_id',
+                'appointments.doctor_id',
+                'appointments.clinic_id',
+                'appointments.appointment_date',
+                'appointments.appointment_time',
+                'appointments.appointment_status',
+                'appointments.created_at',
+                'appointments.updated_at',
+                'appointments.deleted_at',
+                'users.name',
+                'users.email'
+            )
+            ->where('appointments.user_id', $user_id)
+            ->get();
+            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $appointments]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
+        }
+    }
+
+
+    /**
+     * Doctor details Api
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "data": [
+     *   {
+     *     "id": 13,
+     *    "name": "Shreeja Sadhukhan",
+     *    "email": "shreeja@mailinator.com",
+     *    "phone": "7475850123",
+     *    "email_verified_at": null,
+     *    "profile_picture": "doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg",
+     *    "year_of_experience": "3",
+     *    "license_number": null,
+     *    "location": "Purba Bardhaman",
+     *    "gender": "Female",
+     *    "age": "22",
+     *    "status": 1,
+     *    "fcm_token": null,
+     *    "created_at": "2023-06-06T10:55:47.000000Z",
+     *    "updated_at": "2023-06-06T10:55:47.000000Z",
+     *    "deleted_at": null
+     *  }
+     * ]
+     * }
+     * 
+     * 
+     */
+
+    public function doctorDetails(Request $request) {
+        try {
+            $doctor_id = $request->doctor_id;
+            $data = [];
+            $data['doctor'] = User::where('id', $doctor_id)->first();
+            // get clinic details for the doctor
+            $data['clinic'] = ClinicDetails::where('user_id', $doctor_id)->first();
+            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
+        }
     }
 }
