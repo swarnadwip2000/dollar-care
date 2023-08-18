@@ -119,7 +119,7 @@ Echo.join("status-update")
         );
         $("#" + user.id + "-userStatus").html(
             `<span class="offline-user"></span>Offline`
-        );
+        );  
     })
 
     .listen("UserStatusEvent", (e) => {

@@ -30,14 +30,14 @@
                                         <div class="col-xl-5 col-12">
                                             <div class="dr-chat-box-1 srl-2" id="srl-2">
                                                 @foreach ($friends as $key => $value)
-                                                    <div class="dr-chat-box-1 mb-3 user-list" data-id="{{ $value->friend_id }}" data-query="0">
+                                                    <div class="dr-chat-box-1 mb-3 user-list" data-id="{{ $value->id }}" data-query="0">
                                                         <div
                                                             class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
                                                             <div
                                                                 class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
                                                                 <div class="profile-img">
-                                                                    @if ($value->friend->profile_picture)
-                                                                        <img src="{{ Storage::url($value->friend->profile_picture) }}"
+                                                                    @if ($value->profile_picture)
+                                                                        <img src="{{ Storage::url($value->profile_picture) }}"
                                                                             alt="">
                                                                     @else
                                                                         <img src="{{ asset('frontend_assets/images/profile-3.png') }}"
@@ -46,10 +46,10 @@
                                                                 </div>
                                                                 <div class="profile-text">
                                                                     <h2>
-                                                                        {{ $value->friend->name }}
+                                                                        {{ $value->name }}
                                                                     </h2>
 
-                                                                    <p id="{{ $value->friend_id }}-userStatus"><span class="offline-user"></span>Offline</p>
+                                                                    <p id="{{ $value->id }}-userStatus"><span class="offline-user"></span>Offline</p>
                                                                 </div>
                                                             </div>
                                                             <div class="patient-age">

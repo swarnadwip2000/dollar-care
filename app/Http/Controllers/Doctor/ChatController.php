@@ -8,13 +8,29 @@ use App\Models\Friends;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class ChatController extends Controller
 {
     public function index()
     {
-        $friends = Friends::where('user_id', Auth::user()->id)->where('status', 1)->orWhere('status', 0)->get();
+        // get friend list from chat table orderby last conbversation
+        $message = Chat::where('sender_id', Auth::user()->id)->orWhere('reciver_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        $friends = [];
+        foreach ($message as $key => $value) {
+            if ($value->sender_id == Auth::user()->id) {
+                $friends[] = $value->reciver_id;
+            } else {
+                $friends[] = $value->sender_id;
+            }
+        }
+        $friends = array_unique($friends);
+        // show the list of friends orderby $friends
+        $friends = User::whereIn('id', $friends)->orderByRaw("FIELD(id, " . implode(',', $friends) . ")")->get(); // it's not working
+        // dd($friends);
+
+
         return view('frontend.doctor.chat.index')->with(compact('friends'));
     }
 

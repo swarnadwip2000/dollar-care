@@ -243,7 +243,7 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
     Route::post('/appointment-store', [BookingAndConsultancyController::class, 'storeAppointment'])->name('appointment-store');
-    Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
+    
     Route::get('/visitSlotAjax', [BookingAndConsultancyController::class, 'visitSlotAjax'])->name('clinic.visit.slot-ajax');
     Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
     Route::get('/thank-you', [BookingAndConsultancyController::class, 'thankYou'])->name('thank-you');
@@ -260,7 +260,7 @@ Route::post('/membership-payment', [MembershipController::class, 'membershipPaym
 // clinic visit slot ajax
     // chat
 Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
-
+Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
 
 /**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/
 Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(function () {

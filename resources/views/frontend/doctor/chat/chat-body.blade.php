@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="profile-text">
-            <div class="dr-chat-request-img active-green">
+            <div id="{{ $reciver->id }}-chatStatus" class="dr-chat-request-img">
                 @if ($reciver->profile_picture)
                     <img src="{{ Storage::url($reciver->profile_picture) }}" alt="">
                 @else
@@ -93,3 +93,4 @@
     </div>
     </div>
 @endif
+

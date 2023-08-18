@@ -48,7 +48,7 @@ class BookingAndConsultancyController extends Controller
                             $query->where('sender_id', Auth::user()->id)->where('reciver_id', $request->doctor_id);
                         })->orWhere(function ($query) use ($request) {
                             $query->where('sender_id', $request->doctor_id)->where('reciver_id', Auth::user()->id);
-                        })->paginate(10);
+                        })->get();
                         $doctor = User::find($request->doctor_id);
                         return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call','doctor'))]);   
                     } else {

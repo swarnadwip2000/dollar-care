@@ -39,8 +39,7 @@
                                 </div>
                             </div>
                         @endif
-                    @endforeach
-                    {{ $chats->links() }}
+                    @endforeach 
                 </div>
             @else
                 <div class="chat-sec-box chat-srl_1" id="chat-container">
@@ -72,25 +71,3 @@
         </div>
     </div>
 @endif
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.3.7/jquery.jscroll.min.js"></script>
-<script type="text/javascript">
-    $('ul.pagination').hide();
-    $(function() {
-        $('document').ready(function(){
-         $('.infinite-scroll').jscroll({
-            autoTrigger: true,
-            debug: true,
-            loadingHtml: `<img class="center-block" src="{{ asset('frontend_assets/images/loading.gif') }}" alt="Loading..." />`,
-            padding: 0,
-            nextSelector: '.pagination li.page-active + li a',
-            contentSelector: '.infinite-scroll',
-            callback: function() {
-                $('ul.pagination').remove();
-            }
-         });
-        //  console.log('hello');
-
-        });   
-    });
-</script>
