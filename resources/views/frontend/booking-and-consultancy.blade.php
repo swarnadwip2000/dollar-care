@@ -85,7 +85,8 @@
                                 </a>
                             @endif
                             <a href="javascript:void(0);">
-                                <div class="slot-1 chat" id="show-chat">
+                                <div class="slot-1 user-list chat" id="show-chat" data-id="{{ $doctor['id'] }}"
+                                    data-query="1">
                                     {{-- add chat class when implemetation start --}}
                                     <h3>Chat / Video Consultation</h3>
                                 </div>
@@ -202,11 +203,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- <div class="mdl-img">
-                                                                                                                                                                                                                                                                                                                                 <div class="find-doc-slide-img">
-                                                                                                                                                                                                                                                                                                                                     <img src="{{ asset('frontend_assets/images/fd-2.png') }}" alt="">
-                                                                                                                                                                                                                                                                                                                                 </div>
-                                                                                                                                                                                                                                                                                                                             </div> -->
+
                 <div class="mdl-cam">
                     <i class="fa-sharp fa-solid fa-video"></i>
                 </div>
@@ -310,7 +307,7 @@
                 $('.chat-slot').css('display', 'none');
             });
             $('#show-chat').on('click', function() {
-                var doctor_id = '{{ $doctor['id'] }}'
+                var doctor_id = "{{ $doctor['id'] }}"
                 $('#loading').addClass('loading');
                 $('#loading-content').addClass('loading-content');
                 $.ajax({
@@ -326,17 +323,25 @@
                             $('#show-chat').addClass('active-slot');
                             $('.chat-slot').css('display', 'block');
                             $('.chat-slot').html(resp.view);
+                            scrollChatToBottom()
                             $('#loading').removeClass('loading');
                             $('#loading-content').removeClass('loading-content');
                         } else {
                             toastr.error(resp.message);
+                            $('#loading').removeClass('loading');
+                            $('#loading-content').removeClass('loading-content');
                         }
                     }
                 });
             });
+
+            function scrollChatToBottom() {
+                var messages = document.getElementById('chat-container');
+                messages.scrollTop = messages.scrollHeight;
+            }
         });
     </script>
-   
+
 
     <script>
         $('.clinic_add').on('change', function() {
@@ -361,7 +366,7 @@
     </script>
 
     <script>
-        $('.appointment-date').on('change', function() {
+        $(document).on("change", ".appointment-date", function() {
             var slot_id = $(this).data('id');
             $('#loading').addClass('loading');
             $('#loading-content').addClass('loading-content');

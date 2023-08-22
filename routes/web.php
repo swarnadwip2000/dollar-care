@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\SymptomsController;
 use App\Http\Controllers\Doctor\BookingHistoryController;
+use App\Http\Controllers\Doctor\ChatController as DoctorChatController;
 use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Doctor\ManageClinicController;
 use App\Http\Controllers\Doctor\NotificationController as DoctorNotificationController;
@@ -242,13 +243,13 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/doctors/{type}/{slug}', [TeleHealthController::class, 'doctors'])->name('doctors');
     Route::get('/booking-and-consultancy/{id}', [BookingAndConsultancyController::class, 'bookingAndConsultancy'])->name('booking-and-consultancy');
     Route::post('/appointment-store', [BookingAndConsultancyController::class, 'storeAppointment'])->name('appointment-store');
-    Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
+    
     Route::get('/visitSlotAjax', [BookingAndConsultancyController::class, 'visitSlotAjax'])->name('clinic.visit.slot-ajax');
     Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
     Route::get('/thank-you', [BookingAndConsultancyController::class, 'thankYou'])->name('thank-you');
 
-    // chat
-    Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
+
+    
     
 });
 
@@ -257,8 +258,9 @@ Route::group(['middleware' => 'access.telehealth'], function () {
 Route::post('/membership-model', [MembershipController::class, 'membershipModel'])->name('membership.model');
 Route::post('/membership-payment', [MembershipController::class, 'membershipPayment'])->name('membership.payment');
 // clinic visit slot ajax
-
-
+    // chat
+Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
+Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
 
 /**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/
 Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(function () {
@@ -306,6 +308,9 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     Route::get('/booking-history-ajax', [BookingHistoryController::class, 'bookingHistoryAjax'])->name('booking-history-ajax');
     // logout
     Route::get('/logout', [FrontendAuthController::class, 'doctorLogout'])->name('logout');
+    // chat
+    Route::get('/chat', [DoctorChatController::class, 'index'])->name('chat.index');
+    Route::post('/load-chats', [DoctorChatController::class, 'loadChat'])->name('chat.load');
 });
 
 

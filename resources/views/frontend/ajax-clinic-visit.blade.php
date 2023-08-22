@@ -34,7 +34,7 @@
     </div>
 @endif
 
-<script>
+{{-- <script>
     $('.appointment-date').on('change', function() {
         var slot_id = $(this).data('id');
         $('#loading').addClass('loading');
@@ -54,4 +54,4 @@
             }
         });
     });
-</script>
+</script> --}}

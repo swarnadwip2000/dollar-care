@@ -22,7 +22,7 @@ class ForgetPasswordController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users,email',
         ]);
-        
+
         $user = User::where('email', $request->email)->first();
         if ($user->hasRole('ADMIN')) {
             return redirect()->back()->with('error', 'Admin can not reset password from here');
@@ -41,7 +41,7 @@ class ForgetPasswordController extends Controller
             ];
 
             Mail::to($request->email)->send(new SendOtpMail($details));
-            return redirect()->route('otp.verification',base64_encode($user->id))->with('message', 'OTP has been sent to your email');
+            return redirect()->route('otp.verification', base64_encode($user->id))->with('message', 'OTP has been sent to your email');
         }
     }
 
@@ -59,9 +59,13 @@ class ForgetPasswordController extends Controller
         $user = User::find(base64_decode($request->id));
         $otp = PasswordReset::where('email', $user->email)->first();
         if ($otp->token == $request->otp) {
-            $newtime = date('h:i A', strtotime( $otp->created_at->addHour()));
-            $currenttime = date('h:i A');
-            if ($newtime < $currenttime) {
+            // add 1 hour with created_at date and time
+            $newTime = Carbon::parse($otp->created_at)->addHour();
+            // newtime to date time string
+            $newTime = $newTime->toDateTimeString();
+            // current date and time carbon parse
+            $now_time = Carbon::now()->toDateTimeString();
+            if ($newTime >= $now_time) {
                 return redirect()->back()->with('error', 'OTP has been expired');
             } else {
                 return redirect()->route('reset.password', base64_encode($user->id))->with('message', 'OTP verified successfully');
