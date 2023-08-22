@@ -79,7 +79,7 @@ class BookingAndConsultancyController extends Controller
 
     public function storeAppointment(Request $request)
     {
-        // return $request->all();
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'clinic_id' => 'required',
             'appointment_date' => 'required',
