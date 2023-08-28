@@ -12,6 +12,7 @@ $(document).ready(function () {
     $(document).on("click", ".user-list", function (e) {
         var getUserID = $(this).attr("data-id");
         var dataQuery = $(this).attr("data-query");
+        console.log(getUserID, dataQuery);
         receiver_id = getUserID;
         if (dataQuery == 0) {
             $(".chat-first-page").css("display", "none");
@@ -80,7 +81,7 @@ function loadChats() {
         success: function (resp) {
             if (resp.status == true) {
                 $(".chat-module").html(resp.view);
-                scrollChatToBottom();
+                // scrollChatToBottom();
             } else {
                 console.log(resp.msg);
             }
@@ -153,6 +154,30 @@ Echo.private("broadcast-message").listen(".getChatMessage", (data) => {
     }
 });
 
+
+Echo.private("user-request").listen(".getChatRequest", (data) => {
+    console.log(data);
+    const doctor_id = data.friendRequest.user_id;
+    const patient_id = data.friendRequest.friend_id;
+    console.log(sender_id,doctor_id, patient_id);
+    const requestCount = $("#chat-count-" + doctor_id).text();
+    if (sender_id == doctor_id) {
+        $("#chat-count-" + doctor_id).text(parseInt(requestCount) + 1);
+            $("#friendbox-"+doctor_id).append(` <div id="deletebtn" ></div> <div class="profile-div profile-div-2 profile-div-3 friend-request-div d-flex align-items-center justify-content-center" id="friendProfile`+patient_id+`" > <div class="profile-img"> <img src="`+
+            data.friendProfilePicture+`" alt="" /> </div> <div class="profile-text"> <h2>`+
+            data.friendRequest.friend.name
+            +`</h2> </div> <div id="userId" ></div> <div class="confirm-btn" data-id="`+
+            data.friendRequest.id
+            +`"> <a href="javascript:void(0);"> <h4> <span><i class="fa-solid fa-check" id="acceptRequest"></i></span >Confirm </h4> </a> </div> <div class="confirm-btn delete-btn"> <a href="javascript:void(0);"> <h4> <span><i class="fa-solid fa-trash-can"></i></span> </h4> </a> </div> </div>`);
+
+    }
+    
+ 
+});
+
+Echo.private("chat-request-accepted").listen(".getChatRequestAccepted", (data) => {
+    console.log(data);
+});  
 
 function scrollChatToBottom() {
     var messages = document.getElementById('chat-container');

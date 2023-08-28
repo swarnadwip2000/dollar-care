@@ -42,6 +42,7 @@ use App\Http\Controllers\Patient\NotificationController;
 use App\Http\Controllers\Patient\PaymentHistoryController;
 use App\Http\Controllers\Patient\ProfileController as PatientProfileController;
 use App\Http\Controllers\Patient\SettingController;
+use App\Models\Chat;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -248,8 +249,6 @@ Route::group(['middleware' => 'access.telehealth'], function () {
     Route::get('/clinicVisitSlotAjax', [BookingAndConsultancyController::class, 'clinicVisitSlotAjax'])->name('clinic.ajax-clinic-visit-slot-time');
     Route::get('/thank-you', [BookingAndConsultancyController::class, 'thankYou'])->name('thank-you');
 
-
-    
     
 });
 
@@ -261,6 +260,7 @@ Route::post('/membership-payment', [MembershipController::class, 'membershipPaym
     // chat
 Route::post('/user-chat', [ChatController::class, 'userChat'])->name('user-chat');
 Route::get('/doctors-chat', [BookingAndConsultancyController::class, 'doctorChat'])->name('doctor.chat');
+Route::post('/send-chat-request', [ChatController::class, 'sendChatRequest'])->name('send-chat-request');
 
 /**------------------------------------------------------------- Patient  ----------------------------------------------------------------------------------------------*/
 Route::prefix('patient')->name('patient.')->middleware('access.patient')->group(function () {
@@ -311,6 +311,9 @@ Route::prefix('doctor')->name('doctor.')->middleware('access.doctor')->group(fun
     // chat
     Route::get('/chat', [DoctorChatController::class, 'index'])->name('chat.index');
     Route::post('/load-chats', [DoctorChatController::class, 'loadChat'])->name('chat.load');
+    Route::post('/accept-chat-request', [DoctorChatController::class, 'chatRequestAccept'])->name('chat.accept');
+    Route::post('/reject-chat-request', [DoctorChatController::class, 'deleteChatRequest'])->name('chat.reject');
+    Route::get('/chat-get-user', [DoctorChatController::class, 'chatGetUser'])->name('chat.get-user');
 });
 
 

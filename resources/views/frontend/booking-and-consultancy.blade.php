@@ -317,13 +317,16 @@
                         doctor_id: doctor_id,
                     },
                     success: function(resp) {
+                        console.log(resp);
                         if (resp.status == true) {
                             $('.booking-slot').css('display', 'none');
                             $('.clinic-visit').removeClass('active-slot');
                             $('#show-chat').addClass('active-slot');
                             $('.chat-slot').css('display', 'block');
                             $('.chat-slot').html(resp.view);
-                            scrollChatToBottom()
+                            if(resp.chat_count > 0){
+                                scrollChatToBottom()
+                            } 
                             $('#loading').removeClass('loading');
                             $('#loading-content').removeClass('loading-content');
                         } else {

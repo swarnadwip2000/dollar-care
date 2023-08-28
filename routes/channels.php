@@ -24,3 +24,11 @@ Broadcast::channel('status-update', function ($user) {
 Broadcast::channel('broadcast-message', function ($user) {
     return $user;
 });
+
+Broadcast::channel('user-request', function ($user) {
+    return $user;
+});
+
+Broadcast::channel('chat-request-accepted', function ($user) {
+    return $user;
+});

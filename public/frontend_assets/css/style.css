@@ -4873,6 +4873,157 @@ a .dt-slot-div p {
 }
 
 /* Chat Request page */
+
+/ 22-08-2023 /
+.friend-request i {
+    padding: 5px;
+    color: var(--blue-color);
+    font-size: 35px;
+}
+
+.user-img-1 {
+    width: 40px;
+    height: 40px;
+}
+
+.friend-request span {
+    font-size: 12px;
+    padding: 3px;
+    color: var(--white-color);
+    position: absolute;
+    top: 0px;
+    right: 3px;
+}
+
+.friend-request {
+    position: relative;
+    background: transparent;
+    border: none;
+}
+
+.friend-request::before {
+    position: absolute;
+    content: "";
+    background: var(--main-color);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    right: 2px;
+    top: 0px;
+    z-index: 0;
+}
+
+.friend-request-div {
+    background: #F7F7F7;
+    padding: 5px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.chat-pop .profile-div-3 .profile-text h2 {
+    font-size: 16px!important;
+}
+
+.chat-pop {
+    width: 410px;
+    height: 400px;
+    background: white;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+    box-shadow: 0 0 39px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.chat-pop.active {
+    height: 0;
+    padding: 17px;
+    transition: all 0.3s ease;
+}
+
+.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 2px;
+    height: 32px;
+    background-color: var(--white-color);
+}
+
+#deletebtn {
+    width: 40px;
+    height: 40px;
+    background: none;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    right: 7px;
+    top: 11px;
+    color: #EE1B24;
+    font-size: 22px;
+}
+
+.frnd-srl {
+    max-height: 300px !important;
+    overflow-y: auto;
+    padding-right: 10px !important;
+}
+
+#frnd-srl::-webkit-scrollbar {
+    width: 5px !important;
+    border-radius: 10px !important;
+    background-color: #ccc !important;
+}
+
+#frnd-srl::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+    background-color: #D9D9D9 !important;
+}
+
+#frnd-srl::-webkit-scrollbar-thumb:hover {
+    background: #b30000 !important;
+}
+
+.chat-request {
+    padding: 50px 0px;
+  }
+  .chat-request .chat-request-wrap {
+    box-shadow: 0px 4px 59px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 30px;
+  }
+  .chat-request-img-div {
+    text-align: center;
+  }
+  .chat-request-img {
+    text-align: center;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+  }
+  .chat-request-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .chat-request-name h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--semi-black);
+  }
+  .main-btn-p .sub-btn {
+    width: 100%;
+    background-image: linear-gradient(90deg, #ed1b24 0%, #1851b5 100%);
+    transition: ease all 0.3s;
+    border-radius: 8px;
+  }
+
 .confirm-btn {
     border-radius: 60px;
     background: #04ac33;

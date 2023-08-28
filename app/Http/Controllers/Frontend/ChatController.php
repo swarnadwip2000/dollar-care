@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\MessageEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Events\ChatRequestEvent;
+use App\Models\Friends;
 
 class ChatController extends Controller
 {
@@ -39,5 +42,37 @@ class ChatController extends Controller
             return response()->json(['msg' => $th->getMessage(), 'success' => false]);
         }
     }
+
+    public function sendChatRequest(Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                // return $request->all();
+                // check if chat request already sent
+                $chatRequest = Friends::where('friend_id', $request->sender)->where('status', 0)->first();   
+                if ($chatRequest) {
+                    return response()->json(['status' => false, 'message' => 'Chat request already sent.']);
+                }
+                // send chat request
+                $chat = Friends::create([
+                    'user_id' => $request->recipient, // recipient
+                    'friend_id' => $request->sender, // sender
+                    'status' => 0
+                ]);
+                // // update user is_chat_request status
+                // $user = User::find($request->user_id);
+                // $user->is_chat_request = 1;
+                // $user->save();
+                // last chat request
+                $friendRequest = Friends::with('user', 'friend')->where('friend_id', $request->sender)->latest()->first();
+                $friendProfilePicture = Storage::url($friendRequest->user->profile_picture) ?? asset('frontend_assets/images/profile.png');
+                event(new ChatRequestEvent($friendRequest, $friendProfilePicture));
+                return response()->json(['status' => true, 'message' => 'Chat request sent successfully.', 'chat' => $chat]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => $th->getMessage()]);
+        }
+    }
+    
 
 }
