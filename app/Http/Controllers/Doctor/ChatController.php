@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Events\ChatRequestAcceptedEvent;
+use App\Events\RejectRequestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\Friends;
@@ -93,7 +94,7 @@ class ChatController extends Controller
                 // $sender_profile_picture = Storage::url($chat->sender->profile_picture) ?? asset('frontend_assets/images/profile.png');
                 // $reciver_profile_picture = Storage::url($chat->reciver->profile_picture) ?? asset('frontend_assets/images/profile.png');
 
-                event(new ChatRequestAcceptedEvent($friend));
+                event(new ChatRequestAcceptedEvent($friend, $chat));
                 return response()->json(['status' => true, 'message' => 'Chat request accepted successfully.', 'chat' => $chat, 'acceptedUser' => $acceptedByUser , 'acceptedUser_profile_picture' => $acceptedUser_profile_picture, 'accepterUser_created_at' => $accepterUser_created_at]);
             }
         } catch (\Throwable $th) {
@@ -104,12 +105,15 @@ class ChatController extends Controller
     public function deleteChatRequest(Request $request) {
         try {
             if ($request->ajax()) {
-                $chatRequest = Friends::where('friend_id', $request->user_id)->where('user_id', Auth::user()->id)->first();
+                // return $request->all();
+                $chatRequest = Friends::findOrFail($request->friendId);
                 $chatRequest->status = 2;
-                return response()->json(['status' => true, 'message' => 'Chat request deleted successfully.']);
+                $chatRequest->save();
+                event(new RejectRequestEvent($chatRequest));
+                return response()->json(['status' => true, 'msg' => 'Chat request deleted successfully.', 'chatRequest' => $chatRequest]);
             }
         } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'message' => $th->getMessage()]);
+            return response()->json(['status' => false, 'msg' => $th->getMessage()]);
         }
     }
 

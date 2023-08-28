@@ -49,23 +49,24 @@ class ChatController extends Controller
             if ($request->ajax()) {
                 // return $request->all();
                 // check if chat request already sent
-                $chatRequest = Friends::where('friend_id', $request->sender)->where('status', 0)->first();   
+                $chatRequest = Friends::where('friend_id', $request->sender)->where('status', 0)->first();
                 if ($chatRequest) {
                     return response()->json(['status' => false, 'message' => 'Chat request already sent.']);
                 }
-                // send chat request
-                $chat = Friends::create([
-                    'user_id' => $request->recipient, // recipient
-                    'friend_id' => $request->sender, // sender
-                    'status' => 0
-                ]);
-                // // update user is_chat_request status
-                // $user = User::find($request->user_id);
-                // $user->is_chat_request = 1;
-                // $user->save();
-                // last chat request
+                $countFriends = Friends::where('user_id', $request->recipient)->where('friend_id', $request->sender)->count();
+                if ($countFriends > 0) {
+                    $chat = Friends::where('user_id', $request->recipient)->where('friend_id', $request->sender)->update(['status' => 0]);
+                } else {
+                    $chat = Friends::create([
+                        'user_id' => $request->recipient, // recipient
+                        'friend_id' => $request->sender, // sender
+                        'status' => 0
+                    ]);
+                }
+
+
                 $friendRequest = Friends::with('user', 'friend')->where('friend_id', $request->sender)->latest()->first();
-                $friendProfilePicture = Storage::url($friendRequest->user->profile_picture) ?? asset('frontend_assets/images/profile.png');
+                $friendProfilePicture = Storage::url($friendRequest->friend->profile_picture) ?? asset('frontend_assets/images/profile.png');
                 event(new ChatRequestEvent($friendRequest, $friendProfilePicture));
                 return response()->json(['status' => true, 'message' => 'Chat request sent successfully.', 'chat' => $chat]);
             }
@@ -73,6 +74,4 @@ class ChatController extends Controller
             return response()->json(['status' => false, 'message' => $th->getMessage()]);
         }
     }
-    
-
 }

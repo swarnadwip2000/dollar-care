@@ -2,192 +2,207 @@
 @section('meta_title')
 @endsection
 @section('title')
-Doctor Chats
+    Doctor Chats
 @endsection
 @push('styles')
 @endpush
 
 @section('content')
-<section class="sidebar-sec" id="body-pd">
-    <div class="container-fluid">
-        <div class="sidebar-wrap d-flex justify-content-between">
-            @include('frontend.doctor.partials.sidebar')
+    <section class="sidebar-sec" id="body-pd">
+        <div class="container-fluid">
+            <div class="sidebar-wrap d-flex justify-content-between">
+                @include('frontend.doctor.partials.sidebar')
 
-            <!-- Content -->
+                <!-- Content -->
 
-            <div class="sidebar-right height-100">
-                <div class="content">
-                    <div class="my-app-div-wrap">
-                        <div class="content-head-wrap d-flex justify-content-between align-items-center">
-                            <div class="content-head mb-4">
-                                <h2>Chat History</h2>
-                                <h3>Chat / Chat History</h3>
+                <div class="sidebar-right height-100">
+                    <div class="content">
+                        <div class="my-app-div-wrap">
+                            <div class="content-head-wrap d-flex justify-content-between align-items-center">
+                                <div class="content-head mb-4">
+                                    <h2>Chat History</h2>
+                                    <h3>Chat / Chat History</h3>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="dr-chat-box-wrap">
-                            <div class="row">
-                                <div class="col-xl-5 col-12">
-                                    <div class="btn-group d-flex justify-content-end" id="requestBox">
-                                        <button type="button" id="btn" class="friend-request"><img class="user-img-1" src="{{ asset('frontend_assets/images/users.svg') }}"><span id="chat-count-{{Auth::user()->id}}">{{count($requests)}}</span> </button>
-                                        <!-- <div class="frnd-srl" id="frnd-srl"> -->
-                                        <div class="friend-request-box frnd-srl chat-pop" id="friendbox-{{Auth::user()->id}}" style="display: none;">
-                                            @foreach ($requests as $friend1)
-                                            <div id="deletebtn" onclick="dltFun();">
+                            <div class="dr-chat-box-wrap">
+                                <div class="row">
+                                    <div class="col-xl-5 col-12">
+                                        <div class="btn-group d-flex justify-content-end" id="requestBox">
+                                            <button type="button" id="btn" class="friend-request"><img
+                                                    class="user-img-1"
+                                                    src="{{ asset('frontend_assets/images/users.svg') }}"><span
+                                                    id="chat-count-{{ Auth::user()->id }}">{{ count($requests) }}</span>
+                                            </button>
+                                            <!-- <div class="frnd-srl" id="frnd-srl"> -->
+                                            <div class="friend-request-box frnd-srl chat-pop"
+                                                id="friendbox-{{ Auth::user()->id }}" style="display: none;">
+                                                @foreach ($requests as $friend1)
+                                                    <div id="deletebtn" onclick="dltFun();">
+                                                    </div>
+                                                    <div class="profile-div profile-div-2 profile-div-3 friend-request-div d-flex align-items-center justify-content-center"
+                                                        id="friendProfile{{ $friend1->friend_id }}">
+                                                        <div class="profile-img">
+                                                            @if (isset($friend1->friend->profile_picture))
+                                                                <img src="{{ Storage::url($friend1->friend->profile_picture) }}"
+                                                                    alt="">
+                                                            @else
+                                                                <img src="{{ asset('frontend_assets/images/profile.png') }}"
+                                                                    alt="">
+                                                            @endif
+                                                        </div>
+                                                        <div class="profile-text">
+                                                            @if (isset($friend1->friend->name))
+                                                                <h2>{{ $friend1->friend->name }}</h2>
+                                                            @endif
+                                                        </div>
+                                                        <div id="userId"></div>
+                                                        <div class="confirm-btn" data-id="{{ $friend1->id }}">
+                                                            <a href="javascript:void(0);">
+                                                                <h4> <span><i class="fa-solid fa-check"
+                                                                            id="acceptRequest"></i></span>Confirm
+                                                                </h4>
+                                                            </a>
+                                                        </div>
+                                                        <div class="delete-btn" data-id="{{ $friend1->id }}">
+                                                            <a href="javascript:void(0);">
+                                                                <h4> <span><i class="fa-solid fa-trash-can"></i></span>
+                                                                </h4>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                            <div class="profile-div profile-div-2 profile-div-3 friend-request-div d-flex align-items-center justify-content-center" id="friendProfile{{ $friend1->friend_id }}">
-                                                <div class="profile-img">
-                                                    @if(isset($friend1->friend->profile_picture))
-                                                    <img src="{{ Storage::url($friend1->friend->profile_picture) }}" alt="">
-                                                    @else
-                                                    <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
-                                                    @endif
+                                        </div>
+
+                                        <div class="dr-chat-box-1 srl-2" id="srl-2">
+                                            @if (!empty($friends) && $friends->count() > 0)
+                                                @foreach ($friends as $key => $value)
+                                                    <div class="dr-chat-box-1 mb-3 user-list" id="userList"
+                                                        data-id="{{ $value->id }}" data-query="0">
+                                                        <div
+                                                            class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
+                                                            <div
+                                                                class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
+                                                                <div class="profile-img">
+                                                                    @if ($value->profile_picture)
+                                                                        <img src="{{ Storage::url($value->profile_picture) }}"
+                                                                            alt="">
+                                                                    @else
+                                                                        <img src="{{ asset('frontend_assets/images/profile-3.png') }}"
+                                                                            alt="">
+                                                                    @endif
+                                                                </div>
+                                                                <div class="profile-text">
+                                                                    <h2>
+                                                                        {{ $value->name }}
+                                                                    </h2>
+
+                                                                    <p id="{{ $value->id }}-userStatus"><span
+                                                                            class="offline-user"></span>Offline</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="patient-age">
+                                                                <h3><span>
+                                                                        {{ date('d M Y', strtotime($value->created_at)) }}
+                                                                    </span></h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="dr-chat-box-1 mb-3 user-list" data-query="0">
+
                                                 </div>
-                                                <div class="profile-text">
-                                                    @if(isset($friend1->friend->name))
-                                                    <h2>{{ $friend1->friend->name }}</h2>
-                                                    @endif
-                                                </div>
-                                                <div id="userId"></div>
-                                                <div class="confirm-btn" data-id="{{ $friend1->id }}">
-                                                    <a href="javascript:void(0);">
-                                                        <h4> <span><i class="fa-solid fa-check" id="acceptRequest"></i></span>Confirm
-                                                        </h4>
-                                                    </a>
-                                                </div>
-                                                <div class="confirm-btn delete-btn">
-                                                    <a href="javascript:void(0);">
-                                                        <h4> <span><i class="fa-solid fa-trash-can"></i></span>
-                                                        </h4>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            @endforeach
+                                            @endif
                                         </div>
                                     </div>
-
-                                    <div class="dr-chat-box-1 srl-2" id="srl-2">
-                                        @if (!empty($friends) && $friends->count() > 0)
-                                        @foreach ($friends as $key => $value)
-                                        <div class="dr-chat-box-1 mb-3 user-list" id="userList" data-id="{{ $value->id }}" data-query="0">
-                                            <div class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
-                                                <div class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
-                                                    <div class="profile-img">
-                                                        @if ($value->profile_picture)
-                                                        <img src="{{ Storage::url($value->profile_picture) }}" alt="">
-                                                        @else
-                                                        <img src="{{ asset('frontend_assets/images/profile-3.png') }}" alt="">
-                                                        @endif
-                                                    </div>
-                                                    <div class="profile-text">
-                                                        <h2>
-                                                            {{ $value->name }}
-                                                        </h2>
-
-                                                        <p id="{{ $value->id }}-userStatus"><span class="offline-user"></span>Offline</p>
-                                                    </div>
+                                    <div class="col-xl-7 col-12 chat-first-page">
+                                        <div class="dr-chat-request-box d-flex align-items-center justify-content-center">
+                                            <div class="get-clear-path">
+                                                <div class="get-clear-path-img">
+                                                    <img src="{{ asset('frontend_assets/images/clear-chat.svg') }}"
+                                                        alt="">
                                                 </div>
-                                                <div class="patient-age">
-                                                    <h3><span>
-                                                            {{ date('d M Y', strtotime($value->created_at)) }}
-                                                        </span></h3>
+                                                <div class="get-clear-text">
+                                                    <h3>Get a Clear Path to Securing Lucrative Government Contracts</h3>
+                                                    <p>We coach you to successfully bid on government contracts, doing much
+                                                        of the work for you</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        @endforeach
-                                        @endif
+
+                                    </div>
+                                    <div class="col-xl-7 col-12 chat-module">
+                                        @include('frontend.doctor.chat.chat-body')
                                     </div>
                                 </div>
-                                <div class="col-xl-7 col-12 chat-first-page">
-                                    <div class="dr-chat-request-box">
-                                        <div class="dr-cam-img">
-
-                                        </div>
-                                        <div class="profile-text">
-                                            <div class="dr-chat-request-img">
-                                                {{-- <img src="{{ asset('frontend_assets/images/profile.png') }}">
-                                            </div> --}}
-                                            <h2>Adam Smith</h2>
-                                        </div>
-                                        <div class="chat-sec-box chat-srl_1" id="chat-srl">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                
                             </div>
-                            <div class="col-xl-7 col-12 chat-module">
-                                    @include('frontend.doctor.chat.chat-body')
-                                </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+    </section>
 @endsection
 
 @push('scripts')
-<script>
-    var x = document.getElementById("btn");
-    // x.addEventListener("click", myFunction, false);
+    <script>
+        var x = document.getElementById("btn");
+        // x.addEventListener("click", myFunction, false);
 
-    // function myFunction() {
-    //     var y = document.getElementById("friendbox");
-    //     if (y.className === "active") {
-    //         y.className = "";
-    //     } else {
-    //         y.className = "active";
-    //     }
+        // function myFunction() {
+        //     var y = document.getElementById("friendbox");
+        //     if (y.className === "active") {
+        //         y.className = "";
+        //     } else {
+        //         y.className = "active";
+        //     }
 
-    // };
+        // };
 
-    function dltFun() {
-        var z = document.getElementById("friendbox");
+        function dltFun() {
+            var z = document.getElementById("friendbox");
 
-        if (z.className === "active") {
-            z.className = "";
-        } else {
-            z.className = "active";
+            if (z.className === "active") {
+                z.className = "";
+            } else {
+                z.className = "active";
+            }
+
         }
+    </script>
 
-    }
-</script>
-
-<script>
-    //show/hide friend request box
-    $(document).ready(function() {
-        $(document).on("click", "#requestBox", function() {
-            const id = "{{Auth::user()->id}}"
-            $("#friendbox-" + id).toggle(); // Toggles the visibility of the div
+    <script>
+        //show/hide friend request box
+        $(document).ready(function() {
+            $(document).on("click", "#requestBox", function() {
+                const id = "{{ Auth::user()->id }}"
+                $("#friendbox-" + id).toggle(); // Toggles the visibility of the div
+            });
         });
-    });
-</script>
+    </script>
 
-<script>
-    $(document).on("click", ".confirm-btn", function() {
-        friendId = $(this).data('id');
-        console.log(friendId);
-        $.ajax({
-            url: "{{ route('doctor.chat.accept') }}",
-            type: "POST",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "friendId": friendId
-            },
-            success: function(response) {
-                console.log(response);
-                if (response.status) {
-                    $("#friendProfile" + response.acceptedUser.id).remove();
-                    // return false;
-                    const id = "{{Auth::user()->id}}"
-                    var chatCount = $("#chat-count-" + id).html();
-                    chatCount = parseInt(chatCount) - 1;
-                    $("#chat-count-" + id).html(chatCount);
-                    var user = response.acceptedUser;
-                    console.log(user);
-                    $('#srl-2').append(`
+    <script>
+        $(document).on("click", ".confirm-btn", function() {
+            friendId = $(this).data('id');
+            $.ajax({
+                url: "{{ route('doctor.chat.accept') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "friendId": friendId
+                },
+                success: function(response) {
+                    if (response.status) {
+                        $("#friendProfile" + response.acceptedUser.id).remove();
+                        // return false;
+                        const id = "{{ Auth::user()->id }}"
+                        var chatCount = $("#chat-count-" + id).html();
+                        chatCount = parseInt(chatCount) - 1;
+                        $("#chat-count-" + id).html(chatCount);
+                        var user = response.acceptedUser;
+                        console.log(user);
+                        $('#srl-2').append(`
                         <div class="dr-chat-box-1 mb-3 user-list" id="userList" data-id="` + user.id + `" data-query="0">
                             <div class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
                                 <div class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
@@ -211,108 +226,12 @@ Doctor Chats
                         </div>
                     `);
 
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
                 }
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            });
         });
-    });
-</script>
-
-<script>
-    // $(document).ready(function() {
-    //     // real time chat request show
-    //     Echo.private('chat-request.{{ Auth::user()->id }}')
-    //         .listen('ChatRequestEvent', (e) => {
-    //             console.log(e);
-    //             const friendRequestDiv = $("#friendProfile" + e.sender.id);
-    //             if (friendRequestDiv.length) {
-    //                 return false;
-    //             }
-    //             const friendRequestBox = $("#friendbox");
-    //             friendRequestBox.append(`
-    //                 <div class="profile-div profile-div-2 profile-div-3 friend-request-div d-flex align-items-center justify-content-center" id="friendProfile${e.sender.id}">
-    //                     <div class="profile-img">
-    //                         <img src="${e.sender.profile_picture}" alt="">
-    //                     </div>
-    //                     <div class="profile-text">
-    //                         <h2>${e.sender.name}</h2>
-    //                     </div>
-    //                     <div id="userId" data-id="${e.sender.id}"></div>
-    //                     <div class="confirm-btn">
-    //                         <a href="javascript:void(0);">
-    //                             <h4> <span><i class="fa-solid fa-check" id="acceptRequest"></i></span>Confirm
-    //                             </h4>
-    //                         </a>
-    //                     </div>
-    //                     <div class="confirm-btn delete-btn">
-    //                         <a href="javascript:void(0);">
-    //                             <h4> <span><i class="fa-solid fa-trash-can"></i></span>
-    //                             </h4>
-    //                         </a>
-    //                     </div>
-    //                 </div>
-    //             `);
-    //         });
-    //     //on click confirm button send ajax request to accept chat request
-    //     $(".confirm-btn").click(function() {
-    //         userId = $('#userId').data('id');
-    //         console.log(userId);
-    //         userStatus = $(`#${userId}-userStatus`);
-    //         $.ajax({
-    //             url: "{{ route('doctor.chat.accept') }}",
-    //             type: "POST",
-    //             data: {
-    //                 "_token": "{{ csrf_token() }}",
-    //                 "user_id": userId
-    //             },
-    //             success: function(response) {
-    //                 console.log(response);
-    //                 if (response.status) {
-    //                     $("#friendProfile"+response.chat.sender_id).remove();
-    //                     // return false;
-
-    //                     var user = response.acceptedUser;
-
-    //                     appendUserToList(user);
-
-
-    //                 }
-    //             },
-    //             error: function(error) {
-    //                 console.log(error);
-    //             }
-    //         });
-    //     });
-
-    //     function appendUserToList(user) {
-    //     var userList = $('#srl-2'); //user list container
-    //     var userHtml = `
-    //         <div class="dr-chat-box-1 mb-3 user-list" id="userList" data-id="${user.id}" data-query="0">
-    //             <div class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
-    //                 <div class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
-    //                     <div class="profile-img">
-    //                         <img src="${user.profile_picture}" alt="">
-    //                     </div>
-    //                     <div class="profile-text">
-    //                         <h2>
-    //                             ${user.name}
-    //                         </h2>
-
-    //                         <p id="${user.id}-userStatus"><span class="offline-user"></span>Offline</p>
-    //                     </div>
-    //                 </div>
-    //                 <div class="patient-age">
-    //                     <h3><span>
-    //                             ${user.created_at}
-    //                         </span></h3>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     `;
-    //     userList.append(userHtml);
-    // }
-    // });
-</script>
+    </script>
 @endpush

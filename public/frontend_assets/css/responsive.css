@@ -854,6 +854,28 @@
     .dr-chat-request-img {
         display: none;
     }
+    .confirm-btn {
+        padding: 8px;
+        width: 30px;
+        height: 30pxd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50% !important;
+        margin: 5px 0px;
+    }
+    .get-clear-text h3 {
+        font-size: 24px;
+    }
+    .get-clear-text p {
+        font-size: 16px;
+    }
+    .get-clear-text {
+        width: 100%;
+    }
+    .dr-chat-request-box {
+        min-height: auto;
+    }
 }
 
 @media (max-width: 767px) {

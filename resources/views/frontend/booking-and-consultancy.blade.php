@@ -317,7 +317,7 @@
                         doctor_id: doctor_id,
                     },
                     success: function(resp) {
-                        console.log(resp);
+                        // console.log(resp);
                         if (resp.status == true) {
                             $('.booking-slot').css('display', 'none');
                             $('.clinic-visit').removeClass('active-slot');
@@ -330,6 +330,7 @@
                             $('#loading').removeClass('loading');
                             $('#loading-content').removeClass('loading-content');
                         } else {
+                            // console.log(resp);
                             toastr.error(resp.message);
                             $('#loading').removeClass('loading');
                             $('#loading-content').removeClass('loading-content');

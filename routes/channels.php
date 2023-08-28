@@ -32,3 +32,7 @@ Broadcast::channel('user-request', function ($user) {
 Broadcast::channel('chat-request-accepted', function ($user) {
     return $user;
 });
+
+Broadcast::channel('reject-request', function ($user) {
+    return $user;
+});

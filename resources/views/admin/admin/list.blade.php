@@ -278,7 +278,7 @@
                     dataType: 'JSON',
                     success: async function(data) {
                         try {
-                            console.log(data);
+                            // console.log(data);
                             await $('#hidden_id').val(data.admin.id);
                             await $('#edit_name').val(data.admin.name);
                             await $('#edit_email').val(data.admin.email);

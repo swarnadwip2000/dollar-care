@@ -161,7 +161,7 @@
                 var ckeditorFrame = ckeditorFrameCollection[0];
                 var innerDoc = ckeditorFrame.contentDocument;
                 var innerDocTextAreaHeight = $(innerDoc.body).height();
-                console.log(innerDocTextAreaHeight);
+                // console.log(innerDocTextAreaHeight);
             });
         });
     </script>                                                                                   

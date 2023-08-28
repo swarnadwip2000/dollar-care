@@ -10,33 +10,30 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ChatRequestAcceptedEvent implements ShouldBroadcast
+class RejectRequestEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $friend, $chat;
-
+    public $chatRequest;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($friend, $chat)
+    public function __construct($chatRequest)
     {
-        $this->chat = $chat;
-        $this->friend = $friend;
+        $this->chatRequest = $chatRequest;
     }
 
     public function broadcastAs()
     {
-        return 'getChatRequestAccepted';
+        return 'getRejectRequest';
     }
 
     public function broadcastWith()
     {
         return [
-            'friend' => $this->friend,
-            'chat' => $this->chat,
+            'chatRequest' => $this->chatRequest,
         ];
     }
 
@@ -47,6 +44,6 @@ class ChatRequestAcceptedEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat-request-accepted');
+        return new PrivateChannel('reject-request');
     }
 }
