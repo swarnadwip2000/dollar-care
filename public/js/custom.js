@@ -85,6 +85,59 @@ $(document).ready(function () {
             },
         });
     });
+
+    $(document).on("click", ".confirm-btn", function() {
+        friendId = $(this).data('id');
+        $.ajax({
+            url: "/doctor/accept-chat-request",
+            type: "POST",
+            data: {
+                _token: $("input[name=_token]").val(),
+                friendId: friendId
+            },
+            success: function(response) {
+                if (response.status) {
+                    $("#friendProfile" + response.acceptedUser.id).remove();
+                    // return false;
+                    const id = sender_id;
+                    var chatCount = $("#chat-count-" + id).html();
+                    chatCount = parseInt(chatCount) - 1;
+                    $("#chat-count-" + id).html(chatCount);
+                    var user = response.acceptedUser;
+                    // console.log(user);
+                    // append in top of the list
+                     
+                    $('#srl-2').prepend(`
+                    <div class="dr-chat-box-1 mb-3 user-list" id="userList" data-id="` + user.id + `" data-query="0">
+                        <div class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
+                            <div class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
+                            <div class="profile-img">
+                                <img src="` + response.acceptedUser_profile_picture + `" alt="">
+                            </div>
+                                <div class="profile-text">
+                                    <h2>
+                                        ` + user.name + `
+                                    </h2>
+
+                                    <p id="` + user.id + `-userStatus"><span class="offline-user"></span>Offline</p>
+                                </div>
+                            </div>
+                            <div class="patient-age">
+                                <h3><span>
+                                        ` + response.accepterUser_created_at + `
+                                    </span></h3>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
 });
 
 // load chats
@@ -100,7 +153,10 @@ function loadChats() {
         success: function (resp) {
             if (resp.status == true) {
                 $(".chat-module").html(resp.view);
-                // scrollChatToBottom();
+                if (resp.chat_count > 0) {
+                    scrollChatToBottom();
+                }
+                
             } else {
                 console.log(resp.msg);
             }
@@ -183,7 +239,7 @@ Echo.private("user-request").listen(".getChatRequest", (data) => {
     const requestCount = $("#chat-count-" + doctor_id).text();
     if (sender_id == doctor_id) {
         $("#chat-count-" + doctor_id).text(parseInt(requestCount) + 1);
-        $("#friendbox-" + doctor_id).append(
+        $("#friendbox-" + doctor_id).prepend(
             ` <div id="deletebtn" ></div> <div class="profile-div profile-div-2 profile-div-3 friend-request-div d-flex align-items-center justify-content-center" id="friendProfile` +
                 patient_id +
                 `" > <div class="profile-img"> <img src="` +

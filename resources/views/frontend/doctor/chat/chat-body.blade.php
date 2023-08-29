@@ -12,7 +12,7 @@
                 @if ($reciver->profile_picture)
                     <img src="{{ Storage::url($reciver->profile_picture) }}" alt="">
                 @else
-                    <img src="{{ asset('frontend_assets/images/profile-3.png') }}" alt="">
+                    <img src="{{ asset('frontend_assets/images/profile.png') }}" alt="">
                 @endif
             </div>
             <div class="dr-chat-request-name">
@@ -39,13 +39,13 @@
                                         </h4>
                                     </div>
                                 </div>
-                              
+
                             </div>
                         </div>
                     @else
                         <div class="chat-sec-left pb-1">
                             <div class="chat-sec-left-wrap d-flex">
-                                
+
                                 <div class="chat-sec-left-text-box">
                                     <div class="chat-sec-left-text">
                                         <p>
@@ -71,7 +71,7 @@
                     </p>
                 </div>
             @endif
-           
+
         </div>
         <div class="chat_form-div">
             <form action="javascript:void(0);" id="chat-form">
@@ -84,8 +84,8 @@
                         </div>
                     </div>
                     <div class="send-div">
-                        <button type="submit" value="Submit"><img
-                                src="{{ asset('frontend_assets/images/send.png') }}" alt=""></button>
+                        <button type="submit" value="Submit"><img src="{{ asset('frontend_assets/images/send.png') }}"
+                                alt=""></button>
                     </div>
                 </div>
             </form>
@@ -93,4 +93,3 @@
     </div>
     </div>
 @endif
-

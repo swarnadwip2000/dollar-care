@@ -89,7 +89,7 @@
                                                                         <img src="{{ Storage::url($value->profile_picture) }}"
                                                                             alt="">
                                                                     @else
-                                                                        <img src="{{ asset('frontend_assets/images/profile-3.png') }}"
+                                                                        <img src="{{ asset('frontend_assets/images/profile.png') }}"
                                                                             alt="">
                                                                     @endif
                                                                 </div>
@@ -182,56 +182,7 @@
         });
     </script>
 
-    <script>
-        $(document).on("click", ".confirm-btn", function() {
-            friendId = $(this).data('id');
-            $.ajax({
-                url: "{{ route('doctor.chat.accept') }}",
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "friendId": friendId
-                },
-                success: function(response) {
-                    if (response.status) {
-                        $("#friendProfile" + response.acceptedUser.id).remove();
-                        // return false;
-                        const id = "{{ Auth::user()->id }}"
-                        var chatCount = $("#chat-count-" + id).html();
-                        chatCount = parseInt(chatCount) - 1;
-                        $("#chat-count-" + id).html(chatCount);
-                        var user = response.acceptedUser;
-                        console.log(user);
-                        $('#srl-2').append(`
-                        <div class="dr-chat-box-1 mb-3 user-list" id="userList" data-id="` + user.id + `" data-query="0">
-                            <div class="profile-div-box dr-chat mb-3 d-flex justify-content-between align-items-center">
-                                <div class="profile-div profile-div-2 profile-div-3 d-flex align-items-center">
-                                <div class="profile-img">
-                                    <img src="` + response.acceptedUser_profile_picture + `" alt="">
-                                </div>
-                                    <div class="profile-text">
-                                        <h2>
-                                            ` + user.name + `
-                                        </h2>
-
-                                        <p id="` + user.id + `-userStatus"><span class="offline-user"></span>Offline</p>
-                                    </div>
-                                </div>
-                                <div class="patient-age">
-                                    <h3><span>
-                                            ` + response.accepterUser_created_at + `
-                                        </span></h3>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    </script>
+    {{-- <script>
+       
+    </script> --}}
 @endpush

@@ -60,8 +60,9 @@ class ChatController extends Controller
             })->orWhere(function ($query) use ($request) {
                 $query->where('sender_id', $request->reciver_id)->where('reciver_id', $request->sender_id);
             })->get();
+            $chat_count = count($chats);
             $reciver = User::find($request->reciver_id);
-            return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.doctor.chat.chat-body')->with(compact('chats','chat_call','reciver'))]);
+            return response()->json(['message'=>'Show Chat', 'status'=>true,'chat_count'=>$chat_count,'view' => (string)View::make('frontend.doctor.chat.chat-body')->with(compact('chats','chat_call','reciver'))]);
         } catch (\Throwable $th) {
             return response()->json(['msg' => $th->getMessage(), 'status' => false]);
         }
@@ -88,7 +89,7 @@ class ChatController extends Controller
                 // get chat data with sender and reciver
                 $chat = Chat::with('sender', 'reciver')->find($chat->id);
                 $acceptedByUser = User::find($friend->friend_id);
-                $acceptedUser_profile_picture = Storage::url($acceptedByUser->profile_picture) ?? asset('frontend_assets/images/profile.png');
+                $acceptedUser_profile_picture = ($acceptedByUser->profile_picture) ? Storage::url($acceptedByUser->profile_picture) : asset('frontend_assets/images/profile.png');
                 $accepterUser_created_at = $acceptedByUser->created_at->format('d M Y');
                 // profile picture url
                 // $sender_profile_picture = Storage::url($chat->sender->profile_picture) ?? asset('frontend_assets/images/profile.png');

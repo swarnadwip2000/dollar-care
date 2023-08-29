@@ -53,7 +53,7 @@ class BookingAndConsultancyController extends Controller
                         $chat_count = count($chats);
                         $friendRequestStatus = Auth::user()->friendsRequest->where('user_id', $request->doctor_id)->first()['status'] ?? '' ;
                         // dd($friendRequestStatus);
-                        return response()->json(['message'=>'Show Chat', 'status'=>true,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call','doctor','chat_count','friendRequestStatus'))]);   
+                        return response()->json(['message'=>'Show Chat', 'status'=>true,'chat_count'=>$chat_count,'view' => (string)View::make('frontend.chat')->with(compact('chats','chat_call','doctor','chat_count','friendRequestStatus'))]);   
                     } else {
                         return response()->json(['status' => false, 'message' => 'Your membership has been expired.']);
                     }

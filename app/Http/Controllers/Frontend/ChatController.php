@@ -32,8 +32,8 @@ class ChatController extends Controller
             // get chat data with sender and reciver
             $chat = Chat::with('sender', 'reciver')->find($chatData->id);
             // profile picture url
-            $sender_profile_picture = Storage::url($chat->sender->profile_picture) ?? asset('frontend_assets/images/profile.png');
-            $reciver_profile_picture = Storage::url($chat->reciver->profile_picture) ?? asset('frontend_assets/images/profile.png');
+            $sender_profile_picture = ($chat->sender->profile_picture) ? Storage::url($chat->sender->profile_picture) : asset('frontend_assets/images/profile.png');
+            $reciver_profile_picture = ($chat->reciver->profile_picture) ? Storage::url($chat->reciver->profile_picture) : asset('frontend_assets/images/profile.png');
 
 
             event(new MessageEvent($chat, $sender_profile_picture, $reciver_profile_picture, $chat_count));
@@ -66,7 +66,7 @@ class ChatController extends Controller
 
 
                 $friendRequest = Friends::with('user', 'friend')->where('friend_id', $request->sender)->latest()->first();
-                $friendProfilePicture = Storage::url($friendRequest->friend->profile_picture) ?? asset('frontend_assets/images/profile.png');
+                $friendProfilePicture = ($friendRequest->friend->profile_picture) ? Storage::url($friendRequest->friend->profile_picture) : asset('frontend_assets/images/profile.png');
                 event(new ChatRequestEvent($friendRequest, $friendProfilePicture));
                 return response()->json(['status' => true, 'message' => 'Chat request sent successfully.', 'chat' => $chat]);
             }
