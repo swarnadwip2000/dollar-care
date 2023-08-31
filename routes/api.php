@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\Patient\AuthController as AuthController;
 use App\Http\Controllers\Api\Patient\ForgetPasswordController as ForgetPasswordController;
 use App\Http\Controllers\Api\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Api\Doctor\ProfileController;
 use App\Http\Controllers\Api\Patient\BookingController as BookingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +51,11 @@ Route::prefix('v1')->group(function () {
         Route::post('appointment-history', [HomeController::class,'appointmentHistoryForUser']);
 
         Route::prefix('doctor')->group(function () { 
-            Route::post('profile',[DoctorDashboardController::class,'doctorProfile']);
+            Route::post('getProfile',[ProfileController::class,'getProfile']);
+            Route::post('updateProfile',[ProfileController::class,'updateProfile']);
+            Route::post('changePassword',[ProfileController::class,'changePassword']);
+            Route::post('updateProfileImage',[ProfileController::class,'updateProfileImage']);
+            
             Route::prefix('manage-clinic')->group(function () {
                 Route::get('/', [DoctorDashboardController::class, 'manageClinic'])->name('index');
                 Route::get('/add-address', [DoctorDashboardController::class, 'addAddress'])->name('create');

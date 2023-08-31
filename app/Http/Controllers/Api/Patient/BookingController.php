@@ -16,13 +16,15 @@ use App\Models\Appointment;
 use App\Mail\ThankYouMail;
 use Carbon\Carbon;
 
+/**
+ * @group Patient Booking 
+ * */ 
 
 class BookingController extends Controller
 {
     /**
      * Booking and Consultancy
-     * 
-     * {
+     * @response 200{
      *       "message": "Booking And Consultancy",
      *       "status": true,
      *       "data": {
@@ -71,14 +73,14 @@ class BookingController extends Controller
         $data['clinics'] = ClinicDetails::where('user_id', $id)->select('id', 'user_id', 'clinic_name', 'clinic_address', 'clinic_phone', 'longitute', 'latitute', DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance'))->having('distance', '<', $radius)->get();
         // dd($clinics); 
         
-        return response()->json(['message' => 'Booking And Consultancy', 'status' => true, 'data' => $data]);
+        return response()->json(['message' => 'Booking And Consultancy', 'status' => true, 'data' => $data], 200);
     }
 
 
     /**
      * Clinic Date and Time Slot
      * 
-     * {
+     * @response 200{
      *       "message": "Clinic Details!",
      *       "status": true,
      *       "data": {
@@ -119,7 +121,7 @@ class BookingController extends Controller
     /**
      * Clinic Visit available Slot Time
      * 
-     * {
+     * @response 200{
      *      "message": "Clinic Details!",
      *     "status": true,
      *    "data": {
@@ -145,7 +147,7 @@ class BookingController extends Controller
     /** 
      * Store Appointment
      * 
-     * {
+     * @response 200{
      *    "message": "Appointment booked successfully!",
      *   "status": true,
      *     "data": {

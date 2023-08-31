@@ -63,10 +63,7 @@
                                             <div class="wht-slide-icon-1 wht-slide-icon">
                                                 <img src="{{ $homeBody->image }}" alt="" />
                                             </div>
-                                            <div class="wht-slide-icon wht-slide-icon-2">
-                                                <img src="{{ $homeBody->image }}"
-                                                    alt="" />
-                                            </div>
+                                            
                                         </div>
                                         <div class="wht-slide-text">
                                             <div class="wht-slide-h h-b pb-3">
@@ -76,7 +73,7 @@
                                             </div>
                                             <div class="para p-b wht-slide-p">
                                                 <p>
-                                                    {{ $homeBody->description }}
+                                                    {{ $homeBody->sub_title }}
                                                 </p>
                                             </div>
                                         </div>

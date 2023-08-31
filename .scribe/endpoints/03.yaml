@@ -1,18 +1,18 @@
-name: Endpoints
+name: 'Doctor Profile'
 description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/doctor/forget-password
+    uri: api/v1/doctor/getProfile
     metadata:
-      groupName: Endpoints
+      groupName: 'Doctor Profile'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Forget Password Api'
+      title: 'Get Doctor Profile'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -21,88 +21,8 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      email:
-        name: email
-        description: 'Email of the Doctor.'
-        required: true
-        example: james@yopmail.com
-        type: string
-        custom: []
-    cleanBodyParameters:
-      email: james@yopmail.com
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-           "status": true,
-           "statusCode": 200,
-           "message": "OTP has been sent to your email"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-          "status": false,
-           "statusCode": 401,
-          "error": {
-          "email": [
-          "The email field is required."
-          ]
-           }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/doctor/otp-verification
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'OTP Verification Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      otp:
-        name: otp
-        description: 'OTP of the Patient.'
-        required: true
-        example: '123456'
-        type: numeric
-        custom: []
-      email:
-        name: email
-        description: 'Email of the Patient.'
-        required: true
-        example: james@yopmail.com
-        type: string
-        custom: []
-    cleanBodyParameters:
-      otp: '123456'
-      email: james@yopmail.com
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -111,18 +31,45 @@ endpoints:
           {
           "status": true,
           "statusCode": 200,
-          "message": "OTP verified successfully"
+          "message": "Profile fetched successfully",
+          "data": {
+              "specializations": [
+                  {
+                      "id": 2,
+                      "name": "Dentist",
+                      "slug": "dentist",
+                      "image": "specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png",
+                      "description": "Visit your doctor for joint pain, sprains, arthritis, and other bone pains.",
+                      "status": 1,
+                      "created_at": "2023-06-06T12:40:19.000000Z",
+                      "updated_at": "2023-06-14T08:51:04.000000Z"
+                  },
+              ],
+              "user": {
+                  "data": {
+                      "id": 4,
+                      "name": "James Bond",
+                      "email": "james@yopmail.com",
+                      "phone": "08596769586",
+                      "gender": "Male",
+                      "age": "2001-01-30",
+                      "license_number": "UPS74856963",
+                      "profile_picture": "doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
+                      "fcm_token": "eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN",
+                      "status": 1,
+                      "specializations": [
+                          {
+                              "id": 4,
+                              "name": "ENT Specialist",
+                              "pivot": {
+                                  "doctor_id": 4,
+                                  "specialization_id": 4
+                              }
+                          }
+                      ]
+                  }
+              }
           }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-          "status": false,
-          "statusCode": 401,
-          "error": "OTP is expired"
           }
         headers: []
         description: ''
@@ -136,15 +83,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/doctor/reset-password
+    uri: api/v1/doctor/updateProfile
     metadata:
-      groupName: Endpoints
+      groupName: 'Doctor Profile'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Reset Password Api'
+      title: 'Update Doctor Profile'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -154,31 +101,210 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      password:
-        name: password
-        description: 'Password of the Patient.'
+      name:
+        name: name
+        description: 'The name of the Doctor.'
         required: true
-        example: '123456'
+        example: qui
+        type: string
+        custom: []
+      email:
+        name: email
+        description: 'The email of the Doctor.'
+        required: true
+        example: slehner@example.com
+        type: string
+        custom: []
+      gender:
+        name: gender
+        description: ''
+        required: true
+        example: sunt
+        type: string
+        custom: []
+      age:
+        name: age
+        description: 'The age of the Doctor.'
+        required: true
+        example: atque
+        type: date
+        custom: []
+      phone:
+        name: phone
+        description: 'The phone of the Doctor.'
+        required: true
+        example: veritatis
+        type: numeric
+        custom: []
+      specialization_id:
+        name: specialization_id
+        description: 'The specialization_id of the Doctor.'
+        required: true
+        example:
+          - accusamus
+        type: 'string[]'
+        custom: []
+      license_number:
+        name: license_number
+        description: 'The license_number of the Doctor.'
+        required: true
+        example: est
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: qui
+      email: slehner@example.com
+      gender: sunt
+      age: atque
+      phone: veritatis
+      specialization_id:
+        - accusamus
+      license_number: est
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "message": "Profile fetched successfully",
+          "data": {
+              "specializations": [
+                  {
+                      "id": 2,
+                      "name": "Dentist",
+                      "slug": "dentist",
+                      "image": "specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png",
+                      "description": "Visit your doctor for joint pain, sprains, arthritis, and other bone pains.",
+                      "status": 1,
+                      "created_at": "2023-06-06T12:40:19.000000Z",
+                      "updated_at": "2023-06-14T08:51:04.000000Z"
+                  },
+              ],
+              "user": {
+                  "data": {
+                      "id": 4,
+                      "name": "James Bond",
+                      "email": "james@yopmail.com",
+                      "phone": "08596769586",
+                      "gender": "Male",
+                      "age": "2001-01-30",
+                      "license_number": "UPS74856963",
+                      "profile_picture": "doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
+                      "fcm_token": "eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN",
+                      "status": 1,
+                      "specializations": [
+                          {
+                              "id": 4,
+                              "name": "ENT Specialist",
+                              "pivot": {
+                                  "doctor_id": 4,
+                                  "specialization_id": 4
+                              }
+                          }
+                      ]
+                  }
+              }
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The email has already been taken."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The phone has already been taken."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/doctor/changePassword
+    metadata:
+      groupName: 'Doctor Profile'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Change Password'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      current_password:
+        name: current_password
+        description: 'The value and <code>new_password</code> must be different. The value and <code>confirm_password</code> must be different. Must be at least 8 characters.'
+        required: true
+        example: fzxzhlcqpmrzwlhxryternbhfsgsbmyl
+        type: string
+        custom: []
+      new_password:
+        name: new_password
+        description: 'The value and <code>current_password</code> must be different. The value and <code>confirm_password</code> must match. Must be at least 8 characters.'
+        required: true
+        example: piajrbpvckheywgojxrbjavd
         type: string
         custom: []
       confirm_password:
         name: confirm_password
-        description: 'Confirm Password of the Patient.'
+        description: 'The value and <code>current_password</code> must be different. The value and <code>new_password</code> must match. Must be at least 8 characters.'
         required: true
-        example: '123456'
+        example: nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii
         type: string
         custom: []
-      email:
-        name: email
-        description: 'Email of the Patient.'
+      old_password:
+        name: old_password
+        description: 'The old_password of the Doctor.'
         required: true
-        example: james@yopmail.com
+        example: dolores
+        type: string
+        custom: []
+      password:
+        name: password
+        description: 'The password of the Doctor.'
+        required: true
+        example: 'ioqH6\y(g\IOYb"'
+        type: string
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The password_confirmation of the Doctor.'
+        required: true
+        example: ea
         type: string
         custom: []
     cleanBodyParameters:
-      password: '123456'
-      confirm_password: '123456'
-      email: james@yopmail.com
+      current_password: fzxzhlcqpmrzwlhxryternbhfsgsbmyl
+      new_password: piajrbpvckheywgojxrbjavd
+      confirm_password: nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii
+      old_password: dolores
+      password: 'ioqH6\y(g\IOYb"'
+      password_confirmation: ea
     fileParameters: []
     responses:
       -
@@ -187,28 +313,150 @@ endpoints:
           {
           "status": true,
           "statusCode": 200,
-          "message": "Password has been reset successfully"
+          "message": "Password changed successfully",
+          "data": {
+              "specializations": [
+                  {
+                      "id": 2,
+                      "name": "Dentist",
+                      "slug": "dentist",
+                      "image": "specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png",
+                      "description": "Visit your doctor for joint pain, sprains, arthritis, and other bone pains.",
+                      "status": 1,
+                      "created_at": "2023-06-06T12:40:19.000000Z",
+                      "updated_at": "2023-06-14T08:51:04.000000Z"
+                  },
+              ],
+              "user": {
+                  "data": {
+                      "id": 4,
+                      "name": "James Bond",
+                      "email": "james@yopmail.com",
+                      "phone": "08596769586",
+                      "gender": "Male",
+                      "age": "2001-01-30",
+                      "license_number": "UPS74856963",
+                      "profile_picture": "doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
+                      "fcm_token": "eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN",
+                      "status": 1,
+                      "specializations": [
+                          {
+                              "id": 4,
+                              "name": "ENT Specialist",
+                              "pivot": {
+                                  "doctor_id": 4,
+                                  "specialization_id": 4
+                              }
+                          }
+                      ]
+                  }
+              }
+          }
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 401
+        status: 201
         content: |-
           {
-          "status": false,
-          "statusCode": 401,
-          "error": {
-          "password": [
-          "The password field is required."
-          ],
-          "confirm_password": [
-          "The confirm password field is required."
-          ],
-          "email": [
-          "The email field is required."
-          ]
+          "error": "The old_password and password must be different."
           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/doctor/updateProfileImage
+    metadata:
+      groupName: 'Doctor Profile'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Upload profile image'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      profile_picture:
+        name: profile_picture
+        description: 'The profile_picture of the Doctor.'
+        required: true
+        example: null
+        type: file
+        custom: []
+    cleanBodyParameters: []
+    fileParameters:
+      profile_picture: null
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "message": "Profile updated successfully",
+          "data": {
+              "specializations": [
+                  {
+                      "id": 2,
+                      "name": "Dentist",
+                      "slug": "dentist",
+                      "image": "specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png",
+                      "description": "Visit your doctor for joint pain, sprains, arthritis, and other bone pains.",
+                      "status": 1,
+                      "created_at": "2023-06-06T12:40:19.000000Z",
+                      "updated_at": "2023-06-14T08:51:04.000000Z"
+                  },
+              ],
+              "user": {
+                  "data": {
+                      "id": 4,
+                      "name": "James Bond",
+                      "email": "james@yopmail.com",
+                      "phone": "08596769586",
+                      "gender": "Male",
+                      "age": "2001-01-30",
+                      "license_number": "UPS74856963",
+                      "profile_picture": "doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
+                      "fcm_token": "eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN",
+                      "status": 1,
+                      "specializations": [
+                          {
+                              "id": 4,
+                              "name": "ENT Specialist",
+                              "pivot": {
+                                  "doctor_id": 4,
+                                  "specialization_id": 4
+                              }
+                          }
+                      ]
+                  }
+              }
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The profile_picture filled is required."
           }
         headers: []
         description: ''

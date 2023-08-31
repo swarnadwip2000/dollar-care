@@ -5,9 +5,9 @@ info:
   version: 1.0.0
 servers:
   -
-    url: 'http://localhost'
+    url: 'http://127.0.0.1:8000'
 paths:
-  /api/v1/doctor/login:
+  /api/v1/login:
     post:
       summary: 'Login Api'
       operationId: loginApi
@@ -42,7 +42,7 @@ paths:
                     type: string
                     example: 'Email id & password was invalid!'
       tags:
-        - 'Doctor Authentication'
+        - Authentication
       requestBody:
         required: true
         content:
@@ -52,17 +52,17 @@ paths:
               properties:
                 email:
                   type: string
-                  description: 'The email of the Doctor.'
+                  description: 'The email of the user.'
                   example: john@yopmail.com
                 password:
                   type: string
-                  description: 'The password of the Doctor.'
+                  description: 'The password of the user.'
                   example: '12345678'
               required:
                 - email
                 - password
       security: []
-  /api/v1/doctor/register:
+  /api/v1/register:
     post:
       summary: 'Register Api'
       operationId: registerApi
@@ -150,7 +150,7 @@ paths:
                     type: string
                     example: 'Email id & password was invalid!'
       tags:
-        - 'Doctor Authentication'
+        - Authentication
       requestBody:
         required: true
         content:
@@ -160,11 +160,11 @@ paths:
               properties:
                 name:
                   type: string
-                  description: 'The name of the doctor.'
+                  description: 'The name of the user.'
                   example: 'John Doe'
                 email:
                   type: string
-                  description: 'The email of the doctor.'
+                  description: 'The email of the user.'
                   example: john@yopmail.com
                 gender:
                   type: string
@@ -172,19 +172,27 @@ paths:
                   example: 'Male,Female,Other'
                 phone:
                   type: numeric
-                  description: 'The phone of the doctor.'
+                  description: 'The phone of the user.'
                   example: '9876543210'
                 password:
                   type: string
-                  description: 'The password of the doctor.'
+                  description: 'The password of the user.'
                   example: '12345678'
                 confirm_password:
                   type: string
-                  description: 'The confirm_password of the doctor.'
+                  description: 'The confirm_password of the user.'
                   example: '12345678'
+                type:
+                  type: string
+                  description: ''
+                  example: voluptate
+                age:
+                  type: string
+                  description: ''
+                  example: doloremque
                 location:
                   type: string
-                  description: 'The name of the doctor.'
+                  description: 'The name of the user.'
                   example: 'John Doe'
               required:
                 - name
@@ -192,64 +200,53 @@ paths:
                 - phone
                 - password
                 - confirm_password
+                - type
+                - age
       security: []
-  /api/v1/doctor/forget-password:
+  /api/v1/doctor/getProfile:
     post:
-      summary: 'Forget Password Api'
-      operationId: forgetPasswordApi
+      summary: 'Get Doctor Profile'
+      operationId: getDoctorProfile
       description: ''
       parameters: []
       responses:
         200:
           description: ''
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'OTP has been sent to your email'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'OTP has been sent to your email'
-        401:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+      tags:
+        - 'Doctor Profile'
+  /api/v1/doctor/updateProfile:
+    post:
+      summary: 'Update Doctor Profile'
+      operationId: updateDoctorProfile
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+        201:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  status: false
-                  statusCode: 401
-                  error:
-                    email:
-                      - 'The email field is required.'
+                  error: 'The phone has already been taken.'
                 properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 401
                   error:
-                    type: object
-                    properties:
-                      email:
-                        type: array
-                        example:
-                          - 'The email field is required.'
-                        items:
-                          type: string
+                    type: string
+                    example: 'The phone has already been taken.'
       tags:
-        - Endpoints
+        - 'Doctor Profile'
       requestBody:
         required: true
         content:
@@ -257,154 +254,73 @@ paths:
             schema:
               type: object
               properties:
+                name:
+                  type: string
+                  description: 'The name of the Doctor.'
+                  example: qui
                 email:
                   type: string
-                  description: 'Email of the Doctor.'
-                  example: james@yopmail.com
-              required:
-                - email
-      security: []
-  /api/v1/doctor/otp-verification:
-    post:
-      summary: 'OTP Verification Api'
-      operationId: oTPVerificationApi
-      description: ''
-      parameters: []
-      responses:
-        200:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'OTP verified successfully'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'OTP verified successfully'
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  statusCode: 401
-                  error: 'OTP is expired'
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 401
-                  error:
-                    type: string
-                    example: 'OTP is expired'
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                otp:
+                  description: 'The email of the Doctor.'
+                  example: slehner@example.com
+                gender:
+                  type: string
+                  description: ''
+                  example: sunt
+                age:
+                  type: date
+                  description: 'The age of the Doctor.'
+                  example: atque
+                phone:
                   type: numeric
-                  description: 'OTP of the Patient.'
-                  example: '123456'
-                email:
+                  description: 'The phone of the Doctor.'
+                  example: veritatis
+                specialization_id:
+                  type: array
+                  description: 'The specialization_id of the Doctor.'
+                  example:
+                    - accusamus
+                  items:
+                    type: string
+                license_number:
                   type: string
-                  description: 'Email of the Patient.'
-                  example: james@yopmail.com
+                  description: 'The license_number of the Doctor.'
+                  example: est
               required:
-                - otp
+                - name
                 - email
-      security: []
-  /api/v1/doctor/reset-password:
+                - gender
+                - age
+                - phone
+                - specialization_id
+                - license_number
+  /api/v1/doctor/changePassword:
     post:
-      summary: 'Reset Password Api'
-      operationId: resetPasswordApi
+      summary: 'Change Password'
+      operationId: changePassword
       description: ''
       parameters: []
       responses:
         200:
           description: ''
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'Password has been reset successfully'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'Password has been reset successfully'
-        401:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password changed successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+        201:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  status: false
-                  statusCode: 401
-                  error:
-                    password:
-                      - 'The password field is required.'
-                    confirm_password:
-                      - 'The confirm password field is required.'
-                    email:
-                      - 'The email field is required.'
+                  error: 'The old_password and password must be different.'
                 properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 401
                   error:
-                    type: object
-                    properties:
-                      password:
-                        type: array
-                        example:
-                          - 'The password field is required.'
-                        items:
-                          type: string
-                      confirm_password:
-                        type: array
-                        example:
-                          - 'The confirm password field is required.'
-                        items:
-                          type: string
-                      email:
-                        type: array
-                        example:
-                          - 'The email field is required.'
-                        items:
-                          type: string
+                    type: string
+                    example: 'The old_password and password must be different.'
       tags:
-        - Endpoints
+        - 'Doctor Profile'
       requestBody:
         required: true
         content:
@@ -412,23 +328,78 @@ paths:
             schema:
               type: object
               properties:
-                password:
+                current_password:
                   type: string
-                  description: 'Password of the Patient.'
-                  example: '123456'
+                  description: 'The value and <code>new_password</code> must be different. The value and <code>confirm_password</code> must be different. Must be at least 8 characters.'
+                  example: fzxzhlcqpmrzwlhxryternbhfsgsbmyl
+                new_password:
+                  type: string
+                  description: 'The value and <code>current_password</code> must be different. The value and <code>confirm_password</code> must match. Must be at least 8 characters.'
+                  example: piajrbpvckheywgojxrbjavd
                 confirm_password:
                   type: string
-                  description: 'Confirm Password of the Patient.'
-                  example: '123456'
-                email:
+                  description: 'The value and <code>current_password</code> must be different. The value and <code>new_password</code> must match. Must be at least 8 characters.'
+                  example: nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii
+                old_password:
                   type: string
-                  description: 'Email of the Patient.'
-                  example: james@yopmail.com
+                  description: 'The old_password of the Doctor.'
+                  example: dolores
+                password:
+                  type: string
+                  description: 'The password of the Doctor.'
+                  example: 'ioqH6\y(g\IOYb"'
+                password_confirmation:
+                  type: string
+                  description: 'The password_confirmation of the Doctor.'
+                  example: ea
               required:
-                - password
+                - current_password
+                - new_password
                 - confirm_password
-                - email
-      security: []
+                - old_password
+                - password
+                - password_confirmation
+  /api/v1/doctor/updateProfileImage:
+    post:
+      summary: 'Upload profile image'
+      operationId: uploadProfileImage
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile updated successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'The profile_picture filled is required.'
+                properties:
+                  error:
+                    type: string
+                    example: 'The profile_picture filled is required.'
+      tags:
+        - 'Doctor Profile'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profile_picture:
+                  type: string
+                  format: binary
+                  description: 'The profile_picture of the Doctor.'
+              required:
+                - profile_picture
   /api/v1/symptoms:
     post:
       summary: 'Symptoms Api'
@@ -619,65 +590,10 @@ paths:
       tags:
         - "Home Page Api's"
       security: []
-  /api/v1/patient/login:
+  /api/v1/all-doctors:
     post:
-      summary: 'Login Api'
-      operationId: loginApi
-      description: ''
-      parameters: []
-      responses:
-        200:
-          description: ''
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"Login successfully\",\n     \"data\": {\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM\",\n    \"user\": {\n        \"id\": 3,\n        \"name\": \"John Doe\",\n        \"email\": \"john@yopmail.com\",\n        \"status\": 1\n    }\n}"
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  statusCode: 401
-                  error: 'Email id & password was invalid!'
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 401
-                  error:
-                    type: string
-                    example: 'Email id & password was invalid!'
-      tags:
-        - 'Patient Authentication'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  description: 'The email of the user.'
-                  example: john@yopmail.com
-                password:
-                  type: string
-                  description: 'The password of the user.'
-                  example: '12345678'
-              required:
-                - email
-                - password
-      security: []
-  /api/v1/patient/register:
-    post:
-      summary: 'Register Api'
-      operationId: registerApi
+      summary: 'All doctors Api'
+      operationId: allDoctorsApi
       description: ''
       parameters: []
       responses:
@@ -691,16 +607,23 @@ paths:
                   status: true
                   statusCode: 200
                   data:
-                    auth_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0
-                    user:
-                      name: 'Shilpi Chaki'
-                      email: shilpi@yopmail.com
-                      gender: Male
-                      phone: '7485968600'
+                    -
+                      id: 13
+                      name: 'Shreeja Sadhukhan'
+                      email: shreeja@yopmail.com
+                      phone: '7475850123'
+                      email_verified_at: 'null'
+                      profile_picture: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                      year_of_experience: '3'
+                      license_number: 'null'
+                      location: 'Purba Bardhaman'
+                      gender: Female
+                      age: '22'
                       status: 1
-                      updated_at: '2023-06-07T08:28:31.000000Z'
-                      created_at: '2023-06-07T08:28:31.000000Z'
-                      id: 5
+                      fcm_token: null
+                      created_at: '2023-06-06T10:55:47.000000Z'
+                      updated_at: '2023-06-06T10:55:47.000000Z'
+                      deleted_at: null
                 properties:
                   status:
                     type: boolean
@@ -709,39 +632,77 @@ paths:
                     type: integer
                     example: 200
                   data:
-                    type: object
-                    properties:
-                      auth_token:
-                        type: string
-                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0
-                      user:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                            example: 'Shilpi Chaki'
-                          email:
-                            type: string
-                            example: shilpi@yopmail.com
-                          gender:
-                            type: string
-                            example: Male
-                          phone:
-                            type: string
-                            example: '7485968600'
-                          status:
-                            type: integer
-                            example: 1
-                          updated_at:
-                            type: string
-                            example: '2023-06-07T08:28:31.000000Z'
-                          created_at:
-                            type: string
-                            example: '2023-06-07T08:28:31.000000Z'
-                          id:
-                            type: integer
-                            example: 5
-        401:
+                    type: array
+                    example:
+                      -
+                        id: 13
+                        name: 'Shreeja Sadhukhan'
+                        email: shreeja@yopmail.com
+                        phone: '7475850123'
+                        email_verified_at: 'null'
+                        profile_picture: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                        year_of_experience: '3'
+                        license_number: 'null'
+                        location: 'Purba Bardhaman'
+                        gender: Female
+                        age: '22'
+                        status: 1
+                        fcm_token: null
+                        created_at: '2023-06-06T10:55:47.000000Z'
+                        updated_at: '2023-06-06T10:55:47.000000Z'
+                        deleted_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 13
+                        name:
+                          type: string
+                          example: 'Shreeja Sadhukhan'
+                        email:
+                          type: string
+                          example: shreeja@yopmail.com
+                        phone:
+                          type: string
+                          example: '7475850123'
+                        email_verified_at:
+                          type: string
+                          example: 'null'
+                        profile_picture:
+                          type: string
+                          example: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                        year_of_experience:
+                          type: string
+                          example: '3'
+                        license_number:
+                          type: string
+                          example: 'null'
+                        location:
+                          type: string
+                          example: 'Purba Bardhaman'
+                        gender:
+                          type: string
+                          example: Female
+                        age:
+                          type: string
+                          example: '22'
+                        status:
+                          type: integer
+                          example: 1
+                        fcm_token:
+                          type: string
+                          example: null
+                        created_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        deleted_at:
+                          type: string
+                          example: null
+        404:
           description: ''
           content:
             application/json:
@@ -749,20 +710,370 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 401
-                  error: 'Email id & password was invalid!'
+                  statusCode: 404
+                  message: 'No Specialization Found'
                 properties:
                   status:
                     type: boolean
                     example: false
                   statusCode:
                     type: integer
-                    example: 401
-                  error:
+                    example: 404
+                  message:
                     type: string
-                    example: 'Email id & password was invalid!'
+                    example: 'No Specialization Found'
       tags:
-        - 'Patient Authentication'
+        - "Home Page Api's"
+      security: []
+  /api/v1/doctors:
+    post:
+      summary: 'Doctors List as per symptoms/specializations Api'
+      operationId: doctorsListAsPerSymptomsspecializationsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    -
+                      id: 13
+                      name: 'Shreeja Sadhukhan'
+                      email: shreeja@yopmail.com
+                      phone: '7475850123'
+                      email_verified_at: 'null'
+                      profile_picture: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                      year_of_experience: '3'
+                      license_number: 'null'
+                      location: 'Purba Bardhaman'
+                      gender: Female
+                      age: '22'
+                      status: 1
+                      fcm_token: null
+                      created_at: '2023-06-06T10:55:47.000000Z'
+                      updated_at: '2023-06-06T10:55:47.000000Z'
+                      deleted_at: null
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 13
+                        name: 'Shreeja Sadhukhan'
+                        email: shreeja@yopmail.com
+                        phone: '7475850123'
+                        email_verified_at: 'null'
+                        profile_picture: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                        year_of_experience: '3'
+                        license_number: 'null'
+                        location: 'Purba Bardhaman'
+                        gender: Female
+                        age: '22'
+                        status: 1
+                        fcm_token: null
+                        created_at: '2023-06-06T10:55:47.000000Z'
+                        updated_at: '2023-06-06T10:55:47.000000Z'
+                        deleted_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 13
+                        name:
+                          type: string
+                          example: 'Shreeja Sadhukhan'
+                        email:
+                          type: string
+                          example: shreeja@yopmail.com
+                        phone:
+                          type: string
+                          example: '7475850123'
+                        email_verified_at:
+                          type: string
+                          example: 'null'
+                        profile_picture:
+                          type: string
+                          example: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                        year_of_experience:
+                          type: string
+                          example: '3'
+                        license_number:
+                          type: string
+                          example: 'null'
+                        location:
+                          type: string
+                          example: 'Purba Bardhaman'
+                        gender:
+                          type: string
+                          example: Female
+                        age:
+                          type: string
+                          example: '22'
+                        status:
+                          type: integer
+                          example: 1
+                        fcm_token:
+                          type: string
+                          example: null
+                        created_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        deleted_at:
+                          type: string
+                          example: null
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 404
+                  message: 'No Doctor Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'No Doctor Found'
+      tags:
+        - "Home Page Api's"
+      security: []
+  /api/v1/search-doctors:
+    post:
+      summary: 'Doctors/Clinics List as per search Api'
+      operationId: doctorsClinicsListAsPerSearchApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    -
+                      id: 13
+                      name: 'Shreeja Sadhukhan'
+                      email: shreeja@yopmail.com
+                      phone: '7475850123'
+                      email_verified_at: 'null'
+                      profile_picture: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                      year_of_experience: '3'
+                      license_number: 'null'
+                      location: 'Purba Bardhaman'
+                      gender: Female
+                      age: '22'
+                      status: 1
+                      fcm_token: null
+                      created_at: '2023-06-06T10:55:47.000000Z'
+                      updated_at: '2023-06-06T10:55:47.000000Z'
+                      deleted_at: null
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 13
+                        name: 'Shreeja Sadhukhan'
+                        email: shreeja@yopmail.com
+                        phone: '7475850123'
+                        email_verified_at: 'null'
+                        profile_picture: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                        year_of_experience: '3'
+                        license_number: 'null'
+                        location: 'Purba Bardhaman'
+                        gender: Female
+                        age: '22'
+                        status: 1
+                        fcm_token: null
+                        created_at: '2023-06-06T10:55:47.000000Z'
+                        updated_at: '2023-06-06T10:55:47.000000Z'
+                        deleted_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 13
+                        name:
+                          type: string
+                          example: 'Shreeja Sadhukhan'
+                        email:
+                          type: string
+                          example: shreeja@yopmail.com
+                        phone:
+                          type: string
+                          example: '7475850123'
+                        email_verified_at:
+                          type: string
+                          example: 'null'
+                        profile_picture:
+                          type: string
+                          example: doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg
+                        year_of_experience:
+                          type: string
+                          example: '3'
+                        license_number:
+                          type: string
+                          example: 'null'
+                        location:
+                          type: string
+                          example: 'Purba Bardhaman'
+                        gender:
+                          type: string
+                          example: Female
+                        age:
+                          type: string
+                          example: '22'
+                        status:
+                          type: integer
+                          example: 1
+                        fcm_token:
+                          type: string
+                          example: null
+                        created_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        deleted_at:
+                          type: string
+                          example: null
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 404
+                  message: 'No Doctor or Clinic Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'No Doctor or Clinic Found'
+      tags:
+        - "Home Page Api's"
+      security: []
+  /api/v1/store-location:
+    post:
+      summary: 'Location Store Api'
+      operationId: locationStoreApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    -
+                      id: 23
+                      user_id: 14
+                      session_id: null
+                      ip_address: 127.0.0.1
+                      address: 'J92M+P72, Kolkata Station Rd, Belgachia, Kolkata, West Bengal 700004, India'
+                      latitude: '22.5764753'
+                      longitude: '88.4306861'
+                      created_at: '2023-06-06T10:55:47.000000Z'
+                      updated_at: '2023-06-06T10:55:47.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 23
+                        user_id: 14
+                        session_id: null
+                        ip_address: 127.0.0.1
+                        address: 'J92M+P72, Kolkata Station Rd, Belgachia, Kolkata, West Bengal 700004, India'
+                        latitude: '22.5764753'
+                        longitude: '88.4306861'
+                        created_at: '2023-06-06T10:55:47.000000Z'
+                        updated_at: '2023-06-06T10:55:47.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 23
+                        user_id:
+                          type: integer
+                          example: 14
+                        session_id:
+                          type: string
+                          example: null
+                        ip_address:
+                          type: string
+                          example: 127.0.0.1
+                        address:
+                          type: string
+                          example: 'J92M+P72, Kolkata Station Rd, Belgachia, Kolkata, West Bengal 700004, India'
+                        latitude:
+                          type: string
+                          example: '22.5764753'
+                        longitude:
+                          type: string
+                          example: '88.4306861'
+                        created_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-06-06T10:55:47.000000Z'
+      tags:
+        - "Home Page Api's"
       requestBody:
         required: true
         content:
@@ -770,42 +1081,305 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                latitude:
                   type: string
-                  description: 'The name of the user.'
-                  example: 'John Doe'
-                email:
+                  description: ''
+                  example: modi
+                longitude:
                   type: string
-                  description: 'The email of the user.'
-                  example: john@yopmail.com
-                gender:
-                  type: string
-                  description: required.
-                  example: 'Male,Female,Other'
-                phone:
-                  type: numeric
-                  description: 'The phone of the user.'
-                  example: '9876543210'
-                password:
-                  type: string
-                  description: 'The password of the user.'
-                  example: '12345678'
-                confirm_password:
-                  type: string
-                  description: 'The confirm_password of the user.'
-                  example: '12345678'
-                location:
-                  type: string
-                  description: 'The name of the user.'
-                  example: 'John Doe'
+                  description: ''
+                  example: assumenda
               required:
-                - name
-                - email
-                - phone
-                - password
-                - confirm_password
+                - latitude
+                - longitude
       security: []
-  /api/v1/patient/forget-password:
+  /api/v1/appointment-history:
+    post:
+      summary: 'Appointment History Api'
+      operationId: appointmentHistoryApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": [\n   {\n      \"id\": 1,\n      \"user_id\": 14,\n      \"doctor_id\": 13,\n      \"clinic_id\": 1,\n      \"appointment_date\": \"2021-06-06\",\n      \"appointment_time\": \"10:00 AM\",\n      \"appointment_status\": 1,\n      \"created_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"updated_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"deleted_at\": null,\n      \"doctor\": {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@mailinator.com\"\n     },\n     }]\n   }"
+      tags:
+        - "Home Page Api's"
+      security: []
+  /api/v1/booking-and-consultancy:
+    post:
+      summary: 'Booking and Consultancy'
+      operationId: bookingAndConsultancy
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n      \"message\": \"Booking And Consultancy\",\n      \"status\": true,\n      \"data\": {\n         \"doctor\": {\n            \"id\": 4,\n             \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n             \"phone\": \"08596769586\",\n             \"email_verified_at\": null,\n             \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"year_of_experience\": \"4\",\n             \"license_number\": \"UPS74856963\",\n             \"location\": \"Kolkata\",\n             \"gender\": \"Male\",\n             \"age\": \"2001-01-30\",\n             \"status\": 1,\n             \"fcm_token\": \"fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI\",\n            \"created_at\": \"2023-06-06T08:40:43.000000Z\",\n             \"updated_at\": \"2023-07-25T08:53:27.000000Z\",\n             \"deleted_at\": null\n        },\n      \"clinics\": [\n         {\n            \"id\": 7,\n            \"user_id\": 4,\n            \"clinic_name\": \"Life Medical\",\n            \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n            \"clinic_phone\": \"7894561230\",\n            \"longitute\": \"88.3598025\",\n            \"latitute\": \"22.5474164\",\n            \"distance\": 7.963637575826944\n        },\n     ]\n     }\n }"
+      tags:
+        - 'Patient Booking'
+      security: []
+  /api/v1/appointment-store:
+    post:
+      summary: 'Store Appointment'
+      operationId: storeAppointment
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Appointment booked successfully!'
+                  status: true
+                  data:
+                    user_id: 1
+                    doctor_id: 4
+                    clinic_id: 7
+                    appointment_id: '000000'
+                    appointment_date: '2021-08-02'
+                    appointment_time: '11:00 AM'
+                    appointment_status: Done
+                    booking_time: '2021-08-02 12:00:00'
+                    clinic_name: 'Life Medical'
+                    clinic_address: 'Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India'
+                    clinic_phone: '7894561230'
+                    updated_at: '2021-08-02T12:00:00.000000Z'
+                    created_at: '2021-08-02T12:00:00.000000Z'
+                    id: 1
+                    user:
+                      id: 1
+                      name: 'Shilpi Chaki'
+                      email: shilpi@mailinator.com
+                      email_verified_at: null
+                      profile_picture: user/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png
+                      phone: '7894561230'
+                      year_of_experience: '4'
+                      license_number: UPS74856963
+                      location: Kolkata
+                      gender: female
+                      age: '2001-01-30'
+                      status: 1
+                      fcm_token: 'fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI'
+                      created_at: '2021-07-25T08:53:27.000000Z'
+                      updated_at: '2021-07-25T08:53:27.000000Z'
+                      deleted_at: null
+                properties:
+                  message:
+                    type: string
+                    example: 'Appointment booked successfully!'
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      user_id:
+                        type: integer
+                        example: 1
+                      doctor_id:
+                        type: integer
+                        example: 4
+                      clinic_id:
+                        type: integer
+                        example: 7
+                      appointment_id:
+                        type: string
+                        example: '000000'
+                      appointment_date:
+                        type: string
+                        example: '2021-08-02'
+                      appointment_time:
+                        type: string
+                        example: '11:00 AM'
+                      appointment_status:
+                        type: string
+                        example: Done
+                      booking_time:
+                        type: string
+                        example: '2021-08-02 12:00:00'
+                      clinic_name:
+                        type: string
+                        example: 'Life Medical'
+                      clinic_address:
+                        type: string
+                        example: 'Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India'
+                      clinic_phone:
+                        type: string
+                        example: '7894561230'
+                      updated_at:
+                        type: string
+                        example: '2021-08-02T12:00:00.000000Z'
+                      created_at:
+                        type: string
+                        example: '2021-08-02T12:00:00.000000Z'
+                      id:
+                        type: integer
+                        example: 1
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: 'Shilpi Chaki'
+                          email:
+                            type: string
+                            example: shilpi@mailinator.com
+                          email_verified_at:
+                            type: string
+                            example: null
+                          profile_picture:
+                            type: string
+                            example: user/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png
+                          phone:
+                            type: string
+                            example: '7894561230'
+                          year_of_experience:
+                            type: string
+                            example: '4'
+                          license_number:
+                            type: string
+                            example: UPS74856963
+                          location:
+                            type: string
+                            example: Kolkata
+                          gender:
+                            type: string
+                            example: female
+                          age:
+                            type: string
+                            example: '2001-01-30'
+                          status:
+                            type: integer
+                            example: 1
+                          fcm_token:
+                            type: string
+                            example: 'fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI'
+                          created_at:
+                            type: string
+                            example: '2021-07-25T08:53:27.000000Z'
+                          updated_at:
+                            type: string
+                            example: '2021-07-25T08:53:27.000000Z'
+                          deleted_at:
+                            type: string
+                            example: null
+      tags:
+        - 'Patient Booking'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clinic_id:
+                  type: string
+                  description: ''
+                  example: consequatur
+                appointment_date:
+                  type: string
+                  description: ''
+                  example: fuga
+                appointment_time:
+                  type: string
+                  description: ''
+                  example: voluptas
+              required:
+                - clinic_id
+                - appointment_date
+                - appointment_time
+      security: []
+  /api/v1/visitDate:
+    post:
+      summary: 'Clinic Date and Time Slot'
+      operationId: clinicDateAndTimeSlot
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n      \"message\": \"Clinic Details!\",\n      \"status\": true,\n      \"data\": {\n         \"id\": 7,\n        \"user_id\": 4,\n         \"clinic_name\": \"Life Medical\",\n         \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n         \"clinic_phone\": \"7894561230\",\n         \"longitute\": \"88.3598025\",\n         \"latitute\": \"22.5474164\",\n         \"distance\": 7.963637575826944,\n        \"clinic_slots\": [\n             {\n                 \"id\": 1,\n                 \"clinic_detail_id\": 7,\n                 \"slot_date\": \"2021-08-02\",\n                 \"slot_start_time\": \"11:00 AM\",\n                 \"slot_end_time\": \"12:00 PM\",\n                 \"created_at\": null,\n                 \"updated_at\": null\n            },\n        ]\n     }\n }"
+      tags:
+        - 'Patient Booking'
+      security: []
+  /api/v1/clinicVisitSlot:
+    post:
+      summary: 'Clinic Visit available Slot Time'
+      operationId: clinicVisitAvailableSlotTime
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Clinic Details!'
+                  status: true
+                  data:
+                    id: 1
+                    clinic_detail_id: 7
+                    slot_date: '2021-08-02'
+                    slot_start_time: '11:00 AM'
+                    slot_end_time: '12:00 PM'
+                    created_at: null
+                    updated_at: null
+                properties:
+                  message:
+                    type: string
+                    example: 'Clinic Details!'
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      clinic_detail_id:
+                        type: integer
+                        example: 7
+                      slot_date:
+                        type: string
+                        example: '2021-08-02'
+                      slot_start_time:
+                        type: string
+                        example: '11:00 AM'
+                      slot_end_time:
+                        type: string
+                        example: '12:00 PM'
+                      created_at:
+                        type: string
+                        example: null
+                      updated_at:
+                        type: string
+                        example: null
+      tags:
+        - 'Patient Booking'
+      security: []
+  /api/v1/forget-password:
     post:
       summary: 'Forget Password Api'
       operationId: forgetPasswordApi
@@ -876,7 +1450,7 @@ paths:
               required:
                 - email
       security: []
-  /api/v1/patient/otp-verification:
+  /api/v1/otp-verification:
     post:
       summary: 'OTP Verification Api'
       operationId: oTPVerificationApi
@@ -944,7 +1518,7 @@ paths:
                 - otp
                 - email
       security: []
-  /api/v1/patient/reset-password:
+  /api/v1/reset-password:
     post:
       summary: 'Reset Password Api'
       operationId: resetPasswordApi
@@ -1043,16 +1617,16 @@ paths:
       security: []
 tags:
   -
-    name: 'Doctor Authentication'
+    name: Authentication
     description: ''
   -
-    name: Endpoints
+    name: 'Doctor Profile'
     description: ''
   -
     name: "Home Page Api's"
     description: ''
   -
-    name: 'Patient Authentication'
+    name: 'Patient Booking'
     description: ''
   -
     name: 'Patient Forget Password'

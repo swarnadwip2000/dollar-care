@@ -4,7 +4,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/patient/forget-password
+    uri: api/v1/forget-password
     metadata:
       groupName: 'Patient Forget Password'
       groupDescription: ''
@@ -68,7 +68,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/patient/otp-verification
+    uri: api/v1/otp-verification
     metadata:
       groupName: 'Patient Forget Password'
       groupDescription: ''
@@ -136,7 +136,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/patient/reset-password
+    uri: api/v1/reset-password
     metadata:
       groupName: 'Patient Forget Password'
       groupDescription: ''

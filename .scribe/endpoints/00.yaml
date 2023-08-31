@@ -1,12 +1,12 @@
-name: 'Patient Authentication'
+name: Authentication
 description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/patient/login
+    uri: api/v1/login
     metadata:
-      groupName: 'Patient Authentication'
+      groupName: Authentication
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -96,9 +96,9 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/patient/register
+    uri: api/v1/register
     metadata:
-      groupName: 'Patient Authentication'
+      groupName: Authentication
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -156,6 +156,20 @@ endpoints:
         example: '12345678'
         type: string
         custom: []
+      type:
+        name: type
+        description: ''
+        required: true
+        example: voluptate
+        type: string
+        custom: []
+      age:
+        name: age
+        description: ''
+        required: true
+        example: doloremque
+        type: string
+        custom: []
       location:
         name: location
         description: 'The name of the user.'
@@ -170,6 +184,8 @@ endpoints:
       phone: '9876543210'
       password: '12345678'
       confirm_password: '12345678'
+      type: voluptate
+      age: doloremque
       location: 'John Doe'
     fileParameters: []
     responses:

@@ -5,18 +5,18 @@
             "key": "baseUrl",
             "type": "string",
             "name": "string",
-            "value": "http:\/\/localhost"
+            "value": "http:\/\/127.0.0.1:8000"
         }
     ],
     "info": {
         "name": "Dollar CARE",
-        "_postman_id": "3a2efa40-e2eb-497d-a8be-7418ea3e8fc4",
+        "_postman_id": "321ab57a-80f2-4a77-8ca3-4f19e49125e5",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Doctor Authentication",
+            "name": "Authentication",
             "description": "",
             "item": [
                 {
@@ -24,9 +24,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/doctor\/login",
+                            "path": "api\/v1\/login",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/login"
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
                         },
                         "method": "POST",
                         "header": [
@@ -74,9 +74,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/doctor\/register",
+                            "path": "api\/v1\/register",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/register"
+                            "raw": "{{baseUrl}}\/api\/v1\/register"
                         },
                         "method": "POST",
                         "header": [
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"location\":\"John Doe\"}"
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"voluptate\",\"age\":\"doloremque\",\"location\":\"John Doe\"}"
                         },
                         "description": "",
                         "auth": {
@@ -116,17 +116,17 @@
             ]
         },
         {
-            "name": "Endpoints",
+            "name": "Doctor Profile",
             "description": "",
             "item": [
                 {
-                    "name": "Forget Password Api",
+                    "name": "Get Doctor Profile",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/doctor\/forget-password",
+                            "path": "api\/v1\/doctor\/getProfile",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/forget-password"
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/getProfile"
                         },
                         "method": "POST",
                         "header": [
@@ -139,38 +139,26 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"email\":\"james@yopmail.com\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "body": null,
+                        "description": ""
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"OTP has been sent to your email\"\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 401,\n\"error\": {\n\"email\": [\n\"The email field is required.\"\n]\n }\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "OTP Verification Api",
+                    "name": "Update Doctor Profile",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/doctor\/otp-verification",
+                            "path": "api\/v1\/doctor\/updateProfile",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/otp-verification"
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/updateProfile"
                         },
                         "method": "POST",
                         "header": [
@@ -185,36 +173,39 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"otp\":\"123456\",\"email\":\"james@yopmail.com\"}"
+                            "raw": "{\"name\":\"qui\",\"email\":\"slehner@example.com\",\"gender\":\"sunt\",\"age\":\"atque\",\"phone\":\"veritatis\",\"specialization_id\":[\"accusamus\"],\"license_number\":\"est\"}"
                         },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"OTP verified successfully\"\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
                             "name": ""
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"OTP is expired\"\n}",
+                            "code": 201,
+                            "body": "{\n\"error\": \"The email has already been taken.\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"error\": \"The phone has already been taken.\"\n}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "Reset Password Api",
+                    "name": "Change Password",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/doctor\/reset-password",
+                            "path": "api\/v1\/doctor\/changePassword",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/reset-password"
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/changePassword"
                         },
                         "method": "POST",
                         "header": [
@@ -229,24 +220,68 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"password\":\"123456\",\"confirm_password\":\"123456\",\"email\":\"james@yopmail.com\"}"
+                            "raw": "{\"current_password\":\"fzxzhlcqpmrzwlhxryternbhfsgsbmyl\",\"new_password\":\"piajrbpvckheywgojxrbjavd\",\"confirm_password\":\"nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii\",\"old_password\":\"dolores\",\"password\":\"ioqH6\\\\y(g\\\\IOYb\\\"\",\"password_confirmation\":\"ea\"}"
                         },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password has been reset successfully\"\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password changed successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
                             "name": ""
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"password\": [\n\"The password field is required.\"\n],\n\"confirm_password\": [\n\"The confirm password field is required.\"\n],\n\"email\": [\n\"The email field is required.\"\n]\n}\n}",
+                            "code": 201,
+                            "body": "{\n\"error\": \"The old_password and password must be different.\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Upload profile image",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/updateProfileImage",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/updateProfileImage"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "profile_picture",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile updated successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"error\": \"The profile_picture filled is required.\"\n}",
                             "name": ""
                         }
                     ]
@@ -338,21 +373,15 @@
                             "name": ""
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "name": "Patient Authentication",
-            "description": "",
-            "item": [
+                },
                 {
-                    "name": "Login Api",
+                    "name": "All doctors Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/patient\/login",
+                            "path": "api\/v1\/all-doctors",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/patient\/login"
+                            "raw": "{{baseUrl}}\/api\/v1\/all-doctors"
                         },
                         "method": "POST",
                         "header": [
@@ -365,10 +394,7 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\"}"
-                        },
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -378,31 +404,107 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"Login successfully\",\n     \"data\": {\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM\",\n    \"user\": {\n        \"id\": 3,\n        \"name\": \"John Doe\",\n        \"email\": \"john@yopmail.com\",\n        \"status\": 1\n    }\n}",
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@yopmail.com\",\n         \"phone\": \"7475850123\",\n         \"email_verified_at\": \"null\",\n         \"profile_picture\": \"doctor\/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg\",\n         \"year_of_experience\": \"3\",\n         \"license_number\": \"null\",\n         \"location\": \"Purba Bardhaman\",\n         \"gender\": \"Female\",\n         \"age\": \"22\",\n         \"status\": 1,\n         \"fcm_token\": null,\n         \"created_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"updated_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"deleted_at\": null\n     }\n   ]\n}",
                             "name": ""
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n   \"message\": [\n      \"The email field is required.\",\n     \"The password field is required.\"\n  ]\n}\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n \"status\": false,\n \"statusCode\": 401,\n \"error\": \"Email id & password was invalid!\"\n}",
+                            "code": 404,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 404,\n \"message\": \"No Specialization Found\"\n}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "Register Api",
+                    "name": "Doctors List as per symptoms\/specializations Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/patient\/register",
+                            "path": "api\/v1\/doctors",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/patient\/register"
+                            "raw": "{{baseUrl}}\/api\/v1\/doctors"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@yopmail.com\",\n         \"phone\": \"7475850123\",\n         \"email_verified_at\": \"null\",\n         \"profile_picture\": \"doctor\/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg\",\n         \"year_of_experience\": \"3\",\n         \"license_number\": \"null\",\n         \"location\": \"Purba Bardhaman\",\n         \"gender\": \"Female\",\n         \"age\": \"22\",\n         \"status\": 1,\n         \"fcm_token\": null,\n         \"created_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"updated_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"deleted_at\": null\n     }\n   ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 404,\n \"message\": \"No Doctor Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Doctors\/Clinics List as per search Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/search-doctors",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/search-doctors"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@yopmail.com\",\n         \"phone\": \"7475850123\",\n         \"email_verified_at\": \"null\",\n         \"profile_picture\": \"doctor\/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg\",\n         \"year_of_experience\": \"3\",\n         \"license_number\": \"null\",\n         \"location\": \"Purba Bardhaman\",\n         \"gender\": \"Female\",\n         \"age\": \"22\",\n         \"status\": 1,\n         \"fcm_token\": null,\n         \"created_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"updated_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"deleted_at\": null\n     }\n   ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 404,\n \"message\": \"No Doctor or Clinic Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Location Store Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/store-location",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/store-location"
                         },
                         "method": "POST",
                         "header": [
@@ -417,7 +519,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"location\":\"John Doe\"}"
+                            "raw": "{\"latitude\":\"modi\",\"longitude\":\"assumenda\"}"
                         },
                         "description": "",
                         "auth": {
@@ -428,13 +530,191 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"status\": true,\n \"statusCode\": 200,\n \"data\": {\n  \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWVkZWJjZWQ5MzE4OGFjM2YwNGQ1ZTgwYjdhZmFiNjE2N2Q5ZjgzYmM4Zjc0OGI3MDQyNDkzOTJlZTdkYjIzYzUwZTFhODdlMGY0ZTJiYjIiLCJpYXQiOjE2ODYxMjY1MTEuNzkxNDc2LCJuYmYiOjE2ODYxMjY1MTEuNzkxNDgxLCJleHAiOjE3MTc3NDg5MTEuNzczMjE4LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.R6_pNkfP_tbzdV0J9grl1nPXrjjaaBriTIyKSEvfFoFgupAGNSBZm7Z1e7yRsDowh5PWpXs5eHGBBvD06S1sh9YgF5kE9j4JopVntNgG1Ksnugn6UXQXIW2el5jAWRAQCH_MKByrkw3ktZ1_PGz7gsnmC0PWGI53YtEN3cOleU26e9EiHAS5-8uaU7mwQGlU8C_SGF7rS--QsX9_PX3eRWekJ9ssPkysdabZRWeD1WD4xEJUMuG7x_8vckF4k6zsiykJa43ZCRxAQmqJ81rma1leBZ8Li9wtkk3u5lrmPGq1NI3CZB0PMaC0koH2MyiZvAsM-zB_LaALpkLxpWuPR1xu1UxF7LKfFJ8Qw-2Bnelblh1hdu5Iie5vEVQsV2n6kjXNCPLRRaKYEZIWixAyOZQkJiunyuCskgfcPaBZLLMCPZ80by9OoMhPQTMI1FmSJU6gEse8YuN-P33F4TE9QKcCkUh8ATSUeOUN65auQ2h-cEnACxcB2O5k90ohyISDvBQrUp3EN32OLuJHJUWchISGtVvAhL9Ui5iwXDNrnPMQVqMHpHANwK90jpBQ68t8vwmAoKY_pvVDmnzRdx2CwPEtgNfvyXP6k5lUsi6BsFyKJ83mqOMPdF8XbotN0bpyWOA6tw14lR-SHS3IeIk0doMbqAiseuHlZqzaFQ6Uaa0\",\n   \"user\": {\n       \"name\": \"Shilpi Chaki\",\n       \"email\": \"shilpi@yopmail.com\",\n       \"gender\": \"Male\",\n       \"phone\": \"7485968600\",\n       \"status\": 1,\n       \"updated_at\": \"2023-06-07T08:28:31.000000Z\",\n       \"created_at\": \"2023-06-07T08:28:31.000000Z\",\n       \"id\": 5\n  }\n }\n}",
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 23,\n         \"user_id\": 14,\n         \"session_id\": null,\n         \"ip_address\": \"127.0.0.1\",\n         \"address\": \"J92M+P72, Kolkata Station Rd, Belgachia, Kolkata, West Bengal 700004, India\",\n         \"latitude\": \"22.5764753\",\n         \"longitude\": \"88.4306861\",\n         \"created_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"updated_at\": \"2023-06-06T10:55:47.000000Z\"\n     }\n   ]\n}",
                             "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Appointment History Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/appointment-history",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/appointment-history"
                         },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n \"status\": false,\n\"statusCode\": 401,\n\"error\": \"Email id & password was invalid!\"\n}",
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": [\n   {\n      \"id\": 1,\n      \"user_id\": 14,\n      \"doctor_id\": 13,\n      \"clinic_id\": 1,\n      \"appointment_date\": \"2021-06-06\",\n      \"appointment_time\": \"10:00 AM\",\n      \"appointment_status\": 1,\n      \"created_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"updated_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"deleted_at\": null,\n      \"doctor\": {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@mailinator.com\"\n     },\n     }]\n   }",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Patient Booking",
+            "description": "",
+            "item": [
+                {
+                    "name": "Booking and Consultancy",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/booking-and-consultancy",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/booking-and-consultancy"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n      \"message\": \"Booking And Consultancy\",\n      \"status\": true,\n      \"data\": {\n         \"doctor\": {\n            \"id\": 4,\n             \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n             \"phone\": \"08596769586\",\n             \"email_verified_at\": null,\n             \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"year_of_experience\": \"4\",\n             \"license_number\": \"UPS74856963\",\n             \"location\": \"Kolkata\",\n             \"gender\": \"Male\",\n             \"age\": \"2001-01-30\",\n             \"status\": 1,\n             \"fcm_token\": \"fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI\",\n            \"created_at\": \"2023-06-06T08:40:43.000000Z\",\n             \"updated_at\": \"2023-07-25T08:53:27.000000Z\",\n             \"deleted_at\": null\n        },\n      \"clinics\": [\n         {\n            \"id\": 7,\n            \"user_id\": 4,\n            \"clinic_name\": \"Life Medical\",\n            \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n            \"clinic_phone\": \"7894561230\",\n            \"longitute\": \"88.3598025\",\n            \"latitute\": \"22.5474164\",\n            \"distance\": 7.963637575826944\n        },\n     ]\n     }\n }",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store Appointment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/appointment-store",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/appointment-store"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"clinic_id\":\"consequatur\",\"appointment_date\":\"fuga\",\"appointment_time\":\"voluptas\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n   \"message\": \"Appointment booked successfully!\",\n  \"status\": true,\n    \"data\": {\n         \"user_id\": 1,\n         \"doctor_id\": 4,\n         \"clinic_id\": 7,\n         \"appointment_id\": \"000000\",\n         \"appointment_date\": \"2021-08-02\",\n         \"appointment_time\": \"11:00 AM\",\n          \"appointment_status\": \"Done\",\n          \"booking_time\": \"2021-08-02 12:00:00\",\n          \"clinic_name\": \"Life Medical\",\n           \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n         \"clinic_phone\": \"7894561230\",\n         \"updated_at\": \"2021-08-02T12:00:00.000000Z\",\n         \"created_at\": \"2021-08-02T12:00:00.000000Z\",\n         \"id\": 1,\n         \"user\": {\n             \"id\": 1,\n             \"name\": \"Shilpi Chaki\",\n             \"email\": \"shilpi@mailinator.com\",\n             \"email_verified_at\": null,\n             \"profile_picture\": \"user\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n             \"phone\": \"7894561230\",\n             \"year_of_experience\": \"4\",\n             \"license_number\": \"UPS74856963\",\n             \"location\": \"Kolkata\",\n             \"gender\": \"female\",\n             \"age\": \"2001-01-30\",\n             \"status\": 1,\n             \"fcm_token\": \"fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI\",\n             \"created_at\": \"2021-07-25T08:53:27.000000Z\",\n             \"updated_at\": \"2021-07-25T08:53:27.000000Z\",\n             \"deleted_at\": null\n         }\n    }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Clinic Date and Time Slot",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/visitDate",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/visitDate"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n      \"message\": \"Clinic Details!\",\n      \"status\": true,\n      \"data\": {\n         \"id\": 7,\n        \"user_id\": 4,\n         \"clinic_name\": \"Life Medical\",\n         \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n         \"clinic_phone\": \"7894561230\",\n         \"longitute\": \"88.3598025\",\n         \"latitute\": \"22.5474164\",\n         \"distance\": 7.963637575826944,\n        \"clinic_slots\": [\n             {\n                 \"id\": 1,\n                 \"clinic_detail_id\": 7,\n                 \"slot_date\": \"2021-08-02\",\n                 \"slot_start_time\": \"11:00 AM\",\n                 \"slot_end_time\": \"12:00 PM\",\n                 \"created_at\": null,\n                 \"updated_at\": null\n            },\n        ]\n     }\n }",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Clinic Visit available Slot Time",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/clinicVisitSlot",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/clinicVisitSlot"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"Clinic Details!\",\n    \"status\": true,\n   \"data\": {\n         \"id\": 1,\n         \"clinic_detail_id\": 7,\n         \"slot_date\": \"2021-08-02\",\n         \"slot_start_time\": \"11:00 AM\",\n         \"slot_end_time\": \"12:00 PM\",\n         \"created_at\": null,\n         \"updated_at\": null\n    }\n}",
                             "name": ""
                         }
                     ]
@@ -450,9 +730,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/patient\/forget-password",
+                            "path": "api\/v1\/forget-password",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/patient\/forget-password"
+                            "raw": "{{baseUrl}}\/api\/v1\/forget-password"
                         },
                         "method": "POST",
                         "header": [
@@ -494,9 +774,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/patient\/otp-verification",
+                            "path": "api\/v1\/otp-verification",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/patient\/otp-verification"
+                            "raw": "{{baseUrl}}\/api\/v1\/otp-verification"
                         },
                         "method": "POST",
                         "header": [
@@ -538,9 +818,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/patient\/reset-password",
+                            "path": "api\/v1\/reset-password",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/patient\/reset-password"
+                            "raw": "{{baseUrl}}\/api\/v1\/reset-password"
                         },
                         "method": "POST",
                         "header": [
