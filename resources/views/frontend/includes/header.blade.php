@@ -33,7 +33,7 @@
                             alt="" /></a>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-8">
+            <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-6 col-8">
             <div id="main">
               <a href="javascript:void(0)" onclick="openNav()">
                 <div class="location d-flex">
@@ -71,7 +71,7 @@
             </div>
             </a>
           </div>
-          <div class="col-xxl-7 col-xl-7 col-lg-6 col-md-3 col-2">
+          <div class="col-xxl-7 col-xl-8 col-lg-8 col-md-3 col-2">
                 <div id="cssmenu">
                     <ul>
                         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>

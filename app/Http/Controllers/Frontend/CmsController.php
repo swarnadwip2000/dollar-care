@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\ContactPageCms;
 use App\Models\ContactUs;
+use App\Models\HomePage;
 use App\Models\Plan;
 use App\Models\Qna;
 use App\Models\Location;
@@ -18,7 +19,9 @@ class CmsController extends Controller
     {
         $blogs = Blog::orderBy('id', 'desc')->limit(4)->offset(1)->get();
         $blog = Blog::orderBy('id', 'desc')->first();
-        return view('frontend.home')->with(compact('blogs','blog'));
+        $banners = HomePage::orderBy('id', 'desc')->where('type', 1)->get();
+        $homeBodies = HomePage::orderBy('id', 'desc')->where('type', 2)->get(); 
+        return view('frontend.home')->with(compact('blogs','blog', 'banners', 'homeBodies'));
     }
 
     public function aboutUs()

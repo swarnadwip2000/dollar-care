@@ -6,13 +6,64 @@ use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
 use App\Models\ContactPageCms;
 use App\Models\ContactUs;
+use App\Models\HomePage;
 use App\Models\PrivacyPolicy;
 use App\Models\Qna;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Psy\CodeCleaner\ReturnTypePass;
 
 class CmsController extends Controller
 {
+    use ImageTrait;
+
+    public function homeIndex()
+    {
+        $homePage = HomePage::orderBy('id', 'desc')->get();
+        return view('admin.cms.home.list', compact('homePage'));
+    }
+    
+
+    public function homeStore(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'sub_title' => 'required',
+            // 'image' => 'required',
+            'type' => 'required',
+        ]);
+        if ($request->hidden_id != null) {
+            $homePage = HomePage::find($request->hidden_id);
+            $message = 'Home page details has been updated successfully';
+        } else {
+            $homePage = new HomePage();
+            $message = 'Home page details has been added successfully';
+        }
+        $homePage->title = $request->title;
+        $homePage->sub_title = $request->sub_title;
+        if ($request->hasFile('image')) {
+            $image = $this->imageUpload($request->file('image'), 'home-page');
+            $homePage->image = Storage::url($image);
+        }   
+        $homePage->type = $request->type;
+        $homePage->save();
+        return redirect()->back()->with('message', $message);
+    }
+
+    public function homeEdit(Request $request)
+    {
+        $homePage = HomePage::find($request->id);
+        return response()->json(['homePage' => $homePage, 'message' => 'Home page details found successfully.']);
+    }   
+
+    public function homeDelete($id)
+    {
+        $homePage = HomePage::findOrFail($id);
+        $homePage->delete();
+        return redirect()->back()->with('error', 'Home page details has been deleted successfully');
+    }
+
     public function qnaIndex()
     {
         $qnas = Qna::orderBy('id', 'desc')->get();

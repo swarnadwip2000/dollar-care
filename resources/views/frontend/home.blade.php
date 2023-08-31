@@ -10,23 +10,20 @@
 @section('content')
     <section class="banner__slider banner_sec">
         <div class="slider stick-dots">
+            @foreach($banners as $key =>$banner)
             <div class="slide">
                 <div class="slide__img">
-                    <img src="{{ asset('frontend_assets/images/banner-1.jpg') }}" alt="" data-lazy=""
+                    <img src="{{ $banner->image }}" alt="" data-lazy=""
                         class="full-image" />
                 </div>
                 <div class="slide__content slide__content__left">
                     <div class="slide__content--headings text-left" data-aos="fade-up" data-aos-easing="linear"
                         data-aos-duration="1000">
                         <h1 class="title">
-                            1. Meet Healthcare Partner to Help and Facilitate the Overall
-                            Well Being of Humanity Towards Better Living Conditions
+                            {{ $key+1 }}. {{ $banner->title }}
                         </h1>
                         <p class="top-title">
-                            We specialize in returning Hope to Families affected by
-                            Natural Disasters Like Fire and Floods to provide Affected
-                            Families with quality living conditions, accessible Health
-                            Care.
+                            {{ $banner->sub_title }}
                         </p>
                     </div>
                     <div class="main-btn pt-4">
@@ -37,87 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="slide">
-                <div class="slide__img">
-                    <img src="{{ asset('frontend_assets/images/banner-2.jpg') }}" alt="" data-lazy=""
-                        class="full-image" />
-                </div>
-                <div class="slide__content slide__content__left">
-                    <div class="slide__content--headings text-left" data-aos="fade-up" data-aos-easing="linear"
-                        data-aos-duration="1000">
-                        <h1 class="title">
-                            2. Meet Healthcare Partner to Help and Facilitate the Overall
-                            Well Being of Humanity Towards Better Living Conditions
-                        </h1>
-                        <p class="top-title">
-                            We specialize in returning Hope to Families affected by
-                            Natural Disasters Like Fire and Floods to provide Affected
-                            Families with quality living conditions, accessible Health
-                            Care.
-                        </p>
-                    </div>
-                    <div class="main-btn pt-4">
-                        @if (!Auth::check())
-                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="slide__img">
-                    <img src="{{ asset('frontend_assets/images/banner-3.jpg') }}" alt="" data-lazy=""
-                        class="full-image" />
-                </div>
-                <div class="slide__content slide__content__left">
-                    <div class="slide__content--headings text-left" data-aos="fade-up" data-aos-easing="linear"
-                        data-aos-duration="1000">
-                        <h1 class="title">
-                            3. Meet Healthcare Partner to Help and Facilitate the Overall
-                            Well Being of Humanity Towards Better Living Conditions
-                        </h1>
-                        <p class="top-title">
-                            We specialize in returning Hope to Families affected by
-                            Natural Disasters Like Fire and Floods to provide Affected
-                            Families with quality living conditions, accessible Health
-                            Care.
-                        </p>
-                    </div>
-                    <div class="main-btn pt-4">
-                        @if (!Auth::check())
-                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="slide__img">
-                    <img src="{{ asset('frontend_assets/images/banner-4.jpg') }}" alt="" data-lazy=""
-                        class="full-image" />
-                </div>
-                <div class="slide__content slide__content__left">
-                    <div class="slide__content--headings text-left" data-aos="fade-up" data-aos-easing="linear"
-                        data-aos-duration="1000">
-                        <h1 class="title">
-                            4. Meet Healthcare Partner to Help and Facilitate the Overall
-                            Well Being of Humanity Towards Better Living Conditions
-                        </h1>
-                        <p class="top-title">
-                            We specialize in returning Hope to Families affected by
-                            Natural Disasters Like Fire and Floods to provide Affected
-                            Families with quality living conditions, accessible Health
-                            Care.
-                        </p>
-                    </div>
-                    <div class="main-btn pt-4">
-                        @if (!Auth::check())
-                            <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
-                        @endif
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
     <section class="wht-we-do">
@@ -137,105 +54,36 @@
                     </div>
                     <div class="col-xl-9 col-lg-12">
                         <div class="wht-serv">
+                            @foreach($homeBodies as $homeBody)
                             <div class="wht-slide">
                                 <div class="wht-slide-wrap" data-aos="fade-up" data-aos-easing="linear"
                                     data-aos-duration="600">
                                     <div class="wht-slide-box">
                                         <div class="wht-slide-icon-div">
                                             <div class="wht-slide-icon-1 wht-slide-icon">
-                                                <img src="{{ asset('frontend_assets/images/sr-1.png') }}" alt="" />
+                                                <img src="{{ $homeBody->image }}" alt="" />
                                             </div>
                                             <div class="wht-slide-icon wht-slide-icon-2">
-                                                <img src="{{ asset('frontend_assets/images/sr-1.1.png') }}"
+                                                <img src="{{ $homeBody->image }}"
                                                     alt="" />
                                             </div>
                                         </div>
                                         <div class="wht-slide-text">
                                             <div class="wht-slide-h h-b pb-3">
-                                                <h3>Planning and Advice</h3>
+                                                <h3>
+                                                    {{ $homeBody->title }}
+                                                </h3>
                                             </div>
                                             <div class="para p-b wht-slide-p">
-                                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                                                <p>
+                                                    {{ $homeBody->description }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="wht-slide">
-                                <div class="wht-slide-wrap" data-aos="fade-down" data-aos-easing="linear"
-                                    data-aos-duration="600">
-                                    <div class="wht-slide-box">
-                                        <div class="wht-slide-icon-div">
-                                            <div class="wht-slide-icon-1 wht-slide-icon">
-                                                <img src="{{ asset('frontend_assets/images/sr-2.png') }}"
-                                                    alt="" />
-                                            </div>
-                                            <div class="wht-slide-icon wht-slide-icon-2">
-                                                <img src="{{ asset('frontend_assets/images/sr-2.1.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="wht-slide-text">
-                                            <div class="wht-slide-h h-b pb-3">
-                                                <h3>High Yield Projects</h3>
-                                            </div>
-                                            <div class="para p-b wht-slide-p">
-                                                <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wht-slide">
-                                <div class="wht-slide-wrap" data-aos="fade-up" data-aos-easing="linear"
-                                    data-aos-duration="600">
-                                    <div class="wht-slide-box">
-                                        <div class="wht-slide-icon-div">
-                                            <div class="wht-slide-icon-1 wht-slide-icon">
-                                                <img src="{{ asset('frontend_assets/images/sr-3.png') }}"
-                                                    alt="" />
-                                            </div>
-                                            <div class="wht-slide-icon wht-slide-icon-2">
-                                                <img src="{{ asset('frontend_assets/images/sr-3.1.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="wht-slide-text">
-                                            <div class="wht-slide-h h-b pb-3">
-                                                <h3>Robust Investment Tools</h3>
-                                            </div>
-                                            <div class="para p-b wht-slide-p">
-                                                <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wht-slide">
-                                <div class="wht-slide-wrap" data-aos="fade-down" data-aos-easing="linear"
-                                    data-aos-duration="600">
-                                    <div class="wht-slide-box">
-                                        <div class="wht-slide-icon-div">
-                                            <div class="wht-slide-icon-1 wht-slide-icon">
-                                                <img src="{{ asset('frontend_assets/images/sr-1.png') }}"
-                                                    alt="" />
-                                            </div>
-                                            <div class="wht-slide-icon wht-slide-icon-2">
-                                                <img src="{{ asset('frontend_assets/images/sr-1.1.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="wht-slide-text">
-                                            <div class="wht-slide-h h-b pb-3">
-                                                <h3>Planning and Advice</h3>
-                                            </div>
-                                            <div class="para p-b wht-slide-p">
-                                                <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

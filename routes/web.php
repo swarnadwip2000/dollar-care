@@ -165,6 +165,14 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
             Route::post('/update', [AdminCmsController::class, 'aboutUsUpdate'])->name('update');
         });
 
+        Route::prefix('home')->name('home.')->group(function () {
+            Route::get('/', [AdminCmsController::class, 'homeIndex'])->name('index');
+            Route::post('/store', [AdminCmsController::class, 'homeStore'])->name('store');
+            Route::get('/delete/{id}', [AdminCmsController::class, 'homeDelete'])->name('delete');
+            // edit
+            Route::post('/edit', [AdminCmsController::class, 'homeEdit'])->name('edit');
+        });
+
         Route::prefix('privacy-policy')->name('privacy-policy.')->group(function () {
             Route::get('/', [AdminCmsController::class, 'privacyPolicyIndex'])->name('index');
             Route::post('/update', [AdminCmsController::class, 'privacyPolicyUpdate'])->name('update');
