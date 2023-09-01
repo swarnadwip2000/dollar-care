@@ -27,9 +27,9 @@ class ForgetPasswordController extends Controller
      *  "message": "OTP has been sent to your email"
      * }
      * 
-     * @response 401{
+     * @response 201{
      * "status": false,
-     *  "statusCode": 401,
+     *  "statusCode": 201,
      * "error": {
      * "email": [
      * "The email field is required."
@@ -48,7 +48,7 @@ class ForgetPasswordController extends Controller
                 'status' => false,
                 'statusCode' => 401,
                 'error' => $validator->errors()
-            ], 401);
+            ], 201);
         }
 
         try {
@@ -75,9 +75,9 @@ class ForgetPasswordController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'statusCode' => 401,
+                    'statusCode' => 201,
                     'error' => 'Admin & Doctor can not reset password from here'
-                ], 401);
+                ], 201);
             }
         } catch (\Throwable $th) {
             return response()->json([
@@ -99,7 +99,7 @@ class ForgetPasswordController extends Controller
      * "message": "OTP verified successfully"   
      * }
      * 
-     * @response 401{
+     * @response 201{
      * "status": false,
      * "statusCode": 401,
      * "error": "OTP is expired"
@@ -115,16 +115,7 @@ class ForgetPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $errors['message'] = [];
-            $data = explode(',', $validator->errors());
-
-            for ($i = 0; $i < count($validator->errors()); $i++) {
-                // return $data[$i];
-                $dk = explode('["', $data[$i]);
-                $ck = explode('"]', $dk[1]);
-                $errors['message'][$i] = $ck[0];
-            }
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['error' => $validator->errors()->first()], 201);
         }
 
         try {
@@ -136,9 +127,9 @@ class ForgetPasswordController extends Controller
                 if ($newtime < $currenttime) {
                     return response()->json([
                         'status' => false,
-                        'statusCode' => 401,
+                        'statusCode' => 201,
                         'error' => 'OTP is expired'
-                    ], 401);
+                    ], 201);
                 } else {
                     return response()->json([
                         'status' => true,
@@ -149,9 +140,9 @@ class ForgetPasswordController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'statusCode' => 401,
+                    'statusCode' => 201,
                     'error' => 'OTP is not valid'
-                ], 401);
+                ], 201);
             }
         } catch (\Throwable $th) {
             return response()->json([
@@ -174,9 +165,9 @@ class ForgetPasswordController extends Controller
      * "message": "Password has been reset successfully"
      * }
      * 
-     * @response 401{
+     * @response 201{
      * "status": false,
-     * "statusCode": 401,
+     * "statusCode": 201,
      * "error": {
      * "password": [
      * "The password field is required."
@@ -202,15 +193,7 @@ class ForgetPasswordController extends Controller
 
         if ($validator->fails()) {
             $errors['message'] = [];
-            $data = explode(',', $validator->errors());
-
-            for ($i = 0; $i < count($validator->errors()); $i++) {
-                // return $data[$i];
-                $dk = explode('["', $data[$i]);
-                $ck = explode('"]', $dk[1]);
-                $errors['message'][$i] = $ck[0];
-            } 
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['error' => $validator->errors()->first()], 201);
         }
 
         try {

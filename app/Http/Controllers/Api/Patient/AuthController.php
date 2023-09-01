@@ -33,9 +33,9 @@ class AuthController extends Controller
      *     }
      * }
      * 
-     * @response 401{
+     * @response 201{
      * "status": false,
-     * "statusCode": 401,
+     * "statusCode": 201,
      * "error": {
      *    "message": [
      *       "The email field is required.",
@@ -44,9 +44,9 @@ class AuthController extends Controller
      * }
      * }
      * 
-     * @response 401{
+     * @response 201{
      *  "status": false,
-     *  "statusCode": 401,
+     *  "statusCode": 201,
      *  "error": "Email id & password was invalid!"
      * }
      */
@@ -59,16 +59,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $errors['message'] = [];
-            $data = explode(',', $validator->errors());
-
-            for ($i = 0; $i < count($validator->errors()); $i++) {
-                // return $data[$i];
-                $dk = explode('["', $data[$i]);
-                $ck = explode('"]', $dk[1]);
-                $errors['message'][$i] = $ck[0];
-            }
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['error' => $validator->errors()->first()], 201);
         }
 
         try {
@@ -79,10 +70,10 @@ class AuthController extends Controller
                     $data['user'] = $user->makeHidden('roles');
                     return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
                 } else {
-                    return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Email id & password was invalid!'], 401);
+                    return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
                 }
             } else {
-                return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Email id & password was invalid!'], 401);
+                return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()], 500);
@@ -140,16 +131,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $errors['message'] = [];
-            $data = explode(',', $validator->errors());
-
-            for ($i = 0; $i < count($validator->errors()); $i++) {
-                // return $data[$i];
-                $dk = explode('["', $data[$i]);
-                $ck = explode('"]', $dk[1]);
-                $errors['message'][$i] = $ck[0];
-            }
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['error' => $validator->errors()->first()], 201);
         }
 
         try {

@@ -41,9 +41,9 @@ class HomeController extends Controller
      *   ]
      * }
      * 
-     * @response 404{
+     * @response 201{
      * "status": false,
-     * "statusCode": 404,
+     * "statusCode": 201,
      * "message": "No Symptoms Found"
      * }
      */
@@ -56,7 +56,7 @@ class HomeController extends Controller
                 $symptoms = Symptoms::where('symptom_status', 1)->orderBy('id', 'desc')->get();
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $symptoms]);
             } else {
-                return response()->json(['status' => false, 'statusCode' => 404, 'message' => 'No Symptoms Found']);
+                return response()->json(['status' => false, 'statusCode' => 201, 'message' => 'No Symptoms Found'], 201);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
@@ -82,9 +82,9 @@ class HomeController extends Controller
      *    ]
      * }
      * 
-     * @response 404{
+     * @response 201{
      * "status": false,
-     *  "statusCode": 404,
+     *  "statusCode": 201,
      *  "message": "No Specialization Found"
      * }
      */
@@ -97,7 +97,7 @@ class HomeController extends Controller
                 $specializations = Specialization::where('status', 1)->orderBy('id', 'desc')->get();
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $specializations]);
             } else {
-                return response()->json(['status' => false, 'statusCode' => 404, 'message' => 'No Specialization Found']);
+                return response()->json(['status' => false, 'statusCode' => 201, 'message' => 'No Specialization Found'], 201);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
@@ -136,16 +136,7 @@ class HomeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $errors['message'] = [];
-            $data = explode(',', $validator->errors());
-
-            for ($i = 0; $i < count($validator->errors()); $i++) {
-                // return $data[$i];
-                $dk = explode('["', $data[$i]);
-                $ck = explode('"]', $dk[1]);
-                $errors['message'][$i] = $ck[0];
-            }
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['error' => $validator->errors()->first()], 201);
         }
 
         try {
@@ -204,9 +195,9 @@ class HomeController extends Controller
      *    ]
      * }
      * 
-     * @response 404{
+     * @response 201{
      * "status": false,
-     *  "statusCode": 404,
+     *  "statusCode": 201,
      *  "message": "No Specialization Found"
      * }
      */
@@ -270,7 +261,7 @@ class HomeController extends Controller
 
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $doctors]);
             } else {
-                return response()->json(['status' => false, 'statusCode' => 404, 'message' => 'No Doctor Found in your area!']);
+                return response()->json(['status' => false, 'statusCode' => 201, 'message' => 'No Doctor Found in your area!'], 201);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
@@ -306,9 +297,9 @@ class HomeController extends Controller
      *    ]
      * }
      * 
-     * @response 404{
+     * @response 201{
      * "status": false,
-     *  "statusCode": 404,
+     *  "statusCode": 201,
      *  "message": "No Doctor Found"
      * }
      */
