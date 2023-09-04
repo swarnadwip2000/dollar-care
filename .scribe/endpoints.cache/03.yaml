@@ -114,28 +114,28 @@ endpoints:
         name: email
         description: 'The email of the Doctor.'
         required: true
-        example: slehner@example.com
+        example: hlind@example.org
         type: string
         custom: []
       gender:
         name: gender
         description: ''
         required: true
-        example: sunt
+        example: animi
         type: string
         custom: []
       age:
         name: age
         description: 'The age of the Doctor.'
         required: true
-        example: atque
+        example: quaerat
         type: date
         custom: []
       phone:
         name: phone
         description: 'The phone of the Doctor.'
         required: true
-        example: veritatis
+        example: vitae
         type: numeric
         custom: []
       specialization_id:
@@ -143,25 +143,25 @@ endpoints:
         description: 'The specialization_id of the Doctor.'
         required: true
         example:
-          - accusamus
+          - rerum
         type: 'string[]'
         custom: []
       license_number:
         name: license_number
         description: 'The license_number of the Doctor.'
         required: true
-        example: est
+        example: necessitatibus
         type: string
         custom: []
     cleanBodyParameters:
       name: qui
-      email: slehner@example.com
-      gender: sunt
-      age: atque
-      phone: veritatis
+      email: hlind@example.org
+      gender: animi
+      age: quaerat
+      phone: vitae
       specialization_id:
-        - accusamus
-      license_number: est
+        - rerum
+      license_number: necessitatibus
     fileParameters: []
     responses:
       -
@@ -262,51 +262,51 @@ endpoints:
         name: current_password
         description: 'The value and <code>new_password</code> must be different. The value and <code>confirm_password</code> must be different. Must be at least 8 characters.'
         required: true
-        example: fzxzhlcqpmrzwlhxryternbhfsgsbmyl
+        example: yheyvswujcsumykiayojioasyominfwfiowmvabgbjtxjmbvxuynbdtfqcpkpen
         type: string
         custom: []
       new_password:
         name: new_password
         description: 'The value and <code>current_password</code> must be different. The value and <code>confirm_password</code> must match. Must be at least 8 characters.'
         required: true
-        example: piajrbpvckheywgojxrbjavd
+        example: sumijfumdxxyeecem
         type: string
         custom: []
       confirm_password:
         name: confirm_password
         description: 'The value and <code>current_password</code> must be different. The value and <code>new_password</code> must match. Must be at least 8 characters.'
         required: true
-        example: nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii
+        example: tuxfenwhcgvofhxuumubtuwrlabvybxmffngggnrnaygflmsdokbypetccffjlk
         type: string
         custom: []
       old_password:
         name: old_password
         description: 'The old_password of the Doctor.'
         required: true
-        example: dolores
+        example: similique
         type: string
         custom: []
       password:
         name: password
         description: 'The password of the Doctor.'
         required: true
-        example: 'ioqH6\y(g\IOYb"'
+        example: "Ds-}'iWSC18["
         type: string
         custom: []
       password_confirmation:
         name: password_confirmation
         description: 'The password_confirmation of the Doctor.'
         required: true
-        example: ea
+        example: sed
         type: string
         custom: []
     cleanBodyParameters:
-      current_password: fzxzhlcqpmrzwlhxryternbhfsgsbmyl
-      new_password: piajrbpvckheywgojxrbjavd
-      confirm_password: nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii
-      old_password: dolores
-      password: 'ioqH6\y(g\IOYb"'
-      password_confirmation: ea
+      current_password: yheyvswujcsumykiayojioasyominfwfiowmvabgbjtxjmbvxuynbdtfqcpkpen
+      new_password: sumijfumdxxyeecem
+      confirm_password: tuxfenwhcgvofhxuumubtuwrlabvybxmffngggnrnaygflmsdokbypetccffjlk
+      old_password: similique
+      password: "Ds-}'iWSC18["
+      password_confirmation: sed
     fileParameters: []
     responses:
       -

@@ -10,6 +10,7 @@ use App\Models\Slot;
 use App\Transformers\DayTransformer;
 use App\Transformers\ManageClinicEditTransformer;
 use App\Transformers\ManageClinicTransformer;
+use App\Transformers\PresentSheduleTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -168,6 +169,18 @@ class ManageClinicController extends Controller
      * @bodyParam slot_end_time array required. Example: 10:00, 11:00
      * @bodyParam first_time_mode array required. Example: AM, PM
      * @bodyParam second_time_mode array required. Example: AM, PM
+     * 
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "message": "Clinic details added successfully"
+     * }
+     * 
+     *  @response 201{
+     * "status": false,
+     * "statusCode": 201,
+     * "error": "No clinic found"
+     * }
      */
 
     public function store(Request $request)
@@ -191,7 +204,7 @@ class ManageClinicController extends Controller
         }
 
         try {
-            
+
             $clinicDetail = new ClinicDetails();
             $clinicDetail->user_id = auth()->user()->id;
             $clinicDetail->clinic_name = $request->clinic_name;
@@ -253,6 +266,253 @@ class ManageClinicController extends Controller
                     'statusCode' => $this->successStatus,
                     'message' => 'Clinic list',
                     'data' => $clinics
+                ], $this->successStatus);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 201,
+                    'message' => 'No clinic found',
+                ], 201);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Update clinic details
+     * @authenticated
+     * @bodyParam id numeric required
+     * @bodyParam clinic_name string required
+     * @bodyParam clinic_address string required
+     * @bodyParam clinic_phone numeric required
+     * @bodyParam day_id array required
+     * @bodyParam latitute string required
+     * @bodyParam longitute string required
+     * @bodyParam slot_date array optional Example: 2021-09-01, 2021-09-02
+     * @bodyParam slot_start_time array optional Example: 10:00, 11:00
+     * @bodyParam slot_end_time array optional. Example: 10:00, 11:00
+     * @bodyParam first_time_mode array optional. Example: AM, PM
+     * @bodyParam second_time_mode array optional. Example: AM, PM
+     *  @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "message": "Clinic details updated successfully"
+     * }
+     * 
+     * @response 201{
+     * "status": false,
+     *  "statusCode": 201,
+     * "error": "No clinic found"
+     * }
+     */
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|numeric|exists:clinic_details,id',
+            'clinic_name' => 'required',
+            'clinic_address' => 'required',
+            'clinic_phone' => 'required|numeric|digits_between:10,12',
+            'day_id' => 'array|required',
+            'latitute' => 'required',
+            'longitute' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
+        try {
+
+            $clinicDetail = ClinicDetails::find($request->id);
+            $clinicDetail->user_id = auth()->user()->id;
+            $clinicDetail->clinic_name = $request->clinic_name;
+            $clinicDetail->clinic_address = $request->clinic_address;
+            $clinicDetail->clinic_phone = $request->clinic_phone;
+            $clinicDetail->longitute = $request->longitude;
+            $clinicDetail->latitute = $request->latitude;
+            $clinicDetail->save();
+
+            ClinicOpeningDay::where('clinic_details_id', $request->id)->delete();
+            foreach ($request->day_id as $day) {
+                $clinic_opening_days = new ClinicOpeningDay();
+                $clinic_opening_days->clinic_details_id = $clinicDetail->id;
+                $clinic_opening_days->day_id = $day;
+                $clinic_opening_days->save();
+            }
+
+
+            foreach ($request->slot_date as $key => $slot_date) {
+                if ($slot_date != null) {
+                    $slot = new Slot();
+                    $slot->clinic_detail_id = $clinicDetail->id;
+                    $slot->slot_date = $slot_date;
+                    $slot->slot_start_time = $request->slot_start_time[$key] . ':00 ' . $request->first_time_mode[$key];
+                    $slot->slot_end_time = $request->slot_end_time[$key] . ':00 ' . $request->second_time_mode[$key];
+                    $slot->save();
+                }
+            }
+
+            return response()->json([
+                'status' => true,
+                'statusCode' => $this->successStatus,
+                'message' => 'Clinic details updated successfully',
+            ], $this->successStatus);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Delete clinic details
+     * @authenticated
+     * @bodyParam id numeric required
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "message": "Clinic deleted successfully"
+     * }
+     *  @response 201{
+     * "status": false,
+     * "statusCode": 201,
+     * "error": "No clinic found"
+     * }
+     */
+
+    public function delete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|numeric|exists:clinic_details,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
+        try {
+            $clinic = ClinicDetails::find($request->id);
+            if ($clinic) {
+                $clinic->delete();
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => $this->successStatus,
+                    'message' => 'Clinic deleted successfully',
+                ], $this->successStatus);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 201,
+                    'message' => 'No clinic found',
+                ], 201);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+
+    }
+
+    /**
+     *  Present shedule date
+     * @authenticated
+     * @bodyParam id numeric required 
+     * @response 200{
+     * "status": true,
+     *  "statusCode": 200,
+     *  "message": "Clinic list",
+     *  "data": {
+     *      "data": [
+     *          {
+     *              "id": 51,
+     *              "slot_start_time": "2:00 PM",
+     *              "slot_end_time": "5:00 PM",
+     *              "slot_date": "2023-09-21"
+     *          },
+     *          {
+     *              "id": 50,
+     *              "slot_start_time": "1:00 PM",
+     *              "slot_end_time": "3:00 PM",
+     *              "slot_date": "2023-09-19"
+     *          },
+     *      ]
+     *  }
+     * }
+     * @response 201{
+     * "status": false,
+     * "statusCode": 201,
+     * "error": "No clinic found"
+     * }
+     */
+
+    public function presentSheduleDate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|numeric|exists:clinic_details,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
+        try {
+            $clinic = ClinicDetails::find($request->id);
+            if ($clinic) {
+                $data = Slot::where('clinic_detail_id', $request->id)->where('slot_date', '>=', date('Y-m-d'))->orderBy('slot_date', 'desc')->get();
+                $data = fractal($data, new PresentSheduleTransformer())->toArray();
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => $this->successStatus,
+                    'message' => 'Clinic list',
+                    'data' => $data
+                ], $this->successStatus);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 201,
+                    'message' => 'No clinic found',
+                ], 201);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Delete Present shedule date
+     * @authenticated
+     * @bodyParam id numeric required
+     * @response 200{
+     * "status": true,
+     *  "statusCode": 200,
+     * "message": "Slot deleted successfully",
+     * }
+     * }
+     * 
+     * @response 201{
+     * "status": false,
+     * "statusCode": 201,
+     * "error": "No clinic found"
+     * }
+     */
+
+    public function deletePresentSheduleDate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|numeric|exists:slots,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
+        try {
+            $clinic = Slot::find($request->id);
+            if ($clinic) {
+                $clinic->delete();
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => $this->successStatus,
+                    'message' => 'Slot deleted successfully',
                 ], $this->successStatus);
             } else {
                 return response()->json([

@@ -31,7 +31,7 @@
                     <div class="col-xl-9">
                         <div class="cl-dc-bx">
                             <div class="row justify-content-between">
-                                <div class="col-xl-3 col-md-3 col-12">
+                                <div class="col-xl-3 col-lg-3 col-md-12 col-12">
                                     <div class="find-doc-slide-img" id="{{ $doctor['id'] }}-status">
                                         @if ($doctor['profile_picture'])
                                             <img src="{{ Storage::url($doctor['profile_picture']) }}" alt="">
@@ -40,7 +40,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-md-3 col-13">
+                                <div class="col-xl-3 col-lg-3 col-md-12 col-12">
                                     <div class="find-doc-slide-text">
                                         <h3>Dr. {{ $doctor['name'] }}</h3>
                                         <h4>{{ User::getDoctorSpecializations($doctor['id']) }}</h4>
@@ -51,7 +51,7 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-md-3 col-12">
+                                <div class="col-xl-3 col-lg-3 col-md-12 col-12">
                                     <div class="pec-div">
                                         <span class="pec d-block"><i class="fa-solid fa-thumbs-up"></i>99%</span>
                                         <span class="exp d-block"><i class="fa-regular fa-period"></i>
@@ -59,7 +59,7 @@
                                             Exp</span>
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-md-3 col-12">
+                                <div class="col-xl-3 col-lg-3 col-md-12 col-12">
                                     <div class="find-doc-slide-text">
                                         <h5>{{ $doctor['location'] }}</h5>
                                     </div>
@@ -76,7 +76,34 @@
             <div class="slot-sec-wrap">
                 <div class="row justify-content-center">
                     <div class="col-xl-8">
-                        <div class="slot-div d-flex justify-content-center">
+                     <div class="slot-div">
+                        <div class="row">
+                          <div class="col-md-6">
+                             <div class="slot-div-wrap">
+                               @if ($clinics->count() > 0)
+                                 <a href="javascript:void(0);">
+                                    <div class="slot-1 slot-2 lft active-slot clinic-visit">
+                                        <h3>Clinic Visit Slots</h3>
+                                    </div>
+                                 </a>
+                              @endif
+                             </div>    
+                          </div> 
+                          <div class="col-md-6">
+                            <div class="slot-div-wrap">
+                              <a href="javascript:void(0);">
+                                <div class="slot-1 user-list chat" id="show-chat" data-id="{{ $doctor['id'] }}"
+                                    data-query="1">
+                                    {{-- add chat class when implemetation start --}}
+                                    <h3>Chat / Video Consultation</h3>
+                                </div>
+                              </a> 
+                            </div>    
+                           </div> 
+                          </div>
+                        </div>  
+
+                        <!-- <div class="slot-div d-flex justify-content-center">
                             @if ($clinics->count() > 0)
                                 <a href="javascript:void(0);">
                                     <div class="slot-1 slot-2 lft active-slot clinic-visit">
@@ -91,7 +118,7 @@
                                     <h3>Chat / Video Consultation</h3>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

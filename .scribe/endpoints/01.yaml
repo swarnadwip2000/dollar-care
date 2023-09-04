@@ -45,11 +45,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 401
+        status: 201
         content: |-
           {
           "status": false,
-           "statusCode": 401,
+           "statusCode": 201,
           "error": {
           "email": [
           "The email field is required."
@@ -117,7 +117,7 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 401
+        status: 201
         content: |-
           {
           "status": false,
@@ -193,11 +193,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 401
+        status: 201
         content: |-
           {
           "status": false,
-          "statusCode": 401,
+          "statusCode": 201,
           "error": {
           "password": [
           "The password field is required."

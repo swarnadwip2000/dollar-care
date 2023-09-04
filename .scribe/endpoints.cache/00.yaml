@@ -63,11 +63,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 401
+        status: 201
         content: |-
           {
           "status": false,
-          "statusCode": 401,
+          "statusCode": 201,
           "error": {
              "message": [
                 "The email field is required.",
@@ -79,11 +79,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 401
+        status: 201
         content: |-
           {
            "status": false,
-           "statusCode": 401,
+           "statusCode": 201,
            "error": "Email id & password was invalid!"
           }
         headers: []
@@ -162,14 +162,14 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: voluptate
+        example: quia
         type: string
         custom: []
       age:
         name: age
         description: ''
         required: true
-        example: doloremque
+        example: quidem
         type: string
         custom: []
       location:
@@ -186,8 +186,8 @@ endpoints:
       phone: '9876543210'
       password: '12345678'
       confirm_password: '12345678'
-      type: voluptate
-      age: doloremque
+      type: quia
+      age: quidem
       location: 'John Doe'
     fileParameters: []
     responses:

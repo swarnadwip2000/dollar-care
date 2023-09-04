@@ -48,11 +48,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 404
+        status: 201
         content: |-
           {
           "status": false,
-          "statusCode": 404,
+          "statusCode": 201,
           "message": "No Symptoms Found"
           }
         headers: []
@@ -111,11 +111,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 404
+        status: 201
         content: |-
           {
           "status": false,
-           "statusCode": 404,
+           "statusCode": 201,
            "message": "No Specialization Found"
           }
         headers: []
@@ -182,11 +182,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 404
+        status: 201
         content: |-
           {
           "status": false,
-           "statusCode": 404,
+           "statusCode": 201,
            "message": "No Specialization Found"
           }
         headers: []
@@ -253,11 +253,11 @@ endpoints:
         description: ''
         custom: []
       -
-        status: 404
+        status: 201
         content: |-
           {
           "status": false,
-           "statusCode": 404,
+           "statusCode": 201,
            "message": "No Doctor Found"
           }
         headers: []
@@ -365,19 +365,19 @@ endpoints:
         name: latitude
         description: ''
         required: true
-        example: modi
+        example: vel
         type: string
         custom: []
       longitude:
         name: longitude
         description: ''
         required: true
-        example: assumenda
+        example: facere
         type: string
         custom: []
     cleanBodyParameters:
-      latitude: modi
-      longitude: assumenda
+      latitude: vel
+      longitude: facere
     fileParameters: []
     responses:
       -

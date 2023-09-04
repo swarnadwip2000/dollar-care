@@ -43,7 +43,7 @@
                 </div>
                 <form action="javascript:void(0);" id="chat-form">
                     <input type="hidden" class="reciver_id" value="{{ $doctor['id'] }}">
-                    <div class="type-sec d-flex justify-content-center align-items-center">
+                    <div class="type-sec d-flex justify-content-between align-items-center">
                         <div class="type-div">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="user-chat" value=""

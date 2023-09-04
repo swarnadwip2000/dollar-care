@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Dollar CARE",
-        "_postman_id": "321ab57a-80f2-4a77-8ca3-4f19e49125e5",
+        "_postman_id": "c1529748-1532-4cc7-8412-13d0a17dc013",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -57,14 +57,14 @@
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n   \"message\": [\n      \"The email field is required.\",\n     \"The password field is required.\"\n  ]\n}\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": {\n   \"message\": [\n      \"The email field is required.\",\n     \"The password field is required.\"\n  ]\n}\n}",
                             "name": ""
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n \"status\": false,\n \"statusCode\": 401,\n \"error\": \"Email id & password was invalid!\"\n}",
+                            "code": 201,
+                            "body": "{\n \"status\": false,\n \"statusCode\": 201,\n \"error\": \"Email id & password was invalid!\"\n}",
                             "name": ""
                         }
                     ]
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"voluptate\",\"age\":\"doloremque\",\"location\":\"John Doe\"}"
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"quia\",\"age\":\"quidem\",\"location\":\"John Doe\"}"
                         },
                         "description": "",
                         "auth": {
@@ -109,6 +109,88 @@
                             "header": [],
                             "code": 401,
                             "body": "{\n \"status\": false,\n\"statusCode\": 401,\n\"error\": \"Email id & password was invalid!\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Doctor Booking History",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get Booking History",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/booking-history\/list-with-filter",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/booking-history\/list-with-filter"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"date\":\"2021-09-11\",\"clinic_id\":[1,2],\"status\":[\"Pending\",\"Done\",\"Cancelled\"]}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n   \"data\": {\n       \"appointments\": {\n           \"data\": [\n               {\n                   \"id\": 11,\n                   \"patient_name\": \"John Doe\",\n                   \"patient_profile_picture\": \"patient\/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg\",\n                   \"appointment_date\": \"2023-09-11\",\n                   \"appointment_time\": \"01:00 PM\",\n                   \"clinic_name\": \"ORM Medicle\",\n                   \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n                   \"duration\": \"30 min\",\n                   \"appointment_status\": \"Done\"\n               }\n           ]\n       },\n       \"clinics\": {\n           \"data\": [\n               {\n                   \"id\": 4,\n                   \"clinic_name\": \"The Healing Clinic\"\n               },\n               {\n                   \"id\": 8,\n                   \"clinic_name\": \"ORM Medicle\"\n               }\n           ]\n       }\n   }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Doctor Notification",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get Notification",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/notifications",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/notifications"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"success\": true,\n\"data\": [\n{\n\"id\": 1,\n\"send_to\": \"doctor\",\n\"message\": \"Your appointment is booked with patient name: test patient\",\n\"created_at\": \"2021-09-28T10:20:00.000000Z\",\n\"updated_at\": \"2021-09-28T10:20:00.000000Z\"\n},\n{\n\"id\": 2,\n\"send_to\": \"doctor\",\n\"message\": \"Your appointment is booked with patient name: test patient\",\n\"created_at\": \"2021-09-28T10:20:00.000000Z\",\n \"updated_at\": \"2021-09-28T10:20:00.000000Z\"\n}\n]\n}",
                             "name": ""
                         }
                     ]
@@ -173,7 +255,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"qui\",\"email\":\"slehner@example.com\",\"gender\":\"sunt\",\"age\":\"atque\",\"phone\":\"veritatis\",\"specialization_id\":[\"accusamus\"],\"license_number\":\"est\"}"
+                            "raw": "{\"name\":\"qui\",\"email\":\"hlind@example.org\",\"gender\":\"animi\",\"age\":\"quaerat\",\"phone\":\"vitae\",\"specialization_id\":[\"rerum\"],\"license_number\":\"necessitatibus\"}"
                         },
                         "description": ""
                     },
@@ -220,7 +302,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_password\":\"fzxzhlcqpmrzwlhxryternbhfsgsbmyl\",\"new_password\":\"piajrbpvckheywgojxrbjavd\",\"confirm_password\":\"nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii\",\"old_password\":\"dolores\",\"password\":\"ioqH6\\\\y(g\\\\IOYb\\\"\",\"password_confirmation\":\"ea\"}"
+                            "raw": "{\"current_password\":\"yheyvswujcsumykiayojioasyominfwfiowmvabgbjtxjmbvxuynbdtfqcpkpen\",\"new_password\":\"sumijfumdxxyeecem\",\"confirm_password\":\"tuxfenwhcgvofhxuumubtuwrlabvybxmffngggnrnaygflmsdokbypetccffjlk\",\"old_password\":\"similique\",\"password\":\"Ds-}'iWSC18[\",\"password_confirmation\":\"sed\"}"
                         },
                         "description": ""
                     },
@@ -289,6 +371,113 @@
             ]
         },
         {
+            "name": "Doctor Settings",
+            "description": "",
+            "item": [
+                {
+                    "name": "Help and Support",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/help-and-support",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/help-and-support"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"subject\":\"facere\",\"message\":\"neque\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Privacy Policy",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/privacy-policy",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/privacy-policy"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n\"data\": {\n    \"id\": 1,\n    \"content\": \"Why do we use it?\\r\\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\",\n    \"created_at\": \"2023-06-28T09:40:56.000000Z\",\n    \"updated_at\": \"2023-06-28T09:45:32.000000Z\"\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "About Us",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/about-us",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/about-us"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"data\": {\n    \"id\": 1,\n    \"content\": \"Lorem ipsum dolor sit amet consectetur. Pharetra netus cursus nec facilisis. Quis ultrices morbi maecenas lobortis. Mattis sed nisi amet nisi elit nunc nibh in. Ac convallis fringilla tortor morbi vel massa et et. Elementum pellentesque quis nunc elit. Urna pellentesque venenatis egestas ac neque a. Consequat mi at quis sed tincidunt leo sed sit. Pretium mauris imperdiet ornare nunc ut enim. Erat viverra urna sed quis et varius lectus ipsum mollis. Ullamcorper pellentesque lectus sed tellus fames dolor turpis nibh pharetra. Aliquam tortor nascetur nec neque porttitor molestie quis non arcu. Pretium lectus eu vitae diam sapien pellentesque nisl. Euismod auctor arcu cras facilisi tortor facilisis consectetur.\\r\\n\\r\\n        Amet ultrices augue lorem iaculis tortor massa velit. Phasellus sapien non ac tortor convallis fringilla. Sapien massa nunc aliquam platea pulvinar morbi dictum. Quis eget at magna sem mi dui elit. Nisl leo facilisis faucibus non posuere enim senectus. Lorem volutpat ante mollis pulvinar nibh tristique eu. Neque malesuada enim tellus tristique sem senectus ornare pharetra. Ipsum est a bibendum pretium viverra cras turpis massa.\\r\\n\\r\\n        Neque id tristique auctor accumsan dolor lorem praesent volutpat cras. Id auctor in tempor egestas ornare faucibus. Viverra nisi quis lacinia lorem sed tellus mattis aliquet. Sed nam nulla sit eu feugiat nisi elementum urna laoreet. Nulla sit interdum amet nisl et. Fames senectus cursus ullamcorper varius feugiat.\",\n    \"created_at\": \"2023-06-28T09:26:19.000000Z\",\n    \"updated_at\": \"2023-06-28T09:35:58.000000Z\"\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Home Page Api's",
             "description": "",
             "item": [
@@ -327,8 +516,8 @@
                         },
                         {
                             "header": [],
-                            "code": 404,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 404,\n\"message\": \"No Symptoms Found\"\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"message\": \"No Symptoms Found\"\n}",
                             "name": ""
                         }
                     ]
@@ -368,8 +557,8 @@
                         },
                         {
                             "header": [],
-                            "code": 404,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 404,\n \"message\": \"No Specialization Found\"\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n \"message\": \"No Specialization Found\"\n}",
                             "name": ""
                         }
                     ]
@@ -409,8 +598,8 @@
                         },
                         {
                             "header": [],
-                            "code": 404,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 404,\n \"message\": \"No Specialization Found\"\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n \"message\": \"No Specialization Found\"\n}",
                             "name": ""
                         }
                     ]
@@ -450,8 +639,8 @@
                         },
                         {
                             "header": [],
-                            "code": 404,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 404,\n \"message\": \"No Doctor Found\"\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n \"message\": \"No Doctor Found\"\n}",
                             "name": ""
                         }
                     ]
@@ -519,7 +708,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"latitude\":\"modi\",\"longitude\":\"assumenda\"}"
+                            "raw": "{\"latitude\":\"vel\",\"longitude\":\"facere\"}"
                         },
                         "description": "",
                         "auth": {
@@ -566,6 +755,303 @@
                             "header": [],
                             "code": 200,
                             "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": [\n   {\n      \"id\": 1,\n      \"user_id\": 14,\n      \"doctor_id\": 13,\n      \"clinic_id\": 1,\n      \"appointment_date\": \"2021-06-06\",\n      \"appointment_time\": \"10:00 AM\",\n      \"appointment_status\": 1,\n      \"created_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"updated_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"deleted_at\": null,\n      \"doctor\": {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@mailinator.com\"\n     },\n     }]\n   }",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Manage Clinic",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get Clinic List",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n*\"status\": true,\n   \"statusCode\": 200,\n   \"message\": \"Clinic list\",\n   \"data\": {\n       \"data\": [\n           {\n               \"id\": 4,\n               \"clinic_name\": \"The Healing Clinic\",\n               \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n               \"clinic_phone\": \"7485968695\",\n               \"clinic_opening_days\": [\n                   {\n                       \"id\": 38,\n                       \"day\": \"Monday\"\n                   },\n                   {\n                       \"id\": 39,\n                       \"day\": \"Tuesday\"\n                   },\n                   {\n                       \"id\": 40,\n                       \"day\": \"Wednesday\"\n                   },\n                   {\n                       \"id\": 41,\n                       \"day\": \"Thursday\"\n                   }\n               ]\n           }\n       ]\n   }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"message\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Clinic",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic list\",\n\"data\": {\n   \"data\": [\n       {\n           \"id\": 1,\n           \"day\": \"Sunday\"\n       },\n       {\n           \"id\": 2,\n           \"day\": \"Monday\"\n       },\n       {\n           \"id\": 3,\n           \"day\": \"Tuesday\"\n       },\n       {\n           \"id\": 4,\n           \"day\": \"Wednesday\"\n       },\n       {\n           \"id\": 5,\n           \"day\": \"Thursday\"\n       },\n       {\n           \"id\": 6,\n           \"day\": \"Friday\"\n       },\n       {\n           \"id\": 7,\n           \"day\": \"Saturday\"\n       }\n   ]\n}\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store clinic details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/store",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/store"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"clinic_name\":\"facilis\",\"clinic_address\":\"qui\",\"clinic_phone\":\"dolorum\",\"day_id\":[\"est\"],\"latitute\":\"praesentium\",\"longitute\":\"iusto\",\"slot_date\":[\"numquam\"],\"slot_start_time\":[\"corrupti\"],\"slot_end_time\":[\"dolore\"],\"first_time_mode\":[\"architecto\"],\"second_time_mode\":[\"consequatur\"]}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic details added successfully\"\n}\n\n @response 201{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Edit clinic details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/edit",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/edit"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":7036541.9}"
+                        },
+                        "description": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update clinic details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"dolorem\",\"clinic_name\":\"rerum\",\"clinic_address\":\"sit\",\"clinic_phone\":\"tempora\",\"day_id\":[\"voluptates\"],\"latitute\":\"ut\",\"longitute\":\"laudantium\",\"slot_date\":[\"saepe\"],\"slot_start_time\":[\"fugit\"],\"slot_end_time\":[\"quia\"],\"first_time_mode\":[\"nobis\"],\"second_time_mode\":[\"neque\"]}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete clinic details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/delete"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"omnis\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic deleted successfully\"\n}\n @response 201{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Present shedule date",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/presentSheduleDate",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/presentSheduleDate"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"enim\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"message\": \"Clinic list\",\n \"data\": {\n     \"data\": [\n         {\n             \"id\": 51,\n             \"slot_start_time\": \"2:00 PM\",\n             \"slot_end_time\": \"5:00 PM\",\n             \"slot_date\": \"2023-09-21\"\n         },\n         {\n             \"id\": 50,\n             \"slot_start_time\": \"1:00 PM\",\n             \"slot_end_time\": \"3:00 PM\",\n             \"slot_date\": \"2023-09-19\"\n         },\n     ]\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Present shedule date",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/doctor\/manage-clinic\/deletePresentSheduleDate",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor\/manage-clinic\/deletePresentSheduleDate"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"quas\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n\"message\": \"Slot deleted successfully\",\n}\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
                             "name": ""
                         }
                     ]
@@ -633,7 +1119,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"clinic_id\":\"consequatur\",\"appointment_date\":\"fuga\",\"appointment_time\":\"voluptas\"}"
+                            "raw": "{\"clinic_id\":\"mollitia\",\"appointment_date\":\"quia\",\"appointment_time\":\"debitis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -763,8 +1249,8 @@
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 401,\n\"error\": {\n\"email\": [\n\"The email field is required.\"\n]\n }\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n\"error\": {\n\"email\": [\n\"The email field is required.\"\n]\n }\n}",
                             "name": ""
                         }
                     ]
@@ -807,7 +1293,7 @@
                         },
                         {
                             "header": [],
-                            "code": 401,
+                            "code": 201,
                             "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"OTP is expired\"\n}",
                             "name": ""
                         }
@@ -851,8 +1337,8 @@
                         },
                         {
                             "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"password\": [\n\"The password field is required.\"\n],\n\"confirm_password\": [\n\"The confirm password field is required.\"\n],\n\"email\": [\n\"The email field is required.\"\n]\n}\n}",
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": {\n\"password\": [\n\"The password field is required.\"\n],\n\"confirm_password\": [\n\"The confirm password field is required.\"\n],\n\"email\": [\n\"The email field is required.\"\n]\n}\n}",
                             "name": ""
                         }
                     ]

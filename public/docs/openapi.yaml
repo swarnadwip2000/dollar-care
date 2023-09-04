@@ -21,7 +21,7 @@ paths:
               schema:
                 type: string
                 example: "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"Login successfully\",\n     \"data\": {\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM\",\n    \"user\": {\n        \"id\": 3,\n        \"name\": \"John Doe\",\n        \"email\": \"john@yopmail.com\",\n        \"status\": 1\n    }\n}"
-        401:
+        201:
           description: ''
           content:
             application/json:
@@ -29,7 +29,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 401
+                  statusCode: 201
                   error: 'Email id & password was invalid!'
                 properties:
                   status:
@@ -37,7 +37,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 401
+                    example: 201
                   error:
                     type: string
                     example: 'Email id & password was invalid!'
@@ -185,11 +185,11 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: voluptate
+                  example: quia
                 age:
                   type: string
                   description: ''
-                  example: doloremque
+                  example: quidem
                 location:
                   type: string
                   description: 'The name of the user.'
@@ -202,6 +202,214 @@ paths:
                 - confirm_password
                 - type
                 - age
+      security: []
+  /api/v1/doctor/booking-history/list-with-filter:
+    post:
+      summary: 'Get Booking History'
+      operationId: getBookingHistory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  data:
+                    appointments:
+                      data:
+                        -
+                          id: 11
+                          patient_name: 'John Doe'
+                          patient_profile_picture: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
+                          appointment_date: '2023-09-11'
+                          appointment_time: '01:00 PM'
+                          clinic_name: 'ORM Medicle'
+                          clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
+                          duration: '30 min'
+                          appointment_status: Done
+                    clinics:
+                      data:
+                        -
+                          id: 4
+                          clinic_name: 'The Healing Clinic'
+                        -
+                          id: 8
+                          clinic_name: 'ORM Medicle'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      appointments:
+                        type: object
+                        properties:
+                          data:
+                            type: array
+                            example:
+                              -
+                                id: 11
+                                patient_name: 'John Doe'
+                                patient_profile_picture: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
+                                appointment_date: '2023-09-11'
+                                appointment_time: '01:00 PM'
+                                clinic_name: 'ORM Medicle'
+                                clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
+                                duration: '30 min'
+                                appointment_status: Done
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 11
+                                patient_name:
+                                  type: string
+                                  example: 'John Doe'
+                                patient_profile_picture:
+                                  type: string
+                                  example: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
+                                appointment_date:
+                                  type: string
+                                  example: '2023-09-11'
+                                appointment_time:
+                                  type: string
+                                  example: '01:00 PM'
+                                clinic_name:
+                                  type: string
+                                  example: 'ORM Medicle'
+                                clinic_address:
+                                  type: string
+                                  example: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
+                                duration:
+                                  type: string
+                                  example: '30 min'
+                                appointment_status:
+                                  type: string
+                                  example: Done
+                      clinics:
+                        type: object
+                        properties:
+                          data:
+                            type: array
+                            example:
+                              -
+                                id: 4
+                                clinic_name: 'The Healing Clinic'
+                              -
+                                id: 8
+                                clinic_name: 'ORM Medicle'
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 4
+                                clinic_name:
+                                  type: string
+                                  example: 'The Healing Clinic'
+      tags:
+        - 'Doctor Booking History'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: 'optional Date of appointment.'
+                  example: '2021-09-11'
+                clinic_id:
+                  type: array
+                  description: 'optional Clinic id.'
+                  example:
+                    - 1
+                    - 2
+                  items:
+                    type: string
+                status:
+                  type: array
+                  description: 'optional Appointment status.'
+                  example:
+                    - Pending
+                    - Done
+                    - Cancelled
+                  items:
+                    type: string
+  /api/v1/doctor/notifications:
+    post:
+      summary: 'Get Notification'
+      operationId: getNotification
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      send_to: doctor
+                      message: 'Your appointment is booked with patient name: test patient'
+                      created_at: '2021-09-28T10:20:00.000000Z'
+                      updated_at: '2021-09-28T10:20:00.000000Z'
+                    -
+                      id: 2
+                      send_to: doctor
+                      message: 'Your appointment is booked with patient name: test patient'
+                      created_at: '2021-09-28T10:20:00.000000Z'
+                      updated_at: '2021-09-28T10:20:00.000000Z'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        send_to: doctor
+                        message: 'Your appointment is booked with patient name: test patient'
+                        created_at: '2021-09-28T10:20:00.000000Z'
+                        updated_at: '2021-09-28T10:20:00.000000Z'
+                      -
+                        id: 2
+                        send_to: doctor
+                        message: 'Your appointment is booked with patient name: test patient'
+                        created_at: '2021-09-28T10:20:00.000000Z'
+                        updated_at: '2021-09-28T10:20:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        send_to:
+                          type: string
+                          example: doctor
+                        message:
+                          type: string
+                          example: 'Your appointment is booked with patient name: test patient'
+                        created_at:
+                          type: string
+                          example: '2021-09-28T10:20:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2021-09-28T10:20:00.000000Z'
+      tags:
+        - 'Doctor Notification'
       security: []
   /api/v1/doctor/getProfile:
     post:
@@ -261,30 +469,30 @@ paths:
                 email:
                   type: string
                   description: 'The email of the Doctor.'
-                  example: slehner@example.com
+                  example: hlind@example.org
                 gender:
                   type: string
                   description: ''
-                  example: sunt
+                  example: animi
                 age:
                   type: date
                   description: 'The age of the Doctor.'
-                  example: atque
+                  example: quaerat
                 phone:
                   type: numeric
                   description: 'The phone of the Doctor.'
-                  example: veritatis
+                  example: vitae
                 specialization_id:
                   type: array
                   description: 'The specialization_id of the Doctor.'
                   example:
-                    - accusamus
+                    - rerum
                   items:
                     type: string
                 license_number:
                   type: string
                   description: 'The license_number of the Doctor.'
-                  example: est
+                  example: necessitatibus
               required:
                 - name
                 - email
@@ -331,27 +539,27 @@ paths:
                 current_password:
                   type: string
                   description: 'The value and <code>new_password</code> must be different. The value and <code>confirm_password</code> must be different. Must be at least 8 characters.'
-                  example: fzxzhlcqpmrzwlhxryternbhfsgsbmyl
+                  example: yheyvswujcsumykiayojioasyominfwfiowmvabgbjtxjmbvxuynbdtfqcpkpen
                 new_password:
                   type: string
                   description: 'The value and <code>current_password</code> must be different. The value and <code>confirm_password</code> must match. Must be at least 8 characters.'
-                  example: piajrbpvckheywgojxrbjavd
+                  example: sumijfumdxxyeecem
                 confirm_password:
                   type: string
                   description: 'The value and <code>current_password</code> must be different. The value and <code>new_password</code> must match. Must be at least 8 characters.'
-                  example: nrexplyxhlxcrggumvqpcatknyoynvyfmxmosdtdhtckgfxanjuwutdii
+                  example: tuxfenwhcgvofhxuumubtuwrlabvybxmffngggnrnaygflmsdokbypetccffjlk
                 old_password:
                   type: string
                   description: 'The old_password of the Doctor.'
-                  example: dolores
+                  example: similique
                 password:
                   type: string
                   description: 'The password of the Doctor.'
-                  example: 'ioqH6\y(g\IOYb"'
+                  example: "Ds-}'iWSC18["
                 password_confirmation:
                   type: string
                   description: 'The password_confirmation of the Doctor.'
-                  example: ea
+                  example: sed
               required:
                 - current_password
                 - new_password
@@ -400,6 +608,118 @@ paths:
                   description: 'The profile_picture of the Doctor.'
               required:
                 - profile_picture
+  /api/v1/doctor/help-and-support:
+    post:
+      summary: 'Help and Support'
+      operationId: helpAndSupport
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Doctor Settings'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                  description: ''
+                  example: facere
+                message:
+                  type: string
+                  description: "@response 200{\n\"status\": true,\n\"data\": {\n\"id\": 1,\n\"user_id\": 1,\n\"name\": \"test doctor\",\n\"email\": \"test@yopmail.com\",\n\"phone\": \"1234567890\",\n\"subject\": \"test\",\n\"message\": \"test\",\n\"created_at\": \"2021-09-28T10:20:00.000000Z\",\n\"updated_at\": \"2021-09-28T10:20:00.000000Z\"\n}\n}"
+                  example: neque
+              required:
+                - subject
+                - message
+      security: []
+  /api/v1/doctor/privacy-policy:
+    post:
+      summary: 'Privacy Policy'
+      operationId: privacyPolicy
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  data:
+                    id: 1
+                    content: "Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                    created_at: '2023-06-28T09:40:56.000000Z'
+                    updated_at: '2023-06-28T09:45:32.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      content:
+                        type: string
+                        example: "Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                      created_at:
+                        type: string
+                        example: '2023-06-28T09:40:56.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-06-28T09:45:32.000000Z'
+      tags:
+        - 'Doctor Settings'
+      security: []
+  /api/v1/doctor/about-us:
+    post:
+      summary: 'About Us'
+      operationId: aboutUs
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  data:
+                    id: 1
+                    content: "Lorem ipsum dolor sit amet consectetur. Pharetra netus cursus nec facilisis. Quis ultrices morbi maecenas lobortis. Mattis sed nisi amet nisi elit nunc nibh in. Ac convallis fringilla tortor morbi vel massa et et. Elementum pellentesque quis nunc elit. Urna pellentesque venenatis egestas ac neque a. Consequat mi at quis sed tincidunt leo sed sit. Pretium mauris imperdiet ornare nunc ut enim. Erat viverra urna sed quis et varius lectus ipsum mollis. Ullamcorper pellentesque lectus sed tellus fames dolor turpis nibh pharetra. Aliquam tortor nascetur nec neque porttitor molestie quis non arcu. Pretium lectus eu vitae diam sapien pellentesque nisl. Euismod auctor arcu cras facilisi tortor facilisis consectetur.\r\n\r\n        Amet ultrices augue lorem iaculis tortor massa velit. Phasellus sapien non ac tortor convallis fringilla. Sapien massa nunc aliquam platea pulvinar morbi dictum. Quis eget at magna sem mi dui elit. Nisl leo facilisis faucibus non posuere enim senectus. Lorem volutpat ante mollis pulvinar nibh tristique eu. Neque malesuada enim tellus tristique sem senectus ornare pharetra. Ipsum est a bibendum pretium viverra cras turpis massa.\r\n\r\n        Neque id tristique auctor accumsan dolor lorem praesent volutpat cras. Id auctor in tempor egestas ornare faucibus. Viverra nisi quis lacinia lorem sed tellus mattis aliquet. Sed nam nulla sit eu feugiat nisi elementum urna laoreet. Nulla sit interdum amet nisl et. Fames senectus cursus ullamcorper varius feugiat."
+                    created_at: '2023-06-28T09:26:19.000000Z'
+                    updated_at: '2023-06-28T09:35:58.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      content:
+                        type: string
+                        example: "Lorem ipsum dolor sit amet consectetur. Pharetra netus cursus nec facilisis. Quis ultrices morbi maecenas lobortis. Mattis sed nisi amet nisi elit nunc nibh in. Ac convallis fringilla tortor morbi vel massa et et. Elementum pellentesque quis nunc elit. Urna pellentesque venenatis egestas ac neque a. Consequat mi at quis sed tincidunt leo sed sit. Pretium mauris imperdiet ornare nunc ut enim. Erat viverra urna sed quis et varius lectus ipsum mollis. Ullamcorper pellentesque lectus sed tellus fames dolor turpis nibh pharetra. Aliquam tortor nascetur nec neque porttitor molestie quis non arcu. Pretium lectus eu vitae diam sapien pellentesque nisl. Euismod auctor arcu cras facilisi tortor facilisis consectetur.\r\n\r\n        Amet ultrices augue lorem iaculis tortor massa velit. Phasellus sapien non ac tortor convallis fringilla. Sapien massa nunc aliquam platea pulvinar morbi dictum. Quis eget at magna sem mi dui elit. Nisl leo facilisis faucibus non posuere enim senectus. Lorem volutpat ante mollis pulvinar nibh tristique eu. Neque malesuada enim tellus tristique sem senectus ornare pharetra. Ipsum est a bibendum pretium viverra cras turpis massa.\r\n\r\n        Neque id tristique auctor accumsan dolor lorem praesent volutpat cras. Id auctor in tempor egestas ornare faucibus. Viverra nisi quis lacinia lorem sed tellus mattis aliquet. Sed nam nulla sit eu feugiat nisi elementum urna laoreet. Nulla sit interdum amet nisl et. Fames senectus cursus ullamcorper varius feugiat."
+                      created_at:
+                        type: string
+                        example: '2023-06-28T09:26:19.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-06-28T09:35:58.000000Z'
+      tags:
+        - 'Doctor Settings'
+      security: []
   /api/v1/symptoms:
     post:
       summary: 'Symptoms Api'
@@ -472,7 +792,7 @@ paths:
                         updated_at:
                           type: string
                           example: '2023-06-06T07:13:51.000000Z'
-        404:
+        201:
           description: ''
           content:
             application/json:
@@ -480,7 +800,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 404
+                  statusCode: 201
                   message: 'No Symptoms Found'
                 properties:
                   status:
@@ -488,7 +808,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 404
+                    example: 201
                   message:
                     type: string
                     example: 'No Symptoms Found'
@@ -567,7 +887,7 @@ paths:
                         updated_at:
                           type: string
                           example: '2023-06-06T10:55:47.000000Z'
-        404:
+        201:
           description: ''
           content:
             application/json:
@@ -575,7 +895,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 404
+                  statusCode: 201
                   message: 'No Specialization Found'
                 properties:
                   status:
@@ -583,7 +903,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 404
+                    example: 201
                   message:
                     type: string
                     example: 'No Specialization Found'
@@ -702,7 +1022,7 @@ paths:
                         deleted_at:
                           type: string
                           example: null
-        404:
+        201:
           description: ''
           content:
             application/json:
@@ -710,7 +1030,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 404
+                  statusCode: 201
                   message: 'No Specialization Found'
                 properties:
                   status:
@@ -718,7 +1038,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 404
+                    example: 201
                   message:
                     type: string
                     example: 'No Specialization Found'
@@ -837,7 +1157,7 @@ paths:
                         deleted_at:
                           type: string
                           example: null
-        404:
+        201:
           description: ''
           content:
             application/json:
@@ -845,7 +1165,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 404
+                  statusCode: 201
                   message: 'No Doctor Found'
                 properties:
                   status:
@@ -853,7 +1173,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 404
+                    example: 201
                   message:
                     type: string
                     example: 'No Doctor Found'
@@ -1084,11 +1404,11 @@ paths:
                 latitude:
                   type: string
                   description: ''
-                  example: modi
+                  example: vel
                 longitude:
                   type: string
                   description: ''
-                  example: assumenda
+                  example: facere
               required:
                 - latitude
                 - longitude
@@ -1110,6 +1430,503 @@ paths:
       tags:
         - "Home Page Api's"
       security: []
+  /api/v1/doctor/manage-clinic/list:
+    post:
+      summary: 'Get Clinic List'
+      operationId: getClinicList
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n*\"status\": true,\n   \"statusCode\": 200,\n   \"message\": \"Clinic list\",\n   \"data\": {\n       \"data\": [\n           {\n               \"id\": 4,\n               \"clinic_name\": \"The Healing Clinic\",\n               \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n               \"clinic_phone\": \"7485968695\",\n               \"clinic_opening_days\": [\n                   {\n                       \"id\": 38,\n                       \"day\": \"Monday\"\n                   },\n                   {\n                       \"id\": 39,\n                       \"day\": \"Tuesday\"\n                   },\n                   {\n                       \"id\": 40,\n                       \"day\": \"Wednesday\"\n                   },\n                   {\n                       \"id\": 41,\n                       \"day\": \"Thursday\"\n                   }\n               ]\n           }\n       ]\n   }\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  message: 'No clinic found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: 'No clinic found'
+      tags:
+        - 'Manage Clinic'
+  /api/v1/doctor/manage-clinic/create:
+    post:
+      summary: 'Create Clinic'
+      operationId: createClinic
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Clinic list'
+                  data:
+                    data:
+                      -
+                        id: 1
+                        day: Sunday
+                      -
+                        id: 2
+                        day: Monday
+                      -
+                        id: 3
+                        day: Tuesday
+                      -
+                        id: 4
+                        day: Wednesday
+                      -
+                        id: 5
+                        day: Thursday
+                      -
+                        id: 6
+                        day: Friday
+                      -
+                        id: 7
+                        day: Saturday
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Clinic list'
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        example:
+                          -
+                            id: 1
+                            day: Sunday
+                          -
+                            id: 2
+                            day: Monday
+                          -
+                            id: 3
+                            day: Tuesday
+                          -
+                            id: 4
+                            day: Wednesday
+                          -
+                            id: 5
+                            day: Thursday
+                          -
+                            id: 6
+                            day: Friday
+                          -
+                            id: 7
+                            day: Saturday
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            day:
+                              type: string
+                              example: Sunday
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error: 'No clinic found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: string
+                    example: 'No clinic found'
+      tags:
+        - 'Manage Clinic'
+  /api/v1/doctor/manage-clinic/store:
+    post:
+      summary: 'Store clinic details'
+      operationId: storeClinicDetails
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic details added successfully\"\n}\n\n @response 201{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}"
+      tags:
+        - 'Manage Clinic'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clinic_name:
+                  type: string
+                  description: ''
+                  example: facilis
+                clinic_address:
+                  type: string
+                  description: ''
+                  example: qui
+                clinic_phone:
+                  type: numeric
+                  description: ''
+                  example: dolorum
+                day_id:
+                  type: array
+                  description: ''
+                  example:
+                    - est
+                  items:
+                    type: string
+                latitute:
+                  type: string
+                  description: ''
+                  example: praesentium
+                longitute:
+                  type: string
+                  description: ''
+                  example: iusto
+                slot_date:
+                  type: array
+                  description: ''
+                  example:
+                    - numquam
+                  items:
+                    type: string
+                slot_start_time:
+                  type: array
+                  description: ''
+                  example:
+                    - corrupti
+                  items:
+                    type: string
+                slot_end_time:
+                  type: array
+                  description: required.
+                  example:
+                    - dolore
+                  items:
+                    type: string
+                first_time_mode:
+                  type: array
+                  description: required.
+                  example:
+                    - architecto
+                  items:
+                    type: string
+                second_time_mode:
+                  type: array
+                  description: required.
+                  example:
+                    - consequatur
+                  items:
+                    type: string
+              required:
+                - clinic_name
+                - clinic_address
+                - clinic_phone
+                - day_id
+                - latitute
+                - longitute
+                - slot_date
+                - slot_start_time
+  /api/v1/doctor/manage-clinic/edit:
+    post:
+      summary: 'Edit clinic details'
+      operationId: editClinicDetails
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Manage Clinic'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  description: ''
+                  example: 7036541.9
+              required:
+                - id
+  /api/v1/doctor/manage-clinic/update:
+    post:
+      summary: 'Update clinic details'
+      operationId: updateClinicDetails
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error: 'No clinic found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: string
+                    example: 'No clinic found'
+      tags:
+        - 'Manage Clinic'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: numeric
+                  description: ''
+                  example: dolorem
+                clinic_name:
+                  type: string
+                  description: ''
+                  example: rerum
+                clinic_address:
+                  type: string
+                  description: ''
+                  example: sit
+                clinic_phone:
+                  type: numeric
+                  description: ''
+                  example: tempora
+                day_id:
+                  type: array
+                  description: ''
+                  example:
+                    - voluptates
+                  items:
+                    type: string
+                latitute:
+                  type: string
+                  description: ''
+                  example: ut
+                longitute:
+                  type: string
+                  description: ''
+                  example: laudantium
+                slot_date:
+                  type: array
+                  description: optional
+                  example:
+                    - saepe
+                  items:
+                    type: string
+                slot_start_time:
+                  type: array
+                  description: optional
+                  example:
+                    - fugit
+                  items:
+                    type: string
+                slot_end_time:
+                  type: array
+                  description: optional.
+                  example:
+                    - quia
+                  items:
+                    type: string
+                first_time_mode:
+                  type: array
+                  description: optional.
+                  example:
+                    - nobis
+                  items:
+                    type: string
+                second_time_mode:
+                  type: array
+                  description: optional.
+                  example:
+                    - neque
+                  items:
+                    type: string
+              required:
+                - id
+                - clinic_name
+                - clinic_address
+                - clinic_phone
+                - day_id
+                - latitute
+                - longitute
+  /api/v1/doctor/manage-clinic/delete:
+    post:
+      summary: 'Delete clinic details'
+      operationId: deleteClinicDetails
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic deleted successfully\"\n}\n @response 201{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}"
+      tags:
+        - 'Manage Clinic'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: numeric
+                  description: ''
+                  example: omnis
+              required:
+                - id
+  /api/v1/doctor/manage-clinic/presentSheduleDate:
+    post:
+      summary: 'Present shedule date'
+      operationId: presentSheduleDate
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n \"statusCode\": 200,\n \"message\": \"Clinic list\",\n \"data\": {\n     \"data\": [\n         {\n             \"id\": 51,\n             \"slot_start_time\": \"2:00 PM\",\n             \"slot_end_time\": \"5:00 PM\",\n             \"slot_date\": \"2023-09-21\"\n         },\n         {\n             \"id\": 50,\n             \"slot_start_time\": \"1:00 PM\",\n             \"slot_end_time\": \"3:00 PM\",\n             \"slot_date\": \"2023-09-19\"\n         },\n     ]\n }\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error: 'No clinic found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: string
+                    example: 'No clinic found'
+      tags:
+        - 'Manage Clinic'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: numeric
+                  description: ''
+                  example: enim
+              required:
+                - id
+  /api/v1/doctor/manage-clinic/deletePresentSheduleDate:
+    post:
+      summary: 'Delete Present shedule date'
+      operationId: deletePresentSheduleDate
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n \"statusCode\": 200,\n\"message\": \"Slot deleted successfully\",\n}\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error: 'No clinic found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: string
+                    example: 'No clinic found'
+      tags:
+        - 'Manage Clinic'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: numeric
+                  description: ''
+                  example: quas
+              required:
+                - id
   /api/v1/booking-and-consultancy:
     post:
       summary: 'Booking and Consultancy'
@@ -1290,15 +2107,15 @@ paths:
                 clinic_id:
                   type: string
                   description: ''
-                  example: consequatur
+                  example: mollitia
                 appointment_date:
                   type: string
                   description: ''
-                  example: fuga
+                  example: quia
                 appointment_time:
                   type: string
                   description: ''
-                  example: voluptas
+                  example: debitis
               required:
                 - clinic_id
                 - appointment_date
@@ -1406,7 +2223,7 @@ paths:
                   message:
                     type: string
                     example: 'OTP has been sent to your email'
-        401:
+        201:
           description: ''
           content:
             application/json:
@@ -1414,7 +2231,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 401
+                  statusCode: 201
                   error:
                     email:
                       - 'The email field is required.'
@@ -1424,7 +2241,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 401
+                    example: 201
                   error:
                     type: object
                     properties:
@@ -1477,7 +2294,7 @@ paths:
                   message:
                     type: string
                     example: 'OTP verified successfully'
-        401:
+        201:
           description: ''
           content:
             application/json:
@@ -1545,7 +2362,7 @@ paths:
                   message:
                     type: string
                     example: 'Password has been reset successfully'
-        401:
+        201:
           description: ''
           content:
             application/json:
@@ -1553,7 +2370,7 @@ paths:
                 type: object
                 example:
                   status: false
-                  statusCode: 401
+                  statusCode: 201
                   error:
                     password:
                       - 'The password field is required.'
@@ -1567,7 +2384,7 @@ paths:
                     example: false
                   statusCode:
                     type: integer
-                    example: 401
+                    example: 201
                   error:
                     type: object
                     properties:
@@ -1620,10 +2437,22 @@ tags:
     name: Authentication
     description: ''
   -
+    name: 'Doctor Booking History'
+    description: ''
+  -
+    name: 'Doctor Notification'
+    description: ''
+  -
     name: 'Doctor Profile'
     description: ''
   -
+    name: 'Doctor Settings'
+    description: ''
+  -
     name: "Home Page Api's"
+    description: ''
+  -
+    name: 'Manage Clinic'
     description: ''
   -
     name: 'Patient Booking'

@@ -235,6 +235,9 @@
     .confirm-btn a h4 span {
         font-size: 12px;
     }
+    .inr-bnr-text h1 {
+        font-size: 65px;
+    }
 }
 
 @media (max-width: 1280px) {
@@ -257,7 +260,7 @@
     }
 
     #cssmenu > ul > li > a {
-        padding: 15px 12px;
+        padding: 15px 5px;
         font-size: 12px;
     }
 
@@ -266,6 +269,12 @@
     }
     .booking-history-table .table-responsive .table tbody tr td {
         width: 21%;
+    }
+    .logo a {
+        width: 95px;
+    }
+    .mn-btn a {
+        padding: 15px !important;
     }
 }
 
@@ -473,7 +482,7 @@
     }
 
     .inr-bnr-text h1 {
-        font-size: 65px;
+        font-size: 40px;
     }
 
     .serv-inr {
@@ -573,6 +582,9 @@
     }
     .profile-text {
         padding: 0px 5px;
+    }
+    .logo a {
+        width: 75px;
     }
 }
 
@@ -746,8 +758,8 @@
     }
 
     .modal_1 {
-        right: -34%;
-        bottom: -13%;
+        right: -32%;
+        bottom: -8%;
         transform: rotate(270deg);
     }
 
@@ -857,7 +869,7 @@
     .confirm-btn {
         padding: 8px;
         width: 30px;
-        height: 30pxd;
+        height: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -875,6 +887,21 @@
     }
     .dr-chat-request-box {
         min-height: auto;
+    }
+    .find-doc-slide-img {
+        margin: 0 auto;
+    }
+    .find-doc-slide-text{
+        text-align: center;
+    }
+    .pec-div{
+        text-align: center;
+    }
+    .type-div {
+        width: 94%;
+    }
+    .send-div {
+        width: 6%;
     }
 }
 
@@ -900,9 +927,9 @@
         height: 60vh;
     }
 
-    .logo {
+    /* .logo {
         padding: 10px 0px 0px 0px;
-    }
+    } */
 
     .quick_links_ul ul li {
         padding: 0 2px;
@@ -1032,7 +1059,7 @@
     }
 
     .inr-bnr-text h1 {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .abt-inr-sec::before {
@@ -1271,12 +1298,12 @@
     }
 
     .send-div {
-        width: 20px;
-        height: 20px;
+        width: 35px;
+        height: 35px;
     }
 
     .type-div .form-group input {
-        padding: 4px 20px;
+        padding: 10px 20px;
     }
 
     .cvv-div {
@@ -1317,9 +1344,10 @@
     }
 
     .header {
-        top: 10%;
+        top: 2%;
         left: 0%;
         z-index: 0;
+        width: 10%;
     }
 
     .body-pd {
@@ -1445,6 +1473,82 @@
     .congo-text h3 {
         font-size: 16px;
         line-height: 20px;
+    }
+    .slide .slide__content {
+        padding: 18px;
+    }
+    .main_manu {
+        padding: 10px 0px;
+    }
+    .chat-sec-wrap {
+        padding: 10px;
+    }
+    .cl-slot-wrap{
+        padding: 15px;
+    }
+    .main-btn-p{
+        padding-top: 5px!important;
+    }
+    .cl-tm-slot {
+        padding-bottom: 20px;
+    }
+    .cl-dc-bx{
+        padding: 15px;
+    }
+    .chat-pop {
+        width: 100%;
+    }
+    .frnd-srl {
+		max-height: 200px!important;
+	}
+    .inr-bnr-img {
+        height: 300px;
+    }
+    /* .location .address_loa {
+        width: 50%;
+    } */
+    .location .address_loa span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+    .add-loc-1{
+        padding: 20px 0px 0px;
+    }
+    .main_manu{
+
+    }
+    .search-doc {
+        padding: 20px 0px 0;
+    }
+    .doc-list-head {
+        padding: 20px 0px;
+    }
+    .search-text h3 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+    .doc-spl-wrap-box {
+        padding-bottom: 0px;
+    }
+    .slot-div-wrap{
+        margin-bottom: 15px;
+    }
+    .chat-sec {
+        padding-bottom: 10px;
+    }
+    .search-box {
+        margin-bottom: 10px;
+    }
+    .dr-name-img {
+        width: 50px;
+        height: 50px!important;
+    }
+    .manage-clinic-div {
+        padding: 20px 20px;
+        margin: 0px 5px 10px 5px;
     }
 }
 

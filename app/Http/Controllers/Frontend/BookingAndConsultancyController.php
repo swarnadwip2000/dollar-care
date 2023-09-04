@@ -70,7 +70,7 @@ class BookingAndConsultancyController extends Controller
     {
         if ($request->ajax()) {
             $clinic_details = ClinicDetails::with(array('clinic_slots' => function ($query) {
-                $query->whereBetween('slot_date', [date('Y-m-d'), date('Y-m-d', strtotime('+' . 7 . 'days'))]);
+                $query->where('slot_date', '>=', date('Y-m-d'))->take(9);
             }))->where('id', $request->clinic_id)->first();
             return response()->json(['view' => (string)View::make('frontend.ajax-clinic-visit')->with(compact('clinic_details'))]);
         }

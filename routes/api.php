@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\Api\Docotor\AuthController as DocotorAuthController;
 use App\Http\Controllers\Api\Docotor\ForgetPasswordController as DocotorForgetPasswordController;
+use App\Http\Controllers\Api\Doctor\BookingHistoryController;
 use App\Http\Controllers\Api\FCMController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\Patient\AuthController as AuthController;
 use App\Http\Controllers\Api\Patient\ForgetPasswordController as ForgetPasswordController;
 use App\Http\Controllers\Api\Doctor\DashboardController as DoctorDashboardController;
 use App\Http\Controllers\Api\Doctor\ManageClinicController;
+use App\Http\Controllers\Api\Doctor\NotificationController;
 use App\Http\Controllers\Api\Doctor\ProfileController;
+use App\Http\Controllers\Api\Doctor\SettingsController;
 use App\Http\Controllers\Api\Patient\BookingController as BookingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -63,7 +66,21 @@ Route::prefix('v1')->group(function () {
                 Route::post('/store', [ManageClinicController::class, 'store']);
                 Route::post('/edit', [ManageClinicController::class, 'edit']);
                 Route::post('/update', [ManageClinicController::class, 'update']);
+                Route::post('/delete', [ManageClinicController::class, 'delete']);
+                Route::post('/presentSheduleDate', [ManageClinicController::class, 'presentSheduleDate']);
+                Route::post('/deletePresentSheduleDate', [ManageClinicController::class, 'deletePresentSheduleDate']);
             });
+            
+            // booking history
+            Route::prefix('booking-history')->group(function () {
+                Route::post('/list-with-filter', [BookingHistoryController::class, 'listWithFilter']);
+            });
+
+            // notifications routes
+            Route::post('/notifications', [NotificationController::class, 'notifications']);
+            Route::post('/help-and-support', [SettingsController::class, 'helpAndSupport']);
+            Route::post('/privacy-policy', [SettingsController::class, 'privacyPolicy']);
+            Route::post('/about-us', [SettingsController::class, 'aboutUs']);
         });
 
         //slots routes

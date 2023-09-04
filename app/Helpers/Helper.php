@@ -118,7 +118,7 @@ class Helper
 
     public static function countSlotAvailability($clinic_id)
     {
-        $count = Slot::whereBetween('slot_date', [date('Y-m-d'), date('Y-m-d', strtotime('+' . 7 . 'days'))])->where('clinic_detail_id',$clinic_id)->count();
+        $count = Slot::where('slot_date', '>=', date('Y-m-d'))->where('clinic_detail_id',$clinic_id)->count();
         return $count;
     }
 

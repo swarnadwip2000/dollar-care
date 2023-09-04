@@ -27,13 +27,13 @@
 <div class="main_manu">
     <div class="container-fluid">
         <div class="row justify-content-between align-items-center">
-            <div class="col-xl-1 col-lg-1 col-md-1 col-2">
+            <div class="col-xl-1 col-lg-1 col-md-2 col-2">
                 <div class="logo {{ Request::is('patient/*') || Request::is('doctor/*') ? 'logo-d' : '' }}">
                     <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}"
                             alt="" /></a>
                 </div>
             </div>
-            <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-6 col-8">
+            <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-6 col-6 d-none d-md-block">
             <div id="main">
               <a href="javascript:void(0)" onclick="openNav()">
                 <div class="location d-flex">
@@ -145,6 +145,46 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="add-loc-1 d-block d-md-none">
+         <div class="row">
+         <div class="col-xxl-12">
+             <div id="main">
+              <a href="javascript:void(0)" onclick="openNav()">
+                <div class="location d-flex">
+                  <div class="location_icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div class="address_loa">
+                    @if (Auth::check())
+                        @if (Auth::user()->locations)
+                            <span id="status">{{ substr((Auth::user()->locations->address), 0, 50) }}</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @elseif (session()->has('address'))
+                            <span id="status">{{ substr(session()->get('address'), 0, 50) }}</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @else
+                            <span id="status">Please Set Your Location</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                        @endif
+                    @elseif(Session::has('session_id'))
+                    <span id="status">{{ substr(session()->get('address'), 0, 50) }}</span>
+                    <span id="map-link"></span>
+                    <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+
+                    @else
+                            <span id="status">Please Set Your Location</span>
+                            <span id="map-link"></span>
+                            <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
+                    @endif
+                    
+                  </div>
+                </div>
+            </div>  
+         </div>    
         </div>
     </div>
 </div>
