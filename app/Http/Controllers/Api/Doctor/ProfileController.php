@@ -275,9 +275,9 @@ class ProfileController extends Controller
     /**
      * Change Password
      * @authenticated
-     * @bodyParam old_password string required The old_password of the Doctor.
-     * @bodyParam password string required The password of the Doctor.
-     * @bodyParam password_confirmation string required The password_confirmation of the Doctor.
+     * @bodyParam current_password string required The old_password of the Doctor.
+     * @bodyParam new_password string required The password of the Doctor.
+     * @bodyParam confirm_password string required The password_confirmation of the Doctor.
      * @response 200{
      *"status": true,
      * "statusCode": 200,

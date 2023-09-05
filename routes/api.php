@@ -12,7 +12,10 @@ use App\Http\Controllers\Api\Doctor\ManageClinicController;
 use App\Http\Controllers\Api\Doctor\NotificationController;
 use App\Http\Controllers\Api\Doctor\ProfileController;
 use App\Http\Controllers\Api\Doctor\SettingsController;
+use App\Http\Controllers\Api\Patient\AppointmentController;
 use App\Http\Controllers\Api\Patient\BookingController as BookingController;
+use App\Http\Controllers\Api\Patient\NotificationController as PatientNotificationController;
+use App\Http\Controllers\Api\Patient\ProfileController as PatientProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -70,7 +73,7 @@ Route::prefix('v1')->group(function () {
                 Route::post('/presentSheduleDate', [ManageClinicController::class, 'presentSheduleDate']);
                 Route::post('/deletePresentSheduleDate', [ManageClinicController::class, 'deletePresentSheduleDate']);
             });
-            
+
             // booking history
             Route::prefix('booking-history')->group(function () {
                 Route::post('/list-with-filter', [BookingHistoryController::class, 'listWithFilter']);
@@ -81,6 +84,18 @@ Route::prefix('v1')->group(function () {
             Route::post('/help-and-support', [SettingsController::class, 'helpAndSupport']);
             Route::post('/privacy-policy', [SettingsController::class, 'privacyPolicy']);
             Route::post('/about-us', [SettingsController::class, 'aboutUs']);
+        });
+
+        Route::prefix('patient')->group(function () {
+            Route::post('getProfile', [PatientProfileController::class, 'getProfile']);
+            Route::post('updateProfile', [PatientProfileController::class, 'updateProfile']);
+            Route::post('changePassword', [PatientProfileController::class, 'changePassword']);
+            Route::post('updateProfileImage', [PatientProfileController::class, 'updateProfileImage']);
+            Route::post('/notifications', [PatientNotificationController::class, 'notifications']);
+
+            // appoimtment 
+            Route::post('/upcoming-appointment', [AppointmentController::class, 'upcomingAppointment']);
+            Route::post('/appointment-history', [AppointmentController::class, 'appointmentHistory']);
         });
 
         //slots routes

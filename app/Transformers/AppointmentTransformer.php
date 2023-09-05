@@ -14,6 +14,8 @@ class AppointmentTransformer extends TransformerAbstract
             'id'               => $appointment->id,
             'patient_name'             => $appointment->user->name,
             'patient_profile_picture'            => $appointment->user->profile_picture,
+            'doctor_name'            => $appointment->doctor->name,
+            'doctor_profile_picture'            => $appointment->doctor->profile_picture,
             'appointment_date'            => $appointment->appointment_date,        
             'appointment_time'            => $appointment->appointment_time,
             'clinic_name'            => $appointment->clinic_name,

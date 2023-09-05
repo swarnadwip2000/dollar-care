@@ -62,7 +62,7 @@
                                                 @endif
                                             </div>
                                             <div class="form-group col-lg-6 col-md-12">
-                                                <input type="text" class="form-control" id=""
+                                                <input type="text" class="form-control" id="" readonly
                                                     value="{{ Auth::user()->email }}" name="email" placeholder="Email ID">
                                                 @if ($errors->has('email'))
                                                     <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -122,21 +122,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="form-group col-lg-6 col-md-12">
-                                                <input type="text" class="form-control" id="" value=""
-                                                    name="password" placeholder="Password">
-                                                @if ($errors->has('password'))
-                                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                                @endif
-                                            </div>
-                                            <div class="form-group col-lg-6 col-md-12">
-                                                <input type="text" class="form-control" id="" value=""
-                                                    name="confirm_password" placeholder="Confirm Password">
-                                                @if ($errors->has('confirm_password'))
-                                                    <span
-                                                        class="text-danger">{{ $errors->first('confirm_password') }}</span>
-                                                @endif
-                                            </div>
+                                           
                                             <div class="col-xl-5">
                                                 <div class="main-btn-p pt-4">
                                                     <input type="submit" value="SAVE" class="sub-btn">

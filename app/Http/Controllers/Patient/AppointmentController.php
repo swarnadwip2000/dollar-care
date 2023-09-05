@@ -20,7 +20,7 @@ class AppointmentController extends Controller
         $combinedDT = date('Y-m-d H:i A', strtotime("$date $time"));
         $upcominAppontments = Appointment::where('user_id', Auth::user()->id)->where(DB::raw("concat(appointment_date, ' ', appointment_time)"), '>' , $combinedDT)->where('appointment_status', 'Done')->orderBy('id', 'DESC')->get();
         // dd($upcominAppontments);
-        $pastAppontments = Appointment::where('user_id', Auth::user()->id)->where('appointment_date', '<', date('d-m-Y'))->orderBy('id', 'DESC')->get();
+        $pastAppontments = Appointment::where('user_id', Auth::user()->id)->where('appointment_date', '<', date('Y-m-d'))->orderBy('id', 'DESC')->get();
         $appointments = Appointment::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         return view('frontend.patient.my-appointment')->with(compact('appointments','upcominAppontments','pastAppontments'));
     }
