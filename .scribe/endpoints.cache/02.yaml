@@ -367,19 +367,19 @@ endpoints:
         name: latitude
         description: ''
         required: true
-        example: vel
+        example: totam
         type: string
         custom: []
       longitude:
         name: longitude
         description: ''
         required: true
-        example: facere
+        example: tempore
         type: string
         custom: []
     cleanBodyParameters:
-      latitude: vel
-      longitude: facere
+      latitude: totam
+      longitude: tempore
     fileParameters: []
     responses:
       -

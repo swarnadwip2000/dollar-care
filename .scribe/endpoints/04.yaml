@@ -190,21 +190,21 @@ endpoints:
         name: clinic_name
         description: ''
         required: true
-        example: facilis
+        example: et
         type: string
         custom: []
       clinic_address:
         name: clinic_address
         description: ''
         required: true
-        example: qui
+        example: est
         type: string
         custom: []
       clinic_phone:
         name: clinic_phone
         description: ''
         required: true
-        example: dolorum
+        example: cum
         type: numeric
         custom: []
       day_id:
@@ -212,21 +212,21 @@ endpoints:
         description: ''
         required: true
         example:
-          - est
+          - ducimus
         type: 'string[]'
         custom: []
       latitute:
         name: latitute
         description: ''
         required: true
-        example: praesentium
+        example: voluptas
         type: string
         custom: []
       longitute:
         name: longitute
         description: ''
         required: true
-        example: iusto
+        example: impedit
         type: string
         custom: []
       slot_date:
@@ -234,7 +234,7 @@ endpoints:
         description: ''
         required: true
         example:
-          - numquam
+          - ullam
         type: 'string[]'
         custom: []
       slot_start_time:
@@ -242,7 +242,7 @@ endpoints:
         description: ''
         required: true
         example:
-          - corrupti
+          - quod
         type: 'string[]'
         custom: []
       slot_end_time:
@@ -250,7 +250,7 @@ endpoints:
         description: required.
         required: false
         example:
-          - dolore
+          - et
         type: 'string[]'
         custom: []
       first_time_mode:
@@ -258,7 +258,7 @@ endpoints:
         description: required.
         required: false
         example:
-          - architecto
+          - autem
         type: 'string[]'
         custom: []
       second_time_mode:
@@ -266,27 +266,27 @@ endpoints:
         description: required.
         required: false
         example:
-          - consequatur
+          - est
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      clinic_name: facilis
-      clinic_address: qui
-      clinic_phone: dolorum
+      clinic_name: et
+      clinic_address: est
+      clinic_phone: cum
       day_id:
-        - est
-      latitute: praesentium
-      longitute: iusto
+        - ducimus
+      latitute: voluptas
+      longitute: impedit
       slot_date:
-        - numquam
+        - ullam
       slot_start_time:
-        - corrupti
+        - quod
       slot_end_time:
-        - dolore
+        - et
       first_time_mode:
-        - architecto
+        - autem
       second_time_mode:
-        - consequatur
+        - est
     fileParameters: []
     responses:
       -
@@ -337,11 +337,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 7036541.9
+        example: 2.5
         type: number
         custom: []
     cleanBodyParameters:
-      id: 7036541.9
+      id: 2.5
     fileParameters: []
     responses: []
     responseFields: []
@@ -375,28 +375,28 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: dolorem
+        example: delectus
         type: numeric
         custom: []
       clinic_name:
         name: clinic_name
         description: ''
         required: true
-        example: rerum
+        example: sit
         type: string
         custom: []
       clinic_address:
         name: clinic_address
         description: ''
         required: true
-        example: sit
+        example: sed
         type: string
         custom: []
       clinic_phone:
         name: clinic_phone
         description: ''
         required: true
-        example: tempora
+        example: non
         type: numeric
         custom: []
       day_id:
@@ -404,21 +404,21 @@ endpoints:
         description: ''
         required: true
         example:
-          - voluptates
+          - esse
         type: 'string[]'
         custom: []
       latitute:
         name: latitute
         description: ''
         required: true
-        example: ut
+        example: ipsa
         type: string
         custom: []
       longitute:
         name: longitute
         description: ''
         required: true
-        example: laudantium
+        example: illo
         type: string
         custom: []
       slot_date:
@@ -426,7 +426,7 @@ endpoints:
         description: optional
         required: false
         example:
-          - saepe
+          - quo
         type: 'string[]'
         custom: []
       slot_start_time:
@@ -434,7 +434,7 @@ endpoints:
         description: optional
         required: false
         example:
-          - fugit
+          - praesentium
         type: 'string[]'
         custom: []
       slot_end_time:
@@ -442,7 +442,7 @@ endpoints:
         description: optional.
         required: false
         example:
-          - quia
+          - dolore
         type: 'string[]'
         custom: []
       first_time_mode:
@@ -450,7 +450,7 @@ endpoints:
         description: optional.
         required: false
         example:
-          - nobis
+          - eius
         type: 'string[]'
         custom: []
       second_time_mode:
@@ -458,28 +458,28 @@ endpoints:
         description: optional.
         required: false
         example:
-          - neque
+          - laboriosam
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      id: dolorem
-      clinic_name: rerum
-      clinic_address: sit
-      clinic_phone: tempora
+      id: delectus
+      clinic_name: sit
+      clinic_address: sed
+      clinic_phone: non
       day_id:
-        - voluptates
-      latitute: ut
-      longitute: laudantium
+        - esse
+      latitute: ipsa
+      longitute: illo
       slot_date:
-        - saepe
+        - quo
       slot_start_time:
-        - fugit
+        - praesentium
       slot_end_time:
-        - quia
+        - dolore
       first_time_mode:
-        - nobis
+        - eius
       second_time_mode:
-        - neque
+        - laboriosam
     fileParameters: []
     responses:
       -
@@ -524,11 +524,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: omnis
+        example: quia
         type: numeric
         custom: []
     cleanBodyParameters:
-      id: omnis
+      id: quia
     fileParameters: []
     responses:
       -
@@ -578,11 +578,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: enim
+        example: quaerat
         type: numeric
         custom: []
     cleanBodyParameters:
-      id: enim
+      id: quaerat
     fileParameters: []
     responses:
       -
@@ -654,11 +654,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: quas
+        example: modi
         type: numeric
         custom: []
     cleanBodyParameters:
-      id: quas
+      id: modi
     fileParameters: []
     responses:
       -

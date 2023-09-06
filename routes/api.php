@@ -14,8 +14,11 @@ use App\Http\Controllers\Api\Doctor\ProfileController;
 use App\Http\Controllers\Api\Doctor\SettingsController;
 use App\Http\Controllers\Api\Patient\AppointmentController;
 use App\Http\Controllers\Api\Patient\BookingController as BookingController;
+use App\Http\Controllers\Api\Patient\MembershipController;
 use App\Http\Controllers\Api\Patient\NotificationController as PatientNotificationController;
+use App\Http\Controllers\Api\Patient\PaymentController;
 use App\Http\Controllers\Api\Patient\ProfileController as PatientProfileController;
+use App\Http\Controllers\Patient\PaymentHistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,7 +54,7 @@ Route::prefix('v1')->group(function () {
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('symptoms', [HomeController::class, 'symptoms']);
         Route::post('specializations', [HomeController::class, 'specializations']);
-        Route::post('all-doctors', [HomeController::class, 'all_doctors']);
+        Route::post('all-doctors-by-location', [HomeController::class, 'allDoctorsByLocation']);
         Route::post('doctors', [HomeController::class, 'doctorsList']);
         Route::post('search-doctors', [HomeController::class, 'searchDoctorOrClinic']);
         Route::post('store-location', [HomeController::class, 'storeLocation']);
@@ -96,6 +99,14 @@ Route::prefix('v1')->group(function () {
             // appoimtment 
             Route::post('/upcoming-appointment', [AppointmentController::class, 'upcomingAppointment']);
             Route::post('/appointment-history', [AppointmentController::class, 'appointmentHistory']);
+            // payment history
+            Route::post('/payment-history', [PaymentController::class, 'paymentHistory']);
+
+            Route::prefix('membership')->group(function () {
+                Route::post('/list', [MembershipController::class, 'membershipList']);
+                Route::post('/detailById', [MembershipController::class, 'detailById']);
+                Route::post('/payment', [MembershipController::class, 'membershipPayment']);
+            });
         });
 
         //slots routes

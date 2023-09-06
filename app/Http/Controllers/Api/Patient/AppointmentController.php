@@ -61,6 +61,27 @@ class AppointmentController extends Controller
 
     /**
      * Appointment History
+     * @authenticated
+     * @response 200{
+     *"status": true,
+     *"appointment": {
+     *    "data": [
+     *        {
+     *            "id": 10,
+     *            "patient_name": "John Does",
+     *            "patient_profile_picture": "patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg",
+     *            "doctor_name": "Derick Veliz",
+     *            "doctor_profile_picture": "doctor/hkt0RnyhO4wSDMEpVrdNGdXYayxmjTaepELsZnu8.png",
+     *            "appointment_date": "2023-07-25",
+     *            "appointment_time": "01:30 PM",
+     *            "clinic_name": "Christan Medical Collage(CMS)",
+     *            "clinic_address": "Saltlake Sector V, Street Number 18, DP Block, Sector V, Bidhannagar, Kolkata, West Bengal, India",
+     *            "duration": "30 min",
+     *            "appointment_status": "Done"
+     *        },
+     *    ]
+     *}
+     *}
      */
 
     public function appointmentHistory(Request $request)
@@ -68,10 +89,10 @@ class AppointmentController extends Controller
         try {
             $pastAppontments = Appointment::where('user_id', Auth::user()->id)->where('appointment_date', '<', date('Y-m-d'))->orderBy('id', 'DESC')->get();
             if ($pastAppontments->count() > 0) {
-                $data = fractal($pastAppontments, new AppointmentTransformer())->toArray();
-                return response()->json(['status' => true, 'data' => $data], $this->successStatus);
+                $appointment = fractal($pastAppontments, new AppointmentTransformer())->toArray();
+                return response()->json(['status' => true, 'appointment' => $appointment], $this->successStatus);
             } else {
-                return response()->json(['status' => false, 'message' => 'No appointment history'], 500);
+                return response()->json(['status' => false, 'message' => 'No appointment history'], 201);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => $th->getMessage()], 500);

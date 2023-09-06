@@ -185,11 +185,11 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: quia
+                  example: quod
                 age:
                   type: string
                   description: ''
-                  example: quidem
+                  example: hic
                 location:
                   type: string
                   description: 'The name of the user.'
@@ -465,34 +465,34 @@ paths:
                 name:
                   type: string
                   description: 'The name of the Doctor.'
-                  example: qui
+                  example: at
                 email:
                   type: string
                   description: 'The email of the Doctor.'
-                  example: hlind@example.org
+                  example: annie.ledner@example.com
                 gender:
                   type: string
                   description: ''
-                  example: animi
+                  example: reprehenderit
                 age:
                   type: date
                   description: 'The age of the Doctor.'
-                  example: quaerat
+                  example: illo
                 phone:
                   type: numeric
                   description: 'The phone of the Doctor.'
-                  example: vitae
+                  example: atque
                 specialization_id:
                   type: array
                   description: 'The specialization_id of the Doctor.'
                   example:
-                    - rerum
+                    - esse
                   items:
                     type: string
                 license_number:
                   type: string
                   description: 'The license_number of the Doctor.'
-                  example: necessitatibus
+                  example: mollitia
               required:
                 - name
                 - email
@@ -538,35 +538,20 @@ paths:
               properties:
                 current_password:
                   type: string
-                  description: 'The value and <code>new_password</code> must be different. The value and <code>confirm_password</code> must be different. Must be at least 8 characters.'
-                  example: yheyvswujcsumykiayojioasyominfwfiowmvabgbjtxjmbvxuynbdtfqcpkpen
+                  description: 'The old_password of the Doctor.'
+                  example: et
                 new_password:
                   type: string
-                  description: 'The value and <code>current_password</code> must be different. The value and <code>confirm_password</code> must match. Must be at least 8 characters.'
-                  example: sumijfumdxxyeecem
+                  description: 'The password of the Doctor.'
+                  example: et
                 confirm_password:
                   type: string
-                  description: 'The value and <code>current_password</code> must be different. The value and <code>new_password</code> must match. Must be at least 8 characters.'
-                  example: tuxfenwhcgvofhxuumubtuwrlabvybxmffngggnrnaygflmsdokbypetccffjlk
-                old_password:
-                  type: string
-                  description: 'The old_password of the Doctor.'
-                  example: similique
-                password:
-                  type: string
-                  description: 'The password of the Doctor.'
-                  example: "Ds-}'iWSC18["
-                password_confirmation:
-                  type: string
                   description: 'The password_confirmation of the Doctor.'
-                  example: sed
+                  example: eveniet
               required:
                 - current_password
                 - new_password
                 - confirm_password
-                - old_password
-                - password
-                - password_confirmation
   /api/v1/doctor/updateProfileImage:
     post:
       summary: 'Upload profile image'
@@ -627,11 +612,11 @@ paths:
                 subject:
                   type: string
                   description: ''
-                  example: facere
+                  example: incidunt
                 message:
                   type: string
                   description: "@response 200{\n\"status\": true,\n\"data\": {\n\"id\": 1,\n\"user_id\": 1,\n\"name\": \"test doctor\",\n\"email\": \"test@yopmail.com\",\n\"phone\": \"1234567890\",\n\"subject\": \"test\",\n\"message\": \"test\",\n\"created_at\": \"2021-09-28T10:20:00.000000Z\",\n\"updated_at\": \"2021-09-28T10:20:00.000000Z\"\n}\n}"
-                  example: neque
+                  example: et
               required:
                 - subject
                 - message
@@ -1404,11 +1389,11 @@ paths:
                 latitude:
                   type: string
                   description: ''
-                  example: vel
+                  example: totam
                 longitude:
                   type: string
                   description: ''
-                  example: facere
+                  example: tempore
               required:
                 - latitude
                 - longitude
@@ -1600,63 +1585,63 @@ paths:
                 clinic_name:
                   type: string
                   description: ''
-                  example: facilis
+                  example: et
                 clinic_address:
                   type: string
                   description: ''
-                  example: qui
+                  example: est
                 clinic_phone:
                   type: numeric
                   description: ''
-                  example: dolorum
+                  example: cum
                 day_id:
                   type: array
                   description: ''
                   example:
-                    - est
+                    - ducimus
                   items:
                     type: string
                 latitute:
                   type: string
                   description: ''
-                  example: praesentium
+                  example: voluptas
                 longitute:
                   type: string
                   description: ''
-                  example: iusto
+                  example: impedit
                 slot_date:
                   type: array
                   description: ''
                   example:
-                    - numquam
+                    - ullam
                   items:
                     type: string
                 slot_start_time:
                   type: array
                   description: ''
                   example:
-                    - corrupti
+                    - quod
                   items:
                     type: string
                 slot_end_time:
                   type: array
                   description: required.
                   example:
-                    - dolore
+                    - et
                   items:
                     type: string
                 first_time_mode:
                   type: array
                   description: required.
                   example:
-                    - architecto
+                    - autem
                   items:
                     type: string
                 second_time_mode:
                   type: array
                   description: required.
                   example:
-                    - consequatur
+                    - est
                   items:
                     type: string
               required:
@@ -1687,7 +1672,7 @@ paths:
                 id:
                   type: number
                   description: ''
-                  example: 7036541.9
+                  example: 2.5
               required:
                 - id
   /api/v1/doctor/manage-clinic/update:
@@ -1729,67 +1714,67 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: dolorem
+                  example: delectus
                 clinic_name:
                   type: string
                   description: ''
-                  example: rerum
+                  example: sit
                 clinic_address:
                   type: string
                   description: ''
-                  example: sit
+                  example: sed
                 clinic_phone:
                   type: numeric
                   description: ''
-                  example: tempora
+                  example: non
                 day_id:
                   type: array
                   description: ''
                   example:
-                    - voluptates
+                    - esse
                   items:
                     type: string
                 latitute:
                   type: string
                   description: ''
-                  example: ut
+                  example: ipsa
                 longitute:
                   type: string
                   description: ''
-                  example: laudantium
+                  example: illo
                 slot_date:
                   type: array
                   description: optional
                   example:
-                    - saepe
+                    - quo
                   items:
                     type: string
                 slot_start_time:
                   type: array
                   description: optional
                   example:
-                    - fugit
+                    - praesentium
                   items:
                     type: string
                 slot_end_time:
                   type: array
                   description: optional.
                   example:
-                    - quia
+                    - dolore
                   items:
                     type: string
                 first_time_mode:
                   type: array
                   description: optional.
                   example:
-                    - nobis
+                    - eius
                   items:
                     type: string
                 second_time_mode:
                   type: array
                   description: optional.
                   example:
-                    - neque
+                    - laboriosam
                   items:
                     type: string
               required:
@@ -1826,7 +1811,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: omnis
+                  example: quia
               required:
                 - id
   /api/v1/doctor/manage-clinic/presentSheduleDate:
@@ -1875,7 +1860,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: enim
+                  example: quaerat
               required:
                 - id
   /api/v1/doctor/manage-clinic/deletePresentSheduleDate:
@@ -1924,9 +1909,114 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: quas
+                  example: modi
               required:
                 - id
+  /api/v1/patient/upcoming-appointment:
+    post:
+      summary: 'Upcoming appointment'
+      operationId: upcomingAppointment
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  data:
+                    data:
+                      -
+                        id: 11
+                        patient_name: 'John Does'
+                        patient_profile_picture: patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg
+                        doctor_name: 'James Bond'
+                        doctor_profile_picture: doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg
+                        appointment_date: '2023-09-11'
+                        appointment_time: '01:00 PM'
+                        clinic_name: 'ORM Medicle'
+                        clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
+                        duration: '30 min'
+                        appointment_status: Done
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        example:
+                          -
+                            id: 11
+                            patient_name: 'John Does'
+                            patient_profile_picture: patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg
+                            doctor_name: 'James Bond'
+                            doctor_profile_picture: doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg
+                            appointment_date: '2023-09-11'
+                            appointment_time: '01:00 PM'
+                            clinic_name: 'ORM Medicle'
+                            clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
+                            duration: '30 min'
+                            appointment_status: Done
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 11
+                            patient_name:
+                              type: string
+                              example: 'John Does'
+                            patient_profile_picture:
+                              type: string
+                              example: patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg
+                            doctor_name:
+                              type: string
+                              example: 'James Bond'
+                            doctor_profile_picture:
+                              type: string
+                              example: doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg
+                            appointment_date:
+                              type: string
+                              example: '2023-09-11'
+                            appointment_time:
+                              type: string
+                              example: '01:00 PM'
+                            clinic_name:
+                              type: string
+                              example: 'ORM Medicle'
+                            clinic_address:
+                              type: string
+                              example: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
+                            duration:
+                              type: string
+                              example: '30 min'
+                            appointment_status:
+                              type: string
+                              example: Done
+      tags:
+        - 'Patient Appointment'
+  /api/v1/patient/appointment-history:
+    post:
+      summary: 'Appointment History'
+      operationId: appointmentHistory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"appointment\": {\n   \"data\": [\n       {\n           \"id\": 10,\n           \"patient_name\": \"John Does\",\n           \"patient_profile_picture\": \"patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n           \"doctor_name\": \"Derick Veliz\",\n           \"doctor_profile_picture\": \"doctor/hkt0RnyhO4wSDMEpVrdNGdXYayxmjTaepELsZnu8.png\",\n           \"appointment_date\": \"2023-07-25\",\n           \"appointment_time\": \"01:30 PM\",\n           \"clinic_name\": \"Christan Medical Collage(CMS)\",\n           \"clinic_address\": \"Saltlake Sector V, Street Number 18, DP Block, Sector V, Bidhannagar, Kolkata, West Bengal, India\",\n           \"duration\": \"30 min\",\n           \"appointment_status\": \"Done\"\n       },\n   ]\n}\n}"
+      tags:
+        - 'Patient Appointment'
   /api/v1/booking-and-consultancy:
     post:
       summary: 'Booking and Consultancy'
@@ -2107,15 +2197,15 @@ paths:
                 clinic_id:
                   type: string
                   description: ''
-                  example: mollitia
+                  example: labore
                 appointment_date:
                   type: string
                   description: ''
-                  example: quia
+                  example: quaerat
                 appointment_time:
                   type: string
                   description: ''
-                  example: debitis
+                  example: sed
               required:
                 - clinic_id
                 - appointment_date
@@ -2432,6 +2522,402 @@ paths:
                 - confirm_password
                 - email
       security: []
+  /api/v1/patient/membership/list:
+    post:
+      summary: 'Membership List'
+      operationId: membershipList
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"data\": [\n    {\n        \"id\": 1,\n        \"plan_name\": \"Basic\",\n        \"plan_price\": \"100\",\n        \"plan_type\": \"Basic\",\n        \"plan_duration\": \"3\",\n        \"specifications\": [\n            {\n                \"id\": 1,\n                \"plan_id\": 1,\n                \"specification_name\": \"Domain Name                        \"\n            },\n            {\n                \"id\": 2,\n                \"plan_id\": 1,\n                \"specification_name\": \"Upto 8 Pages\"\n            }\n        ]\n    },\n]\n}"
+      tags:
+        - 'Patient Membership'
+  /api/v1/patient/membership/detailById:
+    post:
+      summary: 'Membership Details by id'
+      operationId: membershipDetailsById
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  * \"status\": true,\n\"data\": [\n    {\n        \"id\": 1,\n        \"plan_name\": \"Basic\",\n        \"plan_price\": \"100\",\n        \"plan_type\": \"Basic\",\n        \"plan_duration\": \"3\",\n        \"specifications\": [\n            {\n                \"id\": 1,\n                \"plan_id\": 1,\n                \"specification_name\": \"Domain Name                        \"\n            },\n            {\n                \"id\": 2,\n                \"plan_id\": 1,\n                \"specification_name\": \"Upto 8 Pages\"\n            }\n        ]\n    },\n]\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  message: 'The selected id is invalid.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'The selected id is invalid.'
+      tags:
+        - 'Patient Membership'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: 'The id of the membership.'
+                  example: 8
+              required:
+                - id
+  /api/v1/patient/membership/payment:
+    post:
+      summary: 'Payment api'
+      operationId: paymentApi
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Patient Membership'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan_id:
+                  type: integer
+                  description: 'The id of the membership.'
+                  example: 1
+                name:
+                  type: string
+                  description: ''
+                  example: molestiae
+                stripeToken:
+                  type: string
+                  description: ''
+                  example: quasi
+              required:
+                - plan_id
+                - name
+                - stripeToken
+  /api/v1/patient/notifications:
+    post:
+      summary: 'Get Patient Notification'
+      operationId: getPatientNotification
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"status\": true,\n\"data\": [\n   {\n       \"id\": 5,\n       \"send_to\": \"Patient\",\n       \"message\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n       \"created_at\": \"2023-06-26T10:51:59.000000Z\",\n       \"updated_at\": \"2023-06-26T10:51:59.000000Z\"\n   },\n]\n}"
+      tags:
+        - 'Patient Notification'
+  /api/v1/patient/payment-history:
+    post:
+      summary: 'Payment history'
+      operationId: paymentHistory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  membership:
+                    data:
+                      id: 6
+                      amount: '200'
+                      membership_expiry_date: '2024-01-11'
+                      currency: usd
+                      plan_name: Standard
+                      plan_duration: '6'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  membership:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 6
+                          amount:
+                            type: string
+                            example: '200'
+                          membership_expiry_date:
+                            type: string
+                            example: '2024-01-11'
+                          currency:
+                            type: string
+                            example: usd
+                          plan_name:
+                            type: string
+                            example: Standard
+                          plan_duration:
+                            type: string
+                            example: '6'
+      tags:
+        - 'Patient Payment History'
+  /api/v1/patient/getProfile:
+    post:
+      summary: 'Get Patient Profile'
+      operationId: getPatientProfile
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Profile fetched successfully'
+                  data:
+                    id: 3
+                    name: 'John Doe'
+                    gender: Male
+                    age: '2008-01-26'
+                    email: john@yopmail.com
+                    phone: '8596769586'
+                    profile_picture: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
+                    status: 1
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Profile fetched successfully'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      gender:
+                        type: string
+                        example: Male
+                      age:
+                        type: string
+                        example: '2008-01-26'
+                      email:
+                        type: string
+                        example: john@yopmail.com
+                      phone:
+                        type: string
+                        example: '8596769586'
+                      profile_picture:
+                        type: string
+                        example: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
+                      status:
+                        type: integer
+                        example: 1
+      tags:
+        - 'Patient Profile'
+  /api/v1/patient/updateProfile:
+    post:
+      summary: 'Update Patient Profile'
+      operationId: updatePatientProfile
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'The phone has already been taken.'
+                properties:
+                  error:
+                    type: string
+                    example: 'The phone has already been taken.'
+      tags:
+        - 'Patient Profile'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'optional The name of the Patient.'
+                  example: ea
+                email:
+                  type: string
+                  description: 'optional The email of the Patient.'
+                  example: satterfield.marlene@example.com
+                age:
+                  type: date
+                  description: 'optional The age of the Patient.'
+                  example: eos
+                phone:
+                  type: numeric
+                  description: 'optional The phone of the Patient.'
+                  example: et
+  /api/v1/patient/changePassword:
+    post:
+      summary: 'Change Password'
+      operationId: changePassword
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Password changed successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Password changed successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'The old_password and password must be different.'
+                properties:
+                  error:
+                    type: string
+                    example: 'The old_password and password must be different.'
+      tags:
+        - 'Patient Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                  description: 'The old_password of the Patient.'
+                  example: nihil
+                new_password:
+                  type: string
+                  description: 'The password of the Patient.'
+                  example: itaque
+                confirm_password:
+                  type: string
+                  description: 'The password_confirmation of the Patient.'
+                  example: odit
+              required:
+                - current_password
+                - new_password
+                - confirm_password
+  /api/v1/patient/updateProfileImage:
+    post:
+      summary: 'Upload profile image'
+      operationId: uploadProfileImage
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Profile updated successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Profile updated successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'The profile_picture filled is required.'
+                properties:
+                  error:
+                    type: string
+                    example: 'The profile_picture filled is required.'
+      tags:
+        - 'Patient Profile'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profile_picture:
+                  type: string
+                  format: binary
+                  description: 'The profile_picture of the Patient.'
+              required:
+                - profile_picture
 tags:
   -
     name: Authentication
@@ -2455,8 +2941,23 @@ tags:
     name: 'Manage Clinic'
     description: ''
   -
+    name: 'Patient Appointment'
+    description: ''
+  -
     name: 'Patient Booking'
     description: ''
   -
     name: 'Patient Forget Password'
+    description: ''
+  -
+    name: 'Patient Membership'
+    description: ''
+  -
+    name: 'Patient Notification'
+    description: ''
+  -
+    name: 'Patient Payment History'
+    description: ''
+  -
+    name: 'Patient Profile'
     description: ''

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Location;
 use App\Models\User;
+use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -107,6 +108,8 @@ class HomeController extends Controller
 
     /**
      * Location Store Api
+     * @bodyParam latitude string required The latitude of the location.
+     * @bodyParam longitude string required The longitude of the location.
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
@@ -141,25 +144,13 @@ class HomeController extends Controller
 
         try {
             $location = new Location();
-            if (auth()->check()) {
-                $location->user_id = auth()->user()->id;
-                $location->session_id = null;
-            } else {
-                $session_id = Session::getId();
-                $location->user_id = null;
-                $location->session_id = $session_id;
-                Session::put('session_id', $session_id);
-            }
-            $location->ip_address = $request->ip_address;
+            $location->user_id = auth()->user()->id;
+            $location->session_id = null;
+            $location->ip_address = $request->ip();
             $location->address = $request->address;
             $location->latitude = $request->latitude;
             $location->longitude = $request->longitude;
             $location->save();
-
-
-            Session::put('latitude', $request->latitude);
-            Session::put('longitude', $request->longitude);
-            Session::put('address', $request->address);
 
             return response()->json(['status' => true, 'statusCode' => 200, 'data' => $location], $this->successStatus);
         } catch (\Throwable $th) {
@@ -198,67 +189,43 @@ class HomeController extends Controller
      * @response 201{
      * "status": false,
      *  "statusCode": 201,
-     *  "message": "No Specialization Found"
+     *  "message": "No Doctor Found in your area!"
      * }
      */
 
-    public function all_doctors(Request $request)
+    public function allDoctorsByLocation(Request $request)
     {
         try {
-            $count = User::role('DOCTOR')->where('status', 1)->count();
-            if ($count > 0) {
-                if (Auth::check()) {
-                    // get clinics within 10km radius
-                    $latitude = $request->latitude;
-                    $longitude = $request->longitude;
-                    $radius = 10;
-                    // $doctors = User::role('DOCTOR')->where('status', 1)->orderBy('id', 'desc')->get();
-                    $doctors = DB::table('users')
-                        ->leftJoin('locations', 'locations.user_id', '=', 'users.id')
-                        ->select(
-                            'users.id as user_id',
-                            'users.name',
-                            'users.email',
-                            'users.phone',
-                            'users.year_of_experience',
-                            'users.license_number',
-                            'users.profile_picture',
-                            'users.gender',
-                            'users.fcm_token',
-                            'locations.address as address',
-                            'locations.latitude as latitude',
-                            'locations.longitude as longitude',
-                            DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitude ) ) ) ) AS distance')
-                        )
-                        ->having('distance', '<', $radius)
-                        ->get();
-                    // ->groupBy('user_id');
-                } else {
-                    $latitude = session()->latitude;
-                    $longitude = session()->longitude;
-                    $radius = 10;
+            // get clinics within 10km radius
+            $latitude = Auth::user()->locations->latitude;
+            $longitude = Auth::user()->locations->longitude;
+            $radius = 10;
+            // $doctors = User::role('DOCTOR')->where('status', 1)->orderBy('id', 'desc')->get();
 
-                    $doctors = DB::table('users')
-                        ->leftJoin('locations', 'locations.user_id', '=', 'users.id')
-                        ->select(
-                            'users.id as user_id',
-                            'users.name',
-                            'users.email',
-                            'users.phone',
-                            'users.year_of_experience',
-                            'users.license_number',
-                            'users.profile_picture',
-                            'users.gender',
-                            'users.fcm_token',
-                            'locations.address as address',
-                            'locations.latitude as latitude',
-                            'locations.longitude as longitude',
-                            DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitude ) ) ) ) AS distance')
-                        )
-                        ->having('distance', '<', $radius)
-                        ->get();
-                }
+            $clinics = DB::table('clinic_details')
+                ->join('users', 'clinic_details.user_id', '=', 'users.id')
+                ->select(
+                    'clinic_details.id',
+                    'clinic_details.user_id',
+                    'clinic_name',
+                    'clinic_address',
+                    'clinic_phone',
+                    'longitute',
+                    'latitute',
+                    DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
+                )
+                ->having('distance', '<', $radius)
+                ->get()
+                ->groupBy('user_id');
+            // get doctors from clinics
+            $doctors_array = [];
+            foreach ($clinics as $key => $clinic) {
+                $doctors_array[] =  $key;
+            }
 
+            $allDotor = User::whereIn('id', $doctors_array)->get();
+            if (count($allDotor) > 0) {
+                $doctors = fractal($allDotor, new UserTransformer)->toArray()['data'];
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $doctors]);
             } else {
                 return response()->json(['status' => false, 'statusCode' => 201, 'message' => 'No Doctor Found in your area!'], 201);
@@ -272,6 +239,9 @@ class HomeController extends Controller
 
     /**
      * Doctors List as per symptoms/specializations Api
+     * @bodyParam type string required The type of the search.
+     * @bodyParam slug string required The slug of the search. example - dermatologist, oral-piercing-infection
+     * 
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
@@ -307,6 +277,15 @@ class HomeController extends Controller
 
     public function doctorsList(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'type' => 'required',
+            'slug' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
         try {
             $type = $request->type;
             $slug = $request->slug;
@@ -314,8 +293,8 @@ class HomeController extends Controller
                 $data = Symptoms::where('symptom_slug', $slug)->where('symptom_status', 1)->first();
                 $symptom_id = $data->id;
                 // get clinics within 10km radius
-                $latitude = $request->latitude;
-                $longitude = $request->longitude;
+                $latitude = Auth::user()->locations->latitude;
+                $longitude = Auth::user()->locations->longitude;
                 $radius = 10;
                 $clinics = DB::table('clinic_details')
                     ->join('users', 'clinic_details.user_id', '=', 'users.id')
@@ -433,8 +412,8 @@ class HomeController extends Controller
     {
 
         // get clinics within 10km radius
-        $latitude = $request->latitude;
-        $longitude = $request->longitude;
+        $latitude = Auth::user()->locations->latitude;
+        $longitude = Auth::user()->locations->longitude;
         $radius = 10;
         $clinics = DB::table('clinic_details')
             ->join('users', 'clinic_details.user_id', '=', 'users.id')
@@ -466,68 +445,16 @@ class HomeController extends Controller
         $clinics = ClinicDetails::whereIn('id', $clinics_array)->where('clinic_name', 'like', '%', $request->search)->get();
 
         $results = $doctors->union($clinics)->get();
-        
+
         return response()->json(['status' => true, 'statusCode' => 200, 'data' => $results]);
     }
 
 
-    /**
-     * Appointment History Api
-     * @response 200{
-     * "status": true,
-     * "statusCode": 200,
-     * "data": [
-     *    {
-     *       "id": 1,
-     *       "user_id": 14,
-     *       "doctor_id": 13,
-     *       "clinic_id": 1,
-     *       "appointment_date": "2021-06-06",
-     *       "appointment_time": "10:00 AM",
-     *       "appointment_status": 1,
-     *       "created_at": "2021-06-06T10:55:47.000000Z",
-     *       "updated_at": "2021-06-06T10:55:47.000000Z",
-     *       "deleted_at": null,
-     *       "doctor": {
-     *          "id": 13,
-     *          "name": "Shreeja Sadhukhan",
-     *          "email": "shreeja@mailinator.com"  
-     *      },
-     *      }]
-     *    }
-     * 
-     */
-
-    public function appointmentHistoryForUser(Request $request) {
-        try {
-            $user_id = auth()->user()->id;
-            $appointments = DB::table('appointments')
-            ->join('users', 'appointments.doctor_id', '=', 'users.id')
-            ->select(
-                'appointments.id',
-                'appointments.user_id',
-                'appointments.doctor_id',
-                'appointments.clinic_id',
-                'appointments.appointment_date',
-                'appointments.appointment_time',
-                'appointments.appointment_status',
-                'appointments.created_at',
-                'appointments.updated_at',
-                'appointments.deleted_at',
-                'users.name',
-                'users.email'
-            )
-            ->where('appointments.user_id', $user_id)
-            ->get();
-            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $appointments]);
-        } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
-        }
-    }
 
 
     /**
      * Doctor details Api
+     * @bodyParam doctor_id string required The id of the doctor.
      * @response 200{
      * "status": true,
      * "statusCode": 200,
@@ -556,13 +483,39 @@ class HomeController extends Controller
      * 
      */
 
-    public function doctorDetails(Request $request) {
+    public function doctorDetails(Request $request)
+    {
+        $validator =  Validator::make($request->all(), [
+            'doctor_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+        
         try {
             $doctor_id = $request->doctor_id;
             $data = [];
             $data['doctor'] = User::where('id', $doctor_id)->first();
             // get clinic details for the doctor
-            $data['clinic'] = ClinicDetails::where('user_id', $doctor_id)->first();
+            $latitude = Auth::user()->locations->latitude;
+            $longitude = Auth::user()->locations->longitude;
+            $radius = 10;
+            $data['clinic'] = DB::table('clinic_details')
+                ->join('users', 'clinic_details.user_id', '=', 'users.id')
+                ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
+                ->select(
+                    'clinic_details.id',
+                    'clinic_details.user_id',
+                    'clinic_name',
+                    'clinic_address',
+                    'clinic_phone',
+                    'longitute',
+                    'latitute',
+                    DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
+                )
+                ->having('distance', '<', $radius)
+                ->get();
             return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data]);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);

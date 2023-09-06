@@ -1,18 +1,18 @@
-name: 'Patient Booking'
+name: 'Patient Profile'
 description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/booking-and-consultancy
+    uri: api/v1/patient/getProfile
     metadata:
-      groupName: 'Patient Booking'
+      groupName: 'Patient Profile'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Booking and Consultancy'
+      title: 'Get Patient Profile'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -29,138 +29,19 @@ endpoints:
         status: 200
         content: |-
           {
-                "message": "Booking And Consultancy",
-                "status": true,
-                "data": {
-                   "doctor": {
-                      "id": 4,
-                       "name": "James Bond",
-                      "email": "james@yopmail.com",
-                       "phone": "08596769586",
-                       "email_verified_at": null,
-                       "profile_picture": "doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
-                      "year_of_experience": "4",
-                       "license_number": "UPS74856963",
-                       "location": "Kolkata",
-                       "gender": "Male",
-                       "age": "2001-01-30",
-                       "status": 1,
-                       "fcm_token": "fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI",
-                      "created_at": "2023-06-06T08:40:43.000000Z",
-                       "updated_at": "2023-07-25T08:53:27.000000Z",
-                       "deleted_at": null
-                  },
-                "clinics": [
-                   {
-                      "id": 7,
-                      "user_id": 4,
-                      "clinic_name": "Life Medical",
-                      "clinic_address": "Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India",
-                      "clinic_phone": "7894561230",
-                      "longitute": "88.3598025",
-                      "latitute": "22.5474164",
-                      "distance": 7.963637575826944
-                  },
-               ]
-               }
-           }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/appointment-store
-    metadata:
-      groupName: 'Patient Booking'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Store Appointment'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      clinic_id:
-        name: clinic_id
-        description: ''
-        required: true
-        example: mollitia
-        type: string
-        custom: []
-      appointment_date:
-        name: appointment_date
-        description: ''
-        required: true
-        example: quia
-        type: string
-        custom: []
-      appointment_time:
-        name: appointment_time
-        description: ''
-        required: true
-        example: debitis
-        type: string
-        custom: []
-    cleanBodyParameters:
-      clinic_id: mollitia
-      appointment_date: quia
-      appointment_time: debitis
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-             "message": "Appointment booked successfully!",
             "status": true,
-              "data": {
-                   "user_id": 1,
-                   "doctor_id": 4,
-                   "clinic_id": 7,
-                   "appointment_id": "000000",
-                   "appointment_date": "2021-08-02",
-                   "appointment_time": "11:00 AM",
-                    "appointment_status": "Done",
-                    "booking_time": "2021-08-02 12:00:00",
-                    "clinic_name": "Life Medical",
-                     "clinic_address": "Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India",
-                   "clinic_phone": "7894561230",
-                   "updated_at": "2021-08-02T12:00:00.000000Z",
-                   "created_at": "2021-08-02T12:00:00.000000Z",
-                   "id": 1,
-                   "user": {
-                       "id": 1,
-                       "name": "Shilpi Chaki",
-                       "email": "shilpi@mailinator.com",
-                       "email_verified_at": null,
-                       "profile_picture": "user/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
-                       "phone": "7894561230",
-                       "year_of_experience": "4",
-                       "license_number": "UPS74856963",
-                       "location": "Kolkata",
-                       "gender": "female",
-                       "age": "2001-01-30",
-                       "status": 1,
-                       "fcm_token": "fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI",
-                       "created_at": "2021-07-25T08:53:27.000000Z",
-                       "updated_at": "2021-07-25T08:53:27.000000Z",
-                       "deleted_at": null
-                   }
-              }
+           "statusCode": 200,
+           "message": "Profile fetched successfully",
+           "data": {
+               "id": 3,
+               "name": "John Doe",
+               "gender": "Male",
+               "age": "2008-01-26",
+               "email": "john@yopmail.com",
+               "phone": "8596769586",
+               "profile_picture": "patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg",
+               "status": 1
+           }
           }
         headers: []
         description: ''
@@ -174,15 +55,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/visitDate
+    uri: api/v1/patient/updateProfile
     metadata:
-      groupName: 'Patient Booking'
+      groupName: 'Patient Profile'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Clinic Date and Time Slot'
+      title: 'Update Patient Profile'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -191,38 +72,68 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'optional The name of the Patient.'
+        required: false
+        example: ea
+        type: string
+        custom: []
+      email:
+        name: email
+        description: 'optional The email of the Patient.'
+        required: false
+        example: satterfield.marlene@example.com
+        type: string
+        custom: []
+      age:
+        name: age
+        description: 'optional The age of the Patient.'
+        required: false
+        example: eos
+        type: date
+        custom: []
+      phone:
+        name: phone
+        description: 'optional The phone of the Patient.'
+        required: false
+        example: et
+        type: numeric
+        custom: []
+    cleanBodyParameters:
+      name: ea
+      email: satterfield.marlene@example.com
+      age: eos
+      phone: et
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-                "message": "Clinic Details!",
-                "status": true,
-                "data": {
-                   "id": 7,
-                  "user_id": 4,
-                   "clinic_name": "Life Medical",
-                   "clinic_address": "Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India",
-                   "clinic_phone": "7894561230",
-                   "longitute": "88.3598025",
-                   "latitute": "22.5474164",
-                   "distance": 7.963637575826944,
-                  "clinic_slots": [
-                       {
-                           "id": 1,
-                           "clinic_detail_id": 7,
-                           "slot_date": "2021-08-02",
-                           "slot_start_time": "11:00 AM",
-                           "slot_end_time": "12:00 PM",
-                           "created_at": null,
-                           "updated_at": null
-                      },
-                  ]
-               }
-           }
+          "status": true,
+          "statusCode": 200,
+          "message": "Profile fetched successfully",
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The email has already been taken."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The phone has already been taken."
+          }
         headers: []
         description: ''
         custom: []
@@ -235,15 +146,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/clinicVisitSlot
+    uri: api/v1/patient/changePassword
     metadata:
-      groupName: 'Patient Booking'
+      groupName: 'Patient Profile'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Clinic Visit available Slot Time'
+      title: 'Change Password'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -252,25 +163,108 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      current_password:
+        name: current_password
+        description: 'The old_password of the Patient.'
+        required: true
+        example: nihil
+        type: string
+        custom: []
+      new_password:
+        name: new_password
+        description: 'The password of the Patient.'
+        required: true
+        example: itaque
+        type: string
+        custom: []
+      confirm_password:
+        name: confirm_password
+        description: 'The password_confirmation of the Patient.'
+        required: true
+        example: odit
+        type: string
+        custom: []
+    cleanBodyParameters:
+      current_password: nihil
+      new_password: itaque
+      confirm_password: odit
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-               "message": "Clinic Details!",
-              "status": true,
-             "data": {
-                   "id": 1,
-                   "clinic_detail_id": 7,
-                   "slot_date": "2021-08-02",
-                   "slot_start_time": "11:00 AM",
-                   "slot_end_time": "12:00 PM",
-                   "created_at": null,
-                   "updated_at": null
-              }
+          "status": true,
+          "statusCode": 200,
+          "message": "Password changed successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The old_password and password must be different."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/patient/updateProfileImage
+    metadata:
+      groupName: 'Patient Profile'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Upload profile image'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      profile_picture:
+        name: profile_picture
+        description: 'The profile_picture of the Patient.'
+        required: true
+        example: null
+        type: file
+        custom: []
+    cleanBodyParameters: []
+    fileParameters:
+      profile_picture: null
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "message": "Profile updated successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "error": "The profile_picture filled is required."
           }
         headers: []
         description: ''
