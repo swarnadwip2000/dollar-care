@@ -192,7 +192,6 @@ class ForgetPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $errors['message'] = [];
             return response()->json(['error' => $validator->errors()->first()], 201);
         }
 

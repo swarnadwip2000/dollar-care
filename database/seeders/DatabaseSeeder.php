@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             // AboutUsSeeder::class,
             // PrivacyPolicySeeder::class,
             // AddDaySeeder::class
-            HomePageSeeder::class
+            // HomePageSeeder::class
+            TermsAndConditionSeeder::class,
         ]);
     }
 }

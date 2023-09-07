@@ -68,7 +68,6 @@ endpoints:
           "status": true,
              "data": {
                  "appointments": {
-                     "data": [
                          {
                              "id": 11,
                              "patient_name": "John Doe",
@@ -80,10 +79,8 @@ endpoints:
                              "duration": "30 min",
                              "appointment_status": "Done"
                          }
-                     ]
                  },
                  "clinics": {
-                     "data": [
                          {
                              "id": 4,
                              "clinic_name": "The Healing Clinic"
@@ -92,7 +89,6 @@ endpoints:
                              "id": 8,
                              "clinic_name": "ORM Medicle"
                          }
-                     ]
                  }
              }
           }

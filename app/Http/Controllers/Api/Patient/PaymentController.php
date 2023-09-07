@@ -20,7 +20,6 @@ class PaymentController extends Controller
      * @response 200{
      * "status": true,
      * "membership": {
-     *     "data": {
      *         "id": 6,
      *         "amount": "200",
      *         "membership_expiry_date": "2024-01-11",
@@ -28,7 +27,6 @@ class PaymentController extends Controller
      *         "plan_name": "Standard",
      *         "plan_duration": "6"
      *     }
-     *}
      * }
      */
 
@@ -37,7 +35,7 @@ class PaymentController extends Controller
         try {
             $membership = UserMembership::where('user_id', auth()->user()->id)->where('membership_expiry_date', '>=', date('Y-m-d'))->orderBy('id', 'desc')->first();
             if ($membership) {
-                $data = fractal($membership, new UserMembershipTransformer())->toArray();
+                $data = fractal($membership, new UserMembershipTransformer())->toArray()['data'];
                 return response()->json(['status' => true, 'membership' => $data], $this->successStatus);
             } else {
                 return response()->json(['status' => false, 'message' => 'No payment history'], 201);

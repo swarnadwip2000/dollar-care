@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Doctor\ProfileController;
 use App\Http\Controllers\Api\Doctor\SettingsController;
 use App\Http\Controllers\Api\Patient\AppointmentController;
 use App\Http\Controllers\Api\Patient\BookingController as BookingController;
+use App\Http\Controllers\Api\Patient\ChatController;
 use App\Http\Controllers\Api\Patient\MembershipController;
 use App\Http\Controllers\Api\Patient\NotificationController as PatientNotificationController;
 use App\Http\Controllers\Api\Patient\PaymentController;
@@ -107,10 +108,14 @@ Route::prefix('v1')->group(function () {
                 Route::post('/detailById', [MembershipController::class, 'detailById']);
                 Route::post('/payment', [MembershipController::class, 'membershipPayment']);
             });
+
+            // friend request
+            Route::post('/chat-request', [ChatController::class, 'chatRequest']);
+            Route::post('/chat-request-send', [ChatController::class, 'chatRequestSend']);
         });
 
         //slots routes
-        Route::post('/booking-and-consultancy', [BookingController::class, 'bookingAndConsultancy']);
+        Route::post('/doctor-details', [BookingController::class, 'doctorDetails']);
         Route::post('/appointment-store', [BookingController::class, 'storeAppointment']);
         Route::post('/visitDate', [BookingController::class, 'visitDate']);
         Route::post('/clinicVisitSlot', [BookingController::class, 'clinicVisitSlot']);

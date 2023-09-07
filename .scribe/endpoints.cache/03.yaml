@@ -48,7 +48,6 @@ endpoints:
                   },
               ],
               "user": {
-                  "data": {
                       "id": 4,
                       "name": "James Bond",
                       "email": "james@yopmail.com",
@@ -69,7 +68,6 @@ endpoints:
                               }
                           }
                       ]
-                  }
               }
           }
           }
@@ -107,35 +105,35 @@ endpoints:
         name: name
         description: 'The name of the Doctor.'
         required: true
-        example: at
+        example: veritatis
         type: string
         custom: []
       email:
         name: email
         description: 'The email of the Doctor.'
         required: true
-        example: annie.ledner@example.com
+        example: katlynn.reilly@example.net
         type: string
         custom: []
       gender:
         name: gender
         description: ''
         required: true
-        example: reprehenderit
+        example: quibusdam
         type: string
         custom: []
       age:
         name: age
         description: 'The age of the Doctor.'
         required: true
-        example: illo
+        example: quo
         type: date
         custom: []
       phone:
         name: phone
         description: 'The phone of the Doctor.'
         required: true
-        example: atque
+        example: consectetur
         type: numeric
         custom: []
       specialization_id:
@@ -143,25 +141,25 @@ endpoints:
         description: 'The specialization_id of the Doctor.'
         required: true
         example:
-          - esse
+          - optio
         type: 'string[]'
         custom: []
       license_number:
         name: license_number
         description: 'The license_number of the Doctor.'
         required: true
-        example: mollitia
+        example: odit
         type: string
         custom: []
     cleanBodyParameters:
-      name: at
-      email: annie.ledner@example.com
-      gender: reprehenderit
-      age: illo
-      phone: atque
+      name: veritatis
+      email: katlynn.reilly@example.net
+      gender: quibusdam
+      age: quo
+      phone: consectetur
       specialization_id:
-        - esse
-      license_number: mollitia
+        - optio
+      license_number: odit
     fileParameters: []
     responses:
       -
@@ -185,7 +183,6 @@ endpoints:
                   },
               ],
               "user": {
-                  "data": {
                       "id": 4,
                       "name": "James Bond",
                       "email": "james@yopmail.com",
@@ -206,7 +203,6 @@ endpoints:
                               }
                           }
                       ]
-                  }
               }
           }
           }
@@ -262,27 +258,27 @@ endpoints:
         name: current_password
         description: 'The old_password of the Doctor.'
         required: true
-        example: et
+        example: odio
         type: string
         custom: []
       new_password:
         name: new_password
         description: 'The password of the Doctor.'
         required: true
-        example: et
+        example: dolorem
         type: string
         custom: []
       confirm_password:
         name: confirm_password
         description: 'The password_confirmation of the Doctor.'
         required: true
-        example: eveniet
+        example: harum
         type: string
         custom: []
     cleanBodyParameters:
-      current_password: et
-      new_password: et
-      confirm_password: eveniet
+      current_password: odio
+      new_password: dolorem
+      confirm_password: harum
     fileParameters: []
     responses:
       -
@@ -306,7 +302,6 @@ endpoints:
                   },
               ],
               "user": {
-                  "data": {
                       "id": 4,
                       "name": "James Bond",
                       "email": "james@yopmail.com",
@@ -327,7 +322,6 @@ endpoints:
                               }
                           }
                       ]
-                  }
               }
           }
           }
@@ -402,7 +396,6 @@ endpoints:
                   },
               ],
               "user": {
-                  "data": {
                       "id": 4,
                       "name": "James Bond",
                       "email": "james@yopmail.com",
@@ -423,7 +416,6 @@ endpoints:
                               }
                           }
                       ]
-                  }
               }
           }
           }

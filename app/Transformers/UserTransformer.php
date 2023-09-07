@@ -19,8 +19,6 @@ class UserTransformer extends TransformerAbstract
             'age'              => $user->age,
             'license_number'   => $user->license_number,
             'profile_picture'  => $user->profile_picture,
-            'fcm_token'        => $user->fcm_token,
-            'status'           => $user->status,
             'specializations'  => $user->specializations()->select('specializations.id', 'specializations.name')->get(),    
         ];
     }

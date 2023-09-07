@@ -40,7 +40,6 @@ class ProfileController extends Controller
      *         },
      *     ],
      *     "user": {
-     *         "data": {
      *             "id": 4,
      *             "name": "James Bond",
      *             "email": "james@yopmail.com",
@@ -61,7 +60,6 @@ class ProfileController extends Controller
      *                     }
      *                 }
      *             ]
-     *         }
      *     }
      * }
      * }
@@ -71,7 +69,7 @@ class ProfileController extends Controller
     {
         $user = User::where('id', auth()->user()->id)->first();
         $data['specializations'] = Specialization::orderBy('name', 'asc')->get();
-        $data['user'] = fractal($user, new UserTransformer())->toArray();
+        $data['user'] = fractal($user, new UserTransformer())->toArray()['data'];
         return response()->json([
             'status' => true,
             'statusCode' => $this->sucessStatus,
@@ -103,7 +101,6 @@ class ProfileController extends Controller
      *         },
      *     ],
      *     "user": {
-     *         "data": {
      *             "id": 4,
      *             "name": "James Bond",
      *             "email": "james@yopmail.com",
@@ -124,7 +121,6 @@ class ProfileController extends Controller
      *                     }
      *                 }
      *             ]
-     *         }
      *     }
      * }
      * }
@@ -180,7 +176,7 @@ class ProfileController extends Controller
                 }
             }
 
-            $data =  fractal($user, new UserTransformer())->toArray();
+            $data =  fractal($user, new UserTransformer())->toArray()['data'];
 
             return response()->json([
                 'status' => true,
@@ -215,7 +211,6 @@ class ProfileController extends Controller
      *         },
      *     ],
      *     "user": {
-     *         "data": {
      *             "id": 4,
      *             "name": "James Bond",
      *             "email": "james@yopmail.com",
@@ -236,7 +231,6 @@ class ProfileController extends Controller
      *                     }
      *                 }
      *             ]
-     *         }
      *     }
      * }
      * }
@@ -259,7 +253,7 @@ class ProfileController extends Controller
             $user = auth()->user();
             $user->profile_picture = $this->imageUpload($request->profile_picture, 'doctor');
             $user->save();
-            $data =  fractal($user, new UserTransformer())->toArray();
+            $data =  fractal($user, new UserTransformer())->toArray()['data'];
 
             return response()->json([
                 'status' => true,
@@ -296,7 +290,6 @@ class ProfileController extends Controller
      *         },
      *     ],
      *     "user": {
-     *         "data": {
      *             "id": 4,
      *             "name": "James Bond",
      *             "email": "james@yopmail.com",
@@ -317,7 +310,6 @@ class ProfileController extends Controller
      *                     }
      *                 }
      *             ]
-     *         }
      *     }
      * }
      * }
@@ -343,7 +335,7 @@ class ProfileController extends Controller
             $user = User::findOrFail(auth()->user()->id);
             $user->password = bcrypt($request->new_password);
             $user->save();
-            $data =  fractal($user, new UserTransformer())->toArray();
+            $data =  fractal($user, new UserTransformer())->toArray()['data'];
             return response()->json([
                 'status' => true,
                 'statusCode' => $this->sucessStatus,

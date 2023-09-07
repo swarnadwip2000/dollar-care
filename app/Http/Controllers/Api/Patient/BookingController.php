@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Patient;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,66 +15,87 @@ use App\Models\ClinicDetails;
 use App\Models\Slot;
 use App\Models\Appointment;
 use App\Mail\ThankYouMail;
+use App\Transformers\DateSlotTransformer;
+use App\Transformers\TimeSlotTransformer;
+use App\Transformers\UserTransformer;
 use Carbon\Carbon;
 
 /**
  * @group Patient Booking 
- * */ 
+ * */
 
 class BookingController extends Controller
 {
+
     /**
-     * Booking and Consultancy
+     * Doctor details Api
+     * @bodyParam doctor_id string required The id of the doctor.
      * @response 200{
-     *       "message": "Booking And Consultancy",
-     *       "status": true,
-     *       "data": {
-     *          "doctor": {
-     *             "id": 4,
-     *              "name": "James Bond",
-     *             "email": "james@yopmail.com",
-     *              "phone": "08596769586",
-     *              "email_verified_at": null,
-     *              "profile_picture": "doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
-     *             "year_of_experience": "4",
-     *              "license_number": "UPS74856963",
-     *              "location": "Kolkata",
-     *              "gender": "Male",
-     *              "age": "2001-01-30",
-     *              "status": 1,
-     *              "fcm_token": "fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI",
-     *             "created_at": "2023-06-06T08:40:43.000000Z",
-     *              "updated_at": "2023-07-25T08:53:27.000000Z",
-     *              "deleted_at": null
-     *         },
-     *       "clinics": [
-     *          {
-     *             "id": 7,
-     *             "user_id": 4,
-     *             "clinic_name": "Life Medical",
-     *             "clinic_address": "Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India",
-     *             "clinic_phone": "7894561230",
-     *             "longitute": "88.3598025",
-     *             "latitute": "22.5474164",
-     *             "distance": 7.963637575826944
-     *         },
-     *      ]
-     *      }
-     *  }
+     *  "status": true,
+     *   "statusCode": 200,
+     *   "data": {
+     *       "doctor": {
+     *           "id": 4,
+     *           "name": "James Bond",
+     *           "email": "james@yopmail.com",
+     *           "phone": "7485968695",
+     *           "gender": "Male",
+     *           "age": "2000-02-10",
+     *           "license_number": "DKM-74859686",
+     *           "profile_picture": "doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg",
+     *           "specializations": [
+     *               {
+     *                   "id": 2,
+     *                   "name": "Dentist",
+     *               }
+     *           ]
+     *       },
+     *       "clinic": [
+     *           {
+     *               "id": 5,
+     *               "user_id": 4,
+     *               "clinic_name": "Christan Medical Collage (CMC)",
+     *               "clinic_address": "Rajarhat, Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Gopalpur I, Kolkata, West Bengal, India",
+     *               "clinic_phone": "7412589635",
+     *               "longitute": "88.4528608",
+     *               "latitute": "22.6343954",
+     *               "distance": 6.830848254188763
+     *           },
+     *       
+     *       ]
+     *   }
+     * }
+     * 
      * 
      */
-    public function bookingAndConsultancy(Request $request)
+
+    public function doctorDetails(Request $request)
     {
-        $id = $request->id;
-        $data['doctor'] = User::find($id);
-        // get clinics within 10km radius
-        $latitude = $request->latitude;
-        $longitude = $request->longitude;
-        $radius = 10;
-        $data['clinics'] = ClinicDetails::where('user_id', $id)->select('id', 'user_id', 'clinic_name', 'clinic_address', 'clinic_phone', 'longitute', 'latitute', DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance'))->having('distance', '<', $radius)->get();
-        // dd($clinics); 
-        
-        return response()->json(['message' => 'Booking And Consultancy', 'status' => true, 'data' => $data], 200);
+        $validator =  Validator::make($request->all(), [
+            'doctor_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
+        try {
+            $doctor_id = $request->doctor_id;
+            $data = [];
+            $doctor = User::where('id', $doctor_id)->first();
+            $data['doctor'] = fractal($doctor, new UserTransformer())->toArray()['data'];
+            // get clinic details for the doctor
+            $latitude = Auth::user()->locations->latitude;
+            $longitude = Auth::user()->locations->longitude;
+            $radius = 10;
+            $data['clinic'] = ClinicDetails::where('user_id', $doctor_id)->select('id', 'user_id', 'clinic_name', 'clinic_address', 'clinic_phone', 'longitute', 'latitute', DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance'))->having('distance', '<', $radius)->get();
+
+
+
+            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
+        }
     }
 
 
@@ -81,66 +103,76 @@ class BookingController extends Controller
      * Clinic Date and Time Slot
      * 
      * @response 200{
-     *       "message": "Clinic Details!",
-     *       "status": true,
-     *       "data": {
-     *          "id": 7,
-     *         "user_id": 4,
-     *          "clinic_name": "Life Medical",
-     *          "clinic_address": "Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India",
-     *          "clinic_phone": "7894561230",
-     *          "longitute": "88.3598025",
-     *          "latitute": "22.5474164",
-     *          "distance": 7.963637575826944,
-     *         "clinic_slots": [
-     *              {
-     *                  "id": 1,
-     *                  "clinic_detail_id": 7,
-     *                  "slot_date": "2021-08-02",
-     *                  "slot_start_time": "11:00 AM",
-     *                  "slot_end_time": "12:00 PM",
-     *                  "created_at": null,     
-     *                  "updated_at": null
-     *             },
-     *         ]
-     *      }
+     *   "message": "Clinic Details",
+     * "status": true,
+     * "data": [
+     *     {
+     *         "id": 46,
+     *         "slot_date": "2023-09-11",
+     *         "slot_available": 2
+     *     },
+     *     {
+     *         "id": 48,
+     *         "slot_date": "2023-09-14",
+     *         "slot_available": 5
+     *     }
+     *     ]
      *  }
+     * 
+     * @response 201{
+     *  "error": "The clinic id field is required."
+     * }
      * 
      */
     public function visitDate(Request $request)
     {
-        if ($request->status == true) {
-            $clinic_details = ClinicDetails::with(array('clinic_slots' => function ($query) {
-                $query->whereBetween('slot_date', [date('Y-m-d'), date('Y-m-d', strtotime('+' . 7 . 'days'))]);
-            }))->where('id', $request->clinic_id)->first();
+        $validator = Validator::make($request->all(), [
+            'clinic_id' => 'required|exists:clinic_details,id'
+        ]);
 
-            return response()->json(['message' => 'Clinic Details', 'status' => true, 'data' => $clinic_details]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+
+        try {
+            $slot_details = Slot::where('clinic_detail_id', $request->clinic_id)->where('slot_date', '>=', date('Y-m-d'))->get();
+            $slots = fractal($slot_details, new DateSlotTransformer())->toArray()['data'];
+            return response()->json(['message' => 'Clinic Details', 'status' => true, 'data' => $slots]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Something went wrong!', 'status' => false, 'data' => $th->getMessage()], 500);
         }
     }
 
     /**
      * Clinic Visit available Slot Time
-     * 
+     *  @bodyParam slot_id string required The id of the slot.
      * @response 200{
-     *      "message": "Clinic Details!",
-     *     "status": true,
-     *    "data": {
-     *          "id": 1,
-     *          "clinic_detail_id": 7,
-     *          "slot_date": "2021-08-02",
-     *          "slot_start_time": "11:00 AM",
-     *          "slot_end_time": "12:00 PM",
-     *          "created_at": null,
-     *          "updated_at": null
-     *     }
+     *   {
+     *    "message": "Clinic Details",
+     *    "status": true,
+     *    "data": [
+     *        {
+     *            "id": 46,
+     *            "slot_date": "2023-09-11",
+     *            "slot_available": 2
+     *        },
+     *        {
+     *            "id": 48,
+     *            "slot_date": "2023-09-14",
+     *            "slot_available": 5
+     *        },
+     *    ]
+     *}
      * }
      */
     public function clinicVisitSlot(Request $request)
     {
-        if ($request->status == true) {
-            $slot_times = Slot::where('id', $request->slot_id)->first();
-
-            return response()->json(['message' => 'Clinic Details', 'status' => true, 'data' => $slot_times]);
+        try {
+            $slot_times = Helper::slotSliceWithDate($request->slot_id);
+            $slots = fractal($slot_times, new TimeSlotTransformer())->toArray()['data'];
+            return response()->json(['message' => 'Clinic Details!', 'status' => true, 'data' => $slots]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Something went wrong!', 'status' => false, 'data' => $th->getMessage()], 500);
         }
     }
 
@@ -201,22 +233,13 @@ class BookingController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $errors['message'] = [];
-            $data = explode(',', $validator->errors());
-
-            for ($i = 0; $i < count($validator->errors()); $i++) {
-                // return $data[$i];
-                $dk = explode('["', $data[$i]);
-                $ck = explode('"]', $dk[1]);
-                $errors['message'][$i] = $ck[0];
-            }
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['message' => $validator->errors()->first(), 'status' => false, 'statusCode' => 201], 201);
         }
 
         try {
             $count = Appointment::where(['user_id' => Auth::user()->id, 'appointment_time' => $request->appointment_time, 'appointment_status' => 'Done'])->count();
             if ($count > 0) {
-                return response()->json(['message' => 'You have already booked an appointment on this date and time!!', 'status' => false, 'statusCode' => 401], 401);
+                return response()->json(['message' => 'You have already booked an appointment on this date and time!!', 'status' => false, 'statusCode' => 201], 201);
             }
 
             $clinic_details = ClinicDetails::where('id', $request->clinic_id)->first();
@@ -241,11 +264,9 @@ class BookingController extends Controller
             $email = Auth::user()->email;
             Mail::to($email)->send(new ThankYouMail($body));
 
-            return response()->json(['message' => 'Appointment booked successfully!', 'status' => true, 'data' => $appointment]);
-        } catch(\Throwable $th) {
+            return response()->json(['message' => 'Appointment booked successfully!', 'status' => true, 'data' => $appointment], 200);
+        } catch (\Throwable $th) {
             return response()->json(['message' => 'Something went wrong!', 'status' => false, 'data' => $th->getMessage()]);
         }
-
-        
     }
 }

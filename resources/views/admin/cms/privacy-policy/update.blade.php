@@ -24,7 +24,8 @@
                         <h3 class="page-title">Privacy Policy Page Information</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item">CMS</li>
-                            <li class="breadcrumb-item"><a href="{{ route('cms.privacy-policy.index') }}">Contact Page</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('cms.privacy-policy.index') }}">Contact Page</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
@@ -50,9 +51,9 @@
                                             <div class="border p-4 rounded">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <label for="inputEnterYourName" class="col-form-label"> Content <span
-                                                                style="color: red;">*</span></label>
-                                                       <textarea name="content" class="form-control" id="" cols="30" rows="10">{{ $privacyPolicy->content }}</textarea>
+                                                        <label for="inputEnterYourName" class="col-form-label"> Content
+                                                            <span style="color: red;">*</span></label>
+                                                        <textarea name="content" class="form-control" id="editor" cols="30" rows="10">{{ $privacyPolicy->content }}</textarea>
                                                         @if ($errors->has('content'))
                                                             <div class="error" style="color:red;">
                                                                 {{ $errors->first('content') }}</div>
@@ -80,5 +81,21 @@
 @endsection
 
 @push('scripts')
-    
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <script>
+        // cke editor
+        CKEDITOR.replace('content');
+        CKEDITOR.on('instanceReady', function(evt) {
+            var editor = evt.editor;
+
+            editor.on('change', function(e) {
+                var contentSpace = editor.ui.space('contents');
+                var ckeditorFrameCollection = contentSpace.$.getElementsByTagName('iframe');
+                var ckeditorFrame = ckeditorFrameCollection[0];
+                var innerDoc = ckeditorFrame.contentDocument;
+                var innerDocTextAreaHeight = $(innerDoc.body).height();
+                console.log(innerDocTextAreaHeight);
+            });
+        });
+    </script>
 @endpush

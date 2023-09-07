@@ -192,7 +192,7 @@ class ProfileController extends Controller
             $user = User::findOrFail(auth()->user()->id);
             $user->password = bcrypt($request->new_password);
             $user->save();
-            $data =  fractal($user, new UserTransformer())->toArray();
+            $data =  fractal($user, new UserTransformer())->toArray()['data'];
             return response()->json([
                 'status' => true,
                 'statusCode' => $this->sucessStatus,

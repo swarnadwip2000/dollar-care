@@ -9,6 +9,7 @@ use App\Models\ContactUs;
 use App\Models\HomePage;
 use App\Models\PrivacyPolicy;
 use App\Models\Qna;
+use App\Models\TermsAndCondition;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -149,22 +150,22 @@ class CmsController extends Controller
         }
     }
 
-    public function aboutUsIndex()
+    public function termsAndConditionIndex()
     {
-        $aboutUs = AboutUs::orderBy('id', 'desc')->first();
-        return view('admin.cms.about-us.update')->with(compact('aboutUs'));
+        $terms = TermsAndCondition::orderBy('id', 'desc')->first();
+        return view('admin.cms.terms-and-condions.update')->with(compact('terms'));
     }
 
-    public function aboutUsUpdate(Request $request)
+    public function termsAndConditionUpdate(Request $request)
     {
         $request->validate([
             'content' => 'required',
         ]);
 
-        $aboutUs = AboutUs::findOrFail($request->id);
-        $aboutUs->content = $request->content;
-        $aboutUs->save();
-        return redirect()->back()->with('message', 'About us page details has been updated successfully');
+        $terms = TermsAndCondition::findOrFail($request->id);
+        $terms->content = $request->content;
+        $terms->save();
+        return redirect()->back()->with('message', 'Terms & Condition page details has been updated successfully');
     }
 
     public function privacyPolicyIndex()

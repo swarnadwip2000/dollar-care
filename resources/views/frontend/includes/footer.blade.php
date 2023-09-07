@@ -129,9 +129,9 @@
             <div class="ftr-btm">
                 <ul>
                     <li class="bdr_1">
-                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
                     </li>
-                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="{{ route('terms-and-conditions') }}">Terms & Conditions</a></li>
                 </ul>
                 <p>
                     Copyright © {{ date('Y') }} DollarCARE. All Rights Reserved DESIGNED &

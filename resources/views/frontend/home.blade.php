@@ -27,7 +27,7 @@
                         </p>
                     </div>
                     <div class="main-btn pt-4">
-                        @if (!Auth::check())
+                        @if (!Auth::check() )
                             <a href="{{ route('login') }}"><span>get started</span><span class="btn-arw"><i
                                         class="fa-solid fa-arrow-right"></i></span></a>
                         @endif

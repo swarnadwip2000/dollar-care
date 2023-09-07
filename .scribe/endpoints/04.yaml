@@ -33,7 +33,6 @@ endpoints:
              "statusCode": 200,
              "message": "Clinic list",
              "data": {
-                 "data": [
                      {
                          "id": 4,
                          "clinic_name": "The Healing Clinic",
@@ -58,7 +57,6 @@ endpoints:
                              }
                          ]
                      }
-                 ]
              }
           }
         headers: []
@@ -113,7 +111,6 @@ endpoints:
           "statusCode": 200,
           "message": "Clinic list",
           "data": {
-             "data": [
                  {
                      "id": 1,
                      "day": "Sunday"
@@ -142,7 +139,6 @@ endpoints:
                      "id": 7,
                      "day": "Saturday"
                  }
-             ]
           }
           }
         headers: []
@@ -190,21 +186,21 @@ endpoints:
         name: clinic_name
         description: ''
         required: true
-        example: et
+        example: velit
         type: string
         custom: []
       clinic_address:
         name: clinic_address
         description: ''
         required: true
-        example: est
+        example: iure
         type: string
         custom: []
       clinic_phone:
         name: clinic_phone
         description: ''
         required: true
-        example: cum
+        example: nisi
         type: numeric
         custom: []
       day_id:
@@ -212,21 +208,21 @@ endpoints:
         description: ''
         required: true
         example:
-          - ducimus
+          - aliquid
         type: 'string[]'
         custom: []
       latitute:
         name: latitute
         description: ''
         required: true
-        example: voluptas
+        example: corrupti
         type: string
         custom: []
       longitute:
         name: longitute
         description: ''
         required: true
-        example: impedit
+        example: suscipit
         type: string
         custom: []
       slot_date:
@@ -234,7 +230,7 @@ endpoints:
         description: ''
         required: true
         example:
-          - ullam
+          - est
         type: 'string[]'
         custom: []
       slot_start_time:
@@ -242,7 +238,7 @@ endpoints:
         description: ''
         required: true
         example:
-          - quod
+          - optio
         type: 'string[]'
         custom: []
       slot_end_time:
@@ -250,7 +246,7 @@ endpoints:
         description: required.
         required: false
         example:
-          - et
+          - quasi
         type: 'string[]'
         custom: []
       first_time_mode:
@@ -258,7 +254,7 @@ endpoints:
         description: required.
         required: false
         example:
-          - autem
+          - nemo
         type: 'string[]'
         custom: []
       second_time_mode:
@@ -266,27 +262,27 @@ endpoints:
         description: required.
         required: false
         example:
-          - est
+          - excepturi
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      clinic_name: et
-      clinic_address: est
-      clinic_phone: cum
+      clinic_name: velit
+      clinic_address: iure
+      clinic_phone: nisi
       day_id:
-        - ducimus
-      latitute: voluptas
-      longitute: impedit
+        - aliquid
+      latitute: corrupti
+      longitute: suscipit
       slot_date:
-        - ullam
-      slot_start_time:
-        - quod
-      slot_end_time:
-        - et
-      first_time_mode:
-        - autem
-      second_time_mode:
         - est
+      slot_start_time:
+        - optio
+      slot_end_time:
+        - quasi
+      first_time_mode:
+        - nemo
+      second_time_mode:
+        - excepturi
     fileParameters: []
     responses:
       -
@@ -335,15 +331,49 @@ endpoints:
     bodyParameters:
       id:
         name: id
-        description: ''
-        required: true
-        example: 2.5
-        type: number
+        description: required.
+        required: false
+        example: '1'
+        type: numeric
         custom: []
     cleanBodyParameters:
-      id: 2.5
+      id: '1'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "message": "Clinic list",
+          "data": {
+              "id": 4,
+             "clinic_name": "The Healing Clinic",
+            "clinic_address": "Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India",
+           "clinic_phone": "7485968695",
+          "clinic_opening_days": [
+             {
+                "id": 38,
+               "day": "Monday"
+          },
+          ]
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+          "status": false,
+          "statusCode": 201,
+          "error": "No clinic found"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth: []
     controller: null
@@ -375,28 +405,28 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: delectus
+        example: quos
         type: numeric
         custom: []
       clinic_name:
         name: clinic_name
         description: ''
         required: true
-        example: sit
+        example: est
         type: string
         custom: []
       clinic_address:
         name: clinic_address
         description: ''
         required: true
-        example: sed
+        example: aut
         type: string
         custom: []
       clinic_phone:
         name: clinic_phone
         description: ''
         required: true
-        example: non
+        example: ipsa
         type: numeric
         custom: []
       day_id:
@@ -404,21 +434,21 @@ endpoints:
         description: ''
         required: true
         example:
-          - esse
+          - totam
         type: 'string[]'
         custom: []
       latitute:
         name: latitute
         description: ''
         required: true
-        example: ipsa
+        example: ducimus
         type: string
         custom: []
       longitute:
         name: longitute
         description: ''
         required: true
-        example: illo
+        example: officiis
         type: string
         custom: []
       slot_date:
@@ -426,7 +456,7 @@ endpoints:
         description: optional
         required: false
         example:
-          - quo
+          - suscipit
         type: 'string[]'
         custom: []
       slot_start_time:
@@ -434,7 +464,7 @@ endpoints:
         description: optional
         required: false
         example:
-          - praesentium
+          - quas
         type: 'string[]'
         custom: []
       slot_end_time:
@@ -442,7 +472,7 @@ endpoints:
         description: optional.
         required: false
         example:
-          - dolore
+          - dicta
         type: 'string[]'
         custom: []
       first_time_mode:
@@ -450,7 +480,7 @@ endpoints:
         description: optional.
         required: false
         example:
-          - eius
+          - voluptatem
         type: 'string[]'
         custom: []
       second_time_mode:
@@ -458,28 +488,28 @@ endpoints:
         description: optional.
         required: false
         example:
-          - laboriosam
+          - expedita
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      id: delectus
-      clinic_name: sit
-      clinic_address: sed
-      clinic_phone: non
+      id: quos
+      clinic_name: est
+      clinic_address: aut
+      clinic_phone: ipsa
       day_id:
-        - esse
-      latitute: ipsa
-      longitute: illo
+        - totam
+      latitute: ducimus
+      longitute: officiis
       slot_date:
-        - quo
+        - suscipit
       slot_start_time:
-        - praesentium
+        - quas
       slot_end_time:
-        - dolore
+        - dicta
       first_time_mode:
-        - eius
+        - voluptatem
       second_time_mode:
-        - laboriosam
+        - expedita
     fileParameters: []
     responses:
       -
@@ -524,11 +554,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: quia
+        example: natus
         type: numeric
         custom: []
     cleanBodyParameters:
-      id: quia
+      id: natus
     fileParameters: []
     responses:
       -
@@ -578,11 +608,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: quaerat
+        example: quibusdam
         type: numeric
         custom: []
     cleanBodyParameters:
-      id: quaerat
+      id: quibusdam
     fileParameters: []
     responses:
       -
@@ -593,7 +623,6 @@ endpoints:
            "statusCode": 200,
            "message": "Clinic list",
            "data": {
-               "data": [
                    {
                        "id": 51,
                        "slot_start_time": "2:00 PM",
@@ -606,7 +635,6 @@ endpoints:
                        "slot_end_time": "3:00 PM",
                        "slot_date": "2023-09-19"
                    },
-               ]
            }
           }
         headers: []
@@ -654,11 +682,11 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: modi
+        example: rerum
         type: numeric
         custom: []
     cleanBodyParameters:
-      id: modi
+      id: rerum
     fileParameters: []
     responses:
       -

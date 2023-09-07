@@ -160,9 +160,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
             Route::post('/update', [AdminCmsController::class, 'contactUsUpdate'])->name('update');
         });
 
-        Route::prefix('about-us')->name('about-us.')->group(function () {
-            Route::get('/', [AdminCmsController::class, 'aboutUsIndex'])->name('index');
-            Route::post('/update', [AdminCmsController::class, 'aboutUsUpdate'])->name('update');
+        Route::prefix('terms-and-condition')->name('terms-and-condition.')->group(function () {
+            Route::get('/', [AdminCmsController::class, 'termsAndConditionIndex'])->name('index');
+            Route::post('/update', [AdminCmsController::class, 'termsAndConditionUpdate'])->name('update');
         });
 
         Route::prefix('home')->name('home.')->group(function () {
@@ -204,12 +204,14 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
 /**------------------------------------------------------------- Frontend  ----------------------------------------------------------------------------------------------*/
 
 Route::get('/', [CmsController::class, 'index'])->name('home');
-Route::get('/about-us', [CmsController::class, 'aboutUs'])->name('about-us');
+// Route::get('/about-us', [CmsController::class, 'aboutUs'])->name('about-us');
 Route::get('/services', [CmsController::class, 'services'])->name('services');
 Route::get('/contact-us', [CmsController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact-us', [CmsController::class, 'contactUsSubmit'])->name('contact-us.submit');
+Route::get('/privacy-policy', [CmsController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-and-conditions', [CmsController::class, 'termsAndConditions'])->name('terms-and-conditions');
 // qna
-Route::get('/qna', [CmsController::class, 'qna'])->name('qna');
+// Route::get('/qna', [CmsController::class, 'qna'])->name('qna');
 // membership plans
 Route::get('/membership-plans', [CmsController::class, 'membershipPlans'])->name('membership-plans');
 

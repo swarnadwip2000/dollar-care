@@ -115,8 +115,8 @@
                         <li class="{{ Request::is('admin/cms/contact-us*') ? 'active' : ' ' }}">
                             <a href="{{ route('cms.contact-us.index') }}">Contact Us Page</a>
                         </li>
-                        <li class="{{ Request::is('admin/cms/about-us*') ? 'active' : ' ' }}">
-                            <a href="{{ route('cms.about-us.index') }}">About Us Page</a>
+                        <li class="{{ Request::is('admin/cms/terms-and-condition*') ? 'active' : ' ' }}">
+                            <a href="{{ route('cms.terms-and-condition.index') }}">Terms & Condition Page</a>
                         </li>
                         <li class="{{ Request::is('admin/cms/privacy-policy*') ? 'active' : ' ' }}">
                             <a href="{{ route('cms.privacy-policy.index') }}">Privacy Policy Page</a>

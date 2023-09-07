@@ -185,11 +185,11 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: quod
+                  example: laborum
                 age:
                   type: string
                   description: ''
-                  example: hic
+                  example: atque
                 location:
                   type: string
                   description: 'The name of the user.'
@@ -213,106 +213,10 @@ paths:
         200:
           description: ''
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                example:
-                  status: true
-                  data:
-                    appointments:
-                      data:
-                        -
-                          id: 11
-                          patient_name: 'John Doe'
-                          patient_profile_picture: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
-                          appointment_date: '2023-09-11'
-                          appointment_time: '01:00 PM'
-                          clinic_name: 'ORM Medicle'
-                          clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
-                          duration: '30 min'
-                          appointment_status: Done
-                    clinics:
-                      data:
-                        -
-                          id: 4
-                          clinic_name: 'The Healing Clinic'
-                        -
-                          id: 8
-                          clinic_name: 'ORM Medicle'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  data:
-                    type: object
-                    properties:
-                      appointments:
-                        type: object
-                        properties:
-                          data:
-                            type: array
-                            example:
-                              -
-                                id: 11
-                                patient_name: 'John Doe'
-                                patient_profile_picture: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
-                                appointment_date: '2023-09-11'
-                                appointment_time: '01:00 PM'
-                                clinic_name: 'ORM Medicle'
-                                clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
-                                duration: '30 min'
-                                appointment_status: Done
-                            items:
-                              type: object
-                              properties:
-                                id:
-                                  type: integer
-                                  example: 11
-                                patient_name:
-                                  type: string
-                                  example: 'John Doe'
-                                patient_profile_picture:
-                                  type: string
-                                  example: patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg
-                                appointment_date:
-                                  type: string
-                                  example: '2023-09-11'
-                                appointment_time:
-                                  type: string
-                                  example: '01:00 PM'
-                                clinic_name:
-                                  type: string
-                                  example: 'ORM Medicle'
-                                clinic_address:
-                                  type: string
-                                  example: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
-                                duration:
-                                  type: string
-                                  example: '30 min'
-                                appointment_status:
-                                  type: string
-                                  example: Done
-                      clinics:
-                        type: object
-                        properties:
-                          data:
-                            type: array
-                            example:
-                              -
-                                id: 4
-                                clinic_name: 'The Healing Clinic'
-                              -
-                                id: 8
-                                clinic_name: 'ORM Medicle'
-                            items:
-                              type: object
-                              properties:
-                                id:
-                                  type: integer
-                                  example: 4
-                                clinic_name:
-                                  type: string
-                                  example: 'The Healing Clinic'
+                type: string
+                example: "{\n\"status\": true,\n   \"data\": {\n       \"appointments\": {\n               {\n                   \"id\": 11,\n                   \"patient_name\": \"John Doe\",\n                   \"patient_profile_picture\": \"patient/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg\",\n                   \"appointment_date\": \"2023-09-11\",\n                   \"appointment_time\": \"01:00 PM\",\n                   \"clinic_name\": \"ORM Medicle\",\n                   \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n                   \"duration\": \"30 min\",\n                   \"appointment_status\": \"Done\"\n               }\n       },\n       \"clinics\": {\n               {\n                   \"id\": 4,\n                   \"clinic_name\": \"The Healing Clinic\"\n               },\n               {\n                   \"id\": 8,\n                   \"clinic_name\": \"ORM Medicle\"\n               }\n       }\n   }\n}"
       tags:
         - 'Doctor Booking History'
       requestBody:
@@ -424,7 +328,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}"
       tags:
         - 'Doctor Profile'
   /api/v1/doctor/updateProfile:
@@ -440,7 +344,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}"
         201:
           description: ''
           content:
@@ -465,34 +369,34 @@ paths:
                 name:
                   type: string
                   description: 'The name of the Doctor.'
-                  example: at
+                  example: veritatis
                 email:
                   type: string
                   description: 'The email of the Doctor.'
-                  example: annie.ledner@example.com
+                  example: katlynn.reilly@example.net
                 gender:
                   type: string
                   description: ''
-                  example: reprehenderit
+                  example: quibusdam
                 age:
                   type: date
                   description: 'The age of the Doctor.'
-                  example: illo
+                  example: quo
                 phone:
                   type: numeric
                   description: 'The phone of the Doctor.'
-                  example: atque
+                  example: consectetur
                 specialization_id:
                   type: array
                   description: 'The specialization_id of the Doctor.'
                   example:
-                    - esse
+                    - optio
                   items:
                     type: string
                 license_number:
                   type: string
                   description: 'The license_number of the Doctor.'
-                  example: mollitia
+                  example: odit
               required:
                 - name
                 - email
@@ -514,7 +418,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password changed successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password changed successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}"
         201:
           description: ''
           content:
@@ -539,15 +443,15 @@ paths:
                 current_password:
                   type: string
                   description: 'The old_password of the Doctor.'
-                  example: et
+                  example: odio
                 new_password:
                   type: string
                   description: 'The password of the Doctor.'
-                  example: et
+                  example: dolorem
                 confirm_password:
                   type: string
                   description: 'The password_confirmation of the Doctor.'
-                  example: eveniet
+                  example: harum
               required:
                 - current_password
                 - new_password
@@ -565,7 +469,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile updated successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}"
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile updated successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}"
         201:
           description: ''
           content:
@@ -612,11 +516,11 @@ paths:
                 subject:
                   type: string
                   description: ''
-                  example: incidunt
+                  example: illum
                 message:
                   type: string
                   description: "@response 200{\n\"status\": true,\n\"data\": {\n\"id\": 1,\n\"user_id\": 1,\n\"name\": \"test doctor\",\n\"email\": \"test@yopmail.com\",\n\"phone\": \"1234567890\",\n\"subject\": \"test\",\n\"message\": \"test\",\n\"created_at\": \"2021-09-28T10:20:00.000000Z\",\n\"updated_at\": \"2021-09-28T10:20:00.000000Z\"\n}\n}"
-                  example: et
+                  example: ipsum
               required:
                 - subject
                 - message
@@ -895,7 +799,7 @@ paths:
       tags:
         - "Home Page Api's"
       security: []
-  /api/v1/all-doctors:
+  /api/v1/all-doctors-by-location:
     post:
       summary: 'All doctors Api'
       operationId: allDoctorsApi
@@ -1016,7 +920,7 @@ paths:
                 example:
                   status: false
                   statusCode: 201
-                  message: 'No Specialization Found'
+                  message: 'No Doctor Found in your area!'
                 properties:
                   status:
                     type: boolean
@@ -1026,7 +930,7 @@ paths:
                     example: 201
                   message:
                     type: string
-                    example: 'No Specialization Found'
+                    example: 'No Doctor Found in your area!'
       tags:
         - "Home Page Api's"
       security: []
@@ -1164,6 +1068,24 @@ paths:
                     example: 'No Doctor Found'
       tags:
         - "Home Page Api's"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'The type of the search.'
+                  example: sequi
+                slug:
+                  type: string
+                  description: 'The slug of the search. example - dermatologist, oral-piercing-infection'
+                  example: commodi
+              required:
+                - type
+                - slug
       security: []
   /api/v1/search-doctors:
     post:
@@ -1388,32 +1310,15 @@ paths:
               properties:
                 latitude:
                   type: string
-                  description: ''
-                  example: totam
+                  description: 'The latitude of the location.'
+                  example: quibusdam
                 longitude:
                   type: string
-                  description: ''
-                  example: tempore
+                  description: 'The longitude of the location.'
+                  example: tenetur
               required:
                 - latitude
                 - longitude
-      security: []
-  /api/v1/appointment-history:
-    post:
-      summary: 'Appointment History Api'
-      operationId: appointmentHistoryApi
-      description: ''
-      parameters: []
-      responses:
-        200:
-          description: ''
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": [\n   {\n      \"id\": 1,\n      \"user_id\": 14,\n      \"doctor_id\": 13,\n      \"clinic_id\": 1,\n      \"appointment_date\": \"2021-06-06\",\n      \"appointment_time\": \"10:00 AM\",\n      \"appointment_status\": 1,\n      \"created_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"updated_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"deleted_at\": null,\n      \"doctor\": {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@mailinator.com\"\n     },\n     }]\n   }"
-      tags:
-        - "Home Page Api's"
       security: []
   /api/v1/doctor/manage-clinic/list:
     post:
@@ -1428,7 +1333,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n*\"status\": true,\n   \"statusCode\": 200,\n   \"message\": \"Clinic list\",\n   \"data\": {\n       \"data\": [\n           {\n               \"id\": 4,\n               \"clinic_name\": \"The Healing Clinic\",\n               \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n               \"clinic_phone\": \"7485968695\",\n               \"clinic_opening_days\": [\n                   {\n                       \"id\": 38,\n                       \"day\": \"Monday\"\n                   },\n                   {\n                       \"id\": 39,\n                       \"day\": \"Tuesday\"\n                   },\n                   {\n                       \"id\": 40,\n                       \"day\": \"Wednesday\"\n                   },\n                   {\n                       \"id\": 41,\n                       \"day\": \"Thursday\"\n                   }\n               ]\n           }\n       ]\n   }\n}"
+                example: "{\n*\"status\": true,\n   \"statusCode\": 200,\n   \"message\": \"Clinic list\",\n   \"data\": {\n           {\n               \"id\": 4,\n               \"clinic_name\": \"The Healing Clinic\",\n               \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n               \"clinic_phone\": \"7485968695\",\n               \"clinic_opening_days\": [\n                   {\n                       \"id\": 38,\n                       \"day\": \"Monday\"\n                   },\n                   {\n                       \"id\": 39,\n                       \"day\": \"Tuesday\"\n                   },\n                   {\n                       \"id\": 40,\n                       \"day\": \"Wednesday\"\n                   },\n                   {\n                       \"id\": 41,\n                       \"day\": \"Thursday\"\n                   }\n               ]\n           }\n   }\n}"
         201:
           description: ''
           content:
@@ -1461,82 +1366,10 @@ paths:
         200:
           description: ''
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'Clinic list'
-                  data:
-                    data:
-                      -
-                        id: 1
-                        day: Sunday
-                      -
-                        id: 2
-                        day: Monday
-                      -
-                        id: 3
-                        day: Tuesday
-                      -
-                        id: 4
-                        day: Wednesday
-                      -
-                        id: 5
-                        day: Thursday
-                      -
-                        id: 6
-                        day: Friday
-                      -
-                        id: 7
-                        day: Saturday
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'Clinic list'
-                  data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        example:
-                          -
-                            id: 1
-                            day: Sunday
-                          -
-                            id: 2
-                            day: Monday
-                          -
-                            id: 3
-                            day: Tuesday
-                          -
-                            id: 4
-                            day: Wednesday
-                          -
-                            id: 5
-                            day: Thursday
-                          -
-                            id: 6
-                            day: Friday
-                          -
-                            id: 7
-                            day: Saturday
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              example: 1
-                            day:
-                              type: string
-                              example: Sunday
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic list\",\n\"data\": {\n       {\n           \"id\": 1,\n           \"day\": \"Sunday\"\n       },\n       {\n           \"id\": 2,\n           \"day\": \"Monday\"\n       },\n       {\n           \"id\": 3,\n           \"day\": \"Tuesday\"\n       },\n       {\n           \"id\": 4,\n           \"day\": \"Wednesday\"\n       },\n       {\n           \"id\": 5,\n           \"day\": \"Thursday\"\n       },\n       {\n           \"id\": 6,\n           \"day\": \"Friday\"\n       },\n       {\n           \"id\": 7,\n           \"day\": \"Saturday\"\n       }\n}\n}"
         201:
           description: ''
           content:
@@ -1585,63 +1418,63 @@ paths:
                 clinic_name:
                   type: string
                   description: ''
-                  example: et
+                  example: velit
                 clinic_address:
                   type: string
                   description: ''
-                  example: est
+                  example: iure
                 clinic_phone:
                   type: numeric
                   description: ''
-                  example: cum
+                  example: nisi
                 day_id:
                   type: array
                   description: ''
                   example:
-                    - ducimus
+                    - aliquid
                   items:
                     type: string
                 latitute:
                   type: string
                   description: ''
-                  example: voluptas
+                  example: corrupti
                 longitute:
                   type: string
                   description: ''
-                  example: impedit
+                  example: suscipit
                 slot_date:
                   type: array
                   description: ''
                   example:
-                    - ullam
+                    - est
                   items:
                     type: string
                 slot_start_time:
                   type: array
                   description: ''
                   example:
-                    - quod
+                    - optio
                   items:
                     type: string
                 slot_end_time:
                   type: array
                   description: required.
                   example:
-                    - et
+                    - quasi
                   items:
                     type: string
                 first_time_mode:
                   type: array
                   description: required.
                   example:
-                    - autem
+                    - nemo
                   items:
                     type: string
                 second_time_mode:
                   type: array
                   description: required.
                   example:
-                    - est
+                    - excepturi
                   items:
                     type: string
               required:
@@ -1659,22 +1492,47 @@ paths:
       operationId: editClinicDetails
       description: ''
       parameters: []
-      responses: {  }
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic list\",\n\"data\": {\n    \"id\": 4,\n   \"clinic_name\": \"The Healing Clinic\",\n  \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n \"clinic_phone\": \"7485968695\",\n\"clinic_opening_days\": [\n   {\n      \"id\": 38,\n     \"day\": \"Monday\"\n},\n]\n}\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error: 'No clinic found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: string
+                    example: 'No clinic found'
       tags:
         - 'Manage Clinic'
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: number
-                  description: ''
-                  example: 2.5
-              required:
-                - id
+                  type: numeric
+                  description: required.
+                  example: '1'
   /api/v1/doctor/manage-clinic/update:
     post:
       summary: 'Update clinic details'
@@ -1714,67 +1572,67 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: delectus
+                  example: quos
                 clinic_name:
                   type: string
                   description: ''
-                  example: sit
+                  example: est
                 clinic_address:
                   type: string
                   description: ''
-                  example: sed
+                  example: aut
                 clinic_phone:
                   type: numeric
                   description: ''
-                  example: non
+                  example: ipsa
                 day_id:
                   type: array
                   description: ''
                   example:
-                    - esse
+                    - totam
                   items:
                     type: string
                 latitute:
                   type: string
                   description: ''
-                  example: ipsa
+                  example: ducimus
                 longitute:
                   type: string
                   description: ''
-                  example: illo
+                  example: officiis
                 slot_date:
                   type: array
                   description: optional
                   example:
-                    - quo
+                    - suscipit
                   items:
                     type: string
                 slot_start_time:
                   type: array
                   description: optional
                   example:
-                    - praesentium
+                    - quas
                   items:
                     type: string
                 slot_end_time:
                   type: array
                   description: optional.
                   example:
-                    - dolore
+                    - dicta
                   items:
                     type: string
                 first_time_mode:
                   type: array
                   description: optional.
                   example:
-                    - eius
+                    - voluptatem
                   items:
                     type: string
                 second_time_mode:
                   type: array
                   description: optional.
                   example:
-                    - laboriosam
+                    - expedita
                   items:
                     type: string
               required:
@@ -1811,7 +1669,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: quia
+                  example: natus
               required:
                 - id
   /api/v1/doctor/manage-clinic/presentSheduleDate:
@@ -1827,7 +1685,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n\"status\": true,\n \"statusCode\": 200,\n \"message\": \"Clinic list\",\n \"data\": {\n     \"data\": [\n         {\n             \"id\": 51,\n             \"slot_start_time\": \"2:00 PM\",\n             \"slot_end_time\": \"5:00 PM\",\n             \"slot_date\": \"2023-09-21\"\n         },\n         {\n             \"id\": 50,\n             \"slot_start_time\": \"1:00 PM\",\n             \"slot_end_time\": \"3:00 PM\",\n             \"slot_date\": \"2023-09-19\"\n         },\n     ]\n }\n}"
+                example: "{\n\"status\": true,\n \"statusCode\": 200,\n \"message\": \"Clinic list\",\n \"data\": {\n         {\n             \"id\": 51,\n             \"slot_start_time\": \"2:00 PM\",\n             \"slot_end_time\": \"5:00 PM\",\n             \"slot_date\": \"2023-09-21\"\n         },\n         {\n             \"id\": 50,\n             \"slot_start_time\": \"1:00 PM\",\n             \"slot_end_time\": \"3:00 PM\",\n             \"slot_date\": \"2023-09-19\"\n         },\n }\n}"
         201:
           description: ''
           content:
@@ -1860,7 +1718,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: quaerat
+                  example: quibusdam
               required:
                 - id
   /api/v1/doctor/manage-clinic/deletePresentSheduleDate:
@@ -1909,7 +1767,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: modi
+                  example: rerum
               required:
                 - id
   /api/v1/patient/upcoming-appointment:
@@ -1922,83 +1780,10 @@ paths:
         200:
           description: ''
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                example:
-                  status: true
-                  data:
-                    data:
-                      -
-                        id: 11
-                        patient_name: 'John Does'
-                        patient_profile_picture: patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg
-                        doctor_name: 'James Bond'
-                        doctor_profile_picture: doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg
-                        appointment_date: '2023-09-11'
-                        appointment_time: '01:00 PM'
-                        clinic_name: 'ORM Medicle'
-                        clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
-                        duration: '30 min'
-                        appointment_status: Done
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        example:
-                          -
-                            id: 11
-                            patient_name: 'John Does'
-                            patient_profile_picture: patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg
-                            doctor_name: 'James Bond'
-                            doctor_profile_picture: doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg
-                            appointment_date: '2023-09-11'
-                            appointment_time: '01:00 PM'
-                            clinic_name: 'ORM Medicle'
-                            clinic_address: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
-                            duration: '30 min'
-                            appointment_status: Done
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              example: 11
-                            patient_name:
-                              type: string
-                              example: 'John Does'
-                            patient_profile_picture:
-                              type: string
-                              example: patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg
-                            doctor_name:
-                              type: string
-                              example: 'James Bond'
-                            doctor_profile_picture:
-                              type: string
-                              example: doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg
-                            appointment_date:
-                              type: string
-                              example: '2023-09-11'
-                            appointment_time:
-                              type: string
-                              example: '01:00 PM'
-                            clinic_name:
-                              type: string
-                              example: 'ORM Medicle'
-                            clinic_address:
-                              type: string
-                              example: 'Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India'
-                            duration:
-                              type: string
-                              example: '30 min'
-                            appointment_status:
-                              type: string
-                              example: Done
+                type: string
+                example: "{\n\"status\": true,\n\"data\": {\n        {\n            \"id\": 11,\n            \"patient_name\": \"John Does\",\n            \"patient_profile_picture\": \"patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n            \"doctor_name\": \"James Bond\",\n            \"doctor_profile_picture\": \"doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg\",\n            \"appointment_date\": \"2023-09-11\",\n            \"appointment_time\": \"01:00 PM\",\n            \"clinic_name\": \"ORM Medicle\",\n            \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n            \"duration\": \"30 min\",\n            \"appointment_status\": \"Done\"\n        }\n}\n}"
       tags:
         - 'Patient Appointment'
   /api/v1/patient/appointment-history:
@@ -2014,13 +1799,13 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n\"status\": true,\n\"appointment\": {\n   \"data\": [\n       {\n           \"id\": 10,\n           \"patient_name\": \"John Does\",\n           \"patient_profile_picture\": \"patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n           \"doctor_name\": \"Derick Veliz\",\n           \"doctor_profile_picture\": \"doctor/hkt0RnyhO4wSDMEpVrdNGdXYayxmjTaepELsZnu8.png\",\n           \"appointment_date\": \"2023-07-25\",\n           \"appointment_time\": \"01:30 PM\",\n           \"clinic_name\": \"Christan Medical Collage(CMS)\",\n           \"clinic_address\": \"Saltlake Sector V, Street Number 18, DP Block, Sector V, Bidhannagar, Kolkata, West Bengal, India\",\n           \"duration\": \"30 min\",\n           \"appointment_status\": \"Done\"\n       },\n   ]\n}\n}"
+                example: "{\n\"status\": true,\n\"appointment\": {\n       {\n           \"id\": 10,\n           \"patient_name\": \"John Does\",\n           \"patient_profile_picture\": \"patient/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n           \"doctor_name\": \"Derick Veliz\",\n           \"doctor_profile_picture\": \"doctor/hkt0RnyhO4wSDMEpVrdNGdXYayxmjTaepELsZnu8.png\",\n           \"appointment_date\": \"2023-07-25\",\n           \"appointment_time\": \"01:30 PM\",\n           \"clinic_name\": \"Christan Medical Collage(CMS)\",\n           \"clinic_address\": \"Saltlake Sector V, Street Number 18, DP Block, Sector V, Bidhannagar, Kolkata, West Bengal, India\",\n           \"duration\": \"30 min\",\n           \"appointment_status\": \"Done\"\n       },\n}\n}"
       tags:
         - 'Patient Appointment'
-  /api/v1/booking-and-consultancy:
+  /api/v1/doctor-details:
     post:
-      summary: 'Booking and Consultancy'
-      operationId: bookingAndConsultancy
+      summary: 'Doctor details Api'
+      operationId: doctorDetailsApi
       description: ''
       parameters: []
       responses:
@@ -2030,9 +1815,22 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n      \"message\": \"Booking And Consultancy\",\n      \"status\": true,\n      \"data\": {\n         \"doctor\": {\n            \"id\": 4,\n             \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n             \"phone\": \"08596769586\",\n             \"email_verified_at\": null,\n             \"profile_picture\": \"doctor/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"year_of_experience\": \"4\",\n             \"license_number\": \"UPS74856963\",\n             \"location\": \"Kolkata\",\n             \"gender\": \"Male\",\n             \"age\": \"2001-01-30\",\n             \"status\": 1,\n             \"fcm_token\": \"fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI\",\n            \"created_at\": \"2023-06-06T08:40:43.000000Z\",\n             \"updated_at\": \"2023-07-25T08:53:27.000000Z\",\n             \"deleted_at\": null\n        },\n      \"clinics\": [\n         {\n            \"id\": 7,\n            \"user_id\": 4,\n            \"clinic_name\": \"Life Medical\",\n            \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n            \"clinic_phone\": \"7894561230\",\n            \"longitute\": \"88.3598025\",\n            \"latitute\": \"22.5474164\",\n            \"distance\": 7.963637575826944\n        },\n     ]\n     }\n }"
+                example: "{\n \"status\": true,\n  \"statusCode\": 200,\n  \"data\": {\n      \"doctor\": {\n          \"id\": 4,\n          \"name\": \"James Bond\",\n          \"email\": \"james@yopmail.com\",\n          \"phone\": \"7485968695\",\n          \"gender\": \"Male\",\n          \"age\": \"2000-02-10\",\n          \"license_number\": \"DKM-74859686\",\n          \"profile_picture\": \"doctor/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg\",\n          \"specializations\": [\n              {\n                  \"id\": 2,\n                  \"name\": \"Dentist\",\n              }\n          ]\n      },\n      \"clinic\": [\n          {\n              \"id\": 5,\n              \"user_id\": 4,\n              \"clinic_name\": \"Christan Medical Collage (CMC)\",\n              \"clinic_address\": \"Rajarhat, Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Gopalpur I, Kolkata, West Bengal, India\",\n              \"clinic_phone\": \"7412589635\",\n              \"longitute\": \"88.4528608\",\n              \"latitute\": \"22.6343954\",\n              \"distance\": 6.830848254188763\n          },\n\n      ]\n  }\n}"
       tags:
         - 'Patient Booking'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doctor_id:
+                  type: string
+                  description: 'The id of the doctor.'
+                  example: voluptas
+              required:
+                - doctor_id
       security: []
   /api/v1/appointment-store:
     post:
@@ -2197,15 +1995,15 @@ paths:
                 clinic_id:
                   type: string
                   description: ''
-                  example: labore
+                  example: quia
                 appointment_date:
                   type: string
                   description: ''
-                  example: quaerat
+                  example: unde
                 appointment_time:
                   type: string
                   description: ''
-                  example: sed
+                  example: et
               required:
                 - clinic_id
                 - appointment_date
@@ -2221,68 +2019,93 @@ paths:
         200:
           description: ''
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                example: "{\n      \"message\": \"Clinic Details!\",\n      \"status\": true,\n      \"data\": {\n         \"id\": 7,\n        \"user_id\": 4,\n         \"clinic_name\": \"Life Medical\",\n         \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n         \"clinic_phone\": \"7894561230\",\n         \"longitute\": \"88.3598025\",\n         \"latitute\": \"22.5474164\",\n         \"distance\": 7.963637575826944,\n        \"clinic_slots\": [\n             {\n                 \"id\": 1,\n                 \"clinic_detail_id\": 7,\n                 \"slot_date\": \"2021-08-02\",\n                 \"slot_start_time\": \"11:00 AM\",\n                 \"slot_end_time\": \"12:00 PM\",\n                 \"created_at\": null,\n                 \"updated_at\": null\n            },\n        ]\n     }\n }"
-      tags:
-        - 'Patient Booking'
-      security: []
-  /api/v1/clinicVisitSlot:
-    post:
-      summary: 'Clinic Visit available Slot Time'
-      operationId: clinicVisitAvailableSlotTime
-      description: ''
-      parameters: []
-      responses:
-        200:
+                type: object
+                example:
+                  message: 'Clinic Details'
+                  status: true
+                  data:
+                    -
+                      id: 46
+                      slot_date: '2023-09-11'
+                      slot_available: 2
+                    -
+                      id: 48
+                      slot_date: '2023-09-14'
+                      slot_available: 5
+                properties:
+                  message:
+                    type: string
+                    example: 'Clinic Details'
+                  status:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 46
+                        slot_date: '2023-09-11'
+                        slot_available: 2
+                      -
+                        id: 48
+                        slot_date: '2023-09-14'
+                        slot_available: 5
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 46
+                        slot_date:
+                          type: string
+                          example: '2023-09-11'
+                        slot_available:
+                          type: integer
+                          example: 2
+        201:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Clinic Details!'
-                  status: true
-                  data:
-                    id: 1
-                    clinic_detail_id: 7
-                    slot_date: '2021-08-02'
-                    slot_start_time: '11:00 AM'
-                    slot_end_time: '12:00 PM'
-                    created_at: null
-                    updated_at: null
+                  error: 'The clinic id field is required.'
                 properties:
-                  message:
+                  error:
                     type: string
-                    example: 'Clinic Details!'
-                  status:
-                    type: boolean
-                    example: true
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        example: 1
-                      clinic_detail_id:
-                        type: integer
-                        example: 7
-                      slot_date:
-                        type: string
-                        example: '2021-08-02'
-                      slot_start_time:
-                        type: string
-                        example: '11:00 AM'
-                      slot_end_time:
-                        type: string
-                        example: '12:00 PM'
-                      created_at:
-                        type: string
-                        example: null
-                      updated_at:
-                        type: string
-                        example: null
+                    example: 'The clinic id field is required.'
+      tags:
+        - 'Patient Booking'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clinic_id:
+                  type: string
+                  description: ''
+                  example: magni
+              required:
+                - clinic_id
+      security: []
+  /api/v1/clinicVisitSlot:
+    post:
+      summary: 'Clinic Visit available Slot Time'
+      operationId: clinicVisitAvailableSlotTime
+      description: '@bodyParam slot_id string required The id of the slot.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  {\n   \"message\": \"Clinic Details\",\n   \"status\": true,\n   \"data\": [\n       {\n           \"id\": 46,\n           \"slot_date\": \"2023-09-11\",\n           \"slot_available\": 2\n       },\n       {\n           \"id\": 48,\n           \"slot_date\": \"2023-09-14\",\n           \"slot_available\": 5\n       },\n   ]\n}\n}"
       tags:
         - 'Patient Booking'
       security: []
@@ -2580,7 +2403,7 @@ paths:
                 id:
                   type: integer
                   description: 'The id of the membership.'
-                  example: 8
+                  example: 14
               required:
                 - id
   /api/v1/patient/membership/payment:
@@ -2602,15 +2425,15 @@ paths:
                 plan_id:
                   type: integer
                   description: 'The id of the membership.'
-                  example: 1
+                  example: 9
                 name:
                   type: string
                   description: ''
-                  example: molestiae
+                  example: quisquam
                 stripeToken:
                   type: string
                   description: ''
-                  example: quasi
+                  example: laboriosam
               required:
                 - plan_id
                 - name
@@ -2647,13 +2470,12 @@ paths:
                 example:
                   status: true
                   membership:
-                    data:
-                      id: 6
-                      amount: '200'
-                      membership_expiry_date: '2024-01-11'
-                      currency: usd
-                      plan_name: Standard
-                      plan_duration: '6'
+                    id: 6
+                    amount: '200'
+                    membership_expiry_date: '2024-01-11'
+                    currency: usd
+                    plan_name: Standard
+                    plan_duration: '6'
                 properties:
                   status:
                     type: boolean
@@ -2661,27 +2483,24 @@ paths:
                   membership:
                     type: object
                     properties:
-                      data:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                            example: 6
-                          amount:
-                            type: string
-                            example: '200'
-                          membership_expiry_date:
-                            type: string
-                            example: '2024-01-11'
-                          currency:
-                            type: string
-                            example: usd
-                          plan_name:
-                            type: string
-                            example: Standard
-                          plan_duration:
-                            type: string
-                            example: '6'
+                      id:
+                        type: integer
+                        example: 6
+                      amount:
+                        type: string
+                        example: '200'
+                      membership_expiry_date:
+                        type: string
+                        example: '2024-01-11'
+                      currency:
+                        type: string
+                        example: usd
+                      plan_name:
+                        type: string
+                        example: Standard
+                      plan_duration:
+                        type: string
+                        example: '6'
       tags:
         - 'Patient Payment History'
   /api/v1/patient/getProfile:
@@ -2787,19 +2606,19 @@ paths:
                 name:
                   type: string
                   description: 'optional The name of the Patient.'
-                  example: ea
+                  example: veritatis
                 email:
                   type: string
                   description: 'optional The email of the Patient.'
-                  example: satterfield.marlene@example.com
+                  example: hans.hansen@example.net
                 age:
                   type: date
                   description: 'optional The age of the Patient.'
-                  example: eos
+                  example: nostrum
                 phone:
                   type: numeric
                   description: 'optional The phone of the Patient.'
-                  example: et
+                  example: praesentium
   /api/v1/patient/changePassword:
     post:
       summary: 'Change Password'
@@ -2851,15 +2670,15 @@ paths:
                 current_password:
                   type: string
                   description: 'The old_password of the Patient.'
-                  example: nihil
+                  example: dolorum
                 new_password:
                   type: string
                   description: 'The password of the Patient.'
-                  example: itaque
+                  example: fugit
                 confirm_password:
                   type: string
                   description: 'The password_confirmation of the Patient.'
-                  example: odit
+                  example: temporibus
               required:
                 - current_password
                 - new_password

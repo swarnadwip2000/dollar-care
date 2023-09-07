@@ -86,11 +86,11 @@ endpoints:
         name: id
         description: 'The id of the membership.'
         required: true
-        example: 8
+        example: 14
         type: integer
         custom: []
     cleanBodyParameters:
-      id: 8
+      id: 14
     fileParameters: []
     responses:
       -
@@ -164,27 +164,27 @@ endpoints:
         name: plan_id
         description: 'The id of the membership.'
         required: true
-        example: 1
+        example: 9
         type: integer
         custom: []
       name:
         name: name
         description: ''
         required: true
-        example: molestiae
+        example: quisquam
         type: string
         custom: []
       stripeToken:
         name: stripeToken
         description: ''
         required: true
-        example: quasi
+        example: laboriosam
         type: string
         custom: []
     cleanBodyParameters:
-      plan_id: 1
-      name: molestiae
-      stripeToken: quasi
+      plan_id: 9
+      name: quisquam
+      stripeToken: laboriosam
     fileParameters: []
     responses: []
     responseFields: []

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Dollar CARE",
-        "_postman_id": "7cd7a3b7-5545-4f95-ba88-e667fdcf5272",
+        "_postman_id": "dcbe4c26-c7b5-4008-8b12-4b788c488782",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"quod\",\"age\":\"hic\",\"location\":\"John Doe\"}"
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"laborum\",\"age\":\"atque\",\"location\":\"John Doe\"}"
                         },
                         "description": "",
                         "auth": {
@@ -149,7 +149,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n   \"data\": {\n       \"appointments\": {\n           \"data\": [\n               {\n                   \"id\": 11,\n                   \"patient_name\": \"John Doe\",\n                   \"patient_profile_picture\": \"patient\/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg\",\n                   \"appointment_date\": \"2023-09-11\",\n                   \"appointment_time\": \"01:00 PM\",\n                   \"clinic_name\": \"ORM Medicle\",\n                   \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n                   \"duration\": \"30 min\",\n                   \"appointment_status\": \"Done\"\n               }\n           ]\n       },\n       \"clinics\": {\n           \"data\": [\n               {\n                   \"id\": 4,\n                   \"clinic_name\": \"The Healing Clinic\"\n               },\n               {\n                   \"id\": 8,\n                   \"clinic_name\": \"ORM Medicle\"\n               }\n           ]\n       }\n   }\n}",
+                            "body": "{\n\"status\": true,\n   \"data\": {\n       \"appointments\": {\n               {\n                   \"id\": 11,\n                   \"patient_name\": \"John Doe\",\n                   \"patient_profile_picture\": \"patient\/07y44Yk7Fgs2DF7v5ErJtbwceKDFIlLpP3mrYkn6.jpg\",\n                   \"appointment_date\": \"2023-09-11\",\n                   \"appointment_time\": \"01:00 PM\",\n                   \"clinic_name\": \"ORM Medicle\",\n                   \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n                   \"duration\": \"30 min\",\n                   \"appointment_status\": \"Done\"\n               }\n       },\n       \"clinics\": {\n               {\n                   \"id\": 4,\n                   \"clinic_name\": \"The Healing Clinic\"\n               },\n               {\n                   \"id\": 8,\n                   \"clinic_name\": \"ORM Medicle\"\n               }\n       }\n   }\n}",
                             "name": ""
                         }
                     ]
@@ -228,7 +228,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}",
                             "name": ""
                         }
                     ]
@@ -255,7 +255,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"at\",\"email\":\"annie.ledner@example.com\",\"gender\":\"reprehenderit\",\"age\":\"illo\",\"phone\":\"atque\",\"specialization_id\":[\"esse\"],\"license_number\":\"mollitia\"}"
+                            "raw": "{\"name\":\"veritatis\",\"email\":\"katlynn.reilly@example.net\",\"gender\":\"quibusdam\",\"age\":\"quo\",\"phone\":\"consectetur\",\"specialization_id\":[\"optio\"],\"license_number\":\"odit\"}"
                         },
                         "description": ""
                     },
@@ -263,7 +263,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile fetched successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}",
                             "name": ""
                         },
                         {
@@ -302,7 +302,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_password\":\"et\",\"new_password\":\"et\",\"confirm_password\":\"eveniet\"}"
+                            "raw": "{\"current_password\":\"odio\",\"new_password\":\"dolorem\",\"confirm_password\":\"harum\"}"
                         },
                         "description": ""
                     },
@@ -310,7 +310,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password changed successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password changed successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}",
                             "name": ""
                         },
                         {
@@ -357,7 +357,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile updated successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n        \"data\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n        }\n    }\n}\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Profile updated successfully\",\n\"data\": {\n    \"specializations\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dentist\",\n            \"slug\": \"dentist\",\n            \"image\": \"specialization\/1dyavyARmT4SiXK9izxsvF1vjW0PYXI28mB94TuB.png\",\n            \"description\": \"Visit your doctor for joint pain, sprains, arthritis, and other bone pains.\",\n            \"status\": 1,\n            \"created_at\": \"2023-06-06T12:40:19.000000Z\",\n            \"updated_at\": \"2023-06-14T08:51:04.000000Z\"\n        },\n    ],\n    \"user\": {\n            \"id\": 4,\n            \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n            \"phone\": \"08596769586\",\n            \"gender\": \"Male\",\n            \"age\": \"2001-01-30\",\n            \"license_number\": \"UPS74856963\",\n            \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"fcm_token\": \"eyo_Z9a_EQkcwF1y_TjA-U:APA91bFvEyoQw3XaMNheNcHlQMQISc-sB2b3RWySS515RaMauTX1RCKrinBcf5-4FhZeLtoB-BYV4K0khjO8pD1ZTi257s3A6_sH36SZGN4tBdS1AlUo3L2sBaXKpZoI0gwq-MWETDfN\",\n            \"status\": 1,\n            \"specializations\": [\n                {\n                    \"id\": 4,\n                    \"name\": \"ENT Specialist\",\n                    \"pivot\": {\n                        \"doctor_id\": 4,\n                        \"specialization_id\": 4\n                    }\n                }\n            ]\n    }\n}\n}",
                             "name": ""
                         },
                         {
@@ -396,7 +396,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"subject\":\"incidunt\",\"message\":\"et\"}"
+                            "raw": "{\"subject\":\"illum\",\"message\":\"ipsum\"}"
                         },
                         "description": "",
                         "auth": {
@@ -568,9 +568,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/all-doctors",
+                            "path": "api\/v1\/all-doctors-by-location",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/all-doctors"
+                            "raw": "{{baseUrl}}\/api\/v1\/all-doctors-by-location"
                         },
                         "method": "POST",
                         "header": [
@@ -599,7 +599,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n \"message\": \"No Specialization Found\"\n}",
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n \"message\": \"No Doctor Found in your area!\"\n}",
                             "name": ""
                         }
                     ]
@@ -624,7 +624,10 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"sequi\",\"slug\":\"commodi\"}"
+                        },
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -708,7 +711,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"latitude\":\"totam\",\"longitude\":\"tempore\"}"
+                            "raw": "{\"latitude\":\"quibusdam\",\"longitude\":\"tenetur\"}"
                         },
                         "description": "",
                         "auth": {
@@ -720,41 +723,6 @@
                             "header": [],
                             "code": 200,
                             "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 23,\n         \"user_id\": 14,\n         \"session_id\": null,\n         \"ip_address\": \"127.0.0.1\",\n         \"address\": \"J92M+P72, Kolkata Station Rd, Belgachia, Kolkata, West Bengal 700004, India\",\n         \"latitude\": \"22.5764753\",\n         \"longitude\": \"88.4306861\",\n         \"created_at\": \"2023-06-06T10:55:47.000000Z\",\n         \"updated_at\": \"2023-06-06T10:55:47.000000Z\"\n     }\n   ]\n}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Appointment History Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/appointment-history",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/appointment-history"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": [\n   {\n      \"id\": 1,\n      \"user_id\": 14,\n      \"doctor_id\": 13,\n      \"clinic_id\": 1,\n      \"appointment_date\": \"2021-06-06\",\n      \"appointment_time\": \"10:00 AM\",\n      \"appointment_status\": 1,\n      \"created_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"updated_at\": \"2021-06-06T10:55:47.000000Z\",\n      \"deleted_at\": null,\n      \"doctor\": {\n         \"id\": 13,\n         \"name\": \"Shreeja Sadhukhan\",\n         \"email\": \"shreeja@mailinator.com\"\n     },\n     }]\n   }",
                             "name": ""
                         }
                     ]
@@ -792,7 +760,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n*\"status\": true,\n   \"statusCode\": 200,\n   \"message\": \"Clinic list\",\n   \"data\": {\n       \"data\": [\n           {\n               \"id\": 4,\n               \"clinic_name\": \"The Healing Clinic\",\n               \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n               \"clinic_phone\": \"7485968695\",\n               \"clinic_opening_days\": [\n                   {\n                       \"id\": 38,\n                       \"day\": \"Monday\"\n                   },\n                   {\n                       \"id\": 39,\n                       \"day\": \"Tuesday\"\n                   },\n                   {\n                       \"id\": 40,\n                       \"day\": \"Wednesday\"\n                   },\n                   {\n                       \"id\": 41,\n                       \"day\": \"Thursday\"\n                   }\n               ]\n           }\n       ]\n   }\n}",
+                            "body": "{\n*\"status\": true,\n   \"statusCode\": 200,\n   \"message\": \"Clinic list\",\n   \"data\": {\n           {\n               \"id\": 4,\n               \"clinic_name\": \"The Healing Clinic\",\n               \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n               \"clinic_phone\": \"7485968695\",\n               \"clinic_opening_days\": [\n                   {\n                       \"id\": 38,\n                       \"day\": \"Monday\"\n                   },\n                   {\n                       \"id\": 39,\n                       \"day\": \"Tuesday\"\n                   },\n                   {\n                       \"id\": 40,\n                       \"day\": \"Wednesday\"\n                   },\n                   {\n                       \"id\": 41,\n                       \"day\": \"Thursday\"\n                   }\n               ]\n           }\n   }\n}",
                             "name": ""
                         },
                         {
@@ -830,7 +798,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic list\",\n\"data\": {\n   \"data\": [\n       {\n           \"id\": 1,\n           \"day\": \"Sunday\"\n       },\n       {\n           \"id\": 2,\n           \"day\": \"Monday\"\n       },\n       {\n           \"id\": 3,\n           \"day\": \"Tuesday\"\n       },\n       {\n           \"id\": 4,\n           \"day\": \"Wednesday\"\n       },\n       {\n           \"id\": 5,\n           \"day\": \"Thursday\"\n       },\n       {\n           \"id\": 6,\n           \"day\": \"Friday\"\n       },\n       {\n           \"id\": 7,\n           \"day\": \"Saturday\"\n       }\n   ]\n}\n}",
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic list\",\n\"data\": {\n       {\n           \"id\": 1,\n           \"day\": \"Sunday\"\n       },\n       {\n           \"id\": 2,\n           \"day\": \"Monday\"\n       },\n       {\n           \"id\": 3,\n           \"day\": \"Tuesday\"\n       },\n       {\n           \"id\": 4,\n           \"day\": \"Wednesday\"\n       },\n       {\n           \"id\": 5,\n           \"day\": \"Thursday\"\n       },\n       {\n           \"id\": 6,\n           \"day\": \"Friday\"\n       },\n       {\n           \"id\": 7,\n           \"day\": \"Saturday\"\n       }\n}\n}",
                             "name": ""
                         },
                         {
@@ -863,7 +831,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"clinic_name\":\"et\",\"clinic_address\":\"est\",\"clinic_phone\":\"cum\",\"day_id\":[\"ducimus\"],\"latitute\":\"voluptas\",\"longitute\":\"impedit\",\"slot_date\":[\"ullam\"],\"slot_start_time\":[\"quod\"],\"slot_end_time\":[\"et\"],\"first_time_mode\":[\"autem\"],\"second_time_mode\":[\"est\"]}"
+                            "raw": "{\"clinic_name\":\"velit\",\"clinic_address\":\"iure\",\"clinic_phone\":\"nisi\",\"day_id\":[\"aliquid\"],\"latitute\":\"corrupti\",\"longitute\":\"suscipit\",\"slot_date\":[\"est\"],\"slot_start_time\":[\"optio\"],\"slot_end_time\":[\"quasi\"],\"first_time_mode\":[\"nemo\"],\"second_time_mode\":[\"excepturi\"]}"
                         },
                         "description": ""
                     },
@@ -898,11 +866,24 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":2.5}"
+                            "raw": "{\"id\":\"1\"}"
                         },
                         "description": ""
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Clinic list\",\n\"data\": {\n    \"id\": 4,\n   \"clinic_name\": \"The Healing Clinic\",\n  \"clinic_address\": \"Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India\",\n \"clinic_phone\": \"7485968695\",\n\"clinic_opening_days\": [\n   {\n      \"id\": 38,\n     \"day\": \"Monday\"\n},\n]\n}\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": \"No clinic found\"\n}",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
                     "name": "Update clinic details",
@@ -926,7 +907,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"delectus\",\"clinic_name\":\"sit\",\"clinic_address\":\"sed\",\"clinic_phone\":\"non\",\"day_id\":[\"esse\"],\"latitute\":\"ipsa\",\"longitute\":\"illo\",\"slot_date\":[\"quo\"],\"slot_start_time\":[\"praesentium\"],\"slot_end_time\":[\"dolore\"],\"first_time_mode\":[\"eius\"],\"second_time_mode\":[\"laboriosam\"]}"
+                            "raw": "{\"id\":\"quos\",\"clinic_name\":\"est\",\"clinic_address\":\"aut\",\"clinic_phone\":\"ipsa\",\"day_id\":[\"totam\"],\"latitute\":\"ducimus\",\"longitute\":\"officiis\",\"slot_date\":[\"suscipit\"],\"slot_start_time\":[\"quas\"],\"slot_end_time\":[\"dicta\"],\"first_time_mode\":[\"voluptatem\"],\"second_time_mode\":[\"expedita\"]}"
                         },
                         "description": ""
                     },
@@ -961,7 +942,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"quia\"}"
+                            "raw": "{\"id\":\"natus\"}"
                         },
                         "description": ""
                     },
@@ -996,7 +977,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"quaerat\"}"
+                            "raw": "{\"id\":\"quibusdam\"}"
                         },
                         "description": ""
                     },
@@ -1004,7 +985,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"message\": \"Clinic list\",\n \"data\": {\n     \"data\": [\n         {\n             \"id\": 51,\n             \"slot_start_time\": \"2:00 PM\",\n             \"slot_end_time\": \"5:00 PM\",\n             \"slot_date\": \"2023-09-21\"\n         },\n         {\n             \"id\": 50,\n             \"slot_start_time\": \"1:00 PM\",\n             \"slot_end_time\": \"3:00 PM\",\n             \"slot_date\": \"2023-09-19\"\n         },\n     ]\n }\n}",
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"message\": \"Clinic list\",\n \"data\": {\n         {\n             \"id\": 51,\n             \"slot_start_time\": \"2:00 PM\",\n             \"slot_end_time\": \"5:00 PM\",\n             \"slot_date\": \"2023-09-21\"\n         },\n         {\n             \"id\": 50,\n             \"slot_start_time\": \"1:00 PM\",\n             \"slot_end_time\": \"3:00 PM\",\n             \"slot_date\": \"2023-09-19\"\n         },\n }\n}",
                             "name": ""
                         },
                         {
@@ -1037,7 +1018,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"modi\"}"
+                            "raw": "{\"id\":\"rerum\"}"
                         },
                         "description": ""
                     },
@@ -1089,7 +1070,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"data\": {\n    \"data\": [\n        {\n            \"id\": 11,\n            \"patient_name\": \"John Does\",\n            \"patient_profile_picture\": \"patient\/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n            \"doctor_name\": \"James Bond\",\n            \"doctor_profile_picture\": \"doctor\/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg\",\n            \"appointment_date\": \"2023-09-11\",\n            \"appointment_time\": \"01:00 PM\",\n            \"clinic_name\": \"ORM Medicle\",\n            \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n            \"duration\": \"30 min\",\n            \"appointment_status\": \"Done\"\n        }\n    ]\n}\n}",
+                            "body": "{\n\"status\": true,\n\"data\": {\n        {\n            \"id\": 11,\n            \"patient_name\": \"John Does\",\n            \"patient_profile_picture\": \"patient\/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n            \"doctor_name\": \"James Bond\",\n            \"doctor_profile_picture\": \"doctor\/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg\",\n            \"appointment_date\": \"2023-09-11\",\n            \"appointment_time\": \"01:00 PM\",\n            \"clinic_name\": \"ORM Medicle\",\n            \"clinic_address\": \"Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Newtown, Kolkata, West Bengal, India\",\n            \"duration\": \"30 min\",\n            \"appointment_status\": \"Done\"\n        }\n}\n}",
                             "name": ""
                         }
                     ]
@@ -1121,7 +1102,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"appointment\": {\n   \"data\": [\n       {\n           \"id\": 10,\n           \"patient_name\": \"John Does\",\n           \"patient_profile_picture\": \"patient\/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n           \"doctor_name\": \"Derick Veliz\",\n           \"doctor_profile_picture\": \"doctor\/hkt0RnyhO4wSDMEpVrdNGdXYayxmjTaepELsZnu8.png\",\n           \"appointment_date\": \"2023-07-25\",\n           \"appointment_time\": \"01:30 PM\",\n           \"clinic_name\": \"Christan Medical Collage(CMS)\",\n           \"clinic_address\": \"Saltlake Sector V, Street Number 18, DP Block, Sector V, Bidhannagar, Kolkata, West Bengal, India\",\n           \"duration\": \"30 min\",\n           \"appointment_status\": \"Done\"\n       },\n   ]\n}\n}",
+                            "body": "{\n\"status\": true,\n\"appointment\": {\n       {\n           \"id\": 10,\n           \"patient_name\": \"John Does\",\n           \"patient_profile_picture\": \"patient\/NJr51HG9dfGvIIfpJVSuHgI7Ps4NkQJdOPLWqSLy.jpg\",\n           \"doctor_name\": \"Derick Veliz\",\n           \"doctor_profile_picture\": \"doctor\/hkt0RnyhO4wSDMEpVrdNGdXYayxmjTaepELsZnu8.png\",\n           \"appointment_date\": \"2023-07-25\",\n           \"appointment_time\": \"01:30 PM\",\n           \"clinic_name\": \"Christan Medical Collage(CMS)\",\n           \"clinic_address\": \"Saltlake Sector V, Street Number 18, DP Block, Sector V, Bidhannagar, Kolkata, West Bengal, India\",\n           \"duration\": \"30 min\",\n           \"appointment_status\": \"Done\"\n       },\n}\n}",
                             "name": ""
                         }
                     ]
@@ -1133,13 +1114,13 @@
             "description": "",
             "item": [
                 {
-                    "name": "Booking and Consultancy",
+                    "name": "Doctor details Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/booking-and-consultancy",
+                            "path": "api\/v1\/doctor-details",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/booking-and-consultancy"
+                            "raw": "{{baseUrl}}\/api\/v1\/doctor-details"
                         },
                         "method": "POST",
                         "header": [
@@ -1152,7 +1133,10 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"doctor_id\":\"voluptas\"}"
+                        },
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -1162,7 +1146,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n      \"message\": \"Booking And Consultancy\",\n      \"status\": true,\n      \"data\": {\n         \"doctor\": {\n            \"id\": 4,\n             \"name\": \"James Bond\",\n            \"email\": \"james@yopmail.com\",\n             \"phone\": \"08596769586\",\n             \"email_verified_at\": null,\n             \"profile_picture\": \"doctor\/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png\",\n            \"year_of_experience\": \"4\",\n             \"license_number\": \"UPS74856963\",\n             \"location\": \"Kolkata\",\n             \"gender\": \"Male\",\n             \"age\": \"2001-01-30\",\n             \"status\": 1,\n             \"fcm_token\": \"fTcKacaIV3mJaU4VbJ_4Ib:APA91bHgCcot6OOpAlysNgDKq54K9PnU6PjDM3tHdiWFm5KpPXDnVVfcfTJV2C4Q6wKk056fIp6zgOLbEU1DhAvN5SQqZGg0ew7qjKN_FAXyd9ORER4vMhjf1qLc9pY32gI7ZGIJLAaI\",\n            \"created_at\": \"2023-06-06T08:40:43.000000Z\",\n             \"updated_at\": \"2023-07-25T08:53:27.000000Z\",\n             \"deleted_at\": null\n        },\n      \"clinics\": [\n         {\n            \"id\": 7,\n            \"user_id\": 4,\n            \"clinic_name\": \"Life Medical\",\n            \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n            \"clinic_phone\": \"7894561230\",\n            \"longitute\": \"88.3598025\",\n            \"latitute\": \"22.5474164\",\n            \"distance\": 7.963637575826944\n        },\n     ]\n     }\n }",
+                            "body": "{\n \"status\": true,\n  \"statusCode\": 200,\n  \"data\": {\n      \"doctor\": {\n          \"id\": 4,\n          \"name\": \"James Bond\",\n          \"email\": \"james@yopmail.com\",\n          \"phone\": \"7485968695\",\n          \"gender\": \"Male\",\n          \"age\": \"2000-02-10\",\n          \"license_number\": \"DKM-74859686\",\n          \"profile_picture\": \"doctor\/V0pUwsFgvg2bMGnRLx3ctmEhxaRLIIXE7SS3g5BJ.jpg\",\n          \"specializations\": [\n              {\n                  \"id\": 2,\n                  \"name\": \"Dentist\",\n              }\n          ]\n      },\n      \"clinic\": [\n          {\n              \"id\": 5,\n              \"user_id\": 4,\n              \"clinic_name\": \"Christan Medical Collage (CMC)\",\n              \"clinic_address\": \"Rajarhat, Rajarhat Main Road, Chinar Park, Kalipark, Tegharia, Gopalpur I, Kolkata, West Bengal, India\",\n              \"clinic_phone\": \"7412589635\",\n              \"longitute\": \"88.4528608\",\n              \"latitute\": \"22.6343954\",\n              \"distance\": 6.830848254188763\n          },\n\n      ]\n  }\n}",
                             "name": ""
                         }
                     ]
@@ -1189,7 +1173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"clinic_id\":\"labore\",\"appointment_date\":\"quaerat\",\"appointment_time\":\"sed\"}"
+                            "raw": "{\"clinic_id\":\"quia\",\"appointment_date\":\"unde\",\"appointment_time\":\"et\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1225,7 +1209,10 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"clinic_id\":\"magni\"}"
+                        },
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -1235,7 +1222,13 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n      \"message\": \"Clinic Details!\",\n      \"status\": true,\n      \"data\": {\n         \"id\": 7,\n        \"user_id\": 4,\n         \"clinic_name\": \"Life Medical\",\n         \"clinic_address\": \"Park Street, Mullick Bazar, Beniapukur, Kolkata, West Bengal, India\",\n         \"clinic_phone\": \"7894561230\",\n         \"longitute\": \"88.3598025\",\n         \"latitute\": \"22.5474164\",\n         \"distance\": 7.963637575826944,\n        \"clinic_slots\": [\n             {\n                 \"id\": 1,\n                 \"clinic_detail_id\": 7,\n                 \"slot_date\": \"2021-08-02\",\n                 \"slot_start_time\": \"11:00 AM\",\n                 \"slot_end_time\": \"12:00 PM\",\n                 \"created_at\": null,\n                 \"updated_at\": null\n            },\n        ]\n     }\n }",
+                            "body": "{\n  \"message\": \"Clinic Details\",\n\"status\": true,\n\"data\": [\n    {\n        \"id\": 46,\n        \"slot_date\": \"2023-09-11\",\n        \"slot_available\": 2\n    },\n    {\n        \"id\": 48,\n        \"slot_date\": \"2023-09-14\",\n        \"slot_available\": 5\n    }\n    ]\n }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"error\": \"The clinic id field is required.\"\n}",
                             "name": ""
                         }
                     ]
@@ -1261,7 +1254,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "@bodyParam slot_id string required The id of the slot.",
                         "auth": {
                             "type": "noauth"
                         }
@@ -1270,7 +1263,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n     \"message\": \"Clinic Details!\",\n    \"status\": true,\n   \"data\": {\n         \"id\": 1,\n         \"clinic_detail_id\": 7,\n         \"slot_date\": \"2021-08-02\",\n         \"slot_start_time\": \"11:00 AM\",\n         \"slot_end_time\": \"12:00 PM\",\n         \"created_at\": null,\n         \"updated_at\": null\n    }\n}",
+                            "body": "{\n  {\n   \"message\": \"Clinic Details\",\n   \"status\": true,\n   \"data\": [\n       {\n           \"id\": 46,\n           \"slot_date\": \"2023-09-11\",\n           \"slot_available\": 2\n       },\n       {\n           \"id\": 48,\n           \"slot_date\": \"2023-09-14\",\n           \"slot_available\": 5\n       },\n   ]\n}\n}",
                             "name": ""
                         }
                     ]
@@ -1473,7 +1466,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":8}"
+                            "raw": "{\"id\":14}"
                         },
                         "description": ""
                     },
@@ -1514,7 +1507,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"plan_id\":1,\"name\":\"molestiae\",\"stripeToken\":\"quasi\"}"
+                            "raw": "{\"plan_id\":9,\"name\":\"quisquam\",\"stripeToken\":\"laboriosam\"}"
                         },
                         "description": ""
                     },
@@ -1591,7 +1584,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"status\": true,\n\"membership\": {\n    \"data\": {\n        \"id\": 6,\n        \"amount\": \"200\",\n        \"membership_expiry_date\": \"2024-01-11\",\n        \"currency\": \"usd\",\n        \"plan_name\": \"Standard\",\n        \"plan_duration\": \"6\"\n    }\n}\n}",
+                            "body": "{\n\"status\": true,\n\"membership\": {\n        \"id\": 6,\n        \"amount\": \"200\",\n        \"membership_expiry_date\": \"2024-01-11\",\n        \"currency\": \"usd\",\n        \"plan_name\": \"Standard\",\n        \"plan_duration\": \"6\"\n    }\n}",
                             "name": ""
                         }
                     ]
@@ -1656,7 +1649,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"ea\",\"email\":\"satterfield.marlene@example.com\",\"age\":\"eos\",\"phone\":\"et\"}"
+                            "raw": "{\"name\":\"veritatis\",\"email\":\"hans.hansen@example.net\",\"age\":\"nostrum\",\"phone\":\"praesentium\"}"
                         },
                         "description": ""
                     },
@@ -1703,7 +1696,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_password\":\"nihil\",\"new_password\":\"itaque\",\"confirm_password\":\"odit\"}"
+                            "raw": "{\"current_password\":\"dolorum\",\"new_password\":\"fugit\",\"confirm_password\":\"temporibus\"}"
                         },
                         "description": ""
                     },

@@ -26,7 +26,7 @@ endpoints:
         name: subject
         description: ''
         required: true
-        example: incidunt
+        example: illum
         type: string
         custom: []
       message:
@@ -47,12 +47,12 @@ endpoints:
           }
           }
         required: true
-        example: et
+        example: ipsum
         type: string
         custom: []
     cleanBodyParameters:
-      subject: incidunt
-      message: et
+      subject: illum
+      message: ipsum
     fileParameters: []
     responses: []
     responseFields: []

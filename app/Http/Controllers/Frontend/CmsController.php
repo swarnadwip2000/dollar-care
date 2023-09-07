@@ -10,6 +10,8 @@ use App\Models\HomePage;
 use App\Models\Plan;
 use App\Models\Qna;
 use App\Models\Location;
+use App\Models\PrivacyPolicy;
+use App\Models\TermsAndCondition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -113,4 +115,17 @@ class CmsController extends Controller
         // return response()->json(['success' => true]);
         // return response()->json(['session' => $request->session()->all()]);
     }
+
+    public function privacyPolicy()
+    {
+        $privacyPolicy = PrivacyPolicy::first();
+        return view('frontend.privacy-policy')->with(compact('privacyPolicy'));
+    }
+
+    public function termsAndConditions()
+    {
+        $terms = TermsAndCondition::first();
+        return view('frontend.terms-and-conditions')->with(compact('terms'));
+    }
 }  
+

@@ -436,7 +436,6 @@ class HomeController extends Controller
         $doctors_array = [];
         $clinics_array = [];
         foreach ($clinics as $key => $clinic) {
-
             $doctors_array[] =  $key;
             $clinics_array[] = $clinic->id;
         }
@@ -449,76 +448,4 @@ class HomeController extends Controller
         return response()->json(['status' => true, 'statusCode' => 200, 'data' => $results]);
     }
 
-
-
-
-    /**
-     * Doctor details Api
-     * @bodyParam doctor_id string required The id of the doctor.
-     * @response 200{
-     * "status": true,
-     * "statusCode": 200,
-     * "data": [
-     *   {
-     *     "id": 13,
-     *    "name": "Shreeja Sadhukhan",
-     *    "email": "shreeja@mailinator.com",
-     *    "phone": "7475850123",
-     *    "email_verified_at": null,
-     *    "profile_picture": "doctor/Vd1tp4kQptLxMkCVW5M0q8F9hE2KpEEedIi9LxNz.jpg",
-     *    "year_of_experience": "3",
-     *    "license_number": null,
-     *    "location": "Purba Bardhaman",
-     *    "gender": "Female",
-     *    "age": "22",
-     *    "status": 1,
-     *    "fcm_token": null,
-     *    "created_at": "2023-06-06T10:55:47.000000Z",
-     *    "updated_at": "2023-06-06T10:55:47.000000Z",
-     *    "deleted_at": null
-     *  }
-     * ]
-     * }
-     * 
-     * 
-     */
-
-    public function doctorDetails(Request $request)
-    {
-        $validator =  Validator::make($request->all(), [
-            'doctor_id' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
-        }
-        
-        try {
-            $doctor_id = $request->doctor_id;
-            $data = [];
-            $data['doctor'] = User::where('id', $doctor_id)->first();
-            // get clinic details for the doctor
-            $latitude = Auth::user()->locations->latitude;
-            $longitude = Auth::user()->locations->longitude;
-            $radius = 10;
-            $data['clinic'] = DB::table('clinic_details')
-                ->join('users', 'clinic_details.user_id', '=', 'users.id')
-                ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
-                ->select(
-                    'clinic_details.id',
-                    'clinic_details.user_id',
-                    'clinic_name',
-                    'clinic_address',
-                    'clinic_phone',
-                    'longitute',
-                    'latitute',
-                    DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
-                )
-                ->having('distance', '<', $radius)
-                ->get();
-            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data]);
-        } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
-        }
-    }
 }

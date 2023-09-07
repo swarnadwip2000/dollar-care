@@ -160,14 +160,14 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: quod
+        example: laborum
         type: string
         custom: []
       age:
         name: age
         description: ''
         required: true
-        example: hic
+        example: atque
         type: string
         custom: []
       location:
@@ -184,8 +184,8 @@ endpoints:
       phone: '9876543210'
       password: '12345678'
       confirm_password: '12345678'
-      type: quod
-      age: hic
+      type: laborum
+      age: atque
       location: 'John Doe'
     fileParameters: []
     responses:

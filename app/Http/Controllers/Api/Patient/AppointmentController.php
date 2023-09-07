@@ -22,7 +22,6 @@ class AppointmentController extends Controller
      * @response 200{
      * "status": true,
      * "data": {
-     *     "data": [
      *         {
      *             "id": 11,
      *             "patient_name": "John Does",
@@ -36,7 +35,6 @@ class AppointmentController extends Controller
      *             "duration": "30 min",
      *             "appointment_status": "Done"
      *         }
-     *     ]
      * }
      * }
      */
@@ -49,7 +47,7 @@ class AppointmentController extends Controller
             $combinedDT = date('Y-m-d H:i A', strtotime("$date $time"));
             $upcominAppontments = Appointment::where('user_id', Auth::user()->id)->where(DB::raw("concat(appointment_date, ' ', appointment_time)"), '>', $combinedDT)->where('appointment_status', 'Done')->orderBy('id', 'DESC')->get();
             if ($upcominAppontments->count() > 0) {
-                $data = fractal($upcominAppontments, new AppointmentTransformer())->toArray();
+                $data = fractal($upcominAppontments, new AppointmentTransformer())->toArray()['data'];
                 return response()->json(['status' => true, 'data' => $data], $this->successStatus);
             } else {
                 return response()->json(['status' => false, 'message' => 'No upcoming appointment'], 500);
@@ -65,7 +63,6 @@ class AppointmentController extends Controller
      * @response 200{
      *"status": true,
      *"appointment": {
-     *    "data": [
      *        {
      *            "id": 10,
      *            "patient_name": "John Does",
@@ -79,7 +76,6 @@ class AppointmentController extends Controller
      *            "duration": "30 min",
      *            "appointment_status": "Done"
      *        },
-     *    ]
      *}
      *}
      */
@@ -89,7 +85,7 @@ class AppointmentController extends Controller
         try {
             $pastAppontments = Appointment::where('user_id', Auth::user()->id)->where('appointment_date', '<', date('Y-m-d'))->orderBy('id', 'DESC')->get();
             if ($pastAppontments->count() > 0) {
-                $appointment = fractal($pastAppontments, new AppointmentTransformer())->toArray();
+                $appointment = fractal($pastAppontments, new AppointmentTransformer())->toArray()['data'];
                 return response()->json(['status' => true, 'appointment' => $appointment], $this->successStatus);
             } else {
                 return response()->json(['status' => false, 'message' => 'No appointment history'], 201);

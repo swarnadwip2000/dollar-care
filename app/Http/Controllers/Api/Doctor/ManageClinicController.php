@@ -29,7 +29,6 @@ class ManageClinicController extends Controller
      *    "statusCode": 200,
      *    "message": "Clinic list",
      *    "data": {
-     *        "data": [
      *            {
      *                "id": 4,
      *                "clinic_name": "The Healing Clinic",
@@ -54,7 +53,6 @@ class ManageClinicController extends Controller
      *                    }
      *                ]
      *            }
-     *        ]
      *    }
      * }
      * 
@@ -71,7 +69,7 @@ class ManageClinicController extends Controller
             $clinics = ClinicDetails::where('user_id', auth()->user()->id)->count();
             if ($clinics > 0) {
                 $data = ClinicDetails::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
-                $clinics = fractal($data, new ManageClinicTransformer())->toArray();
+                $clinics = fractal($data, new ManageClinicTransformer())->toArray()['data'];
                 return response()->json([
                     'status' => true,
                     'statusCode' => $this->successStatus,
@@ -99,7 +97,6 @@ class ManageClinicController extends Controller
      *"statusCode": 200,
      *"message": "Clinic list",
      *"data": {
-     *    "data": [
      *        {
      *            "id": 1,
      *            "day": "Sunday"
@@ -128,7 +125,6 @@ class ManageClinicController extends Controller
      *            "id": 7,
      *            "day": "Saturday"
      *        }
-     *    ]
      *}
      * }
      * @response 201{
@@ -142,7 +138,7 @@ class ManageClinicController extends Controller
     {
         try {
             $data = Day::all();
-            $days = fractal($data, new DayTransformer())->toArray();
+            $days = fractal($data, new DayTransformer())->toArray()['data'];
             return response()->json([
                 'status' => true,
                 'statusCode' => $this->successStatus,
@@ -243,7 +239,30 @@ class ManageClinicController extends Controller
     /**
      * Edit clinic details
      * @authenticated
+     * @bodyParam id numeric required. Example: 1
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "message": "Clinic list",
+     * "data": {
+     *     "id": 4,
+     *    "clinic_name": "The Healing Clinic",
+     *   "clinic_address": "Indian Association For The Cultivation Of Science, Poddar Nagar, Jadavpur, Kolkata, West Bengal, India",
+     *  "clinic_phone": "7485968695",
+     * "clinic_opening_days": [
+     *    {
+     *       "id": 38,
+     *      "day": "Monday"
+     * },
+     * ]
+     * }
+     * }
      * 
+     * @response 201{
+     * "status": false,
+     * "statusCode": 201,
+     * "error": "No clinic found"
+     * }
      */
 
     public function edit(Request $request)
@@ -260,7 +279,7 @@ class ManageClinicController extends Controller
             $clinic = ClinicDetails::find($request->id);
             if ($clinic) {
                 $clinics = ClinicDetails::findOrFail($request->id);
-                $clinics = fractal($clinics, new ManageClinicEditTransformer())->toArray();
+                $clinics = fractal($clinics, new ManageClinicEditTransformer())->toArray()['data'];
                 return response()->json([
                     'status' => true,
                     'statusCode' => $this->successStatus,
@@ -409,7 +428,6 @@ class ManageClinicController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
         }
-
     }
 
     /**
@@ -421,7 +439,6 @@ class ManageClinicController extends Controller
      *  "statusCode": 200,
      *  "message": "Clinic list",
      *  "data": {
-     *      "data": [
      *          {
      *              "id": 51,
      *              "slot_start_time": "2:00 PM",
@@ -434,7 +451,6 @@ class ManageClinicController extends Controller
      *              "slot_end_time": "3:00 PM",
      *              "slot_date": "2023-09-19"
      *          },
-     *      ]
      *  }
      * }
      * @response 201{
@@ -458,7 +474,7 @@ class ManageClinicController extends Controller
             $clinic = ClinicDetails::find($request->id);
             if ($clinic) {
                 $data = Slot::where('clinic_detail_id', $request->id)->where('slot_date', '>=', date('Y-m-d'))->orderBy('slot_date', 'desc')->get();
-                $data = fractal($data, new PresentSheduleTransformer())->toArray();
+                $data = fractal($data, new PresentSheduleTransformer())->toArray()['data'];
                 return response()->json([
                     'status' => true,
                     'statusCode' => $this->successStatus,

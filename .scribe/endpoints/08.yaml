@@ -77,35 +77,35 @@ endpoints:
         name: name
         description: 'optional The name of the Patient.'
         required: false
-        example: ea
+        example: veritatis
         type: string
         custom: []
       email:
         name: email
         description: 'optional The email of the Patient.'
         required: false
-        example: satterfield.marlene@example.com
+        example: hans.hansen@example.net
         type: string
         custom: []
       age:
         name: age
         description: 'optional The age of the Patient.'
         required: false
-        example: eos
+        example: nostrum
         type: date
         custom: []
       phone:
         name: phone
         description: 'optional The phone of the Patient.'
         required: false
-        example: et
+        example: praesentium
         type: numeric
         custom: []
     cleanBodyParameters:
-      name: ea
-      email: satterfield.marlene@example.com
-      age: eos
-      phone: et
+      name: veritatis
+      email: hans.hansen@example.net
+      age: nostrum
+      phone: praesentium
     fileParameters: []
     responses:
       -
@@ -168,27 +168,27 @@ endpoints:
         name: current_password
         description: 'The old_password of the Patient.'
         required: true
-        example: nihil
+        example: dolorum
         type: string
         custom: []
       new_password:
         name: new_password
         description: 'The password of the Patient.'
         required: true
-        example: itaque
+        example: fugit
         type: string
         custom: []
       confirm_password:
         name: confirm_password
         description: 'The password_confirmation of the Patient.'
         required: true
-        example: odit
+        example: temporibus
         type: string
         custom: []
     cleanBodyParameters:
-      current_password: nihil
-      new_password: itaque
-      confirm_password: odit
+      current_password: dolorum
+      new_password: fugit
+      confirm_password: temporibus
     fileParameters: []
     responses:
       -

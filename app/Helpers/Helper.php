@@ -116,6 +116,26 @@ class Helper
         return $intervals;
     }
 
+    public static function slotSliceWithDate($slot_id)
+    {
+        $slot = Slot::where('id', $slot_id)->first();
+        $slot_start_time = $slot['slot_start_time'];
+        $slot_end_time = $slot['slot_end_time'];
+        $intervals = [];
+        $currentTime = Carbon::parse($slot_start_time);
+        $endTime = Carbon::parse($slot_end_time);
+        $key = 0;
+        while ($currentTime->lte($endTime)) {
+            $intervals[$key]['time'] = $currentTime->format('h:i A');
+            $intervals[$key]['date'] = $slot['slot_date'];
+            $intervals[$key]['clinic_id'] = $slot['clinic_detail_id'];
+            $currentTime->addMinutes(30);
+            $key++;
+        }
+
+        return $intervals;
+    }
+
     public static function countSlotAvailability($clinic_id)
     {
         $count = Slot::where('slot_date', '>=', date('Y-m-d'))->where('clinic_detail_id',$clinic_id)->count();

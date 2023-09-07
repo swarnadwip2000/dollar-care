@@ -33,7 +33,6 @@ endpoints:
           {
           "status": true,
           "data": {
-              "data": [
                   {
                       "id": 11,
                       "patient_name": "John Does",
@@ -47,7 +46,6 @@ endpoints:
                       "duration": "30 min",
                       "appointment_status": "Done"
                   }
-              ]
           }
           }
         headers: []
@@ -89,7 +87,6 @@ endpoints:
           {
           "status": true,
           "appointment": {
-             "data": [
                  {
                      "id": 10,
                      "patient_name": "John Does",
@@ -103,7 +100,6 @@ endpoints:
                      "duration": "30 min",
                      "appointment_status": "Done"
                  },
-             ]
           }
           }
         headers: []

@@ -23,7 +23,6 @@ class BookingHistoryController extends Controller
      * "status": true,
      *    "data": {
      *        "appointments": {
-     *            "data": [
      *                {
      *                    "id": 11,
      *                    "patient_name": "John Doe",
@@ -35,10 +34,8 @@ class BookingHistoryController extends Controller
      *                    "duration": "30 min",
      *                    "appointment_status": "Done"
      *                }
-     *            ]
      *        },
      *        "clinics": {
-     *            "data": [
      *                {
      *                    "id": 4,
      *                    "clinic_name": "The Healing Clinic"
@@ -47,7 +44,6 @@ class BookingHistoryController extends Controller
      *                    "id": 8,
      *                    "clinic_name": "ORM Medicle"
      *                }
-     *            ]
      *        }
      *    }
      *}
@@ -72,8 +68,8 @@ class BookingHistoryController extends Controller
             $appointments = $query->get();
 
             $clinics = $request->user()->clinicDetails()->orderBy('clinic_name', 'desc')->get();
-            $data['appointments'] = fractal($appointments, new AppointmentTransformer())->toArray();
-            $data['clinics'] = fractal($clinics, new ClinicTransformer())->toArray();
+            $data['appointments'] = fractal($appointments, new AppointmentTransformer())->toArray()['data'];
+            $data['clinics'] = fractal($clinics, new ClinicTransformer())->toArray()['data'];
 
             return response()->json(['status' => true, 'data' => $data], 200);
         } catch (\Throwable $th) {
