@@ -188,103 +188,114 @@ endpoints:
         name: clinic_name
         description: ''
         required: true
-        example: velit
+        example: eos
         type: string
+        enumValues: []
         custom: []
       clinic_address:
         name: clinic_address
         description: ''
         required: true
-        example: iure
+        example: suscipit
         type: string
+        enumValues: []
         custom: []
       clinic_phone:
         name: clinic_phone
         description: ''
         required: true
-        example: nisi
+        example: aut
         type: numeric
+        enumValues: []
         custom: []
       day_id:
         name: day_id
         description: ''
         required: true
         example:
-          - aliquid
+          - delectus
         type: 'string[]'
+        enumValues: []
         custom: []
       latitute:
         name: latitute
         description: ''
         required: true
-        example: corrupti
+        example: vero
         type: string
+        enumValues: []
         custom: []
       longitute:
         name: longitute
         description: ''
         required: true
-        example: suscipit
+        example: rerum
         type: string
+        enumValues: []
         custom: []
       slot_date:
         name: slot_date
         description: ''
         required: true
         example:
-          - est
+          - vel
         type: 'string[]'
+        enumValues: []
         custom: []
       slot_start_time:
         name: slot_start_time
         description: ''
         required: true
         example:
-          - optio
+          - vero
         type: 'string[]'
+        enumValues: []
         custom: []
       slot_end_time:
         name: slot_end_time
         description: required.
         required: false
         example:
-          - quasi
+          - eum
         type: 'string[]'
+        enumValues: []
         custom: []
       first_time_mode:
         name: first_time_mode
         description: required.
         required: false
         example:
-          - nemo
+          - sit
         type: 'string[]'
+        enumValues: []
         custom: []
       second_time_mode:
         name: second_time_mode
         description: required.
         required: false
         example:
-          - excepturi
+          - nesciunt
         type: 'string[]'
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      clinic_name: velit
-      clinic_address: iure
-      clinic_phone: nisi
+      clinic_name: eos
+      clinic_address: suscipit
+      clinic_phone: aut
       day_id:
-        - aliquid
-      latitute: corrupti
-      longitute: suscipit
+        - delectus
+      latitute: vero
+      longitute: rerum
       slot_date:
-        - est
+        - vel
       slot_start_time:
-        - optio
+        - vero
       slot_end_time:
-        - quasi
+        - eum
       first_time_mode:
-        - nemo
+        - sit
       second_time_mode:
-        - excepturi
+        - nesciunt
     fileParameters: []
     responses:
       -
@@ -337,6 +348,7 @@ endpoints:
         required: false
         example: '1'
         type: numeric
+        enumValues: []
         custom: []
     cleanBodyParameters:
       id: '1'
@@ -407,111 +419,123 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: quos
+        example: ut
         type: numeric
+        enumValues: []
         custom: []
       clinic_name:
         name: clinic_name
         description: ''
         required: true
-        example: est
+        example: molestiae
         type: string
+        enumValues: []
         custom: []
       clinic_address:
         name: clinic_address
         description: ''
         required: true
-        example: aut
+        example: libero
         type: string
+        enumValues: []
         custom: []
       clinic_phone:
         name: clinic_phone
         description: ''
         required: true
-        example: ipsa
+        example: sunt
         type: numeric
+        enumValues: []
         custom: []
       day_id:
         name: day_id
         description: ''
         required: true
         example:
-          - totam
+          - suscipit
         type: 'string[]'
+        enumValues: []
         custom: []
       latitute:
         name: latitute
         description: ''
         required: true
-        example: ducimus
+        example: eius
         type: string
+        enumValues: []
         custom: []
       longitute:
         name: longitute
         description: ''
         required: true
-        example: officiis
+        example: explicabo
         type: string
+        enumValues: []
         custom: []
       slot_date:
         name: slot_date
         description: optional
         required: false
         example:
-          - suscipit
+          - corporis
         type: 'string[]'
+        enumValues: []
         custom: []
       slot_start_time:
         name: slot_start_time
         description: optional
         required: false
         example:
-          - quas
+          - ipsa
         type: 'string[]'
+        enumValues: []
         custom: []
       slot_end_time:
         name: slot_end_time
         description: optional.
         required: false
         example:
-          - dicta
+          - totam
         type: 'string[]'
+        enumValues: []
         custom: []
       first_time_mode:
         name: first_time_mode
         description: optional.
         required: false
         example:
-          - voluptatem
+          - aut
         type: 'string[]'
+        enumValues: []
         custom: []
       second_time_mode:
         name: second_time_mode
         description: optional.
         required: false
         example:
-          - expedita
+          - quaerat
         type: 'string[]'
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      id: quos
-      clinic_name: est
-      clinic_address: aut
-      clinic_phone: ipsa
+      id: ut
+      clinic_name: molestiae
+      clinic_address: libero
+      clinic_phone: sunt
       day_id:
-        - totam
-      latitute: ducimus
-      longitute: officiis
-      slot_date:
         - suscipit
+      latitute: eius
+      longitute: explicabo
+      slot_date:
+        - corporis
       slot_start_time:
-        - quas
+        - ipsa
       slot_end_time:
-        - dicta
+        - totam
       first_time_mode:
-        - voluptatem
+        - aut
       second_time_mode:
-        - expedita
+        - quaerat
     fileParameters: []
     responses:
       -
@@ -556,11 +580,12 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: natus
+        example: enim
         type: numeric
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      id: natus
+      id: enim
     fileParameters: []
     responses:
       -
@@ -610,11 +635,12 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: quibusdam
+        example: distinctio
         type: numeric
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      id: quibusdam
+      id: distinctio
     fileParameters: []
     responses:
       -
@@ -684,11 +710,12 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: rerum
+        example: laborum
         type: numeric
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      id: rerum
+      id: laborum
     fileParameters: []
     responses:
       -

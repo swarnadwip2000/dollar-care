@@ -58,9 +58,14 @@ paths:
                   type: string
                   description: 'The password of the user.'
                   example: '12345678'
+                type:
+                  type: string
+                  description: 'The type of the user.'
+                  example: 'Doctor,Patient'
               required:
                 - email
                 - password
+                - type
       security: []
   /api/v1/register:
     post:
@@ -184,12 +189,12 @@ paths:
                   example: '12345678'
                 type:
                   type: string
-                  description: ''
-                  example: laborum
+                  description: 'The type of the user.'
+                  example: 'Doctor,Patient'
                 age:
                   type: string
                   description: ''
-                  example: atque
+                  example: asperiores
                 location:
                   type: string
                   description: 'The name of the user.'
@@ -369,34 +374,34 @@ paths:
                 name:
                   type: string
                   description: 'The name of the Doctor.'
-                  example: veritatis
+                  example: quibusdam
                 email:
                   type: string
                   description: 'The email of the Doctor.'
-                  example: katlynn.reilly@example.net
+                  example: suzanne.davis@example.net
                 gender:
                   type: string
                   description: ''
-                  example: quibusdam
+                  example: doloribus
                 age:
                   type: date
                   description: 'The age of the Doctor.'
-                  example: quo
+                  example: cumque
                 phone:
                   type: numeric
                   description: 'The phone of the Doctor.'
-                  example: consectetur
+                  example: necessitatibus
                 specialization_id:
                   type: array
                   description: 'The specialization_id of the Doctor.'
                   example:
-                    - optio
+                    - aut
                   items:
                     type: string
                 license_number:
                   type: string
                   description: 'The license_number of the Doctor.'
-                  example: odit
+                  example: minus
               required:
                 - name
                 - email
@@ -443,15 +448,15 @@ paths:
                 current_password:
                   type: string
                   description: 'The old_password of the Doctor.'
-                  example: odio
+                  example: quis
                 new_password:
                   type: string
                   description: 'The password of the Doctor.'
-                  example: dolorem
+                  example: harum
                 confirm_password:
                   type: string
                   description: 'The password_confirmation of the Doctor.'
-                  example: harum
+                  example: sit
               required:
                 - current_password
                 - new_password
@@ -516,11 +521,11 @@ paths:
                 subject:
                   type: string
                   description: ''
-                  example: illum
+                  example: voluptatem
                 message:
                   type: string
                   description: "@response 200{\n\"status\": true,\n\"data\": {\n\"id\": 1,\n\"user_id\": 1,\n\"name\": \"test doctor\",\n\"email\": \"test@yopmail.com\",\n\"phone\": \"1234567890\",\n\"subject\": \"test\",\n\"message\": \"test\",\n\"created_at\": \"2021-09-28T10:20:00.000000Z\",\n\"updated_at\": \"2021-09-28T10:20:00.000000Z\"\n}\n}"
-                  example: ipsum
+                  example: est
               required:
                 - subject
                 - message
@@ -608,6 +613,242 @@ paths:
                         example: '2023-06-28T09:35:58.000000Z'
       tags:
         - 'Doctor Settings'
+      security: []
+  /api/v1/forget-password:
+    post:
+      summary: 'Forget Password Api'
+      operationId: forgetPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'OTP has been sent to your email'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'OTP has been sent to your email'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error:
+                    email:
+                      - 'The email field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Forget Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: john@yopmail.com
+              required:
+                - email
+      security: []
+  /api/v1/otp-verification:
+    post:
+      summary: 'OTP Verification Api'
+      operationId: oTPVerificationApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'OTP verified successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'OTP verified successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'OTP is expired'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'OTP is expired'
+      tags:
+        - 'Forget Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: numeric
+                  description: 'OTP of the Patient.'
+                  example: '123456'
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: john@yopmail.com
+              required:
+                - otp
+                - email
+      security: []
+  /api/v1/reset-password:
+    post:
+      summary: 'Reset Password Api'
+      operationId: resetPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Password has been reset successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Password has been reset successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 201
+                  error:
+                    password:
+                      - 'The password field is required.'
+                    confirm_password:
+                      - 'The confirm password field is required.'
+                    email:
+                      - 'The email field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 201
+                  error:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+                      confirm_password:
+                        type: array
+                        example:
+                          - 'The confirm password field is required.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Forget Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 'Password of the Patient.'
+                  example: '123456'
+                confirm_password:
+                  type: string
+                  description: 'Confirm Password of the Patient.'
+                  example: '123456'
+                email:
+                  type: string
+                  description: 'Email of the Patient.'
+                  example: john@yopmail.com
+              required:
+                - password
+                - confirm_password
+                - email
       security: []
   /api/v1/symptoms:
     post:
@@ -702,7 +943,7 @@ paths:
                     type: string
                     example: 'No Symptoms Found'
       tags:
-        - "Home Page Api's"
+        - 'Home Page Api''s'
       security: []
   /api/v1/specializations:
     post:
@@ -797,7 +1038,7 @@ paths:
                     type: string
                     example: 'No Specialization Found'
       tags:
-        - "Home Page Api's"
+        - 'Home Page Api''s'
       security: []
   /api/v1/all-doctors-by-location:
     post:
@@ -932,7 +1173,7 @@ paths:
                     type: string
                     example: 'No Doctor Found in your area!'
       tags:
-        - "Home Page Api's"
+        - 'Home Page Api''s'
       security: []
   /api/v1/doctors:
     post:
@@ -1067,7 +1308,7 @@ paths:
                     type: string
                     example: 'No Doctor Found'
       tags:
-        - "Home Page Api's"
+        - 'Home Page Api''s'
       requestBody:
         required: true
         content:
@@ -1078,11 +1319,11 @@ paths:
                 type:
                   type: string
                   description: 'The type of the search.'
-                  example: sequi
+                  example: laboriosam
                 slug:
                   type: string
                   description: 'The slug of the search. example - dermatologist, oral-piercing-infection'
-                  example: commodi
+                  example: modi
               required:
                 - type
                 - slug
@@ -1220,7 +1461,7 @@ paths:
                     type: string
                     example: 'No Doctor or Clinic Found'
       tags:
-        - "Home Page Api's"
+        - 'Home Page Api''s'
       security: []
   /api/v1/store-location:
     post:
@@ -1300,7 +1541,7 @@ paths:
                           type: string
                           example: '2023-06-06T10:55:47.000000Z'
       tags:
-        - "Home Page Api's"
+        - 'Home Page Api''s'
       requestBody:
         required: true
         content:
@@ -1311,11 +1552,11 @@ paths:
                 latitude:
                   type: string
                   description: 'The latitude of the location.'
-                  example: quibusdam
+                  example: quia
                 longitude:
                   type: string
                   description: 'The longitude of the location.'
-                  example: tenetur
+                  example: et
               required:
                 - latitude
                 - longitude
@@ -1418,63 +1659,63 @@ paths:
                 clinic_name:
                   type: string
                   description: ''
-                  example: velit
+                  example: eos
                 clinic_address:
                   type: string
                   description: ''
-                  example: iure
+                  example: suscipit
                 clinic_phone:
                   type: numeric
                   description: ''
-                  example: nisi
+                  example: aut
                 day_id:
                   type: array
                   description: ''
                   example:
-                    - aliquid
+                    - delectus
                   items:
                     type: string
                 latitute:
                   type: string
                   description: ''
-                  example: corrupti
+                  example: vero
                 longitute:
                   type: string
                   description: ''
-                  example: suscipit
+                  example: rerum
                 slot_date:
                   type: array
                   description: ''
                   example:
-                    - est
+                    - vel
                   items:
                     type: string
                 slot_start_time:
                   type: array
                   description: ''
                   example:
-                    - optio
+                    - vero
                   items:
                     type: string
                 slot_end_time:
                   type: array
                   description: required.
                   example:
-                    - quasi
+                    - eum
                   items:
                     type: string
                 first_time_mode:
                   type: array
                   description: required.
                   example:
-                    - nemo
+                    - sit
                   items:
                     type: string
                 second_time_mode:
                   type: array
                   description: required.
                   example:
-                    - excepturi
+                    - nesciunt
                   items:
                     type: string
               required:
@@ -1572,67 +1813,67 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: quos
+                  example: ut
                 clinic_name:
                   type: string
                   description: ''
-                  example: est
+                  example: molestiae
                 clinic_address:
                   type: string
                   description: ''
-                  example: aut
+                  example: libero
                 clinic_phone:
                   type: numeric
                   description: ''
-                  example: ipsa
+                  example: sunt
                 day_id:
                   type: array
                   description: ''
                   example:
-                    - totam
+                    - suscipit
                   items:
                     type: string
                 latitute:
                   type: string
                   description: ''
-                  example: ducimus
+                  example: eius
                 longitute:
                   type: string
                   description: ''
-                  example: officiis
+                  example: explicabo
                 slot_date:
                   type: array
                   description: optional
                   example:
-                    - suscipit
+                    - corporis
                   items:
                     type: string
                 slot_start_time:
                   type: array
                   description: optional
                   example:
-                    - quas
+                    - ipsa
                   items:
                     type: string
                 slot_end_time:
                   type: array
                   description: optional.
                   example:
-                    - dicta
+                    - totam
                   items:
                     type: string
                 first_time_mode:
                   type: array
                   description: optional.
                   example:
-                    - voluptatem
+                    - aut
                   items:
                     type: string
                 second_time_mode:
                   type: array
                   description: optional.
                   example:
-                    - expedita
+                    - quaerat
                   items:
                     type: string
               required:
@@ -1669,7 +1910,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: natus
+                  example: enim
               required:
                 - id
   /api/v1/doctor/manage-clinic/presentSheduleDate:
@@ -1718,7 +1959,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: quibusdam
+                  example: distinctio
               required:
                 - id
   /api/v1/doctor/manage-clinic/deletePresentSheduleDate:
@@ -1767,7 +2008,7 @@ paths:
                 id:
                   type: numeric
                   description: ''
-                  example: rerum
+                  example: laborum
               required:
                 - id
   /api/v1/patient/upcoming-appointment:
@@ -1828,7 +2069,7 @@ paths:
                 doctor_id:
                   type: string
                   description: 'The id of the doctor.'
-                  example: voluptas
+                  example: sunt
               required:
                 - doctor_id
       security: []
@@ -1995,15 +2236,15 @@ paths:
                 clinic_id:
                   type: string
                   description: ''
-                  example: quia
+                  example: ea
                 appointment_date:
                   type: string
                   description: ''
-                  example: unde
+                  example: explicabo
                 appointment_time:
                   type: string
                   description: ''
-                  example: et
+                  example: reiciendis
               required:
                 - clinic_id
                 - appointment_date
@@ -2088,7 +2329,7 @@ paths:
                 clinic_id:
                   type: string
                   description: ''
-                  example: magni
+                  example: adipisci
               required:
                 - clinic_id
       security: []
@@ -2109,63 +2350,22 @@ paths:
       tags:
         - 'Patient Booking'
       security: []
-  /api/v1/forget-password:
+  /api/v1/patient/chat-request:
     post:
-      summary: 'Forget Password Api'
-      operationId: forgetPasswordApi
+      summary: 'Chat Request api'
+      operationId: chatRequestApi
       description: ''
       parameters: []
       responses:
         200:
           description: ''
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'OTP has been sent to your email'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'OTP has been sent to your email'
-        201:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  statusCode: 201
-                  error:
-                    email:
-                      - 'The email field is required.'
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 201
-                  error:
-                    type: object
-                    properties:
-                      email:
-                        type: array
-                        example:
-                          - 'The email field is required.'
-                        items:
-                          type: string
+                type: string
+                example: "{\n \"status\": true,\n \"message\": \"Friend request sent successfully\",\n \"data\": {\n     \"id\": 25,\n     \"user_id\": 4,\n     \"friend_id\": 3,\n     \"status\": 1,  // 0 = pending, 1 = accepted, 2 = rejected\n     \"created_at\": \"2023-08-28T11:02:45.000000Z\",\n     \"updated_at\": \"2023-08-28T13:12:02.000000Z\"\n }\n}"
       tags:
-        - 'Patient Forget Password'
+        - 'Patient Chat'
       requestBody:
         required: true
         content:
@@ -2173,62 +2373,21 @@ paths:
             schema:
               type: object
               properties:
-                email:
-                  type: string
-                  description: 'Email of the Patient.'
-                  example: john@yopmail.com
+                doctor_id:
+                  type: integer
+                  description: 'Doctor Id.'
+                  example: 1
               required:
-                - email
-      security: []
-  /api/v1/otp-verification:
+                - doctor_id
+  /api/v1/patient/chat-request-send:
     post:
-      summary: 'OTP Verification Api'
-      operationId: oTPVerificationApi
+      summary: 'Send Chat Request api'
+      operationId: sendChatRequestApi
       description: ''
       parameters: []
-      responses:
-        200:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'OTP verified successfully'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'OTP verified successfully'
-        201:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  statusCode: 401
-                  error: 'OTP is expired'
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 401
-                  error:
-                    type: string
-                    example: 'OTP is expired'
+      responses: {  }
       tags:
-        - 'Patient Forget Password'
+        - 'Patient Chat'
       requestBody:
         required: true
         content:
@@ -2236,115 +2395,12 @@ paths:
             schema:
               type: object
               properties:
-                otp:
-                  type: numeric
-                  description: 'OTP of the Patient.'
-                  example: '123456'
-                email:
-                  type: string
-                  description: 'Email of the Patient.'
-                  example: john@yopmail.com
+                doctor_id:
+                  type: integer
+                  description: 'Doctor Id.'
+                  example: 1
               required:
-                - otp
-                - email
-      security: []
-  /api/v1/reset-password:
-    post:
-      summary: 'Reset Password Api'
-      operationId: resetPasswordApi
-      description: ''
-      parameters: []
-      responses:
-        200:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: true
-                  statusCode: 200
-                  message: 'Password has been reset successfully'
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'Password has been reset successfully'
-        201:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  statusCode: 201
-                  error:
-                    password:
-                      - 'The password field is required.'
-                    confirm_password:
-                      - 'The confirm password field is required.'
-                    email:
-                      - 'The email field is required.'
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  statusCode:
-                    type: integer
-                    example: 201
-                  error:
-                    type: object
-                    properties:
-                      password:
-                        type: array
-                        example:
-                          - 'The password field is required.'
-                        items:
-                          type: string
-                      confirm_password:
-                        type: array
-                        example:
-                          - 'The confirm password field is required.'
-                        items:
-                          type: string
-                      email:
-                        type: array
-                        example:
-                          - 'The email field is required.'
-                        items:
-                          type: string
-      tags:
-        - 'Patient Forget Password'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                  description: 'Password of the Patient.'
-                  example: '123456'
-                confirm_password:
-                  type: string
-                  description: 'Confirm Password of the Patient.'
-                  example: '123456'
-                email:
-                  type: string
-                  description: 'Email of the Patient.'
-                  example: john@yopmail.com
-              required:
-                - password
-                - confirm_password
-                - email
-      security: []
+                - doctor_id
   /api/v1/patient/membership/list:
     post:
       summary: 'Membership List'
@@ -2403,7 +2459,7 @@ paths:
                 id:
                   type: integer
                   description: 'The id of the membership.'
-                  example: 14
+                  example: 19
               required:
                 - id
   /api/v1/patient/membership/payment:
@@ -2425,15 +2481,15 @@ paths:
                 plan_id:
                   type: integer
                   description: 'The id of the membership.'
-                  example: 9
+                  example: 1
                 name:
                   type: string
                   description: ''
-                  example: quisquam
+                  example: commodi
                 stripeToken:
                   type: string
                   description: ''
-                  example: laboriosam
+                  example: qui
               required:
                 - plan_id
                 - name
@@ -2606,19 +2662,19 @@ paths:
                 name:
                   type: string
                   description: 'optional The name of the Patient.'
-                  example: veritatis
+                  example: odit
                 email:
                   type: string
                   description: 'optional The email of the Patient.'
-                  example: hans.hansen@example.net
+                  example: hsawayn@example.org
                 age:
                   type: date
                   description: 'optional The age of the Patient.'
-                  example: nostrum
+                  example: accusamus
                 phone:
                   type: numeric
                   description: 'optional The phone of the Patient.'
-                  example: praesentium
+                  example: iure
   /api/v1/patient/changePassword:
     post:
       summary: 'Change Password'
@@ -2670,15 +2726,15 @@ paths:
                 current_password:
                   type: string
                   description: 'The old_password of the Patient.'
-                  example: dolorum
+                  example: molestiae
                 new_password:
                   type: string
                   description: 'The password of the Patient.'
-                  example: fugit
+                  example: necessitatibus
                 confirm_password:
                   type: string
                   description: 'The password_confirmation of the Patient.'
-                  example: temporibus
+                  example: numquam
               required:
                 - current_password
                 - new_password
@@ -2754,7 +2810,10 @@ tags:
     name: 'Doctor Settings'
     description: ''
   -
-    name: "Home Page Api's"
+    name: 'Forget Password'
+    description: ''
+  -
+    name: 'Home Page Api''s'
     description: ''
   -
     name: 'Manage Clinic'
@@ -2766,7 +2825,7 @@ tags:
     name: 'Patient Booking'
     description: ''
   -
-    name: 'Patient Forget Password'
+    name: 'Patient Chat'
     description: ''
   -
     name: 'Patient Membership'

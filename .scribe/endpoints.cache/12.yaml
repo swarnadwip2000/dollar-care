@@ -88,11 +88,12 @@ endpoints:
         name: id
         description: 'The id of the membership.'
         required: true
-        example: 14
+        example: 19
         type: integer
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      id: 14
+      id: 19
     fileParameters: []
     responses:
       -
@@ -166,27 +167,30 @@ endpoints:
         name: plan_id
         description: 'The id of the membership.'
         required: true
-        example: 9
+        example: 1
         type: integer
+        enumValues: []
         custom: []
       name:
         name: name
         description: ''
         required: true
-        example: quisquam
+        example: commodi
         type: string
+        enumValues: []
         custom: []
       stripeToken:
         name: stripeToken
         description: ''
         required: true
-        example: laboriosam
+        example: qui
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      plan_id: 9
-      name: quisquam
-      stripeToken: laboriosam
+      plan_id: 1
+      name: commodi
+      stripeToken: qui
     fileParameters: []
     responses: []
     responseFields: []

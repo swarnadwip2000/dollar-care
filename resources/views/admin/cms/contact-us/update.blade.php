@@ -9,7 +9,7 @@
         }
     </style>
 @endpush
-
+  
 @section('content')
     <section id="loading">
         <div id="loading-content"></div>
@@ -115,5 +115,5 @@
 @endsection
 
 @push('scripts')
-    
+
 @endpush

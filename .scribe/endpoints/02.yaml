@@ -1,4 +1,4 @@
-name: "Home Page Api's"
+name: 'Home Page Api''s'
 description: ''
 endpoints:
   -
@@ -6,7 +6,7 @@ endpoints:
       - POST
     uri: api/v1/symptoms
     metadata:
-      groupName: "Home Page Api's"
+      groupName: 'Home Page Api''s'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -69,7 +69,7 @@ endpoints:
       - POST
     uri: api/v1/specializations
     metadata:
-      groupName: "Home Page Api's"
+      groupName: 'Home Page Api''s'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -132,7 +132,7 @@ endpoints:
       - POST
     uri: api/v1/all-doctors-by-location
     metadata:
-      groupName: "Home Page Api's"
+      groupName: 'Home Page Api''s'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -203,7 +203,7 @@ endpoints:
       - POST
     uri: api/v1/doctors
     metadata:
-      groupName: "Home Page Api's"
+      groupName: 'Home Page Api''s'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -223,19 +223,21 @@ endpoints:
         name: type
         description: 'The type of the search.'
         required: true
-        example: sequi
+        example: laboriosam
         type: string
+        enumValues: []
         custom: []
       slug:
         name: slug
         description: 'The slug of the search. example - dermatologist, oral-piercing-infection'
         required: true
-        example: commodi
+        example: modi
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      type: sequi
-      slug: commodi
+      type: laboriosam
+      slug: modi
     fileParameters: []
     responses:
       -
@@ -290,7 +292,7 @@ endpoints:
       - POST
     uri: api/v1/search-doctors
     metadata:
-      groupName: "Home Page Api's"
+      groupName: 'Home Page Api''s'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -361,7 +363,7 @@ endpoints:
       - POST
     uri: api/v1/store-location
     metadata:
-      groupName: "Home Page Api's"
+      groupName: 'Home Page Api''s'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -381,19 +383,21 @@ endpoints:
         name: latitude
         description: 'The latitude of the location.'
         required: true
-        example: quibusdam
+        example: quia
         type: string
+        enumValues: []
         custom: []
       longitude:
         name: longitude
         description: 'The longitude of the location.'
         required: true
-        example: tenetur
+        example: et
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      latitude: quibusdam
-      longitude: tenetur
+      latitude: quia
+      longitude: et
     fileParameters: []
     responses:
       -

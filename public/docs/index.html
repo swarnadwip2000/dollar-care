@@ -30,9 +30,9 @@
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
-    <script src="../docs/js/tryitout-4.22.0.js"></script>
+    <script src="../docs/js/tryitout-4.23.1.js"></script>
 
-    <script src="../docs/js/theme-default-4.22.0.js"></script>
+    <script src="../docs/js/theme-default-4.23.1.js"></script>
 
 </head>
 
@@ -134,6 +134,22 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-forget-password" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="forget-password">
+                    <a href="#forget-password">Forget Password</a>
+                </li>
+                                    <ul id="tocify-subheader-forget-password" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="forget-password-POSTapi-v1-forget-password">
+                                <a href="#forget-password-POSTapi-v1-forget-password">Forget Password Api</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="forget-password-POSTapi-v1-otp-verification">
+                                <a href="#forget-password-POSTapi-v1-otp-verification">OTP Verification Api</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="forget-password-POSTapi-v1-reset-password">
+                                <a href="#forget-password-POSTapi-v1-reset-password">Reset Password Api</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-home-page-apis" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="home-page-apis">
                     <a href="#home-page-apis">Home Page Api's</a>
@@ -222,19 +238,16 @@
                             </li>
                                                                         </ul>
                             </ul>
-                    <ul id="tocify-header-patient-forget-password" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="patient-forget-password">
-                    <a href="#patient-forget-password">Patient Forget Password</a>
+                    <ul id="tocify-header-patient-chat" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="patient-chat">
+                    <a href="#patient-chat">Patient Chat</a>
                 </li>
-                                    <ul id="tocify-subheader-patient-forget-password" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="patient-forget-password-POSTapi-v1-forget-password">
-                                <a href="#patient-forget-password-POSTapi-v1-forget-password">Forget Password Api</a>
+                                    <ul id="tocify-subheader-patient-chat" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="patient-chat-POSTapi-v1-patient-chat-request">
+                                <a href="#patient-chat-POSTapi-v1-patient-chat-request">Chat Request api</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="patient-forget-password-POSTapi-v1-otp-verification">
-                                <a href="#patient-forget-password-POSTapi-v1-otp-verification">OTP Verification Api</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="patient-forget-password-POSTapi-v1-reset-password">
-                                <a href="#patient-forget-password-POSTapi-v1-reset-password">Reset Password Api</a>
+                                                                                <li class="tocify-item level-2" data-unique="patient-chat-POSTapi-v1-patient-chat-request-send">
+                                <a href="#patient-chat-POSTapi-v1-patient-chat-request-send">Send Chat Request api</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -302,7 +315,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: September 7, 2023</li>
+        <li>Last updated: September 15, 2023</li>
     </ul>
 </div>
 
@@ -311,7 +324,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>http://127.0.0.1:8000</code>
 </aside>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
@@ -342,7 +355,8 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --data "{
     \"email\": \"john@yopmail.com\",
-    \"password\": \"12345678\"
+    \"password\": \"12345678\",
+    \"type\": \"Doctor,Patient\"
 }"
 </code></pre></div>
 
@@ -359,7 +373,8 @@ const headers = {
 
 let body = {
     "email": "john@yopmail.com",
-    "password": "12345678"
+    "password": "12345678",
+    "type": "Doctor,Patient"
 };
 
 fetch(url, {
@@ -510,6 +525,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The password of the user. Example: <code>12345678</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="POSTapi-v1-login"
+               value="Doctor,Patient"
+               data-component="body">
+    <br>
+<p>The type of the user. Example: <code>Doctor,Patient</code></p>
+        </div>
         </form>
 
                     <h2 id="authentication-POSTapi-v1-register">Register Api</h2>
@@ -535,8 +561,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"phone\": \"9876543210\",
     \"password\": \"12345678\",
     \"confirm_password\": \"12345678\",
-    \"type\": \"laborum\",
-    \"age\": \"atque\",
+    \"type\": \"Doctor,Patient\",
+    \"age\": \"asperiores\",
     \"location\": \"John Doe\"
 }"
 </code></pre></div>
@@ -559,8 +585,8 @@ let body = {
     "phone": "9876543210",
     "password": "12345678",
     "confirm_password": "12345678",
-    "type": "laborum",
-    "age": "atque",
+    "type": "Doctor,Patient",
+    "age": "asperiores",
     "location": "John Doe"
 };
 
@@ -750,10 +776,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-register"
-               value="laborum"
+               value="Doctor,Patient"
                data-component="body">
     <br>
-<p>Example: <code>laborum</code></p>
+<p>The type of the user. Example: <code>Doctor,Patient</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>age</code></b>&nbsp;&nbsp;
@@ -761,10 +787,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="age"                data-endpoint="POSTapi-v1-register"
-               value="atque"
+               value="asperiores"
                data-component="body">
     <br>
-<p>Example: <code>atque</code></p>
+<p>Example: <code>asperiores</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
@@ -1306,15 +1332,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"veritatis\",
-    \"email\": \"katlynn.reilly@example.net\",
-    \"gender\": \"quibusdam\",
-    \"age\": \"quo\",
-    \"phone\": \"consectetur\",
+    \"name\": \"quibusdam\",
+    \"email\": \"suzanne.davis@example.net\",
+    \"gender\": \"doloribus\",
+    \"age\": \"cumque\",
+    \"phone\": \"necessitatibus\",
     \"specialization_id\": [
-        \"optio\"
+        \"aut\"
     ],
-    \"license_number\": \"odit\"
+    \"license_number\": \"minus\"
 }"
 </code></pre></div>
 
@@ -1330,15 +1356,15 @@ const headers = {
 };
 
 let body = {
-    "name": "veritatis",
-    "email": "katlynn.reilly@example.net",
-    "gender": "quibusdam",
-    "age": "quo",
-    "phone": "consectetur",
+    "name": "quibusdam",
+    "email": "suzanne.davis@example.net",
+    "gender": "doloribus",
+    "age": "cumque",
+    "phone": "necessitatibus",
     "specialization_id": [
-        "optio"
+        "aut"
     ],
-    "license_number": "odit"
+    "license_number": "minus"
 };
 
 fetch(url, {
@@ -1492,10 +1518,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-doctor-updateProfile"
-               value="veritatis"
+               value="quibusdam"
                data-component="body">
     <br>
-<p>The name of the Doctor. Example: <code>veritatis</code></p>
+<p>The name of the Doctor. Example: <code>quibusdam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -1503,10 +1529,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-doctor-updateProfile"
-               value="katlynn.reilly@example.net"
+               value="suzanne.davis@example.net"
                data-component="body">
     <br>
-<p>The email of the Doctor. Example: <code>katlynn.reilly@example.net</code></p>
+<p>The email of the Doctor. Example: <code>suzanne.davis@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>gender</code></b>&nbsp;&nbsp;
@@ -1514,10 +1540,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="gender"                data-endpoint="POSTapi-v1-doctor-updateProfile"
-               value="quibusdam"
+               value="doloribus"
                data-component="body">
     <br>
-<p>Example: <code>quibusdam</code></p>
+<p>Example: <code>doloribus</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>age</code></b>&nbsp;&nbsp;
@@ -1525,10 +1551,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="age"                data-endpoint="POSTapi-v1-doctor-updateProfile"
-               value="quo"
+               value="cumque"
                data-component="body">
     <br>
-<p>The age of the Doctor. Example: <code>quo</code></p>
+<p>The age of the Doctor. Example: <code>cumque</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -1536,10 +1562,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-doctor-updateProfile"
-               value="consectetur"
+               value="necessitatibus"
                data-component="body">
     <br>
-<p>The phone of the Doctor. Example: <code>consectetur</code></p>
+<p>The phone of the Doctor. Example: <code>necessitatibus</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>specialization_id</code></b>&nbsp;&nbsp;
@@ -1560,10 +1586,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="license_number"                data-endpoint="POSTapi-v1-doctor-updateProfile"
-               value="odit"
+               value="minus"
                data-component="body">
     <br>
-<p>The license_number of the Doctor. Example: <code>odit</code></p>
+<p>The license_number of the Doctor. Example: <code>minus</code></p>
         </div>
         </form>
 
@@ -1585,9 +1611,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"current_password\": \"odio\",
-    \"new_password\": \"dolorem\",
-    \"confirm_password\": \"harum\"
+    \"current_password\": \"quis\",
+    \"new_password\": \"harum\",
+    \"confirm_password\": \"sit\"
 }"
 </code></pre></div>
 
@@ -1603,9 +1629,9 @@ const headers = {
 };
 
 let body = {
-    "current_password": "odio",
-    "new_password": "dolorem",
-    "confirm_password": "harum"
+    "current_password": "quis",
+    "new_password": "harum",
+    "confirm_password": "sit"
 };
 
 fetch(url, {
@@ -1750,10 +1776,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="current_password"                data-endpoint="POSTapi-v1-doctor-changePassword"
-               value="odio"
+               value="quis"
                data-component="body">
     <br>
-<p>The old_password of the Doctor. Example: <code>odio</code></p>
+<p>The old_password of the Doctor. Example: <code>quis</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>new_password</code></b>&nbsp;&nbsp;
@@ -1761,10 +1787,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="new_password"                data-endpoint="POSTapi-v1-doctor-changePassword"
-               value="dolorem"
+               value="harum"
                data-component="body">
     <br>
-<p>The password of the Doctor. Example: <code>dolorem</code></p>
+<p>The password of the Doctor. Example: <code>harum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>confirm_password</code></b>&nbsp;&nbsp;
@@ -1772,10 +1798,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="confirm_password"                data-endpoint="POSTapi-v1-doctor-changePassword"
-               value="harum"
+               value="sit"
                data-component="body">
     <br>
-<p>The password_confirmation of the Doctor. Example: <code>harum</code></p>
+<p>The password_confirmation of the Doctor. Example: <code>sit</code></p>
         </div>
         </form>
 
@@ -1796,7 +1822,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://127.0.0.1:8000/api/v1/doctor/updateProfileImage" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "profile_picture=@C:\Users\user\AppData\Local\Temp\phpBE71.tmp" </code></pre></div>
+    --form "profile_picture=@C:\Users\Swarnadwip\AppData\Local\Temp\php7D0C.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1957,7 +1983,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The profile_picture of the Doctor. Example: <code>C:\Users\user\AppData\Local\Temp\phpBE71.tmp</code></p>
+<p>The profile_picture of the Doctor. Example: <code>C:\Users\Swarnadwip\AppData\Local\Temp\php7D0C.tmp</code></p>
         </div>
         </form>
 
@@ -1982,8 +2008,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"subject\": \"illum\",
-    \"message\": \"ipsum\"
+    \"subject\": \"voluptatem\",
+    \"message\": \"est\"
 }"
 </code></pre></div>
 
@@ -1999,8 +2025,8 @@ const headers = {
 };
 
 let body = {
-    "subject": "illum",
-    "message": "ipsum"
+    "subject": "voluptatem",
+    "message": "est"
 };
 
 fetch(url, {
@@ -2089,10 +2115,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="subject"                data-endpoint="POSTapi-v1-doctor-help-and-support"
-               value="illum"
+               value="voluptatem"
                data-component="body">
     <br>
-<p>Example: <code>illum</code></p>
+<p>Example: <code>voluptatem</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -2100,7 +2126,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="message"                data-endpoint="POSTapi-v1-doctor-help-and-support"
-               value="ipsum"
+               value="est"
                data-component="body">
     <br>
 <p>@response 200{
@@ -2116,7 +2142,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &quot;created_at&quot;: &quot;2021-09-28T10:20:00.000000Z&quot;,
 &quot;updated_at&quot;: &quot;2021-09-28T10:20:00.000000Z&quot;
 }
-} Example: <code>ipsum</code></p>
+} Example: <code>est</code></p>
         </div>
         </form>
 
@@ -2165,7 +2191,7 @@ fetch(url, {
     &quot;status&quot;: true,
     &quot;data&quot;: {
         &quot;id&quot;: 1,
-        &quot;content&quot;: &quot;Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&quot;,
+        &quot;content&quot;: &quot;Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&quot;,
         &quot;created_at&quot;: &quot;2023-06-28T09:40:56.000000Z&quot;,
         &quot;updated_at&quot;: &quot;2023-06-28T09:45:32.000000Z&quot;
     }
@@ -2365,6 +2391,516 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                <h1 id="forget-password">Forget Password</h1>
+
+    
+
+                                <h2 id="forget-password-POSTapi-v1-forget-password">Forget Password Api</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-forget-password">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/v1/forget-password" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"john@yopmail.com\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/forget-password"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "john@yopmail.com"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-forget-password">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;statusCode&quot;: 200,
+    &quot;message&quot;: &quot;OTP has been sent to your email&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 201,
+    &quot;error&quot;: {
+        &quot;email&quot;: [
+            &quot;The email field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-forget-password" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-forget-password"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-forget-password"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-forget-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-forget-password">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-forget-password" data-method="POST"
+      data-path="api/v1/forget-password"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-forget-password', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-forget-password"
+                    onclick="tryItOut('POSTapi-v1-forget-password');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-forget-password"
+                    onclick="cancelTryOut('POSTapi-v1-forget-password');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-forget-password"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/forget-password</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-forget-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-forget-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-forget-password"
+               value="john@yopmail.com"
+               data-component="body">
+    <br>
+<p>Email of the Patient. Example: <code>john@yopmail.com</code></p>
+        </div>
+        </form>
+
+                    <h2 id="forget-password-POSTapi-v1-otp-verification">OTP Verification Api</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-otp-verification">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/v1/otp-verification" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"otp\": \"123456\",
+    \"email\": \"john@yopmail.com\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/otp-verification"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "otp": "123456",
+    "email": "john@yopmail.com"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-otp-verification">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;statusCode&quot;: 200,
+    &quot;message&quot;: &quot;OTP verified successfully&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 401,
+    &quot;error&quot;: &quot;OTP is expired&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-otp-verification" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-otp-verification"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-otp-verification"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-otp-verification" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-otp-verification">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-otp-verification" data-method="POST"
+      data-path="api/v1/otp-verification"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-otp-verification', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-otp-verification"
+                    onclick="tryItOut('POSTapi-v1-otp-verification');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-otp-verification"
+                    onclick="cancelTryOut('POSTapi-v1-otp-verification');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-otp-verification"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/otp-verification</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-otp-verification"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-otp-verification"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>otp</code></b>&nbsp;&nbsp;
+<small>numeric</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="otp"                data-endpoint="POSTapi-v1-otp-verification"
+               value="123456"
+               data-component="body">
+    <br>
+<p>OTP of the Patient. Example: <code>123456</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-otp-verification"
+               value="john@yopmail.com"
+               data-component="body">
+    <br>
+<p>Email of the Patient. Example: <code>john@yopmail.com</code></p>
+        </div>
+        </form>
+
+                    <h2 id="forget-password-POSTapi-v1-reset-password">Reset Password Api</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-reset-password">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/v1/reset-password" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"password\": \"123456\",
+    \"confirm_password\": \"123456\",
+    \"email\": \"john@yopmail.com\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/reset-password"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "password": "123456",
+    "confirm_password": "123456",
+    "email": "john@yopmail.com"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-reset-password">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;statusCode&quot;: 200,
+    &quot;message&quot;: &quot;Password has been reset successfully&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 201,
+    &quot;error&quot;: {
+        &quot;password&quot;: [
+            &quot;The password field is required.&quot;
+        ],
+        &quot;confirm_password&quot;: [
+            &quot;The confirm password field is required.&quot;
+        ],
+        &quot;email&quot;: [
+            &quot;The email field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-reset-password" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-reset-password"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-reset-password"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-reset-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-reset-password">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-reset-password" data-method="POST"
+      data-path="api/v1/reset-password"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-reset-password', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-reset-password"
+                    onclick="tryItOut('POSTapi-v1-reset-password');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-reset-password"
+                    onclick="cancelTryOut('POSTapi-v1-reset-password');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-reset-password"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/reset-password</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-reset-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-reset-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-reset-password"
+               value="123456"
+               data-component="body">
+    <br>
+<p>Password of the Patient. Example: <code>123456</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>confirm_password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="confirm_password"                data-endpoint="POSTapi-v1-reset-password"
+               value="123456"
+               data-component="body">
+    <br>
+<p>Confirm Password of the Patient. Example: <code>123456</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-reset-password"
+               value="john@yopmail.com"
+               data-component="body">
+    <br>
+<p>Email of the Patient. Example: <code>john@yopmail.com</code></p>
+        </div>
+        </form>
 
                 <h1 id="home-page-apis">Home Page Api's</h1>
 
@@ -2818,8 +3354,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"sequi\",
-    \"slug\": \"commodi\"
+    \"type\": \"laboriosam\",
+    \"slug\": \"modi\"
 }"
 </code></pre></div>
 
@@ -2835,8 +3371,8 @@ const headers = {
 };
 
 let body = {
-    "type": "sequi",
-    "slug": "commodi"
+    "type": "laboriosam",
+    "slug": "modi"
 };
 
 fetch(url, {
@@ -2966,10 +3502,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-doctors"
-               value="sequi"
+               value="laboriosam"
                data-component="body">
     <br>
-<p>The type of the search. Example: <code>sequi</code></p>
+<p>The type of the search. Example: <code>laboriosam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
@@ -2977,10 +3513,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="slug"                data-endpoint="POSTapi-v1-doctors"
-               value="commodi"
+               value="modi"
                data-component="body">
     <br>
-<p>The slug of the search. example - dermatologist, oral-piercing-infection Example: <code>commodi</code></p>
+<p>The slug of the search. example - dermatologist, oral-piercing-infection Example: <code>modi</code></p>
         </div>
         </form>
 
@@ -3150,8 +3686,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"latitude\": \"quibusdam\",
-    \"longitude\": \"tenetur\"
+    \"latitude\": \"quia\",
+    \"longitude\": \"et\"
 }"
 </code></pre></div>
 
@@ -3167,8 +3703,8 @@ const headers = {
 };
 
 let body = {
-    "latitude": "quibusdam",
-    "longitude": "tenetur"
+    "latitude": "quia",
+    "longitude": "et"
 };
 
 fetch(url, {
@@ -3280,10 +3816,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="latitude"                data-endpoint="POSTapi-v1-store-location"
-               value="quibusdam"
+               value="quia"
                data-component="body">
     <br>
-<p>The latitude of the location. Example: <code>quibusdam</code></p>
+<p>The latitude of the location. Example: <code>quia</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
@@ -3291,10 +3827,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="longitude"                data-endpoint="POSTapi-v1-store-location"
-               value="tenetur"
+               value="et"
                data-component="body">
     <br>
-<p>The longitude of the location. Example: <code>tenetur</code></p>
+<p>The longitude of the location. Example: <code>et</code></p>
         </div>
         </form>
 
@@ -3638,28 +4174,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"clinic_name\": \"velit\",
-    \"clinic_address\": \"iure\",
-    \"clinic_phone\": \"nisi\",
+    \"clinic_name\": \"eos\",
+    \"clinic_address\": \"suscipit\",
+    \"clinic_phone\": \"aut\",
     \"day_id\": [
-        \"aliquid\"
+        \"delectus\"
     ],
-    \"latitute\": \"corrupti\",
-    \"longitute\": \"suscipit\",
+    \"latitute\": \"vero\",
+    \"longitute\": \"rerum\",
     \"slot_date\": [
-        \"est\"
+        \"vel\"
     ],
     \"slot_start_time\": [
-        \"optio\"
+        \"vero\"
     ],
     \"slot_end_time\": [
-        \"quasi\"
+        \"eum\"
     ],
     \"first_time_mode\": [
-        \"nemo\"
+        \"sit\"
     ],
     \"second_time_mode\": [
-        \"excepturi\"
+        \"nesciunt\"
     ]
 }"
 </code></pre></div>
@@ -3676,28 +4212,28 @@ const headers = {
 };
 
 let body = {
-    "clinic_name": "velit",
-    "clinic_address": "iure",
-    "clinic_phone": "nisi",
+    "clinic_name": "eos",
+    "clinic_address": "suscipit",
+    "clinic_phone": "aut",
     "day_id": [
-        "aliquid"
+        "delectus"
     ],
-    "latitute": "corrupti",
-    "longitute": "suscipit",
+    "latitute": "vero",
+    "longitute": "rerum",
     "slot_date": [
-        "est"
+        "vel"
     ],
     "slot_start_time": [
-        "optio"
+        "vero"
     ],
     "slot_end_time": [
-        "quasi"
+        "eum"
     ],
     "first_time_mode": [
-        "nemo"
+        "sit"
     ],
     "second_time_mode": [
-        "excepturi"
+        "nesciunt"
     ]
 };
 
@@ -3804,10 +4340,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_name"                data-endpoint="POSTapi-v1-doctor-manage-clinic-store"
-               value="velit"
+               value="eos"
                data-component="body">
     <br>
-<p>Example: <code>velit</code></p>
+<p>Example: <code>eos</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>clinic_address</code></b>&nbsp;&nbsp;
@@ -3815,10 +4351,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_address"                data-endpoint="POSTapi-v1-doctor-manage-clinic-store"
-               value="iure"
+               value="suscipit"
                data-component="body">
     <br>
-<p>Example: <code>iure</code></p>
+<p>Example: <code>suscipit</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>clinic_phone</code></b>&nbsp;&nbsp;
@@ -3826,10 +4362,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_phone"                data-endpoint="POSTapi-v1-doctor-manage-clinic-store"
-               value="nisi"
+               value="aut"
                data-component="body">
     <br>
-<p>Example: <code>nisi</code></p>
+<p>Example: <code>aut</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>day_id</code></b>&nbsp;&nbsp;
@@ -3850,10 +4386,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="latitute"                data-endpoint="POSTapi-v1-doctor-manage-clinic-store"
-               value="corrupti"
+               value="vero"
                data-component="body">
     <br>
-<p>Example: <code>corrupti</code></p>
+<p>Example: <code>vero</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>longitute</code></b>&nbsp;&nbsp;
@@ -3861,10 +4397,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="longitute"                data-endpoint="POSTapi-v1-doctor-manage-clinic-store"
-               value="suscipit"
+               value="rerum"
                data-component="body">
     <br>
-<p>Example: <code>suscipit</code></p>
+<p>Example: <code>rerum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>slot_date</code></b>&nbsp;&nbsp;
@@ -4115,29 +4651,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"quos\",
-    \"clinic_name\": \"est\",
-    \"clinic_address\": \"aut\",
-    \"clinic_phone\": \"ipsa\",
+    \"id\": \"ut\",
+    \"clinic_name\": \"molestiae\",
+    \"clinic_address\": \"libero\",
+    \"clinic_phone\": \"sunt\",
     \"day_id\": [
-        \"totam\"
-    ],
-    \"latitute\": \"ducimus\",
-    \"longitute\": \"officiis\",
-    \"slot_date\": [
         \"suscipit\"
     ],
+    \"latitute\": \"eius\",
+    \"longitute\": \"explicabo\",
+    \"slot_date\": [
+        \"corporis\"
+    ],
     \"slot_start_time\": [
-        \"quas\"
+        \"ipsa\"
     ],
     \"slot_end_time\": [
-        \"dicta\"
+        \"totam\"
     ],
     \"first_time_mode\": [
-        \"voluptatem\"
+        \"aut\"
     ],
     \"second_time_mode\": [
-        \"expedita\"
+        \"quaerat\"
     ]
 }"
 </code></pre></div>
@@ -4154,29 +4690,29 @@ const headers = {
 };
 
 let body = {
-    "id": "quos",
-    "clinic_name": "est",
-    "clinic_address": "aut",
-    "clinic_phone": "ipsa",
+    "id": "ut",
+    "clinic_name": "molestiae",
+    "clinic_address": "libero",
+    "clinic_phone": "sunt",
     "day_id": [
-        "totam"
-    ],
-    "latitute": "ducimus",
-    "longitute": "officiis",
-    "slot_date": [
         "suscipit"
     ],
+    "latitute": "eius",
+    "longitute": "explicabo",
+    "slot_date": [
+        "corporis"
+    ],
     "slot_start_time": [
-        "quas"
+        "ipsa"
     ],
     "slot_end_time": [
-        "dicta"
+        "totam"
     ],
     "first_time_mode": [
-        "voluptatem"
+        "aut"
     ],
     "second_time_mode": [
-        "expedita"
+        "quaerat"
     ]
 };
 
@@ -4277,10 +4813,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-doctor-manage-clinic-update"
-               value="quos"
+               value="ut"
                data-component="body">
     <br>
-<p>Example: <code>quos</code></p>
+<p>Example: <code>ut</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>clinic_name</code></b>&nbsp;&nbsp;
@@ -4288,10 +4824,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_name"                data-endpoint="POSTapi-v1-doctor-manage-clinic-update"
-               value="est"
+               value="molestiae"
                data-component="body">
     <br>
-<p>Example: <code>est</code></p>
+<p>Example: <code>molestiae</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>clinic_address</code></b>&nbsp;&nbsp;
@@ -4299,10 +4835,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_address"                data-endpoint="POSTapi-v1-doctor-manage-clinic-update"
-               value="aut"
+               value="libero"
                data-component="body">
     <br>
-<p>Example: <code>aut</code></p>
+<p>Example: <code>libero</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>clinic_phone</code></b>&nbsp;&nbsp;
@@ -4310,10 +4846,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_phone"                data-endpoint="POSTapi-v1-doctor-manage-clinic-update"
-               value="ipsa"
+               value="sunt"
                data-component="body">
     <br>
-<p>Example: <code>ipsa</code></p>
+<p>Example: <code>sunt</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>day_id</code></b>&nbsp;&nbsp;
@@ -4334,10 +4870,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="latitute"                data-endpoint="POSTapi-v1-doctor-manage-clinic-update"
-               value="ducimus"
+               value="eius"
                data-component="body">
     <br>
-<p>Example: <code>ducimus</code></p>
+<p>Example: <code>eius</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>longitute</code></b>&nbsp;&nbsp;
@@ -4345,10 +4881,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="longitute"                data-endpoint="POSTapi-v1-doctor-manage-clinic-update"
-               value="officiis"
+               value="explicabo"
                data-component="body">
     <br>
-<p>Example: <code>officiis</code></p>
+<p>Example: <code>explicabo</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>slot_date</code></b>&nbsp;&nbsp;
@@ -4435,7 +4971,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"natus\"
+    \"id\": \"enim\"
 }"
 </code></pre></div>
 
@@ -4451,7 +4987,7 @@ const headers = {
 };
 
 let body = {
-    "id": "natus"
+    "id": "enim"
 };
 
 fetch(url, {
@@ -4556,10 +5092,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-doctor-manage-clinic-delete"
-               value="natus"
+               value="enim"
                data-component="body">
     <br>
-<p>Example: <code>natus</code></p>
+<p>Example: <code>enim</code></p>
         </div>
         </form>
 
@@ -4581,7 +5117,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"quibusdam\"
+    \"id\": \"distinctio\"
 }"
 </code></pre></div>
 
@@ -4597,7 +5133,7 @@ const headers = {
 };
 
 let body = {
-    "id": "quibusdam"
+    "id": "distinctio"
 };
 
 fetch(url, {
@@ -4722,10 +5258,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-doctor-manage-clinic-presentSheduleDate"
-               value="quibusdam"
+               value="distinctio"
                data-component="body">
     <br>
-<p>Example: <code>quibusdam</code></p>
+<p>Example: <code>distinctio</code></p>
         </div>
         </form>
 
@@ -4747,7 +5283,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"rerum\"
+    \"id\": \"laborum\"
 }"
 </code></pre></div>
 
@@ -4763,7 +5299,7 @@ const headers = {
 };
 
 let body = {
-    "id": "rerum"
+    "id": "laborum"
 };
 
 fetch(url, {
@@ -4875,10 +5411,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-doctor-manage-clinic-deletePresentSheduleDate"
-               value="rerum"
+               value="laborum"
                data-component="body">
     <br>
-<p>Example: <code>rerum</code></p>
+<p>Example: <code>laborum</code></p>
         </div>
         </form>
 
@@ -5173,7 +5709,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"doctor_id\": \"voluptas\"
+    \"doctor_id\": \"sunt\"
 }"
 </code></pre></div>
 
@@ -5189,7 +5725,7 @@ const headers = {
 };
 
 let body = {
-    "doctor_id": "voluptas"
+    "doctor_id": "sunt"
 };
 
 fetch(url, {
@@ -5319,10 +5855,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="doctor_id"                data-endpoint="POSTapi-v1-doctor-details"
-               value="voluptas"
+               value="sunt"
                data-component="body">
     <br>
-<p>The id of the doctor. Example: <code>voluptas</code></p>
+<p>The id of the doctor. Example: <code>sunt</code></p>
         </div>
         </form>
 
@@ -5343,9 +5879,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"clinic_id\": \"quia\",
-    \"appointment_date\": \"unde\",
-    \"appointment_time\": \"et\"
+    \"clinic_id\": \"ea\",
+    \"appointment_date\": \"explicabo\",
+    \"appointment_time\": \"reiciendis\"
 }"
 </code></pre></div>
 
@@ -5361,9 +5897,9 @@ const headers = {
 };
 
 let body = {
-    "clinic_id": "quia",
-    "appointment_date": "unde",
-    "appointment_time": "et"
+    "clinic_id": "ea",
+    "appointment_date": "explicabo",
+    "appointment_time": "reiciendis"
 };
 
 fetch(url, {
@@ -5496,10 +6032,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_id"                data-endpoint="POSTapi-v1-appointment-store"
-               value="quia"
+               value="ea"
                data-component="body">
     <br>
-<p>Example: <code>quia</code></p>
+<p>Example: <code>ea</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>appointment_date</code></b>&nbsp;&nbsp;
@@ -5507,10 +6043,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="appointment_date"                data-endpoint="POSTapi-v1-appointment-store"
-               value="unde"
+               value="explicabo"
                data-component="body">
     <br>
-<p>Example: <code>unde</code></p>
+<p>Example: <code>explicabo</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>appointment_time</code></b>&nbsp;&nbsp;
@@ -5518,10 +6054,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="appointment_time"                data-endpoint="POSTapi-v1-appointment-store"
-               value="et"
+               value="reiciendis"
                data-component="body">
     <br>
-<p>Example: <code>et</code></p>
+<p>Example: <code>reiciendis</code></p>
         </div>
         </form>
 
@@ -5542,7 +6078,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"clinic_id\": \"magni\"
+    \"clinic_id\": \"adipisci\"
 }"
 </code></pre></div>
 
@@ -5558,7 +6094,7 @@ const headers = {
 };
 
 let body = {
-    "clinic_id": "magni"
+    "clinic_id": "adipisci"
 };
 
 fetch(url, {
@@ -5678,10 +6214,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="clinic_id"                data-endpoint="POSTapi-v1-visitDate"
-               value="magni"
+               value="adipisci"
                data-component="body">
     <br>
-<p>Example: <code>magni</code></p>
+<p>Example: <code>adipisci</code></p>
         </div>
         </form>
 
@@ -5817,35 +6353,36 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                <h1 id="patient-forget-password">Patient Forget Password</h1>
+                <h1 id="patient-chat">Patient Chat</h1>
 
     
 
-                                <h2 id="patient-forget-password-POSTapi-v1-forget-password">Forget Password Api</h2>
+                                <h2 id="patient-chat-POSTapi-v1-patient-chat-request">Chat Request api</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
 
-<span id="example-requests-POSTapi-v1-forget-password">
+<span id="example-requests-POSTapi-v1-patient-chat-request">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/v1/forget-password" \
+    "http://127.0.0.1:8000/api/v1/patient/chat-request" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"john@yopmail.com\"
+    \"doctor_id\": 1
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/forget-password"
+    "http://127.0.0.1:8000/api/v1/patient/chat-request"
 );
 
 const headers = {
@@ -5854,7 +6391,7 @@ const headers = {
 };
 
 let body = {
-    "email": "john@yopmail.com"
+    "doctor_id": 1
 };
 
 fetch(url, {
@@ -5865,71 +6402,63 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-POSTapi-v1-forget-password">
+<span id="example-responses-POSTapi-v1-patient-chat-request">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: true,
-    &quot;statusCode&quot;: 200,
-    &quot;message&quot;: &quot;OTP has been sent to your email&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: false,
-    &quot;statusCode&quot;: 201,
-    &quot;error&quot;: {
-        &quot;email&quot;: [
-            &quot;The email field is required.&quot;
-        ]
-    }
+ &quot;status&quot;: true,
+ &quot;message&quot;: &quot;Friend request sent successfully&quot;,
+ &quot;data&quot;: {
+     &quot;id&quot;: 25,
+     &quot;user_id&quot;: 4,
+     &quot;friend_id&quot;: 3,
+     &quot;status&quot;: 1,  // 0 = pending, 1 = accepted, 2 = rejected
+     &quot;created_at&quot;: &quot;2023-08-28T11:02:45.000000Z&quot;,
+     &quot;updated_at&quot;: &quot;2023-08-28T13:12:02.000000Z&quot;
+ }
 }</code>
  </pre>
     </span>
-<span id="execution-results-POSTapi-v1-forget-password" hidden>
+<span id="execution-results-POSTapi-v1-patient-chat-request" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-forget-password"></span>:
+                id="execution-response-status-POSTapi-v1-patient-chat-request"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-forget-password"
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-patient-chat-request"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-v1-forget-password" hidden>
+<span id="execution-error-POSTapi-v1-patient-chat-request" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-forget-password">
+    <pre><code id="execution-error-message-POSTapi-v1-patient-chat-request">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-v1-forget-password" data-method="POST"
-      data-path="api/v1/forget-password"
-      data-authed="0"
+<form id="form-POSTapi-v1-patient-chat-request" data-method="POST"
+      data-path="api/v1/patient/chat-request"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-forget-password', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-patient-chat-request', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-forget-password"
-                    onclick="tryItOut('POSTapi-v1-forget-password');">Try it out ⚡
+                    id="btn-tryout-POSTapi-v1-patient-chat-request"
+                    onclick="tryItOut('POSTapi-v1-patient-chat-request');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-forget-password"
-                    onclick="cancelTryOut('POSTapi-v1-forget-password');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-v1-patient-chat-request"
+                    onclick="cancelTryOut('POSTapi-v1-patient-chat-request');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-forget-password"
+                    id="btn-executetryout-POSTapi-v1-patient-chat-request"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -5937,7 +6466,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/v1/forget-password</code></b>
+            <b><code>api/v1/patient/chat-request</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -5945,7 +6474,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-forget-password"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-patient-chat-request"
                value="application/json"
                data-component="header">
     <br>
@@ -5956,7 +6485,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-forget-password"
+                              name="Accept"                data-endpoint="POSTapi-v1-patient-chat-request"
                value="application/json"
                data-component="header">
     <br>
@@ -5964,44 +6493,44 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+            <b style="line-height: 2;"><code>doctor_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-forget-password"
-               value="john@yopmail.com"
+                <input type="number" style="display: none"
+               step="any"               name="doctor_id"                data-endpoint="POSTapi-v1-patient-chat-request"
+               value="1"
                data-component="body">
     <br>
-<p>Email of the Patient. Example: <code>john@yopmail.com</code></p>
+<p>Doctor Id. Example: <code>1</code></p>
         </div>
         </form>
 
-                    <h2 id="patient-forget-password-POSTapi-v1-otp-verification">OTP Verification Api</h2>
+                    <h2 id="patient-chat-POSTapi-v1-patient-chat-request-send">Send Chat Request api</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
 
-<span id="example-requests-POSTapi-v1-otp-verification">
+<span id="example-requests-POSTapi-v1-patient-chat-request-send">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/v1/otp-verification" \
+    "http://127.0.0.1:8000/api/v1/patient/chat-request-send" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"otp\": \"123456\",
-    \"email\": \"john@yopmail.com\"
+    \"doctor_id\": 1
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/otp-verification"
+    "http://127.0.0.1:8000/api/v1/patient/chat-request-send"
 );
 
 const headers = {
@@ -6010,8 +6539,7 @@ const headers = {
 };
 
 let body = {
-    "otp": "123456",
-    "email": "john@yopmail.com"
+    "doctor_id": 1
 };
 
 fetch(url, {
@@ -6022,67 +6550,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-POSTapi-v1-otp-verification">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: true,
-    &quot;statusCode&quot;: 200,
-    &quot;message&quot;: &quot;OTP verified successfully&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: false,
-    &quot;statusCode&quot;: 401,
-    &quot;error&quot;: &quot;OTP is expired&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-v1-otp-verification" hidden>
+<span id="example-responses-POSTapi-v1-patient-chat-request-send">
+</span>
+<span id="execution-results-POSTapi-v1-patient-chat-request-send" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-otp-verification"></span>:
+                id="execution-response-status-POSTapi-v1-patient-chat-request-send"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-otp-verification"
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-patient-chat-request-send"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-v1-otp-verification" hidden>
+<span id="execution-error-POSTapi-v1-patient-chat-request-send" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-otp-verification">
+    <pre><code id="execution-error-message-POSTapi-v1-patient-chat-request-send">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-v1-otp-verification" data-method="POST"
-      data-path="api/v1/otp-verification"
-      data-authed="0"
+<form id="form-POSTapi-v1-patient-chat-request-send" data-method="POST"
+      data-path="api/v1/patient/chat-request-send"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-otp-verification', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-patient-chat-request-send', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-otp-verification"
-                    onclick="tryItOut('POSTapi-v1-otp-verification');">Try it out ⚡
+                    id="btn-tryout-POSTapi-v1-patient-chat-request-send"
+                    onclick="tryItOut('POSTapi-v1-patient-chat-request-send');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-otp-verification"
-                    onclick="cancelTryOut('POSTapi-v1-otp-verification');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-v1-patient-chat-request-send"
+                    onclick="cancelTryOut('POSTapi-v1-patient-chat-request-send');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-otp-verification"
+                    id="btn-executetryout-POSTapi-v1-patient-chat-request-send"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -6090,7 +6596,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/v1/otp-verification</code></b>
+            <b><code>api/v1/patient/chat-request-send</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -6098,7 +6604,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-otp-verification"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-patient-chat-request-send"
                value="application/json"
                data-component="header">
     <br>
@@ -6109,7 +6615,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-otp-verification"
+                              name="Accept"                data-endpoint="POSTapi-v1-patient-chat-request-send"
                value="application/json"
                data-component="header">
     <br>
@@ -6117,213 +6623,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>otp</code></b>&nbsp;&nbsp;
-<small>numeric</small>&nbsp;
+            <b style="line-height: 2;"><code>doctor_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="otp"                data-endpoint="POSTapi-v1-otp-verification"
-               value="123456"
+                <input type="number" style="display: none"
+               step="any"               name="doctor_id"                data-endpoint="POSTapi-v1-patient-chat-request-send"
+               value="1"
                data-component="body">
     <br>
-<p>OTP of the Patient. Example: <code>123456</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-otp-verification"
-               value="john@yopmail.com"
-               data-component="body">
-    <br>
-<p>Email of the Patient. Example: <code>john@yopmail.com</code></p>
-        </div>
-        </form>
-
-                    <h2 id="patient-forget-password-POSTapi-v1-reset-password">Reset Password Api</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-reset-password">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/v1/reset-password" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"password\": \"123456\",
-    \"confirm_password\": \"123456\",
-    \"email\": \"john@yopmail.com\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/reset-password"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "password": "123456",
-    "confirm_password": "123456",
-    "email": "john@yopmail.com"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-reset-password">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: true,
-    &quot;statusCode&quot;: 200,
-    &quot;message&quot;: &quot;Password has been reset successfully&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: false,
-    &quot;statusCode&quot;: 201,
-    &quot;error&quot;: {
-        &quot;password&quot;: [
-            &quot;The password field is required.&quot;
-        ],
-        &quot;confirm_password&quot;: [
-            &quot;The confirm password field is required.&quot;
-        ],
-        &quot;email&quot;: [
-            &quot;The email field is required.&quot;
-        ]
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-v1-reset-password" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-reset-password"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-reset-password"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-reset-password" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-reset-password">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-reset-password" data-method="POST"
-      data-path="api/v1/reset-password"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-reset-password', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-reset-password"
-                    onclick="tryItOut('POSTapi-v1-reset-password');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-reset-password"
-                    onclick="cancelTryOut('POSTapi-v1-reset-password');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-reset-password"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/reset-password</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-reset-password"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-reset-password"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password"                data-endpoint="POSTapi-v1-reset-password"
-               value="123456"
-               data-component="body">
-    <br>
-<p>Password of the Patient. Example: <code>123456</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>confirm_password</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="confirm_password"                data-endpoint="POSTapi-v1-reset-password"
-               value="123456"
-               data-component="body">
-    <br>
-<p>Confirm Password of the Patient. Example: <code>123456</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-reset-password"
-               value="john@yopmail.com"
-               data-component="body">
-    <br>
-<p>Email of the Patient. Example: <code>john@yopmail.com</code></p>
+<p>Doctor Id. Example: <code>1</code></p>
         </div>
         </form>
 
@@ -6488,7 +6796,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": 14
+    \"id\": 19
 }"
 </code></pre></div>
 
@@ -6504,7 +6812,7 @@ const headers = {
 };
 
 let body = {
-    "id": 14
+    "id": 19
 };
 
 fetch(url, {
@@ -6633,10 +6941,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="POSTapi-v1-patient-membership-detailById"
-               value="14"
+               value="19"
                data-component="body">
     <br>
-<p>The id of the membership. Example: <code>14</code></p>
+<p>The id of the membership. Example: <code>19</code></p>
         </div>
         </form>
 
@@ -6658,9 +6966,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"plan_id\": 9,
-    \"name\": \"quisquam\",
-    \"stripeToken\": \"laboriosam\"
+    \"plan_id\": 1,
+    \"name\": \"commodi\",
+    \"stripeToken\": \"qui\"
 }"
 </code></pre></div>
 
@@ -6676,9 +6984,9 @@ const headers = {
 };
 
 let body = {
-    "plan_id": 9,
-    "name": "quisquam",
-    "stripeToken": "laboriosam"
+    "plan_id": 1,
+    "name": "commodi",
+    "stripeToken": "qui"
 };
 
 fetch(url, {
@@ -6767,10 +7075,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="plan_id"                data-endpoint="POSTapi-v1-patient-membership-payment"
-               value="9"
+               value="1"
                data-component="body">
     <br>
-<p>The id of the membership. Example: <code>9</code></p>
+<p>The id of the membership. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -6778,10 +7086,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-patient-membership-payment"
-               value="quisquam"
+               value="commodi"
                data-component="body">
     <br>
-<p>Example: <code>quisquam</code></p>
+<p>Example: <code>commodi</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>stripeToken</code></b>&nbsp;&nbsp;
@@ -6789,10 +7097,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="stripeToken"                data-endpoint="POSTapi-v1-patient-membership-payment"
-               value="laboriosam"
+               value="qui"
                data-component="body">
     <br>
-<p>Example: <code>laboriosam</code></p>
+<p>Example: <code>qui</code></p>
         </div>
         </form>
 
@@ -7209,10 +7517,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"veritatis\",
-    \"email\": \"hans.hansen@example.net\",
-    \"age\": \"nostrum\",
-    \"phone\": \"praesentium\"
+    \"name\": \"odit\",
+    \"email\": \"hsawayn@example.org\",
+    \"age\": \"accusamus\",
+    \"phone\": \"iure\"
 }"
 </code></pre></div>
 
@@ -7228,10 +7536,10 @@ const headers = {
 };
 
 let body = {
-    "name": "veritatis",
-    "email": "hans.hansen@example.net",
-    "age": "nostrum",
-    "phone": "praesentium"
+    "name": "odit",
+    "email": "hsawayn@example.org",
+    "age": "accusamus",
+    "phone": "iure"
 };
 
 fetch(url, {
@@ -7349,10 +7657,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-patient-updateProfile"
-               value="veritatis"
+               value="odit"
                data-component="body">
     <br>
-<p>optional The name of the Patient. Example: <code>veritatis</code></p>
+<p>optional The name of the Patient. Example: <code>odit</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -7360,10 +7668,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-patient-updateProfile"
-               value="hans.hansen@example.net"
+               value="hsawayn@example.org"
                data-component="body">
     <br>
-<p>optional The email of the Patient. Example: <code>hans.hansen@example.net</code></p>
+<p>optional The email of the Patient. Example: <code>hsawayn@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>age</code></b>&nbsp;&nbsp;
@@ -7371,10 +7679,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="age"                data-endpoint="POSTapi-v1-patient-updateProfile"
-               value="nostrum"
+               value="accusamus"
                data-component="body">
     <br>
-<p>optional The age of the Patient. Example: <code>nostrum</code></p>
+<p>optional The age of the Patient. Example: <code>accusamus</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -7382,10 +7690,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-patient-updateProfile"
-               value="praesentium"
+               value="iure"
                data-component="body">
     <br>
-<p>optional The phone of the Patient. Example: <code>praesentium</code></p>
+<p>optional The phone of the Patient. Example: <code>iure</code></p>
         </div>
         </form>
 
@@ -7407,9 +7715,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"current_password\": \"dolorum\",
-    \"new_password\": \"fugit\",
-    \"confirm_password\": \"temporibus\"
+    \"current_password\": \"molestiae\",
+    \"new_password\": \"necessitatibus\",
+    \"confirm_password\": \"numquam\"
 }"
 </code></pre></div>
 
@@ -7425,9 +7733,9 @@ const headers = {
 };
 
 let body = {
-    "current_password": "dolorum",
-    "new_password": "fugit",
-    "confirm_password": "temporibus"
+    "current_password": "molestiae",
+    "new_password": "necessitatibus",
+    "confirm_password": "numquam"
 };
 
 fetch(url, {
@@ -7536,10 +7844,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="current_password"                data-endpoint="POSTapi-v1-patient-changePassword"
-               value="dolorum"
+               value="molestiae"
                data-component="body">
     <br>
-<p>The old_password of the Patient. Example: <code>dolorum</code></p>
+<p>The old_password of the Patient. Example: <code>molestiae</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>new_password</code></b>&nbsp;&nbsp;
@@ -7547,10 +7855,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="new_password"                data-endpoint="POSTapi-v1-patient-changePassword"
-               value="fugit"
+               value="necessitatibus"
                data-component="body">
     <br>
-<p>The password of the Patient. Example: <code>fugit</code></p>
+<p>The password of the Patient. Example: <code>necessitatibus</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>confirm_password</code></b>&nbsp;&nbsp;
@@ -7558,10 +7866,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="confirm_password"                data-endpoint="POSTapi-v1-patient-changePassword"
-               value="temporibus"
+               value="numquam"
                data-component="body">
     <br>
-<p>The password_confirmation of the Patient. Example: <code>temporibus</code></p>
+<p>The password_confirmation of the Patient. Example: <code>numquam</code></p>
         </div>
         </form>
 
@@ -7582,7 +7890,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://127.0.0.1:8000/api/v1/patient/updateProfileImage" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "profile_picture=@C:\Users\user\AppData\Local\Temp\phpBFAC.tmp" </code></pre></div>
+    --form "profile_picture=@C:\Users\Swarnadwip\AppData\Local\Temp\php7D5D.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -7707,7 +8015,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The profile_picture of the Patient. Example: <code>C:\Users\user\AppData\Local\Temp\phpBFAC.tmp</code></p>
+<p>The profile_picture of the Patient. Example: <code>C:\Users\Swarnadwip\AppData\Local\Temp\php7D5D.tmp</code></p>
         </div>
         </form>
 

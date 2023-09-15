@@ -19,10 +19,11 @@ class AuthController extends Controller
      * Login Api
      * @bodyParam email string required The email of the user. Example: john@yopmail.com
      * @bodyParam password string required The password of the user. Example: 12345678
+     * @bodyParam type string required The type of the user. Example: Doctor,Patient
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
-     *  "message": "Login successfully",                                
+     *  "message": "Login successfully",
      *      "data": {
      *     "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzEyNTk2OWIyYjU0MzQzNjAzOGMzMzdiMGQ0NmU1YjIyYzBjYmNmMDRiOTUxNDc4NzA5YTc2NGQ5YTU4NDcwNmM1MWRhNDBmYjcwMTg2ODciLCJpYXQiOjE2ODYxMjIxNTEuODYxNjA2LCJuYmYiOjE2ODYxMjIxNTEuODYxNjEyLCJleHAiOjE3MTc3NDQ1NTEuODM5MTIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.oD9hpcugxOhepc-dbeXf94itOJz5G9OXnV2ZQB05FU80cvwOALpEwuCUC30mczb8tnvKdWxOKK0EPOyUZKv6Y9TXkYCfH0BTpQaikKaomZL_4TqnCrJ9ToZSMjpaSWdVdqoyG5Voakw__nehoNUMup_tcFaGh4IxoFQLGZEIbsmQKOxQvQx9doJo6oU6aY2Nvoetk7GmH4XIPX_D4ThQZF5GWdmQ-H6T4Cv9OfnLL5B5aBJbYHcszkJh_HZ4FJ6ViKt61UlPI6ymYUTpC_lmroXigUkQ5Lw5_a7NxgNbd8NHY-893jLMNry5l51vdSG4m9tmcFY1T7WxPTQZ_WjT2I6YAJrxS3tvJaycI7UqPrhRaWtDW3jMYn-Drn1NaUkawzBO7yLsfDQd_WvPu2zFiw6uKvN9ChN_vs551ssx1mF400sx7sx6O194VswDkstNEoSRbKqbxdSISkJSVmSeVwqwt3fSTf0QGFIJxssBI4psyUWcbu-i64g0E_6gPfQ6PELIJN1H7vCdNZbGxjlcW6xGql0D1vXlL307QMLKdhXbmkQhUKHpjaKvgi430K9m16AxOm3QfJr5fguU7AHTHafpeDxaTEgsLiK2Zo7ZovTzEJKj898gA0btJF2LrAtllB4BzYr9Mc4H2oJ49mA9swqjqbCobTosdTcb7NIoThM",
      *     "user": {
@@ -32,7 +33,7 @@ class AuthController extends Controller
      *         "status": 1
      *     }
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -43,7 +44,7 @@ class AuthController extends Controller
      *   ]
      * }
      * }
-     * 
+     *
      * @response 201{
      *  "status": false,
      *  "statusCode": 201,
@@ -56,6 +57,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|exists:users,email',
             'password' => 'required',
+            'type' => 'required|in:Doctor,Patient',
         ]);
 
         if ($validator->fails()) {
@@ -65,10 +67,22 @@ class AuthController extends Controller
         try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
-                if (($user->hasRole('PATIENT') && $user->status == 1) || ($user->hasRole('DOCTOR') && $user->status == 1)) {
-                    $data['auth_token'] = $user->createToken('accessToken')->accessToken;
-                    $data['user'] = $user->makeHidden('roles');
-                    return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
+                if ($user->type == 'Doctor') {
+                    if ($user->status == 1 && $user->hasRole('DOCTOR')) {
+                        $data['auth_token'] = $user->createToken('accessToken')->accessToken;
+                        $data['user'] = $user;
+                        return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Login successfully', 'data' => $data], $this->successStatus);
+                    } else {
+                        return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
+                    }
+                } else if ($user->type == 'Patient') {
+                    if ($user->status == 1 && $user->hasRole('PATIENT')) {
+                        $data['auth_token'] = $user->createToken('accessToken')->accessToken;
+                        $data['user'] = $user;
+                        return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Login successfully', 'data' => $data], $this->successStatus);
+                    } else {
+                        return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
+                    }
                 } else {
                     return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
                 }
@@ -89,7 +103,8 @@ class AuthController extends Controller
      * @bodyParam location string The name of the user. Example: John Doe
      * @bodyParam password string required The password of the user. Example: 12345678
      * @bodyParam confirm_password string required The confirm_password of the user. Example: 12345678
-     *  
+     * @bodyParam type string required The type of the user. Example: Doctor,Patient
+     *
      * @response 200 {
      *   "status": true,
      *  "statusCode": 200,
@@ -107,13 +122,13 @@ class AuthController extends Controller
      *   }
      *  }
      * }
-     * 
+     *
      * @response 401 {
      *  "status": false,
      * "statusCode": 401,
      * "error": "Email id & password was invalid!"
      * }
-     * 
+     *
      */
 
 

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Dollar CARE",
-        "_postman_id": "dcbe4c26-c7b5-4008-8b12-4b788c488782",
+        "_postman_id": "b7c275aa-65df-4edc-b462-e3ab44182d8e",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\"}"
+                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\",\"type\":\"Doctor,Patient\"}"
                         },
                         "description": "",
                         "auth": {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"laborum\",\"age\":\"atque\",\"location\":\"John Doe\"}"
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@yopmail.com\",\"gender\":\"Male,Female,Other\",\"phone\":\"9876543210\",\"password\":\"12345678\",\"confirm_password\":\"12345678\",\"type\":\"Doctor,Patient\",\"age\":\"asperiores\",\"location\":\"John Doe\"}"
                         },
                         "description": "",
                         "auth": {
@@ -255,7 +255,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"veritatis\",\"email\":\"katlynn.reilly@example.net\",\"gender\":\"quibusdam\",\"age\":\"quo\",\"phone\":\"consectetur\",\"specialization_id\":[\"optio\"],\"license_number\":\"odit\"}"
+                            "raw": "{\"name\":\"quibusdam\",\"email\":\"suzanne.davis@example.net\",\"gender\":\"doloribus\",\"age\":\"cumque\",\"phone\":\"necessitatibus\",\"specialization_id\":[\"aut\"],\"license_number\":\"minus\"}"
                         },
                         "description": ""
                     },
@@ -302,7 +302,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_password\":\"odio\",\"new_password\":\"dolorem\",\"confirm_password\":\"harum\"}"
+                            "raw": "{\"current_password\":\"quis\",\"new_password\":\"harum\",\"confirm_password\":\"sit\"}"
                         },
                         "description": ""
                     },
@@ -396,7 +396,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"subject\":\"illum\",\"message\":\"ipsum\"}"
+                            "raw": "{\"subject\":\"voluptatem\",\"message\":\"est\"}"
                         },
                         "description": "",
                         "auth": {
@@ -471,6 +471,144 @@
                             "header": [],
                             "code": 200,
                             "body": "{\n\"status\": true,\n\"data\": {\n    \"id\": 1,\n    \"content\": \"Lorem ipsum dolor sit amet consectetur. Pharetra netus cursus nec facilisis. Quis ultrices morbi maecenas lobortis. Mattis sed nisi amet nisi elit nunc nibh in. Ac convallis fringilla tortor morbi vel massa et et. Elementum pellentesque quis nunc elit. Urna pellentesque venenatis egestas ac neque a. Consequat mi at quis sed tincidunt leo sed sit. Pretium mauris imperdiet ornare nunc ut enim. Erat viverra urna sed quis et varius lectus ipsum mollis. Ullamcorper pellentesque lectus sed tellus fames dolor turpis nibh pharetra. Aliquam tortor nascetur nec neque porttitor molestie quis non arcu. Pretium lectus eu vitae diam sapien pellentesque nisl. Euismod auctor arcu cras facilisi tortor facilisis consectetur.\\r\\n\\r\\n        Amet ultrices augue lorem iaculis tortor massa velit. Phasellus sapien non ac tortor convallis fringilla. Sapien massa nunc aliquam platea pulvinar morbi dictum. Quis eget at magna sem mi dui elit. Nisl leo facilisis faucibus non posuere enim senectus. Lorem volutpat ante mollis pulvinar nibh tristique eu. Neque malesuada enim tellus tristique sem senectus ornare pharetra. Ipsum est a bibendum pretium viverra cras turpis massa.\\r\\n\\r\\n        Neque id tristique auctor accumsan dolor lorem praesent volutpat cras. Id auctor in tempor egestas ornare faucibus. Viverra nisi quis lacinia lorem sed tellus mattis aliquet. Sed nam nulla sit eu feugiat nisi elementum urna laoreet. Nulla sit interdum amet nisl et. Fames senectus cursus ullamcorper varius feugiat.\",\n    \"created_at\": \"2023-06-28T09:26:19.000000Z\",\n    \"updated_at\": \"2023-06-28T09:35:58.000000Z\"\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Forget Password",
+            "description": "",
+            "item": [
+                {
+                    "name": "Forget Password Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/forget-password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/forget-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@yopmail.com\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"OTP has been sent to your email\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n\"error\": {\n\"email\": [\n\"The email field is required.\"\n]\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "OTP Verification Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/otp-verification",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/otp-verification"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"otp\":\"123456\",\"email\":\"john@yopmail.com\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"OTP verified successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"OTP is expired\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Reset Password Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/reset-password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/reset-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"password\":\"123456\",\"confirm_password\":\"123456\",\"email\":\"john@yopmail.com\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password has been reset successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": {\n\"password\": [\n\"The password field is required.\"\n],\n\"confirm_password\": [\n\"The confirm password field is required.\"\n],\n\"email\": [\n\"The email field is required.\"\n]\n}\n}",
                             "name": ""
                         }
                     ]
@@ -626,7 +764,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"sequi\",\"slug\":\"commodi\"}"
+                            "raw": "{\"type\":\"laboriosam\",\"slug\":\"modi\"}"
                         },
                         "description": "",
                         "auth": {
@@ -711,7 +849,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"latitude\":\"quibusdam\",\"longitude\":\"tenetur\"}"
+                            "raw": "{\"latitude\":\"quia\",\"longitude\":\"et\"}"
                         },
                         "description": "",
                         "auth": {
@@ -831,7 +969,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"clinic_name\":\"velit\",\"clinic_address\":\"iure\",\"clinic_phone\":\"nisi\",\"day_id\":[\"aliquid\"],\"latitute\":\"corrupti\",\"longitute\":\"suscipit\",\"slot_date\":[\"est\"],\"slot_start_time\":[\"optio\"],\"slot_end_time\":[\"quasi\"],\"first_time_mode\":[\"nemo\"],\"second_time_mode\":[\"excepturi\"]}"
+                            "raw": "{\"clinic_name\":\"eos\",\"clinic_address\":\"suscipit\",\"clinic_phone\":\"aut\",\"day_id\":[\"delectus\"],\"latitute\":\"vero\",\"longitute\":\"rerum\",\"slot_date\":[\"vel\"],\"slot_start_time\":[\"vero\"],\"slot_end_time\":[\"eum\"],\"first_time_mode\":[\"sit\"],\"second_time_mode\":[\"nesciunt\"]}"
                         },
                         "description": ""
                     },
@@ -907,7 +1045,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"quos\",\"clinic_name\":\"est\",\"clinic_address\":\"aut\",\"clinic_phone\":\"ipsa\",\"day_id\":[\"totam\"],\"latitute\":\"ducimus\",\"longitute\":\"officiis\",\"slot_date\":[\"suscipit\"],\"slot_start_time\":[\"quas\"],\"slot_end_time\":[\"dicta\"],\"first_time_mode\":[\"voluptatem\"],\"second_time_mode\":[\"expedita\"]}"
+                            "raw": "{\"id\":\"ut\",\"clinic_name\":\"molestiae\",\"clinic_address\":\"libero\",\"clinic_phone\":\"sunt\",\"day_id\":[\"suscipit\"],\"latitute\":\"eius\",\"longitute\":\"explicabo\",\"slot_date\":[\"corporis\"],\"slot_start_time\":[\"ipsa\"],\"slot_end_time\":[\"totam\"],\"first_time_mode\":[\"aut\"],\"second_time_mode\":[\"quaerat\"]}"
                         },
                         "description": ""
                     },
@@ -942,7 +1080,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"natus\"}"
+                            "raw": "{\"id\":\"enim\"}"
                         },
                         "description": ""
                     },
@@ -977,7 +1115,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"quibusdam\"}"
+                            "raw": "{\"id\":\"distinctio\"}"
                         },
                         "description": ""
                     },
@@ -1018,7 +1156,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"rerum\"}"
+                            "raw": "{\"id\":\"laborum\"}"
                         },
                         "description": ""
                     },
@@ -1135,7 +1273,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"doctor_id\":\"voluptas\"}"
+                            "raw": "{\"doctor_id\":\"sunt\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1173,7 +1311,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"clinic_id\":\"quia\",\"appointment_date\":\"unde\",\"appointment_time\":\"et\"}"
+                            "raw": "{\"clinic_id\":\"ea\",\"appointment_date\":\"explicabo\",\"appointment_time\":\"reiciendis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1211,7 +1349,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"clinic_id\":\"magni\"}"
+                            "raw": "{\"clinic_id\":\"adipisci\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1271,17 +1409,17 @@
             ]
         },
         {
-            "name": "Patient Forget Password",
+            "name": "Patient Chat",
             "description": "",
             "item": [
                 {
-                    "name": "Forget Password Api",
+                    "name": "Chat Request api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/forget-password",
+                            "path": "api\/v1\/patient\/chat-request",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/forget-password"
+                            "raw": "{{baseUrl}}\/api\/v1\/patient\/chat-request"
                         },
                         "method": "POST",
                         "header": [
@@ -1296,36 +1434,27 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"john@yopmail.com\"}"
+                            "raw": "{\"doctor_id\":1}"
                         },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"message\": \"OTP has been sent to your email\"\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 201,
-                            "body": "{\n\"status\": false,\n \"statusCode\": 201,\n\"error\": {\n\"email\": [\n\"The email field is required.\"\n]\n }\n}",
+                            "body": "{\n \"status\": true,\n \"message\": \"Friend request sent successfully\",\n \"data\": {\n     \"id\": 25,\n     \"user_id\": 4,\n     \"friend_id\": 3,\n     \"status\": 1,  \/\/ 0 = pending, 1 = accepted, 2 = rejected\n     \"created_at\": \"2023-08-28T11:02:45.000000Z\",\n     \"updated_at\": \"2023-08-28T13:12:02.000000Z\"\n }\n}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "OTP Verification Api",
+                    "name": "Send Chat Request api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/otp-verification",
+                            "path": "api\/v1\/patient\/chat-request-send",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/otp-verification"
+                            "raw": "{{baseUrl}}\/api\/v1\/patient\/chat-request-send"
                         },
                         "method": "POST",
                         "header": [
@@ -1340,71 +1469,11 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"otp\":\"123456\",\"email\":\"john@yopmail.com\"}"
+                            "raw": "{\"doctor_id\":1}"
                         },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"OTP verified successfully\"\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 201,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"OTP is expired\"\n}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Reset Password Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/reset-password",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/reset-password"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"password\":\"123456\",\"confirm_password\":\"123456\",\"email\":\"john@yopmail.com\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Password has been reset successfully\"\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 201,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 201,\n\"error\": {\n\"password\": [\n\"The password field is required.\"\n],\n\"confirm_password\": [\n\"The confirm password field is required.\"\n],\n\"email\": [\n\"The email field is required.\"\n]\n}\n}",
-                            "name": ""
-                        }
-                    ]
+                    "response": []
                 }
             ]
         },
@@ -1466,7 +1535,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":14}"
+                            "raw": "{\"id\":19}"
                         },
                         "description": ""
                     },
@@ -1507,7 +1576,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"plan_id\":9,\"name\":\"quisquam\",\"stripeToken\":\"laboriosam\"}"
+                            "raw": "{\"plan_id\":1,\"name\":\"commodi\",\"stripeToken\":\"qui\"}"
                         },
                         "description": ""
                     },
@@ -1649,7 +1718,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"veritatis\",\"email\":\"hans.hansen@example.net\",\"age\":\"nostrum\",\"phone\":\"praesentium\"}"
+                            "raw": "{\"name\":\"odit\",\"email\":\"hsawayn@example.org\",\"age\":\"accusamus\",\"phone\":\"iure\"}"
                         },
                         "description": ""
                     },
@@ -1696,7 +1765,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_password\":\"dolorum\",\"new_password\":\"fugit\",\"confirm_password\":\"temporibus\"}"
+                            "raw": "{\"current_password\":\"molestiae\",\"new_password\":\"necessitatibus\",\"confirm_password\":\"numquam\"}"
                         },
                         "description": ""
                     },

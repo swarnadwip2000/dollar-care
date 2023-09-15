@@ -26,8 +26,9 @@ endpoints:
         name: subject
         description: ''
         required: true
-        example: illum
+        example: voluptatem
         type: string
+        enumValues: []
         custom: []
       message:
         name: message
@@ -47,12 +48,13 @@ endpoints:
           }
           }
         required: true
-        example: ipsum
+        example: est
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      subject: illum
-      message: ipsum
+      subject: voluptatem
+      message: est
     fileParameters: []
     responses: []
     responseFields: []

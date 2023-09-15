@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @group Patient Forget Password
+ * @group Forget Password
  */
 class ForgetPasswordController extends Controller
 {
@@ -26,16 +26,16 @@ class ForgetPasswordController extends Controller
      *  "statusCode": 200,
      *  "message": "OTP has been sent to your email"
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      *  "statusCode": 201,
      * "error": {
      * "email": [
      * "The email field is required."
-     * ]    
+     * ]
      *  }
-     * }   
+     * }
      */
     public function forgetPassword(Request $request)
     {
@@ -90,21 +90,21 @@ class ForgetPasswordController extends Controller
 
     /**
      * OTP Verification Api
-     * 
+     *
      * @bodyparam otp numeric required OTP of the Patient. Example: 123456
      * @bodyparam email string required Email of the Patient. Example: john@yopmail.com
      * @response 200{
      * "status": true,
      * "statusCode": 200,
-     * "message": "OTP verified successfully"   
+     * "message": "OTP verified successfully"
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 401,
      * "error": "OTP is expired"
      * }
-     * 
+     *
      */
 
     public function otpVerification(Request $request)
@@ -155,7 +155,7 @@ class ForgetPasswordController extends Controller
 
     /**
      * Reset Password Api
-     * 
+     *
      * @bodyparam password string required Password of the Patient. Example: 123456
      * @bodyparam confirm_password string required Confirm Password of the Patient. Example: 123456
      * @bodyparam email string required Email of the Patient. Example: john@yopmail.com
@@ -164,7 +164,7 @@ class ForgetPasswordController extends Controller
      * "statusCode": 200,
      * "message": "Password has been reset successfully"
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -180,7 +180,7 @@ class ForgetPasswordController extends Controller
      * ]
      * }
      * }
-     * 
+     *
      */
 
     public function resetPassword(Request $request)

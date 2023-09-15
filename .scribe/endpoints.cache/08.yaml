@@ -79,35 +79,39 @@ endpoints:
         name: name
         description: 'optional The name of the Patient.'
         required: false
-        example: veritatis
+        example: odit
         type: string
+        enumValues: []
         custom: []
       email:
         name: email
         description: 'optional The email of the Patient.'
         required: false
-        example: hans.hansen@example.net
+        example: hsawayn@example.org
         type: string
+        enumValues: []
         custom: []
       age:
         name: age
         description: 'optional The age of the Patient.'
         required: false
-        example: nostrum
+        example: accusamus
         type: date
+        enumValues: []
         custom: []
       phone:
         name: phone
         description: 'optional The phone of the Patient.'
         required: false
-        example: praesentium
+        example: iure
         type: numeric
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      name: veritatis
-      email: hans.hansen@example.net
-      age: nostrum
-      phone: praesentium
+      name: odit
+      email: hsawayn@example.org
+      age: accusamus
+      phone: iure
     fileParameters: []
     responses:
       -
@@ -170,27 +174,30 @@ endpoints:
         name: current_password
         description: 'The old_password of the Patient.'
         required: true
-        example: dolorum
+        example: molestiae
         type: string
+        enumValues: []
         custom: []
       new_password:
         name: new_password
         description: 'The password of the Patient.'
         required: true
-        example: fugit
+        example: necessitatibus
         type: string
+        enumValues: []
         custom: []
       confirm_password:
         name: confirm_password
         description: 'The password_confirmation of the Patient.'
         required: true
-        example: temporibus
+        example: numquam
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      current_password: dolorum
-      new_password: fugit
-      confirm_password: temporibus
+      current_password: molestiae
+      new_password: necessitatibus
+      confirm_password: numquam
     fileParameters: []
     responses:
       -
@@ -246,6 +253,7 @@ endpoints:
         required: true
         example: null
         type: file
+        enumValues: []
         custom: []
     cleanBodyParameters: []
     fileParameters:

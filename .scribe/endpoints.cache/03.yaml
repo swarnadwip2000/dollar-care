@@ -105,61 +105,68 @@ endpoints:
         name: name
         description: 'The name of the Doctor.'
         required: true
-        example: veritatis
+        example: quibusdam
         type: string
+        enumValues: []
         custom: []
       email:
         name: email
         description: 'The email of the Doctor.'
         required: true
-        example: katlynn.reilly@example.net
+        example: suzanne.davis@example.net
         type: string
+        enumValues: []
         custom: []
       gender:
         name: gender
         description: ''
         required: true
-        example: quibusdam
+        example: doloribus
         type: string
+        enumValues: []
         custom: []
       age:
         name: age
         description: 'The age of the Doctor.'
         required: true
-        example: quo
+        example: cumque
         type: date
+        enumValues: []
         custom: []
       phone:
         name: phone
         description: 'The phone of the Doctor.'
         required: true
-        example: consectetur
+        example: necessitatibus
         type: numeric
+        enumValues: []
         custom: []
       specialization_id:
         name: specialization_id
         description: 'The specialization_id of the Doctor.'
         required: true
         example:
-          - optio
+          - aut
         type: 'string[]'
+        enumValues: []
         custom: []
       license_number:
         name: license_number
         description: 'The license_number of the Doctor.'
         required: true
-        example: odit
+        example: minus
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      name: veritatis
-      email: katlynn.reilly@example.net
-      gender: quibusdam
-      age: quo
-      phone: consectetur
+      name: quibusdam
+      email: suzanne.davis@example.net
+      gender: doloribus
+      age: cumque
+      phone: necessitatibus
       specialization_id:
-        - optio
-      license_number: odit
+        - aut
+      license_number: minus
     fileParameters: []
     responses:
       -
@@ -258,27 +265,30 @@ endpoints:
         name: current_password
         description: 'The old_password of the Doctor.'
         required: true
-        example: odio
+        example: quis
         type: string
+        enumValues: []
         custom: []
       new_password:
         name: new_password
         description: 'The password of the Doctor.'
         required: true
-        example: dolorem
+        example: harum
         type: string
+        enumValues: []
         custom: []
       confirm_password:
         name: confirm_password
         description: 'The password_confirmation of the Doctor.'
         required: true
-        example: harum
+        example: sit
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
-      current_password: odio
-      new_password: dolorem
-      confirm_password: harum
+      current_password: quis
+      new_password: harum
+      confirm_password: sit
     fileParameters: []
     responses:
       -
@@ -370,6 +380,7 @@ endpoints:
         required: true
         example: null
         type: file
+        enumValues: []
         custom: []
     cleanBodyParameters: []
     fileParameters:

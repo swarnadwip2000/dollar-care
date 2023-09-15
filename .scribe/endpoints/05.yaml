@@ -28,6 +28,7 @@ endpoints:
         required: false
         example: '2021-09-11'
         type: string
+        enumValues: []
         custom: []
       clinic_id:
         name: clinic_id
@@ -37,6 +38,7 @@ endpoints:
           - 1
           - 2
         type: 'string[]'
+        enumValues: []
         custom: []
       status:
         name: status
@@ -47,6 +49,7 @@ endpoints:
           - Done
           - Cancelled
         type: 'string[]'
+        enumValues: []
         custom: []
     cleanBodyParameters:
       date: '2021-09-11'

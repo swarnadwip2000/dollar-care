@@ -30,6 +30,7 @@ endpoints:
         required: true
         example: john@yopmail.com
         type: string
+        enumValues: []
         custom: []
       password:
         name: password
@@ -37,10 +38,20 @@ endpoints:
         required: true
         example: '12345678'
         type: string
+        enumValues: []
+        custom: []
+      type:
+        name: type
+        description: 'The type of the user.'
+        required: true
+        example: 'Doctor,Patient'
+        type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
       email: john@yopmail.com
       password: '12345678'
+      type: 'Doctor,Patient'
     fileParameters: []
     responses:
       -
@@ -122,6 +133,7 @@ endpoints:
         required: true
         example: 'John Doe'
         type: string
+        enumValues: []
         custom: []
       email:
         name: email
@@ -129,6 +141,7 @@ endpoints:
         required: true
         example: john@yopmail.com
         type: string
+        enumValues: []
         custom: []
       gender:
         name: gender
@@ -136,6 +149,7 @@ endpoints:
         required: false
         example: 'Male,Female,Other'
         type: string
+        enumValues: []
         custom: []
       phone:
         name: phone
@@ -143,6 +157,7 @@ endpoints:
         required: true
         example: '9876543210'
         type: numeric
+        enumValues: []
         custom: []
       password:
         name: password
@@ -150,6 +165,7 @@ endpoints:
         required: true
         example: '12345678'
         type: string
+        enumValues: []
         custom: []
       confirm_password:
         name: confirm_password
@@ -157,20 +173,23 @@ endpoints:
         required: true
         example: '12345678'
         type: string
+        enumValues: []
         custom: []
       type:
         name: type
-        description: ''
+        description: 'The type of the user.'
         required: true
-        example: laborum
+        example: 'Doctor,Patient'
         type: string
+        enumValues: []
         custom: []
       age:
         name: age
         description: ''
         required: true
-        example: atque
+        example: asperiores
         type: string
+        enumValues: []
         custom: []
       location:
         name: location
@@ -178,6 +197,7 @@ endpoints:
         required: false
         example: 'John Doe'
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
       name: 'John Doe'
@@ -186,8 +206,8 @@ endpoints:
       phone: '9876543210'
       password: '12345678'
       confirm_password: '12345678'
-      type: laborum
-      age: atque
+      type: 'Doctor,Patient'
+      age: asperiores
       location: 'John Doe'
     fileParameters: []
     responses:

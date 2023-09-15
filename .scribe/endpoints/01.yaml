@@ -1,4 +1,4 @@
-name: 'Patient Forget Password'
+name: 'Forget Password'
 description: ''
 endpoints:
   -
@@ -6,7 +6,7 @@ endpoints:
       - POST
     uri: api/v1/forget-password
     metadata:
-      groupName: 'Patient Forget Password'
+      groupName: 'Forget Password'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -28,6 +28,7 @@ endpoints:
         required: true
         example: john@yopmail.com
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
       email: john@yopmail.com
@@ -70,7 +71,7 @@ endpoints:
       - POST
     uri: api/v1/otp-verification
     metadata:
-      groupName: 'Patient Forget Password'
+      groupName: 'Forget Password'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -92,6 +93,7 @@ endpoints:
         required: true
         example: '123456'
         type: numeric
+        enumValues: []
         custom: []
       email:
         name: email
@@ -99,6 +101,7 @@ endpoints:
         required: true
         example: john@yopmail.com
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
       otp: '123456'
@@ -138,7 +141,7 @@ endpoints:
       - POST
     uri: api/v1/reset-password
     metadata:
-      groupName: 'Patient Forget Password'
+      groupName: 'Forget Password'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -160,6 +163,7 @@ endpoints:
         required: true
         example: '123456'
         type: string
+        enumValues: []
         custom: []
       confirm_password:
         name: confirm_password
@@ -167,6 +171,7 @@ endpoints:
         required: true
         example: '123456'
         type: string
+        enumValues: []
         custom: []
       email:
         name: email
@@ -174,6 +179,7 @@ endpoints:
         required: true
         example: john@yopmail.com
         type: string
+        enumValues: []
         custom: []
     cleanBodyParameters:
       password: '123456'
