@@ -91,7 +91,7 @@ class MembershipController extends Controller
      *     },
      * ]
      * }
-     * 
+     *
      * @response 201{
      *  "status": false,
      *  "message": "The selected id is invalid."
@@ -103,7 +103,7 @@ class MembershipController extends Controller
             'id' => 'required|exists:plans,id',
         ]);
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'message' => $validator->errors()->first()], 201);
+            return response()->json(['statusCode' => 201,'status'=>false, 'message' => $validator->errors()->first()], 201);
         }
 
         try {

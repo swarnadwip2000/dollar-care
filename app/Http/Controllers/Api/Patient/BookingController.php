@@ -21,7 +21,7 @@ use App\Transformers\UserTransformer;
 use Carbon\Carbon;
 
 /**
- * @group Patient Booking 
+ * @group Patient Booking
  * */
 
 class BookingController extends Controller
@@ -61,12 +61,12 @@ class BookingController extends Controller
      *               "latitute": "22.6343954",
      *               "distance": 6.830848254188763
      *           },
-     *       
+     *
      *       ]
      *   }
      * }
-     * 
-     * 
+     *
+     *
      */
 
     public function doctorDetails(Request $request)
@@ -76,7 +76,7 @@ class BookingController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
         }
 
         try {
@@ -101,7 +101,7 @@ class BookingController extends Controller
 
     /**
      * Clinic Date and Time Slot
-     * 
+     *
      * @response 200{
      *   "message": "Clinic Details",
      * "status": true,
@@ -118,11 +118,11 @@ class BookingController extends Controller
      *     }
      *     ]
      *  }
-     * 
+     *
      * @response 201{
      *  "error": "The clinic id field is required."
      * }
-     * 
+     *
      */
     public function visitDate(Request $request)
     {
@@ -131,7 +131,7 @@ class BookingController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
         }
 
         try {
@@ -176,9 +176,9 @@ class BookingController extends Controller
         }
     }
 
-    /** 
+    /**
      * Store Appointment
-     * 
+     *
      * @response 200{
      *    "message": "Appointment booked successfully!",
      *   "status": true,
@@ -200,7 +200,7 @@ class BookingController extends Controller
      *          "user": {
      *              "id": 1,
      *              "name": "Shilpi Chaki",
-     *              "email": "shilpi@mailinator.com",  
+     *              "email": "shilpi@mailinator.com",
      *              "email_verified_at": null,
      *              "profile_picture": "user/5HiPk9oN9cQCNNKdzmBgvNLHSL8u7bbHncdrPE91.png",
      *              "phone": "7894561230",

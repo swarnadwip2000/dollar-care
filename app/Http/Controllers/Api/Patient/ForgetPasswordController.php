@@ -115,7 +115,7 @@ class ForgetPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'statusCode' => 201,'status'=>false], 201);
         }
 
         try {
@@ -192,7 +192,7 @@ class ForgetPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'statusCode' => 201,'status'=>false], 201);
         }
 
         try {

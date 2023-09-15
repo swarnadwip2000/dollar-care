@@ -136,7 +136,7 @@ class ProfileController extends Controller
      * }
      * @response 201{
      * "error": "The phone has already been taken."
-     * }    
+     * }
      */
 
     public function updateProfile(Request $request)
@@ -154,7 +154,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -246,7 +246,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -313,7 +313,7 @@ class ProfileController extends Controller
      *     }
      * }
      * }
-     * 
+     *
      * @response 201{
      * "error": "The old_password and password must be different."
      * }
@@ -328,7 +328,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {

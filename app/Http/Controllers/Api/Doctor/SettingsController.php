@@ -18,7 +18,7 @@ class SettingsController extends Controller
     public $successStatus = 200;
 
     /**
-     * Privacy Policy 
+     * Privacy Policy
      * @response 200{
      *  "status": true,
      * "data": {
@@ -53,7 +53,7 @@ class SettingsController extends Controller
      *     "updated_at": "2023-06-28T09:35:58.000000Z"
      * }
      * }
-     * 
+     *
      */
 
     public function aboutUs(Request $request)
@@ -84,7 +84,7 @@ class SettingsController extends Controller
      * "updated_at": "2021-09-28T10:20:00.000000Z"
      * }
      * }
-     * 
+     *
      */
 
     public function helpAndSupport(Request $request)
@@ -95,7 +95,7 @@ class SettingsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'message' => $validator->errors()->first()], 201);
+            return response()->json(['status'=>false,'statusCode' => 201, 'message' => $validator->errors()->first()], 201);
         }
 
         try {

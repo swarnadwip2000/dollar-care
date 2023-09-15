@@ -61,13 +61,13 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['status'=>false, 'error' => $validator->errors()->first(), 'statusCode'=> 201], 201);
         }
 
         try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
-                if ($user->type == 'Doctor') {
+                if ($request->type == 'Doctor') {
                     if ($user->status == 1 && $user->hasRole('DOCTOR')) {
                         $data['auth_token'] = $user->createToken('accessToken')->accessToken;
                         $data['user'] = $user;
@@ -75,7 +75,7 @@ class AuthController extends Controller
                     } else {
                         return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
                     }
-                } else if ($user->type == 'Patient') {
+                } else if ($request->type == 'Patient') {
                     if ($user->status == 1 && $user->hasRole('PATIENT')) {
                         $data['auth_token'] = $user->createToken('accessToken')->accessToken;
                         $data['user'] = $user;
@@ -146,7 +146,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['status'=>false, 'error' => $validator->errors()->first(), 'statusCode'=> 201], 201);
         }
 
         try {
@@ -159,7 +159,7 @@ class AuthController extends Controller
             $user->status = 1;
             $user->save();
             // $user->assignRole('PATIENT');
-            if ($user->type == 'Doctor') {
+            if ($request->type == 'Doctor') {
                 $user->assignRole('DOCTOR');
             } else {
                 $user->assignRole('PATIENT');

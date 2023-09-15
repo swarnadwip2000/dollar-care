@@ -41,7 +41,7 @@ class HomeController extends Controller
      *     }
      *   ]
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -82,7 +82,7 @@ class HomeController extends Controller
      *      }
      *    ]
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      *  "statusCode": 201,
@@ -127,8 +127,8 @@ class HomeController extends Controller
      *      }
      *    ]
      * }
-     * 
-     * 
+     *
+     *
      */
 
     public function storeLocation(Request $request)
@@ -139,7 +139,7 @@ class HomeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
         }
 
         try {
@@ -185,7 +185,7 @@ class HomeController extends Controller
      *      }
      *    ]
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      *  "statusCode": 201,
@@ -241,7 +241,7 @@ class HomeController extends Controller
      * Doctors List as per symptoms/specializations Api
      * @bodyParam type string required The type of the search.
      * @bodyParam slug string required The slug of the search. example - dermatologist, oral-piercing-infection
-     * 
+     *
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
@@ -266,7 +266,7 @@ class HomeController extends Controller
      *      }
      *    ]
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      *  "statusCode": 201,
@@ -399,7 +399,7 @@ class HomeController extends Controller
      *      }
      *    ]
      * }
-     * 
+     *
      * @response 404{
      * "status": false,
      *  "statusCode": 404,

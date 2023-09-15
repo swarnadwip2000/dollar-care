@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="sidebar-wrap d-flex justify-content-between">
                 @include('frontend.doctor.partials.sidebar')
-           
+
             <!-- Content -->
             <div class="sidebar-right height-100">
                 <div class="content">
@@ -102,8 +102,9 @@
                                                     @endif
                                                 </div>
                                                 <div class="form-group col-lg-5 col-md-12">
-                                                    <select name="specialization_id[]" id="specialization_id"
-                                                    class="form-control" multiple>
+                                                    <select name="specialization_id" id=""
+                                                    class="form-control">
+                                                    <option value="">Select Specialization</option>
                                                     @foreach ($specializations as $specialization)
                                                         <option value="{{ $specialization['id'] }}" @if(Auth::user()->doctorSpecializations->count() > 0) @foreach(Auth::user()->doctorSpecializations as $item) @if($item['specialization_id'] == $specialization['id']) selected @endif @endforeach @endif>
                                                             {{ $specialization['name'] }}</option>
@@ -122,7 +123,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                           
+
                                             <div class="col-xl-5">
                                                 <div class="main-btn-p pt-4">
                                                     <input type="submit" value="SAVE" class="sub-btn">

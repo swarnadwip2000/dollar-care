@@ -24,6 +24,7 @@ class ProfileController extends Controller
 
     public function profileUpdate(Request $request)
     {
+        // return $request;
         $request->validate([
             'name' => 'required',
             'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|unique:users,email,' . auth()->user()->id,
@@ -62,12 +63,11 @@ class ProfileController extends Controller
 
         if ($request->specialization_id) {
             DoctorSpecialization::where('doctor_id', Auth::user()->id)->delete();
-            foreach ($request->specialization_id as $key => $value) {
+
                 $doctorSpecialization = DoctorSpecialization::create([
                     'doctor_id' => Auth::user()->id,
-                    'specialization_id' => $value,
+                    'specialization_id' => $request->specialization_id,
                 ]);
-            }
         }
 
         return redirect()->back()->with('message', 'Your profile updated successfully.');

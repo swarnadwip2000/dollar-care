@@ -42,7 +42,7 @@ class ChatController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors(),'statusCode' => 201,'status'=>false], 401);
         }
 
         try {
@@ -67,7 +67,7 @@ class ChatController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors(),'statusCode' => 201,'status'=>false], 401);
         }
 
         try {

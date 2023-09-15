@@ -55,7 +55,7 @@ class ManageClinicController extends Controller
      *            }
      *    }
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -159,19 +159,19 @@ class ManageClinicController extends Controller
      * @bodyParam clinic_phone numeric required
      * @bodyParam day_id array required
      * @bodyParam latitute string required
-     * @bodyParam longitute string required 
+     * @bodyParam longitute string required
      * @bodyParam slot_date array required Example: 2021-09-01, 2021-09-02
      * @bodyParam slot_start_time array required Example: 10:00, 11:00
      * @bodyParam slot_end_time array required. Example: 10:00, 11:00
      * @bodyParam first_time_mode array required. Example: AM, PM
      * @bodyParam second_time_mode array required. Example: AM, PM
-     * 
+     *
      * @response 200{
      * "status": true,
      * "statusCode": 200,
      * "message": "Clinic details added successfully"
      * }
-     * 
+     *
      *  @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -196,7 +196,7 @@ class ManageClinicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -257,7 +257,7 @@ class ManageClinicController extends Controller
      * ]
      * }
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -272,7 +272,7 @@ class ManageClinicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -318,7 +318,7 @@ class ManageClinicController extends Controller
      * "statusCode": 200,
      * "message": "Clinic details updated successfully"
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      *  "statusCode": 201,
@@ -339,7 +339,7 @@ class ManageClinicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -406,7 +406,7 @@ class ManageClinicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -433,7 +433,7 @@ class ManageClinicController extends Controller
     /**
      *  Present shedule date
      * @authenticated
-     * @bodyParam id numeric required 
+     * @bodyParam id numeric required
      * @response 200{
      * "status": true,
      *  "statusCode": 200,
@@ -467,7 +467,7 @@ class ManageClinicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {
@@ -503,7 +503,7 @@ class ManageClinicController extends Controller
      * "message": "Slot deleted successfully",
      * }
      * }
-     * 
+     *
      * @response 201{
      * "status": false,
      * "statusCode": 201,
@@ -518,7 +518,7 @@ class ManageClinicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'status'=>false,'statusCode' => 201], 201);
         }
 
         try {

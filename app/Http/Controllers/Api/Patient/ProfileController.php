@@ -66,13 +66,13 @@ class ProfileController extends Controller
      * @bodyPara  gender string optional. Example: Male, Female, Other.
      * @bodyParam age date optional The age of the Patient.
      * @bodyParam phone numeric optional The phone of the Patient.
-     * 
+     *
      * @response 201{
      * "error": "The email has already been taken."
      * }
      * @response 201{
      * "error": "The phone has already been taken."
-     * }    
+     * }
      */
 
     public function updateProfile(Request $request)
@@ -89,7 +89,7 @@ class ProfileController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()->first()], 201);
+                return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
             }
             $user->email = $request->email;
         }
@@ -100,7 +100,7 @@ class ProfileController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()->first()], 201);
+                return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
             }
             $user->phone = $request->phone;
         }
@@ -141,7 +141,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
         }
 
         try {
@@ -170,7 +170,7 @@ class ProfileController extends Controller
      * "statusCode": 200,
      * "message": "Password changed successfully"
      * }
-     * 
+     *
      * @response 201{
      * "error": "The old_password and password must be different."
      * }
@@ -185,7 +185,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
         }
 
         try {
