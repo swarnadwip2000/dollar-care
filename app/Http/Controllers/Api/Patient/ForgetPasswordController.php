@@ -47,7 +47,7 @@ class ForgetPasswordController extends Controller
             return response()->json([
                 'status' => false,
                 'statusCode' => 401,
-                'error' => $validator->errors()
+                'error' => $validator->errors()->first()
             ], 201);
         }
 
