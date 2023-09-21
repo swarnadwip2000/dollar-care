@@ -52,9 +52,11 @@ class HomeController extends Controller
     public function symptoms(Request $request)
     {
         try {
+            $limit = $request->limit ? $request->limit : 10;
+            $offset = $request->offset ? $request->offset : 0;
             $count = Symptoms::where('symptom_status', 1)->count();
             if ($count > 0) {
-                $symptoms = Symptoms::where('symptom_status', 1)->orderBy('id', 'desc')->get();
+                $symptoms = Symptoms::where('symptom_status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $symptoms]);
             } else {
                 return response()->json(['status' => false, 'statusCode' => 201, 'message' => 'No Symptoms Found'], 201);
@@ -94,8 +96,10 @@ class HomeController extends Controller
     {
         try {
             $count = Specialization::where('status', 1)->count();
+            $limit = $request->limit ? $request->limit : 10;
+            $offset = $request->offset ? $request->offset : 0;
             if ($count > 0) {
-                $specializations = Specialization::where('status', 1)->orderBy('id', 'desc')->get();
+                $specializations = Specialization::where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $specializations]);
             } else {
                 return response()->json(['status' => false, 'statusCode' => 201, 'message' => 'No Specialization Found'], 201);
@@ -201,6 +205,8 @@ class HomeController extends Controller
             $longitude = Auth::user()->locations->longitude;
             $radius = 10;
             // $doctors = User::role('DOCTOR')->where('status', 1)->orderBy('id', 'desc')->get();
+            $limit = $request->limit ? $request->limit : 10;
+            $offset = $request->offset ? $request->offset : 0;
 
             $clinics = DB::table('clinic_details')
                 ->join('users', 'clinic_details.user_id', '=', 'users.id')
@@ -223,7 +229,7 @@ class HomeController extends Controller
                 $doctors_array[] =  $key;
             }
 
-            $allDotor = User::whereIn('id', $doctors_array)->get();
+            $allDotor = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
             if (count($allDotor) > 0) {
                 $doctors = fractal($allDotor, new UserTransformer)->toArray()['data'];
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $doctors]);
@@ -289,6 +295,9 @@ class HomeController extends Controller
         try {
             $type = $request->type;
             $slug = $request->slug;
+            $limit = $request->limit ? $request->limit : 10;
+            $offset = $request->offset ? $request->offset : 0;
+
             if ($type == 'symptoms') {
                 $data = Symptoms::where('symptom_slug', $slug)->where('symptom_status', 1)->first();
                 $symptom_id = $data->id;
@@ -321,7 +330,7 @@ class HomeController extends Controller
                     $doctors_array[] =  $key;
                 }
                 $result = [];
-                $result['doctors'] = User::whereIn('id', $doctors_array)->get();
+                $result['doctors'] = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
                 $result['status'] = 1;
                 $result['type'] = 'symptoms';
                 return response()->json(['status' => true, 'statusCode' => 200, 'data' => $result]);
@@ -361,7 +370,7 @@ class HomeController extends Controller
                     $doctors_array[] =  $key;
                 }
                 $result = [];
-                $result['doctors'] = User::whereIn('id', $doctors_array)->get();
+                $result['doctors'] = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
                 $result['status'] = 1;
                 $result['type'] = 'specialization';
 

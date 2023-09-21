@@ -55,7 +55,7 @@ class BookingHistoryController extends Controller
             $query = Appointment::where('doctor_id', $request->user()->id)->orderBy('appointment_date', 'desc');
 
             if ($request->date) {
-                $query->where('appointment_date',  date('d-m-Y', strtotime($request->date)));
+                $query->where('appointment_date',  date('Y-m-d', strtotime($request->date)));
             }
             if ($request->clinic_id) {
                 $query->whereIn('clinic_id', $request->clinic_id);

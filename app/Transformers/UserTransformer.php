@@ -19,7 +19,9 @@ class UserTransformer extends TransformerAbstract
             'age'              => $user->age,
             'license_number'   => $user->license_number,
             'profile_picture'  => $user->profile_picture,
-            'specializations'  => $user->specializations()->select('specializations.id', 'specializations.name')->get(),    
+            'address'          => $user->address,
+            'years_of_experience' => $user->years_of_experience,
+            'specializations'  => $user->specializations()->select('specializations.id', 'specializations.name')->get(),
         ];
     }
 

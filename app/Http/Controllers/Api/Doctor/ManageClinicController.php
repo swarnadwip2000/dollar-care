@@ -206,8 +206,8 @@ class ManageClinicController extends Controller
             $clinicDetail->clinic_name = $request->clinic_name;
             $clinicDetail->clinic_address = $request->clinic_address;
             $clinicDetail->clinic_phone = $request->clinic_phone;
-            $clinicDetail->longitute = $request->longitude;
-            $clinicDetail->latitute = $request->latitude;
+            $clinicDetail->longitute = $request->longitute;
+            $clinicDetail->latitute = $request->latitute;
             $clinicDetail->save();
 
             foreach ($request->day_id as $day) {

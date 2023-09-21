@@ -70,7 +70,7 @@ class AuthController extends Controller
                 if ($request->type == 'Doctor') {
                     if ($user->status == 1 && $user->hasRole('DOCTOR')) {
                         $data['auth_token'] = $user->createToken('accessToken')->accessToken;
-                        $data['user'] = $user;
+                        $data['user'] = $user->makeHidden('roles');
                         return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Login successfully', 'data' => $data], $this->successStatus);
                     } else {
                         return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
@@ -78,7 +78,8 @@ class AuthController extends Controller
                 } else if ($request->type == 'Patient') {
                     if ($user->status == 1 && $user->hasRole('PATIENT')) {
                         $data['auth_token'] = $user->createToken('accessToken')->accessToken;
-                        $data['user'] = $user;
+                        $data['user'] = $user->makeHidden('roles');
+                        $data['user']['isLocation'] = (($user->locations) ? true : false);
                         return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Login successfully', 'data' => $data], $this->successStatus);
                     } else {
                         return response()->json(['status' => false, 'statusCode' => 201, 'error' => 'Email id & password was invalid!'], 201);
