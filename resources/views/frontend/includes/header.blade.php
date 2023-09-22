@@ -12,14 +12,14 @@
         <a href="javascript:void(0)">
             <div class="get-location-box d-flex justify-content-between">
                 <div class="get-location-icon">
-                    <span><i class="fa-solid fa-location-crosshairs"></i></span>   
+                    <span><i class="fa-solid fa-location-crosshairs"></i></span>
                 </div>
                 <div class="get-location-text" >
-                    <button id="find-me" type="button">Get your location</button>   
+                    <button id="find-me" type="button">Get your location</button>
                     <h3>Using GPS</h3>
                 </div>
             </div>
-        </a>     
+        </a>
     </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
                   <div class="address_loa">
                     @if (Auth::check())
                         @if (Auth::user()->locations)
-                            <span id="status">{{ substr((Auth::user()->locations->address), 0, 50) }}</span>
+                            <span id="status">{{ (substr((Auth::user()->locations->address), 0, 50)) }}</span>
                             <span id="map-link"></span>
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                         @elseif (session()->has('address'))
@@ -65,7 +65,7 @@
                             <span id="map-link"></span>
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                     @endif
-                    
+
                   </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                         {{-- <li class="{{ Request::is('qna') ? 'active' : '' }}"><a href="{{ route('qna') }}">Q&A</a></li> --}}
                         <li
                             class="{{ Request::is('qna-blogs/*') || Request::is('blog-details/*') || Request::is('qna-blogs') ? 'active' : '' }}">
-                            <a href="{{ route('blogs') }}">Q&A / 
+                            <a href="{{ route('blogs') }}">Q&A /
                                 Blogs</a>
                         </li>
                         <li class="{{ Request::is('contact-us') ? 'active' : '' }}"><a
@@ -180,11 +180,11 @@
                             <span id="map-link"></span>
                             <span class="arrw-1"><i class="fa-solid fa-angle-down"></i></span>
                     @endif
-                    
+
                   </div>
                 </div>
-            </div>  
-         </div>    
+            </div>
+         </div>
         </div>
     </div>
 </div>

@@ -143,7 +143,7 @@ class HomeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first(),'statusCode' => 201,'status'=>false], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'statusCode' => 201, 'status' => false], 201);
         }
 
         try {
@@ -245,7 +245,7 @@ class HomeController extends Controller
 
     /**
      * Doctors List as per symptoms/specializations Api
-     * @bodyParam type string required The type of the search.
+     * @bodyParam type string required The type of the search. example - symptoms, specializations, all
      * @bodyParam slug string required The slug of the search. example - dermatologist, oral-piercing-infection
      *
      * @response 200{
@@ -297,14 +297,14 @@ class HomeController extends Controller
             $slug = $request->slug;
             $limit = $request->limit ? $request->limit : 10;
             $offset = $request->offset ? $request->offset : 0;
+            $latitude = Auth::user()->locations->latitude;
+            $longitude = Auth::user()->locations->longitude;
+            $radius = 10;
 
             if ($type == 'symptoms') {
                 $data = Symptoms::where('symptom_slug', $slug)->where('symptom_status', 1)->first();
                 $symptom_id = $data->id;
-                // get clinics within 10km radius
-                $latitude = Auth::user()->locations->latitude;
-                $longitude = Auth::user()->locations->longitude;
-                $radius = 10;
+
                 $clinics = DB::table('clinic_details')
                     ->join('users', 'clinic_details.user_id', '=', 'users.id')
                     ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
@@ -330,17 +330,14 @@ class HomeController extends Controller
                     $doctors_array[] =  $key;
                 }
                 $result = [];
-                $result['doctors'] = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
+                $doctors = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->query();
                 $result['status'] = 1;
                 $result['type'] = 'symptoms';
-                return response()->json(['status' => true, 'statusCode' => 200, 'data' => $result]);
-            } else {
+            } else if ($type == 'specialization') {
                 $data = Specialization::where('slug', $slug)->first();
                 $specialization_id = $data->id;
                 // get doctors within 10km radius
-                $latitude = Auth::user()->locations->latitude;
-                $longitude = Auth::user()->locations->longitude;
-                $radius = 10;
+
                 $all_doctors = DB::table('users')
                     ->join('doctor_specializations', 'users.id', '=', 'doctor_specializations.doctor_id')
                     ->leftJoin('symptoms', 'symptoms.specialization_id', '=', 'doctor_specializations.specialization_id')
@@ -370,12 +367,42 @@ class HomeController extends Controller
                     $doctors_array[] =  $key;
                 }
                 $result = [];
-                $result['doctors'] = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->get();
+                $doctors = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->query();
                 $result['status'] = 1;
                 $result['type'] = 'specialization';
-
-                return response()->json(['status' => true, 'statusCode' => 200, 'data' => $result]);
+            } else {
+                $clinics = DB::table('clinic_details')
+                    ->join('users', 'clinic_details.user_id', '=', 'users.id')
+                    ->select(
+                        'clinic_details.id',
+                        'clinic_details.user_id',
+                        'clinic_name',
+                        'clinic_address',
+                        'clinic_phone',
+                        'longitute',
+                        'latitute',
+                        DB::raw('( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitute ) ) * cos( radians( longitute ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitute ) ) ) ) AS distance')
+                    )
+                    ->having('distance', '<', $radius)
+                    ->get()
+                    ->groupBy('user_id');
+                // get doctors from clinics
+                $doctors_array = [];
+                foreach ($clinics as $key => $clinic) {
+                    $doctors_array[] =  $key;
+                }
+                $result = [];
+                $doctors = User::whereIn('id', $doctors_array)->where('status', 1)->orderBy('id', 'desc')->offset($offset)->limit($limit)->query();
+                $result['status'] = 1;
+                $result['type'] = 'specialization';
             }
+
+            if ($request->search) {
+                $doctors->where('name', 'like', '%' . $request->search . '%');
+            }
+             $result['data'] = fractal($doctors->get(), new UserTransformer)->toArray()['data'];
+             
+            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $result ]);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
         }
@@ -456,5 +483,4 @@ class HomeController extends Controller
 
         return response()->json(['status' => true, 'statusCode' => 200, 'data' => $results]);
     }
-
 }
