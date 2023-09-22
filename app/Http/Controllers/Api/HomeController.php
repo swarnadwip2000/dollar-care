@@ -400,9 +400,9 @@ class HomeController extends Controller
             if ($request->search) {
                 $doctors->where('name', 'like', '%' . $request->search . '%');
             }
-             $result['data'] = fractal($doctors->get(), new UserTransformer)->toArray()['data'];
-             
-            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $result ]);
+            $result['data'] = fractal($doctors->get(), new UserTransformer)->toArray()['data'];
+
+            return response()->json(['status' => true, 'statusCode' => 200, 'data' => $result]);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 500, 'error' => $th->getMessage()]);
         }
